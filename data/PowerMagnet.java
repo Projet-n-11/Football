@@ -1,7 +1,7 @@
 package data;
 
 public class PowerMagnet extends AbstractSpecsSP {
-	private float rayonMagnetic;
+	private final float RAYONMAGNETIC = 6;
 
 	public float getRayonMagnetic() {
 		return rayonMagnetic;

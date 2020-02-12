@@ -4,6 +4,11 @@ public class DataBall {
 	private int ballsize ;
 	private int color;
 	private int position;
+	
+	public DataBall(int ballSize, int color, int position) {
+		super(this.ballsize, this.color, this.position);
+	}
+	
 	public int getBallsize() {
 		return ballsize;
 	}

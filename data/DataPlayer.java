@@ -7,10 +7,13 @@ public class DataPlayer {
 	private DataSuperPowers playSuperPower;
 	private String Team;
 	private boolean isPhysical;
-	private int position	// A VERIFIER
+	private int position; // A VERIFIER
 	private int playerSize;
 	private String colorPlayer;
 	
+	public DataPlayer(String playerName, String playerNumber, AbstractDataPlayerType playerType, DataSuperPowers playerSuperPower, String Team, boolean isPhysical, int position, int playerSize, String colorPlayer) {
+		super(this.playerName, this.playerNumber, this.playerType, this.playerSuperPower, this.Team, this.isPhysical, this.position, this.playerSize, this.colorPlayer);
+	}
 	public String getPlayerName() {
 		return playerName;
 	}

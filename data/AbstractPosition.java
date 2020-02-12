@@ -4,6 +4,10 @@ public abstract class AbstractPosition{
 	private int positionX;
 	private int positionY;
 	
+	public AbstractPosition() {
+		
+	}
+	
 	public int getPositionX() {
 		return positionX;
 	}

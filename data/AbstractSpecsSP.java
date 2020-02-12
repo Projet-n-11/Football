@@ -4,6 +4,10 @@ public abstract class AbstractSpecsSP{
 	private int durationTime;
 	private boolean activation;
 	
+	public AbstractSpecsSP() {
+		
+	}
+	
 	public int getDurationTime() {
 		return durationTime;
 	}

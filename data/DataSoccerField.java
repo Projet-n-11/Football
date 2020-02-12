@@ -7,4 +7,6 @@ public class DataSoccerField {
 	private int initialPoint;
 	private HashMap<int,Square> hmField;
 	private SpecialPosition spePos;
+	
+	
 }

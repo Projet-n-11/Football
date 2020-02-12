@@ -1,7 +1,7 @@
 package data;
 
 public class PowerCorruption extends AbstractSpecsSP {
-	private float rayonCorruption;
+	private final float RAYONCORRUPTION = 10;
 
 	public float getRayonCorruption() {
 		return rayonCorruption;

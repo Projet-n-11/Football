@@ -5,6 +5,10 @@ public abstract class AbstractDataPlayerType{
 	private PlayerStress stress;
 	private PlayerSpeed speed;
 	
+	public AbstractDataPlayerType() {
+		
+	}
+	
 	public PlayerHealth getHeath() {
 		return heath;
 	}

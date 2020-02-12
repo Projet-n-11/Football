@@ -4,6 +4,10 @@ public class Corner extends AbstractPosition {
 	private boolean cornerPoint;
 	private boolean isCorner;
 	
+	public Corner() {
+		
+	}
+	
 	public boolean isCornerPoint() {
 		return cornerPoint;
 	}

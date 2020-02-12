@@ -2,8 +2,8 @@ package data;
 
 public class PowerForceField extends AbstractSpecsSP {
 	private String whichTeam;
-	private String colorField;
-	private float rayonCage;
+	private final String COLORFIELD = "BLUE";
+	private final float RAYONCAGE = 4;
 	
 	public String getWhichTeam() {
 		return whichTeam;
