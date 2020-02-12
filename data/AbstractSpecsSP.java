@@ -1,6 +1,6 @@
 package data;
 
-public abstract class AbstractSpecsSP {
+public abstract class AbstractSpecsSP extends PowerMagnet, PowerForceField, PowerSuperSpeed, PowerDodge, PowerCorruption {
 	private int durationTime;
 	private boolean activation;
 	

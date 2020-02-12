@@ -3,6 +3,7 @@ package data;
 public class ReadPlay {
 	private int valueReadPlay;
 
+	
 	public int getValueReadPlay() {
 		return valueReadPlay;
 	}

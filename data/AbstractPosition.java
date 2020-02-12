@@ -1,6 +1,6 @@
 package data;
 
-public abstract class AbstractPosition {
+public abstract class AbstractPosition extends Goal, Engagement, Penalty, Corner, SixYard {
 	private int positionX;
 	private int positionY;
 	
