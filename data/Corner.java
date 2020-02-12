@@ -5,7 +5,7 @@ public class Corner extends AbstractPosition {
 	private boolean isCorner;
 	
 	public Corner() {
-		// commentaire
+		 // commentaire
 	}
 	
 	public boolean isCornerPoint() {
