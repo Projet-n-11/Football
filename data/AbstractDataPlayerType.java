@@ -23,4 +23,5 @@ public abstract class AbstractDataPlayerType {
 	public void setSpeed(PlayerSpeed speed) {
 		this.speed = speed;
 	}
+	
 }
