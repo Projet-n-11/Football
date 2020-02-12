@@ -7,6 +7,8 @@ public class DataSuperPowers {
 	private AbstractSpecsSP corruption;
 	private AbstractSpecsSP magnet;
 	
+	public DataSuperPowers() {
+	}
 	public AbstractSpecsSP getForceField() {
 		return forceField;
 	}
