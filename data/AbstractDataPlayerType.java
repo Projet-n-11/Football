@@ -1,6 +1,6 @@
 package data;
 
-public abstract class AbstractDataPlayerType extends PlayerDefender, PlayerGoalie, PlayerFoward, PlayerMidFielder{
+public abstract class AbstractDataPlayerType{
 	private PlayerHealth heath;
 	private PlayerStress stress;
 	private PlayerSpeed speed;
