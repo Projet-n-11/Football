@@ -19,6 +19,7 @@ public class DataTeam {
 		this.players = players;
 		this.color = color;
 		this.positiononField = positiononField;
+		players = new HashMap<String, DataPlayer>();
 	}
 
 
