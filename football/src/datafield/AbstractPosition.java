@@ -6,7 +6,6 @@ public abstract class AbstractPosition{
 	public AbstractPosition(int position) {
 		this.position = position;
 	}
-	
 	public int getPositionX() {
 		return position;
 	}

@@ -17,6 +17,4 @@ public class DataSoccerField {
 		return "DataSoccerField [WIDTH=" + WIDTH + ", HEIGHT=" + HEIGHT + ", INITIALPOINT=" + INITIALPOINT
 				+ ", hmField=" + hmField + ", SPECIALPOS=" + SPECIALPOS + "]";
 	}
-	
-	
 }
