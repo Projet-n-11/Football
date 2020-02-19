@@ -4,8 +4,9 @@ public abstract class AbstractSpecsSP{
 	private int durationTime;
 	private boolean activation;
 	
-	public AbstractSpecsSP() {
-		
+	public AbstractSpecsSP(int durationTime, boolean activation) {
+		this.durationTime = durationTime;
+		this.activation = activation;
 	}
 	
 	public int getDurationTime() {
@@ -20,4 +21,10 @@ public abstract class AbstractSpecsSP{
 	public void setActivation(boolean activation) {
 		this.activation = activation;
 	}
+
+	@Override
+	public String toString() {
+		return "durationTime=" + durationTime + ", activation=" + activation;
+	}
+	
 }

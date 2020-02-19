@@ -7,7 +7,12 @@ public class DataSuperPowers {
 	private AbstractSpecsSP corruption;
 	private AbstractSpecsSP magnet;
 	
-	public DataSuperPowers() {
+	public DataSuperPowers(AbstractSpecsSP forceField, AbstractSpecsSP superSpeed, AbstractSpecsSP dodge, AbstractSpecsSP corruption, AbstractSpecsSP magnet) {
+		this.forceField = forceField;
+		this.superSpeed = superSpeed;
+		this.dodge = dodge;
+		this.corruption = corruption;
+		this.magnet = magnet;
 	}
 	public AbstractSpecsSP getForceField() {
 		return forceField;
@@ -39,4 +44,9 @@ public class DataSuperPowers {
 	public void setMagnet(AbstractSpecsSP magnet) {
 		this.magnet = magnet;
 	}
+	public String toString() {
+		return "DataSuperPowers [forceField=" + forceField + ", superSpeed=" + superSpeed + ", dodge=" + dodge
+				+ ", corruption=" + corruption + ", magnet=" + magnet + "]";
+	}
+	
 }

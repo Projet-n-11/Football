@@ -1,13 +1,16 @@
 package dataplayer;
 
 public class PowerMagnet extends AbstractSpecsSP {
-	private final float RAYONMAGNETIC = 6;
+	private final float RADIUSMAGNETIC = 6;
 
-	public float getRayonMagnetic() {
-		return rayonMagnetic;
+	public PowerMagnet(int durationTime, boolean activation) {
+		super(durationTime, activation);
 	}
-
-	public void setRayonMagnetic(float rayonMagnetic) {
-		this.rayonMagnetic = rayonMagnetic;
+	
+	public float getRadiusMagnetic() {
+		return RADIUSMAGNETIC;
+	}
+	public String toString() {
+		return "The radius of magnetic field is : " + RADIUSMAGNETIC;
 	}
 }

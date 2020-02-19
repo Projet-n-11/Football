@@ -4,6 +4,11 @@ public class PlayerGoalie extends AbstractDataPlayerType {
 	private Reflex reflex;
 	private Dive dive;
 	
+	public PlayerGoalie(Reflex reflex, Dive dive) {
+		this.reflex = reflex;
+		this.dive = dive;
+	}
+	
 	public Reflex getReflex() {
 		return reflex;
 	}
@@ -15,5 +20,9 @@ public class PlayerGoalie extends AbstractDataPlayerType {
 	}
 	public void setDive(Dive dive) {
 		this.dive = dive;
+	}
+	
+	public String toString() {
+		return "Reflex value = " + reflex.toString() + " and Dive value = " + dive.toString(); 
 	}
 }

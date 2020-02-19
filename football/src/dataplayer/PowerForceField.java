@@ -3,24 +3,30 @@ package dataplayer;
 public class PowerForceField extends AbstractSpecsSP {
 	private String whichTeam;
 	private final String COLORFIELD = "BLUE";
-	private final float RAYONCAGE = 4;
+	private final float RADIUSCAGE = 4;
+	
+	public PowerForceField(int durationTime, boolean activation, String whichTeam) {
+		super(durationTime, activation);
+		this.whichTeam = whichTeam;
+	}
+	
+	public String getColorField() {
+		return COLORFIELD;
+	}
+	
+	public float getRadiusCage() {
+		return RADIUSCAGE;
+	}
 	
 	public String getWhichTeam() {
 		return whichTeam;
 	}
+	
 	public void setWhichTeam(String whichTeam) {
 		this.whichTeam = whichTeam;
 	}
-	public String getColorField() {
-		return colorField;
-	}
-	public void setColorField(String colorField) {
-		this.colorField = colorField;
-	}
-	public float getRayonCage() {
-		return rayonCage;
-	}
-	public void setRayonCage(float rayonCage) {
-		this.rayonCage = rayonCage;
+	
+	public String toString() {
+		return "The color of the Force Field is " + COLORFIELD + " and it has a radius of " + RADIUSCAGE + " and it's enable for " + whichTeam; 
 	}
 }

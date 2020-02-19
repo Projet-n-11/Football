@@ -21,4 +21,8 @@ public class DataBall {
 	public void setPosition(int position) {
 		this.position = position;
 	}
+	
+	public String toString() {
+		return "Ball size is : " + BALLSIZE + " and it's color is : " + COLOR + " for the position : " + position;
+	}
 }

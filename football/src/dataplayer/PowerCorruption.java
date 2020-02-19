@@ -1,13 +1,18 @@
 package dataplayer;
 
 public class PowerCorruption extends AbstractSpecsSP {
-	private final float RAYONCORRUPTION = 10;
 
-	public float getRayonCorruption() {
-		return rayonCorruption;
+	private final float RADIUSCORRUPTION = 10;
+
+	public PowerCorruption(int durationTime, boolean activation) {
+		super(durationTime, activation);
 	}
-
-	public void setRayonCorruption(float rayonCorruption) {
-		this.rayonCorruption = rayonCorruption;
+	
+	public float getRayonCorruption() {
+		return RADIUSCORRUPTION;
+	}
+	
+	public String toString() {
+		return "The corruption radius is : " + RADIUSCORRUPTION;
 	}
 }

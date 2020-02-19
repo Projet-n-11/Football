@@ -5,10 +5,6 @@ public abstract class AbstractDataPlayerType{
 	private PlayerStress stress;
 	private PlayerSpeed speed;
 	
-	public AbstractDataPlayerType() {
-		
-	}
-	
 	public PlayerHealth getHeath() {
 		return heath;
 	}
@@ -27,5 +23,7 @@ public abstract class AbstractDataPlayerType{
 	public void setSpeed(PlayerSpeed speed) {
 		this.speed = speed;
 	}
-	
+	public String toString() {
+		return "heath=" + heath + ", stress=" + stress + ", speed=" + speed;
+	}
 }
