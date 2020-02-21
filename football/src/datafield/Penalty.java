@@ -4,8 +4,8 @@ public class Penalty extends AbstractPosition {
 	private int penaltyPoint;
 	private boolean fault;
 	
-	public Penalty(int penaltyPoint, boolean fault, int position) {
-		super(position);
+	public Penalty(int penaltyPoint, boolean fault, int positionX, int positionY) {
+		super(positionX, positionY);
 		this.penaltyPoint = penaltyPoint;
 		this.fault = fault;
 	}

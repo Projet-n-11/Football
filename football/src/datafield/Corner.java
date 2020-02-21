@@ -4,8 +4,8 @@ public class Corner extends AbstractPosition {
 	private int cornerPoint;
 	private boolean isCorner;
 	
-	public Corner(int cornerPoint, boolean isCorner, int position) {
-		super(position);
+	public Corner(int cornerPoint, boolean isCorner, int positionX, int positionY) {
+		super(positionX, positionY);
 		this.cornerPoint = cornerPoint;
 		this.isCorner = isCorner;
 	}

@@ -3,8 +3,8 @@ package datafield;
 public class SixYard extends AbstractPosition {
 	private boolean sixYardPoint;
 
-	public SixYard(boolean sixYardPoint, int position) {
-		super(position);
+	public SixYard(boolean sixYardPoint, int positionX, int positionY) {
+		super(positionX, positionY);
 		this.sixYardPoint = sixYardPoint;
 	}
 	public boolean isSixYardPoint() {

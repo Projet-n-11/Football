@@ -3,8 +3,8 @@ package datafield;
 public class Goal extends AbstractPosition {
 	private boolean insideBall;
 
-	public Goal(boolean insideBall, int position) {
-		super(position);
+	public Goal(boolean insideBall, int positionX, int positionY) {
+		super(positionX, positionY);
 		this.insideBall = insideBall;
 	}
 	public boolean isInsideBall() {
