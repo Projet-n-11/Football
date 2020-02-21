@@ -3,10 +3,11 @@ package databall;
 public class DataBall {
 	private final int BALLSIZE = 2;
 	private final String COLOR = "White";
-	private int position;
+	private int positionx, positiony;
 	
-	public DataBall(int position) {
-		this.position = position;
+	public DataBall(int positionx, int positiony) {
+		this.positionx = positionx;
+		this.positiony = positiony;
 	}
 	
 	public int getBallsize() {
@@ -15,14 +16,20 @@ public class DataBall {
 	public String getColor() {
 		return COLOR;
 	}
-	public int getPosition() {
-		return position;
+	public int getPositionX() {
+		return positionx;
 	}
-	public void setPosition(int position) {
-		this.position = position;
+	public void setPositionX(int positionx) {
+		this.positionx = positionx;
+	}
+	public int getPositionY() {
+		return positiony;
+	}
+	public void setPositionY(int positiony) {
+		this.positiony = positiony;
 	}
 	
 	public String toString() {
-		return "Ball size is : " + BALLSIZE + " and it's color is : " + COLOR + " for the position : " + position;
+		return "Ball size is : " + BALLSIZE + " and it's color is : " + COLOR + " for the position | x : " + positionx + " ; y =" + positiony;
 	}
 }

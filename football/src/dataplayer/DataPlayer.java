@@ -7,18 +7,19 @@ public class DataPlayer {
 	private DataSuperPowers playerSuperPower;
 	private String team;
 	private boolean isPhysical;
-	private int position;
+	private int positionx, positiony;
 	private int playerSize;
 	private String colorPlayer;
 	
-	public DataPlayer(String playerName, String playerNumber, AbstractDataPlayerType playerType, DataSuperPowers playerSuperPower, String team, boolean isPhysical, int position, int playerSize, String colorPlayer) {
+	public DataPlayer(String playerName, String playerNumber, AbstractDataPlayerType playerType, DataSuperPowers playerSuperPower, String team, boolean isPhysical, int playerSize, String colorPlayer, int positionx, int positiony) {
 		this.playerName = playerName;
 		this.playerNumber = playerNumber;
 		this.playerType = playerType;
 		this.playerSuperPower = playerSuperPower;
 		this.team = team;
 		this.isPhysical = isPhysical;
-		this.position = position;
+		this.positionx = positionx;
+		this.positiony = positiony;
 		this.playerSize = playerSize;
 		this.colorPlayer = colorPlayer;
 	}
@@ -58,11 +59,17 @@ public class DataPlayer {
 	public void setPhysical(boolean isPhysical) {
 		this.isPhysical = isPhysical;
 	}
-	public int getPosition() {
-		return position;
+	public int getPositionX() {
+		return positionx;
 	}
-	public void setPosition(int position) {
-		this.position = position;
+	public void setPositionX(int positionx) {
+		this.positionx = positionx;
+	}
+	public int getPositionY() {
+		return positionx;
+	}
+	public void setPositionY(int positiony) {
+		this.positiony = positiony;
 	}
 	public int getPlayerSize() {
 		return playerSize;
@@ -79,7 +86,7 @@ public class DataPlayer {
 	public String toString() {
 		return "DataPlayer [playerName=" + playerName + ", playerNumber=" + playerNumber + ", playerType=" + playerType.toString()
 				+ ", playerSuperPower=" + playerSuperPower.toString() + ", team=" + team + ", isPhysical=" + isPhysical
-				+ ", position=" + position + ", playerSize=" + playerSize + ", colorPlayer=" + colorPlayer + "]";
+				+ ", position: x =" + positionx + " ; y =" + positiony + ", playerSize=" + playerSize + ", colorPlayer=" + colorPlayer + "]";
 	}
 	
 }
