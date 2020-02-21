@@ -9,8 +9,9 @@ public class MovementPlayer {
 	
 	public int MovementX(int positionX, int borderX) {
 		if(positionX < borderX) {
-			
+			System.out.println("essai");
 		}
 		return 0;
 	}
+	
 }
