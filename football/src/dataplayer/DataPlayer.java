@@ -11,6 +11,22 @@ public class DataPlayer {
 	private int playerSize;
 	private String colorPlayer;
 	
+	public DataPlayer() {
+		Acceleration a = new Acceleration(10);
+		Precision p = new Precision(5);
+		PlayerForward pf = new PlayerForward(a, p);
+		this.playerName = "DefaultPlayer";
+		this.playerNumber = "0";
+		this.playerType = pf;
+		this.playerSuperPower = null;
+		this.team = "DefaultTeam";
+		this.isPhysical = true;
+		this.positionx = 0;
+		this.positiony = 0;
+		this.playerSize = 1;
+		this.colorPlayer = "White";
+	}
+	
 	public DataPlayer(String playerName, String playerNumber, AbstractDataPlayerType playerType, DataSuperPowers playerSuperPower, String team, boolean isPhysical, int playerSize, String colorPlayer, int positionx, int positiony) {
 		this.playerName = playerName;
 		this.playerNumber = playerNumber;
@@ -23,6 +39,7 @@ public class DataPlayer {
 		this.playerSize = playerSize;
 		this.colorPlayer = colorPlayer;
 	}
+	
 	public String getPlayerName() {
 		return playerName;
 	}
@@ -66,7 +83,7 @@ public class DataPlayer {
 		this.positionx = positionx;
 	}
 	public int getPositionY() {
-		return positionx;
+		return positiony;
 	}
 	public void setPositionY(int positiony) {
 		this.positiony = positiony;

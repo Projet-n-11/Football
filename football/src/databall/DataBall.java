@@ -5,6 +5,11 @@ public class DataBall {
 	private final String COLOR = "White";
 	private int positionx, positiony;
 	
+	public DataBall() {
+		this.positionx = 50;
+		this.positiony = 48;
+	}
+	
 	public DataBall(int positionx, int positiony) {
 		this.positionx = positionx;
 		this.positiony = positiony;

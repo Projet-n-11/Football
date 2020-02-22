@@ -1,11 +1,11 @@
 package process.movement;
 
-import dataplayer.Acceleration;
-import dataplayer.PlayerSpeed;
+import databall.DataBall;
+import dataplayer.DataPlayer;
 
 public interface Movement {
 	
-	void Move(Acceleration acceleration, PlayerSpeed speed);
+	public Boolean Move(DataBall db, DataPlayer dp);
 	
-	Boolean limits();
+	public void Limits(DataPlayer dp);
 }

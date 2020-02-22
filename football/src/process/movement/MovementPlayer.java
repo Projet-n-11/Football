@@ -10,7 +10,7 @@ import dataplayer.DataPlayer;
  * 
  * @author Aladdine Ben Romdhane
  */
-public class MovementPlayer /*implements Movement*/ {
+public class MovementPlayer implements Movement {
 
 	private final int BORDERTOP = 0;
 	private final int BORDERBOTTOM = 48;
@@ -22,7 +22,7 @@ public class MovementPlayer /*implements Movement*/ {
 	
 	public MovementPlayer(DataBall db, DataPlayer dp) {
 		Move(db, dp);
-		Limits(dp);
+		//Limits(dp);
 	}
 	
 	
@@ -41,23 +41,33 @@ public class MovementPlayer /*implements Movement*/ {
 		 * to get it. Only for the x axis.
 		 * 
 		 */
-		if(db.getPositionX() < dp.getPositionX()) {
-			dp.setPositionX(dp.getPositionX() - 1);
-		}
-		else if(db.getPositionX() > dp.getPositionX()) {
-			dp.setPositionX(dp.getPositionX() + 1);
-		}
-		
-		/*
-		 * Player's conditions so he'll run to the ball's position
-		 * to get it. Only for the y axis.
-		 * 
-		 */
-		if(db.getPositionY() < dp.getPositionY()) {
-			dp.setPositionY(dp.getPositionY() - 1);
-		}
-		else if(db.getPositionY() > dp.getPositionY()) {
-			dp.setPositionY(dp.getPositionY() + 1);
+
+		while(dp.getPositionY() != db.getPositionY() || dp.getPositionX() != db.getPositionX() && Limits(dp) == true) {
+				if(db.getPositionX() < dp.getPositionX()) {
+					dp.setPositionX(dp.getPositionX() - 2);
+				}
+				else if(db.getPositionX() > dp.getPositionX()) {
+					dp.setPositionX(dp.getPositionX() + 2);
+				}
+				
+				/*
+				 * Player's conditions so he'll run to the ball's position
+				 * to get it. Only for the y axis.
+				 *  
+				 */
+				if(db.getPositionY() < dp.getPositionY()) {
+					dp.setPositionY(dp.getPositionY() - 1);
+				}
+				else if(db.getPositionY() > dp.getPositionY()) {
+					dp.setPositionY(dp.getPositionY() + 2);
+				}
+				System.out.println("Coordinates : x = " + dp.getPositionX() + " ; y = " + dp.getPositionY());
+				
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 		}
 	}
 
@@ -67,28 +77,37 @@ public class MovementPlayer /*implements Movement*/ {
 	 * @param DataBall db, DataPlayer dp
 	 */
 	
-	public void Limits(DataPlayer dp) {
+	public Boolean Limits(DataPlayer dp) {
 		
 		if(dp.getPositionX() == BORDERLEFT || dp.getPositionX() < BORDERLEFT) {
 			dp.setPositionX(BORDERLEFT);
+			return false;
 		}
 		else if( dp.getPositionX() == BORDERRIGHT ||dp.getPositionX() > BORDERRIGHT) {
 			dp.setPositionX(BORDERRIGHT);
+			return false;
 		}
 		else if(dp.getPositionX() < BORDERLEFT && dp.getPositionY() < BORDERTOP) {
 			dp.setPositionX(BORDERLEFT);
 			dp.setPositionY(BORDERTOP);
+			return false;
 		}
 		else if(dp.getPositionY() == BORDERTOP || dp.getPositionY() < BORDERTOP) {
 			dp.setPositionY(BORDERTOP);
+			return false;
 		}
 		else if(dp.getPositionY() == BORDERBOTTOM || dp.getPositionY() > BORDERBOTTOM) {
 			dp.setPositionY(BORDERBOTTOM);
+			return false;
 		}
 		else if(dp.getPositionX() > BORDERRIGHT && dp.getPositionY() > BORDERBOTTOM) {
 			dp.setPositionX(BORDERRIGHT);
 			dp.setPositionY(BORDERBOTTOM);
+			return false;
 		}
+		
+		System.out.println("Coordinates : x = " + dp.getPositionX() + " ; y = " + dp.getPositionY());
+		return true;
 	}
 	
 }
