@@ -5,7 +5,7 @@ import dataplayer.DataPlayer;
 
 public interface Movement {
 	
-	public Boolean Move(DataBall db, DataPlayer dp);
+	public void move(DataBall db, DataPlayer dp);
 	
-	public void Limits(DataPlayer dp);
+	public Boolean limits(DataPlayer dp);
 }
