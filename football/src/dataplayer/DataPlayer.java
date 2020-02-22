@@ -21,7 +21,7 @@ public class DataPlayer {
 		this.playerSuperPower = null;
 		this.team = "DefaultTeam";
 		this.isPhysical = true;
-		this.positionx = 0;
+		this.positionx = 40;
 		this.positiony = 0;
 		this.playerSize = 1;
 		this.colorPlayer = "White";

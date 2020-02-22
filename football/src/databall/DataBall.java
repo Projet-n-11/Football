@@ -6,8 +6,8 @@ public class DataBall {
 	private int positionx, positiony;
 	
 	public DataBall() {
-		this.positionx = 50;
-		this.positiony = 48;
+		this.positionx =69;
+		this.positiony = 7;
 	}
 	
 	public DataBall(int positionx, int positiony) {
@@ -18,12 +18,15 @@ public class DataBall {
 	public int getBallsize() {
 		return BALLSIZE;
 	}
+	
 	public String getColor() {
 		return COLOR;
 	}
+	
 	public int getPositionX() {
 		return positionx;
 	}
+	
 	public void setPositionX(int positionx) {
 		this.positionx = positionx;
 	}
