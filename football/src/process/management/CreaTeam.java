@@ -11,11 +11,18 @@ public class CreaTeam {
 	private ArrayList<String> team;
 	private ArrayList<String> botTeam;
 	
+	/**
+	 * CreaTeam prend en paramètre un nom de pays, le trouve dans teams.txt et en extrait les données associées.
+	 * Ces données sont consignées dans son attribut team. Il répète l'opération dans botTeam en prenant une autre équipe au hasard.
+	 * Si le nom de pays passé en paramètre n'existe pas dans le document : les attributs pointent vers null.
+	 * @param teamName
+	 * @throws IOException
+	 */
 	public CreaTeam (String teamName) throws IOException {	
 		
 		team = this.recupTeam(teamName);
 
-		if (team.size()!=0) { 		// si on a bien trouvé la team, on peut continuer
+		if (team!=null) { 		// si on a bien trouvé la team, on peut continuer
 
 		    // choisir random une équipe pour l’ordi :
 			int nbTeams = 2;																		// on compte à partir de 1, ici on n'atteind pas 3 mais c'est corrigé après
@@ -39,14 +46,13 @@ public class CreaTeam {
 		}
 	
 	public ArrayList<String> recupTeam(String teamName) throws IOException {
-		File fTeams = new File("equipes.csv");
+		File fTeams = new File("teams.csv");
 		BufferedReader br = new BufferedReader (new FileReader(fTeams));
 		String line = "";
 		ArrayList<String> team = new ArrayList<String>();
 		int found=0;
 		
 		while ( ((line = br.readLine()) != null) && found==0) {	// lecture doc
-			
 			if (found!=0) break;
 			// si line révèle une équipe qui correspond au choix du joueur:
 			
@@ -55,12 +61,13 @@ public class CreaTeam {
 				do {
 					team.add(line);
 					line = br.readLine();
-				} while ((line==null) && (teamName.compareTo(readCountry(line))==0));
+				} while ((line!=null) && (teamName.compareTo(readCountry(line))==0));
 			}
 		}
 		br.close();
 		if (team.size()==0) {
-			System.err.println("ERREUR CreaTeams equipe demandee inexistante\nteamName : "+teamName);
+			System.err.println("ERREUR CreaTeam equipe demandee inexistante\nteamName : "+teamName);
+			return null;
 		}
 		return team;
 	}
@@ -69,7 +76,7 @@ public class CreaTeam {
 		ArrayList<String> botTeam = new ArrayList<String>();
 		String country = "", tmp = "", line = "";
 
-		File fTeams = new File("equipes.csv");
+		File fTeams = new File("teams.csv");
 		BufferedReader br = new BufferedReader (new FileReader(fTeams));
 		line = br.readLine();
 
@@ -106,6 +113,7 @@ public class CreaTeam {
 		br.close();
 		return botTeam;
 	}
+
 	
 	public String readCountry(String line) {
 		String country = "";
@@ -133,4 +141,5 @@ public class CreaTeam {
 	public void setBotTeam(ArrayList<String> botTeam) {
 		this.botTeam = botTeam;
 	}
+
 }
