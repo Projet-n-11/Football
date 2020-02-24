@@ -20,7 +20,6 @@ public class CreaTeam {
 				teamsLists.getColorUserTeam(), 0);
 		
 		// répéter pour la team du bot
-		
 	}
 	
 	// NOTES;

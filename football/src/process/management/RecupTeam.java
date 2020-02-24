@@ -29,7 +29,6 @@ public class RecupTeam {
 		    // choisir random une équipe pour l’ordi :
 			int nbTeams = 2;																		// on compte à partir de 1, ici on n'atteind pas 3 mais c'est corrigé après
 			int rand = (int) (1 + Math.random() * nbTeams);
-			
 			botTeam = this.randTeam(rand);
 
 			while ( botTeam.size()==0 || (readCountry(botTeam.get(0)).compareTo(teamName) == 0)) {		// si équipeBot = équipeUser : on recommence

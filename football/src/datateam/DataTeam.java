@@ -18,7 +18,6 @@ public class DataTeam {
 		players = new HashMap<String, DataPlayer>();
 	}
 
-
 	public String getTeamName() {
 		return teamName;
 	}
