@@ -21,7 +21,7 @@ public class MovementBall {
 	}
 	
 	public void move(DataBall db, DataPlayer dp) {
-		while(dp.getPositionX()==db.getPositionX() && dp.getPositionY()==db.getPositionY()) {
+		while(dp.getPositionX()==db.getPositionX() && dp.getPositionY()==db.getPositionY() && limits(db)) {
 			PlayerSpeed v=dp.getPlayerType().getSpeed();
 			db.setSpeedX(v.getSpeedX());
 			db.setSpeedY(v.getSpeedY());
@@ -44,7 +44,7 @@ public class MovementBall {
 		
 	}
 	
-	public Boolean Limits(DataBall db) {
+	public Boolean limits(DataBall db) {
 		
 		if(db.getPositionX() == BORDERLEFT || db.getPositionX() < BORDERLEFT) {
 			db.setPositionX(BORDERLEFT);

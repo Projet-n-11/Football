@@ -42,7 +42,7 @@ public class MovementPlayer {
 		 * 
 		 */
 
-		while(dp.getPositionY() != db.getPositionY() || dp.getPositionX() != db.getPositionX())
+		while(dp.getPositionY() != db.getPositionY() || dp.getPositionX() != db.getPositionX() && limits(dp))
 		{
 					if(db.getPositionX() < dp.getPositionX()) {
 						if(dp.getPositionX() - db.getPositionX() == 1) {
