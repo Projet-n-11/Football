@@ -12,7 +12,6 @@ public class CreaTeam {
 		
 		RecupTeam teamsLists = new RecupTeam(teamName);
 		
-		
 		// initialiser players; 
 		// HashMap<String, DataPlayer> players = ...;
 		

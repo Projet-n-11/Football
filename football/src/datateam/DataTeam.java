@@ -9,7 +9,6 @@ public class DataTeam {
 	private String color;
 	private int positiononField;
 	
-	
 	public DataTeam(String teamName, int numberPlayers, HashMap<String, DataPlayer> players,
 			String color, int positiononField) {
 		this.teamName = teamName;
