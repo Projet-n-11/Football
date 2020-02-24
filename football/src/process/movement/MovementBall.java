@@ -1,12 +1,10 @@
-/**
- * 
- */
 package process.movement;
 import dataplayer.AbstractDataPlayerType;
 import databall.DataBall;
 import dataplayer.DataPlayer;
 import dataplayer.PlayerSpeed;
-essai 
+
+
 /**
  * @author quitt
  *
