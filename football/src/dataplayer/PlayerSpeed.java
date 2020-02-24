@@ -1,24 +1,32 @@
 package dataplayer;
 
 public class PlayerSpeed {
-	private float speed;
+	private int speedX;
+	private int speedY;
 
 	public PlayerSpeed() {
-		this.speed = 1;
+		this.speedX = 1;
+		this.speedY=1;
 	}
-	public PlayerSpeed(float speed) {
-		this.speed = speed;
+	public PlayerSpeed(int speedX,int speedY) {
+		this.speedX = speedX;
+		this.speedY=speedY;
 	}
 	
-	public float getSpeed() {
-		return speed;
+	public int getSpeedX() {
+		return speedX;
 	}
 
-	public void setSpeed(float speed) {
-		this.speed = speed;
+	public void setSpeedX(int speed) {
+		this.speedX = speedX;
 	}
-	
+	public int getSpeedY() {
+		return speedY;
+	}
+	public void setSpeedY(int speedY) {
+		this.speedY=speedY;
+	}
 	public String toString() {
-		return "Speed = " + speed;
+		return "Speed X = " + speedX+"Speed Y"+speedY;
 	}
 }
