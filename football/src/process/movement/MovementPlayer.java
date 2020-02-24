@@ -50,7 +50,7 @@ public class MovementPlayer {
 							dp.setPositionX(dp.getPositionX() - 1);
 						}
 						else {
-							dp.setPositionX(dp.getPositionX() - 2);
+							dp.setPositionX(dp.getPositionX() - dp.getPlayerType().getSpeed().getSpeedX());
 						}
 					}
 					else if(db.getPositionX() > dp.getPositionX()) {
@@ -58,7 +58,7 @@ public class MovementPlayer {
 							dp.setPositionX(dp.getPositionX() + 1);
 						}
 						else {
-							dp.setPositionX(dp.getPositionX() + 2);
+							dp.setPositionX(dp.getPositionX() + dp.getPlayerType().getSpeed().getSpeedX());
 						}
 					}
 				
@@ -72,7 +72,7 @@ public class MovementPlayer {
 						dp.setPositionY(dp.getPositionY() - 1);
 					}
 					else {
-						dp.setPositionY(dp.getPositionY() - 2);
+						dp.setPositionY(dp.getPositionY() - dp.getPlayerType().getSpeed().getSpeedY());
 					}
 				}
 				else if(db.getPositionY() > dp.getPositionY()) {
@@ -80,7 +80,7 @@ public class MovementPlayer {
 						dp.setPositionY(dp.getPositionY() + 1);
 					}
 					else {
-						dp.setPositionY(dp.getPositionY() + 2);
+						dp.setPositionY(dp.getPositionY() + dp.getPlayerType().getSpeed().getSpeedY());
 					}
 				}	
 				System.out.println("Coordinates : x = " + dp.getPositionX() + " ; y = " + dp.getPositionY());
