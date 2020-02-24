@@ -86,7 +86,7 @@ public class MovementPlayer {
 				System.out.println("Coordinates : x = " + dp.getPositionX() + " ; y = " + dp.getPositionY());
 				
 				try {
-					Thread.sleep(500);
+					Thread.sleep(200);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
