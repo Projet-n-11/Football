@@ -4,7 +4,7 @@ public class DataBall {
 	private final int BALLSIZE = 2;
 	private final String COLOR = "White";
 	private int positionx, positiony;
-	private float speed;
+	private int speedX, speedY;
 	public DataBall() {
 		this.positionx =69;
 		this.positiony = 7;
@@ -36,11 +36,18 @@ public class DataBall {
 	public void setPositionY(int positiony) {
 		this.positiony = positiony;
 	}
-	public float getSpeed() {
-		return speed;
+	public int getSpeedX() {
+		return speedX;
 	}
-	public void setSpeed(float speed) {
-		this.speed=speed;
+	public void setSpeedX(int speedX) {
+		this.speedX=speedX;
+	}
+	public int getSpeedY() {
+		return speedY;
+		
+	}
+	public void setSpeedY(int speedY) {
+		this.speedY=speedY;
 	}
 	public String toString() {
 		return "Ball size is : " + BALLSIZE + " and it's color is : " + COLOR + " for the position | x : " + positionx + " ; y =" + positiony;
