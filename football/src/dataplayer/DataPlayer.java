@@ -15,9 +15,11 @@ public class DataPlayer {
 		Acceleration a = new Acceleration(10);
 		Precision p = new Precision(5);
 		PlayerForward pf = new PlayerForward(a, p);
+		PlayerSpeed ps = new PlayerSpeed(2);
 		this.playerName = "DefaultPlayer";
 		this.playerNumber = "0";
 		this.playerType = pf;
+		this.playerType.setSpeed(ps);
 		this.playerSuperPower = null;
 		this.team = "DefaultTeam";
 		this.isPhysical = true;

@@ -8,9 +8,9 @@ public class PlayerSpeed {
 		this.speedX = 1;
 		this.speedY=1;
 	}
-	public PlayerSpeed(int speedX,int speedY) {
-		this.speedX = speedX;
-		this.speedY=speedY;
+	public PlayerSpeed(int speed) {
+		this.speedX = speed;
+		this.speedY=speed;
 	}
 	
 	public int getSpeedX() {

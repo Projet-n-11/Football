@@ -44,10 +44,12 @@ public class MovementPlayer {
 
 		while(dp.getPositionY() != db.getPositionY() || dp.getPositionX() != db.getPositionX())
 		{
-			
 					if(db.getPositionX() < dp.getPositionX()) {
 						if(dp.getPositionX() - db.getPositionX() == 1) {
 							dp.setPositionX(dp.getPositionX() - 1);
+						}
+						else if(dp.getPositionX() - db.getPositionX() < 0){
+							dp.setPositionX(db.getPositionX());
 						}
 						else {
 							dp.setPositionX(dp.getPositionX() - dp.getPlayerType().getSpeed().getSpeedX());
@@ -70,6 +72,9 @@ public class MovementPlayer {
 				if(db.getPositionY() < dp.getPositionY()) {
 					if(dp.getPositionY() - db.getPositionY() == 1) {
 						dp.setPositionY(dp.getPositionY() - 1);
+					}
+					else if(dp.getPositionY() - db.getPositionY() < 0){
+						dp.setPositionY(db.getPositionY());
 					}
 					else {
 						dp.setPositionY(dp.getPositionY() - dp.getPlayerType().getSpeed().getSpeedY());
