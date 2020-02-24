@@ -1,5 +1,4 @@
 package process.movement;
-import dataplayer.AbstractDataPlayerType;
 import databall.DataBall;
 import dataplayer.DataPlayer;
 import dataplayer.PlayerSpeed;
@@ -27,11 +26,10 @@ public class MovementBall {
 			db.setSpeedY(v.getSpeedY());
 			db.setPositionX(db.getPositionX()+db.getSpeedX());
 			db.setPositionY(db.getPositionY()+db.getSpeedY());
-			System.out.println("-----------------------------------");
+			System.out.println("―――――――――――――――");
 			System.out.println("Coordinates  ball: x = " + db.getPositionX() + " ; y = " + db.getPositionY());
 			System.out.println("Coordinates  player: x = " + dp.getPositionX() + " ; y = " + dp.getPositionY());
-			System.out.println("-----------------------------------");
-			
+			System.out.println("―――――――――――――――");
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -40,8 +38,6 @@ public class MovementBall {
 		}
 		db.setSpeedX(0);
 		db.setSpeedY(0);
-		
-		
 	}
 	
 	public Boolean limits(DataBall db) {
