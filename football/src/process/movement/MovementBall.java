@@ -23,12 +23,27 @@ public class MovementBall {
 	public void move(DataBall db, DataPlayer dp) {
 		while(dp.getPositionX()==db.getPositionX() && dp.getPositionY()==db.getPositionY()) {
 			PlayerSpeed v=dp.getPlayerType().getSpeed();
-			db.setSpeed(v.getSpeed());	
+			db.setSpeedX(v.getSpeedX());
+			db.setSpeedY(v.getSpeedY());
+			db.setPositionX(db.getPositionX()+db.getSpeedX());
+			db.setPositionY(db.getPositionY()+db.getSpeedY());
+			System.out.println("-----------------------------------");
+			System.out.println("Coordinates  ball: x = " + db.getPositionX() + " ; y = " + db.getPositionY());
+			System.out.println("Coordinates  player: x = " + dp.getPositionX() + " ; y = " + dp.getPositionY());
+			System.out.println("-----------------------------------");
+			
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
-		db.setSpeed(0);
+		db.setSpeedX(0);
+		db.setSpeedY(0);
 		
 		
 	}
+	
 	public Boolean Limits(DataBall db) {
 		
 		if(db.getPositionX() == BORDERLEFT || db.getPositionX() < BORDERLEFT) {

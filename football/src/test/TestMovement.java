@@ -4,6 +4,7 @@ import java.util.Random;
 
 import databall.DataBall;
 import dataplayer.DataPlayer;
+import process.movement.MovementBall;
 import process.movement.MovementPlayer;
 
 public class TestMovement {
@@ -24,10 +25,11 @@ public class TestMovement {
 			System.out.println("Player's position :");
 			while(!paused) {
 				MovementPlayer mp = new MovementPlayer(db, dp);
+				MovementBall mb=new MovementBall(db,dp);
 				paused = true;
 			}
-			db.setPositionX(r.nextInt(highx-low));
-			db.setPositionY(r.nextInt(highy-low));
+			//db.setPositionX(r.nextInt(highx-low));
+			//db.setPositionY(r.nextInt(highy-low));
 			paused = false;
 			System.out.println("_____________________________");
 			System.out.println("fin");
