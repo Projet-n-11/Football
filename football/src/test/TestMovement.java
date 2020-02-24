@@ -20,8 +20,10 @@ public class TestMovement {
 		int highy = 84;
 		while(restart != 22) {
 			System.out.println("Début de jeu");
-			System.out.println("_____________________________");
+			System.out.println("Initial Positions");
+			System.out.println("Player's position : x = " + dp.getPositionX() + " ; y = " + dp.getPositionY() );
 			System.out.println("Ball is at : x = " + db.getPositionX() + " y = " + db.getPositionY());
+			System.out.println("_____________________________");
 			System.out.println("Player's position :");
 			while(!paused) {
 				MovementPlayer mp = new MovementPlayer(db, dp);

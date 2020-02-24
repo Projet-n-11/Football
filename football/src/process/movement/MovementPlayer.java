@@ -22,7 +22,6 @@ public class MovementPlayer {
 	
 	public MovementPlayer(DataBall db, DataPlayer dp) {
 		move(db, dp);
-		//limits(dp);
 	}
 	
 	
@@ -45,23 +44,30 @@ public class MovementPlayer {
 		while(dp.getPositionY() != db.getPositionY() || dp.getPositionX() != db.getPositionX() && limits(dp))
 		{
 					if(db.getPositionX() < dp.getPositionX()) {
+						//////////////////////////////////////
 						if(dp.getPositionX() - db.getPositionX() == 1) {
 							dp.setPositionX(dp.getPositionX() - 1);
 						}
-						else if(dp.getPositionX() - db.getPositionX() < 0){
+						else if(dp.getPositionX() - db.getPositionX() < dp.getPlayerType().getSpeed().getSpeedX() || dp.getPositionX() - db.getPositionX() == dp.getPlayerType().getSpeed().getSpeedX()) {
 							dp.setPositionX(db.getPositionX());
 						}
 						else {
 							dp.setPositionX(dp.getPositionX() - dp.getPlayerType().getSpeed().getSpeedX());
 						}
+						//////////////////////////////////////
 					}
 					else if(db.getPositionX() > dp.getPositionX()) {
+						//////////////////////////////////////
 						if(dp.getPositionX() - db.getPositionX() == 1) {
 							dp.setPositionX(dp.getPositionX() + 1);
+						}
+						else if(db.getPositionX() - dp.getPositionX() < dp.getPlayerType().getSpeed().getSpeedX() || db.getPositionX() - dp.getPositionX() == dp.getPlayerType().getSpeed().getSpeedX()) {
+							dp.setPositionX(db.getPositionX());
 						}
 						else {
 							dp.setPositionX(dp.getPositionX() + dp.getPlayerType().getSpeed().getSpeedX());
 						}
+						//////////////////////////////////////
 					}
 				
 				/*
@@ -70,23 +76,30 @@ public class MovementPlayer {
 				 *  
 				 */
 				if(db.getPositionY() < dp.getPositionY()) {
+					//////////////////////////////////:
 					if(dp.getPositionY() - db.getPositionY() == 1) {
 						dp.setPositionY(dp.getPositionY() - 1);
 					}
-					else if(dp.getPositionY() - db.getPositionY() < 0){
+					else if(dp.getPositionY() - db.getPositionY() < dp.getPlayerType().getSpeed().getSpeedY() || dp.getPositionY() - db.getPositionY() == dp.getPlayerType().getSpeed().getSpeedY()){
 						dp.setPositionY(db.getPositionY());
 					}
 					else {
 						dp.setPositionY(dp.getPositionY() - dp.getPlayerType().getSpeed().getSpeedY());
 					}
+					//////////////////////////////////:
 				}
 				else if(db.getPositionY() > dp.getPositionY()) {
+					//////////////////////////////////:
 					if(dp.getPositionY() - db.getPositionY() == 1) {
 						dp.setPositionY(dp.getPositionY() + 1);
+					}
+					else if(db.getPositionY() - dp.getPositionY() < dp.getPlayerType().getSpeed().getSpeedY() || db.getPositionY() - dp.getPositionY() == dp.getPlayerType().getSpeed().getSpeedY()){
+						dp.setPositionY(db.getPositionY());
 					}
 					else {
 						dp.setPositionY(dp.getPositionY() + dp.getPlayerType().getSpeed().getSpeedY());
 					}
+					//////////////////////////////////:
 				}	
 				System.out.println("Coordinates : x = " + dp.getPositionX() + " ; y = " + dp.getPositionY());
 				
