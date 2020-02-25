@@ -39,8 +39,7 @@ public class MovementPlayer {
 		 * Player's conditions so he'll run to the ball's position
 		 * to get it. Only for the x axis.
 		 * 
-		 */
-
+		 */	
 		while(dp.getPositionY() != db.getPositionY() || dp.getPositionX() != db.getPositionX() && limits(dp))
 		{
 					if(db.getPositionX() < dp.getPositionX()) {
@@ -54,7 +53,7 @@ public class MovementPlayer {
 						else {
 							dp.setPositionX(dp.getPositionX() - dp.getPlayerType().getSpeed().getSpeedX());
 						}
-						//////////////////////////////////////
+						//////////////////////////////////////j
 					}
 					else if(db.getPositionX() > dp.getPositionX()) {
 						//////////////////////////////////////

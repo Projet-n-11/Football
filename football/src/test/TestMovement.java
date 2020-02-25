@@ -18,16 +18,16 @@ public class TestMovement {
 		int low = 0;
 		int highx = 48;
 		int highy = 84;
+		System.out.println("Début de jeu");
+		System.out.println("Initial Positions");
+		System.out.println("Player's position : x = " + dp.getPositionX() + " ; y = " + dp.getPositionY() );
+		System.out.println("Ball is at : x = " + db.getPositionX() + " y = " + db.getPositionY());
 		while(restart != 22) {
-			System.out.println("Début de jeu");
-			System.out.println("Initial Positions");
-			System.out.println("Player's position : x = " + dp.getPositionX() + " ; y = " + dp.getPositionY() );
-			System.out.println("Ball is at : x = " + db.getPositionX() + " y = " + db.getPositionY());
 			System.out.println("―――――――――――――――");
 			System.out.println("Player's position :");
 			while(!paused) {
 				MovementPlayer mp = new MovementPlayer(db, dp);
-				MovementBall mb = new MovementBall(db,dp);
+			//	MovementBall mb = new MovementBall(db,dp);
 				paused = true;
 			}
 			db.setPositionX(r.nextInt(highx-low));
