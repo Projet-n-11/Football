@@ -1,29 +1,24 @@
 package datafield;
 
 public class Corner extends AbstractPosition {
-	private int cornerPoint;
+	
 	private boolean isCorner;
 	
-	public Corner(int cornerPoint, boolean isCorner, int positionX, int positionY) {
+	public Corner(boolean isCorner, int positionX, int positionY) {
 		super(positionX, positionY);
-		this.cornerPoint = cornerPoint;
+		
 		this.isCorner = isCorner;
 	}
 	
-	public int isCornerPoint() {
-		return cornerPoint;
-	}
-	public void setCornerPoint(int cornerPoint) {
-		this.cornerPoint = cornerPoint;
-	}
-	public boolean isCorner() {
+
+	public boolean getIsCorner() {
 		return isCorner;
 	}
-	public void setCorner(boolean isCorner) {
+	public void setIsCorner(boolean isCorner) {
 		this.isCorner = isCorner;
 	}
 	
 	public String toString() {
-		return "The corner is at position: " + cornerPoint + " and the ball is on corner position? Answer : " + isCorner; 
+		return "The corner is at position: " + super.getPositionX()+";"+super.getPositionY() + " and the ball is on corner position? Answer : " + isCorner; 
 	}
 }
