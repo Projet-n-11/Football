@@ -6,13 +6,11 @@ public class CreaPlayer {
 	public static DataPlayer creaPlayer(RecupTeam teamsLists, int i,int userOrBot) {
 		AbstractDataPlayerType playerType ;
 		
-		/*
-		 * VERIFIER SI REFLEX A ETE CHANGE PAR ERREUR EN INT OU SI C EST VOULU
-		 */
+		// n'est pas une fonction en l'état car on ne peut pas renvoyer un Abstract !
 		if (userOrBot==0) { //user
 			if (teamsLists.getUserTeamPlayerType(i).compareTo("goalie")==0) {
 				int a = Integer.parseInt(teamsLists.getUserTeamSpecialStats(i).charAt(0)+"");
-				float b = Float.parseFloat(teamsLists.getUserTeamSpecialStats(i).charAt(1)+"");
+				int b = Integer.parseInt(teamsLists.getUserTeamSpecialStats(i).charAt(1)+"");
 				Dive dive = new Dive(a);
 				Reflex reflex = new Reflex(b);
 				playerType = new PlayerGoalie(reflex,dive);
@@ -32,7 +30,7 @@ public class CreaPlayer {
 				playerType = new PlayerMidFielder(r,p);
 			}
 			else {// forward
-				float a = Float.parseFloat(teamsLists.getUserTeamSpecialStats(i).charAt(0)+"");
+				int a = Integer.parseInt(teamsLists.getUserTeamSpecialStats(i).charAt(0)+"");
 				int b = Integer.parseInt(teamsLists.getUserTeamSpecialStats(i).charAt(1)+"");
 				Acceleration r = new Acceleration(a);
 				Precision p = new Precision(b);
@@ -42,7 +40,7 @@ public class CreaPlayer {
 		else {	// bot
 			if (teamsLists.getBotTeamPlayerType(i).compareTo("goalie")==0) {
 				int a = Integer.parseInt(teamsLists.getBotTeamSpecialStats(i).charAt(0)+"");
-				float b = Float.parseFloat(teamsLists.getBotTeamSpecialStats(i).charAt(1)+"");
+				int b = Integer.parseInt(teamsLists.getBotTeamSpecialStats(i).charAt(1)+"");
 				Dive dive = new Dive(a);
 				Reflex reflex = new Reflex(b);
 				playerType = new PlayerGoalie(reflex,dive);
@@ -62,7 +60,7 @@ public class CreaPlayer {
 				playerType = new PlayerMidFielder(r,p);
 			}
 			else {// forward
-				float a = Float.parseFloat(teamsLists.getBotTeamSpecialStats(i).charAt(0)+"");
+				int a = Integer.parseInt(teamsLists.getBotTeamSpecialStats(i).charAt(0)+"");
 				int b = Integer.parseInt(teamsLists.getBotTeamSpecialStats(i).charAt(1)+"");
 				Acceleration r = new Acceleration(a);
 				Precision p = new Precision(b);
