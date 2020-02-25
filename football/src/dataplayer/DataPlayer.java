@@ -29,11 +29,11 @@ public class DataPlayer {
 		this.colorPlayer = "White";
 	}
 	
-	public DataPlayer(String playerName, String playerNumber, AbstractDataPlayerType playerType, DataSuperPowers playerSuperPower, String team, boolean isPhysical, int playerSize, String colorPlayer, int positionx, int positiony) {
+	public DataPlayer(String playerName, String playerNumber, AbstractDataPlayerType playerType, String team, boolean isPhysical, int playerSize, String colorPlayer, int positionx, int positiony) {
 		this.playerName = playerName;
 		this.playerNumber = playerNumber;
 		this.playerType = playerType;
-		this.playerSuperPower = playerSuperPower;
+		this.playerSuperPower = null;
 		this.team = team;
 		this.isPhysical = isPhysical;
 		this.positionx = positionx;

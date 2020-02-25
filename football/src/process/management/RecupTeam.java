@@ -5,26 +5,28 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dataplayer.AbstractDataPlayerType;
 import dataplayer.DataPlayer;
+import dataplayer.DataSuperPowers;
 
 
 public class RecupTeam {
 	
-	private ArrayList<String> team;
+	private ArrayList<String> userTeam;
 	private ArrayList<String> botTeam;
 	
 	/**
 	 * RecupTeam prend en paramètre un nom de pays, le trouve dans teams.txt et en extrait les données associées.
-	 * Ces données sont consignées dans son attribut team. Il répète l'opération dans botTeam en prenant une autre équipe au hasard.
+	 * Ces données sont consignées dans son attribut userTeam. Il répète l'opération dans botTeam en prenant une autre équipe au hasard.
 	 * Si le nom de pays passé en paramètre n'existe pas dans le document : les attributs pointent vers null
 	 * @param teamName
 	 * @throws IOException
 	 */
 	public RecupTeam (String teamName) throws IOException {	 
 		
-		team = this.userTeam(teamName);
+		userTeam = this.userTeam(teamName);
 
-		if (team!=null) { 		// si on a bien trouvé la team, on peut continuer
+		if (userTeam!=null) { 		// si on a bien trouvé la userTeam, on peut continuer
 
 		    // choisir random une équipe pour l’ordi :
 			int nbTeams = 2;																		// on compte à partir de 1, ici on n'atteind pas 3 mais c'est corrigé après
@@ -47,7 +49,7 @@ public class RecupTeam {
 			}
 		}
 	
-	public ArrayList<String> userTeam(String teamName) throws IOException {
+	private ArrayList<String> userTeam(String teamName) throws IOException {
 		File fTeams = new File("teams.csv");
 		BufferedReader br = new BufferedReader (new FileReader(fTeams));
 		String line = "";
@@ -74,7 +76,7 @@ public class RecupTeam {
 		return team;
 	}
 		
-	public ArrayList<String> randTeam(int r) throws IOException {
+	private ArrayList<String> randTeam(int r) throws IOException {
 		ArrayList<String> botTeam = new ArrayList<String>();
 		String country = "", tmp = "", line = "";
 
@@ -115,9 +117,8 @@ public class RecupTeam {
 		br.close();
 		return botTeam;
 	}
-
 	
-	public String readCountry(String line) {
+	private String readCountry(String line) {
 		String country = "";
 		int i = 0;
 		do {
@@ -129,46 +130,74 @@ public class RecupTeam {
 	}
 
 	public ArrayList<String> getUserTeamList() {
-		return team;
+		return userTeam;
 	}
-
 	public ArrayList<String> getBotTeamList() {
 		return botTeam;
 	}
 	
 	public int getNumberPlayersUser() {
-		return team.size();
-	}
-	
+		return userTeam.size();
+	}	
 	public int getNumberPlayersBot() {
 		return botTeam.size();
 	}
 	
-	public String getColorUserTeam() {
-		String line = team.get(0);
-		String color = getColor(line);
-		return color;
+	public String getUserTeamName() {
+		return scrollAndGet(userTeam.get(0),0);
+	}
+	public String getBotTeamName() {
+		return scrollAndGet(botTeam.get(0),0);
+	}
+
+	public String getUserTeamColor() {
+		return scrollAndGet(userTeam.get(0),1);
+	}	
+	public String getBotTeamColor() {
+		return scrollAndGet(botTeam.get(0),1);
+	}
+
+	public String getUserTeamPlayerName(int i) {
+		return scrollAndGet(userTeam.get(i),2);
+	}	
+	public String getBotTeamPlayerName(int i) {
+		return scrollAndGet(botTeam.get(i),2);
+	}
+
+	public String getUserTeamNumberOfOnePlayer(int j) {
+		return scrollAndGet(userTeam.get(j),3);
+	}
+	public String getBotTeamNumberOfOnePlayer(int j) {
+		return scrollAndGet(botTeam.get(j),3);
 	}
 	
-	public String getColorBotTeam() {
-		String line = botTeam.get(0);
-		String color = getColor(line);
-		return color;
+	public String getUserTeamPlayerType(int i) {
+		return scrollAndGet(userTeam.get(i),4);
+	}	
+	public String getBotTeamPlayerType(int i) {
+		return scrollAndGet(botTeam.get(i),4);
 	}
-	
-	private String getColor(String line) { // private car à l'usage exclusif de getColorUser/botTeam()
-		String color = "";
+
+	/**
+	 * scrollAndGet parcours la ligne donnée, et saute k données jusqu'à atteinre la bonne
+	 * et la renvoie (la première donnée = 0). On lui passe donc en paramètre les lignes contenues
+	 * dans les ArrayString userTeam et botTeam
+	 * @param str
+	 * @param k
+	 * @return String
+	 */
+	private String scrollAndGet(String str, int k) {
+		String tmp ="";
 		int i = 0;
-		while ( line.charAt(i)!=',' ) { // ignorer "pays"
-			i++;
+		while (k!=0) {
+		while (str.charAt(i)!=',') {i++;}
+		i=i+2;
+		k--;
 		}
-		i = i+2;						// sauter la virgule
-		while ( line.charAt(i)!=',' ) {	// copier "couleur"
-			color += line.charAt(i);
-			i++;
+		while (str.charAt(i)!=',') {
+			tmp += str.charAt(i);
 		}
-		return color;
+		return tmp;
 	}
-	//, int substitute, HashMap<String, DataPlayer> players, String color, int positiononField
 
 }
