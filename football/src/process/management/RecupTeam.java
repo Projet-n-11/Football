@@ -178,6 +178,13 @@ public class RecupTeam {
 		return scrollAndGet(botTeam.get(i),4);
 	}
 
+	public String getUserTeamSpecialStats(int i) {
+		return scrollAndGet(userTeam.get(i),8)+scrollAndGet(userTeam.get(i),9);
+	}
+	public String getBotTeamSpecialStats(int i) {
+		return scrollAndGet(botTeam.get(i),8)+scrollAndGet(botTeam.get(i),9);
+	}
+	
 	/**
 	 * scrollAndGet parcours la ligne donnée, et saute k données jusqu'à atteinre la bonne
 	 * et la renvoie (la première donnée = 0). On lui passe donc en paramètre les lignes contenues
