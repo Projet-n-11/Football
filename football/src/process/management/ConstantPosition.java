@@ -29,7 +29,5 @@ public class ConstantPosition {
 	public static final int GOALY2=30;
 	
 
-	
-	
 
 }

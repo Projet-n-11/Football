@@ -17,7 +17,6 @@ public class Goal extends AbstractPosition {
 		this.insideBall = insideBall;
 	}
 	
-
 	public int getPosition2Y() {
 		return position2Y;
 	}

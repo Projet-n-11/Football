@@ -21,4 +21,5 @@ public class Corner extends AbstractPosition {
 	public String toString() {
 		return "The corner is at position: " + super.getPositionX()+";"+super.getPositionY() + " and the ball is on corner position? Answer : " + isCorner; 
 	}
+	
 }

@@ -24,4 +24,5 @@ public abstract class AbstractPosition{
 	public String toString() {
 		return "X =" + positionx + " ; Y =" + positiony;
 	}
+	
 }

@@ -22,4 +22,5 @@ public class Penalty extends AbstractPosition {
 		return "Penalty [fault=" + fault + "position:"+super.getPositionX()+";"+super.getPositionY()+"]";
 	}
 	
+	
 }

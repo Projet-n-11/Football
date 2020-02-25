@@ -100,4 +100,6 @@ public class SpecialPosition {
 		return "Les corners sont aux positions: " + corner1 + corner2 + corner3 + corner4 + " \nLes cages sont aux positions: " + goal1 + goal2 + "\n Le point d'engagement et à l a position: " + engagement
 				+"\nLes pénaltys sont aux positions: " + penalty1 + penalty2 + "\nLes six-mètres sont aux positions: " + sixYard1 + sixYard2;
 	}
+	
+	
 }

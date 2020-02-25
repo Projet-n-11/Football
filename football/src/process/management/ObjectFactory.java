@@ -30,4 +30,5 @@ public class ObjectFactory {
 	public static SixYard creaSixYard(boolean sixYardPoint, int positionX, int positionY) {
 		return new SixYard(sixYardPoint,positionX,positionY);
 	}
+	
 }
