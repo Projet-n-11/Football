@@ -16,7 +16,7 @@ public class RecupTeam {
 	/**
 	 * RecupTeam prend en paramètre un nom de pays, le trouve dans teams.txt et en extrait les données associées.
 	 * Ces données sont consignées dans son attribut team. Il répète l'opération dans botTeam en prenant une autre équipe au hasard.
-	 * Si le nom de pays passé en paramètre n'existe pas dans le document : les attributs pointent vers null.
+	 * Si le nom de pays passé en paramètre n'existe pas dans le document : les attributs pointent vers null
 	 * @param teamName
 	 * @throws IOException
 	 */
@@ -29,6 +29,8 @@ public class RecupTeam {
 		    // choisir random une équipe pour l’ordi :
 			int nbTeams = 2;																		// on compte à partir de 1, ici on n'atteind pas 3 mais c'est corrigé après
 			int rand = (int) (1 + Math.random() * nbTeams);
+			
+			
 			botTeam = this.randTeam(rand);
 
 			while ( botTeam.size()==0 || (readCountry(botTeam.get(0)).compareTo(teamName) == 0)) {		// si équipeBot = équipeUser : on recommence

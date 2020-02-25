@@ -12,6 +12,7 @@ public class CreaTeam {
 		
 		RecupTeam teamsLists = new RecupTeam(teamName);
 		
+		
 		// initialiser players; 
 		// HashMap<String, DataPlayer> players = ...;
 		
@@ -20,6 +21,7 @@ public class CreaTeam {
 				teamsLists.getColorUserTeam(), 0);
 		
 		// répéter pour la team du bot
+		
 	}
 	
 	// NOTES;
