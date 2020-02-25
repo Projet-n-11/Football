@@ -18,4 +18,5 @@ public class SixYard extends AbstractPosition {
 	public String toString() {
 		return "Is the ball on a sixYard point? Answer : " + sixYardPoint;
 	}
+	
 }

@@ -7,7 +7,7 @@ public class Engagement extends AbstractPosition {
 		super(positionX, positionY);
 		this.engagementPoint = engagementPoint;
 	}
-	public boolean isEngagementPoint() {
+	public boolean getEngagementPoint() {
 		return engagementPoint;
 	}
 
@@ -18,4 +18,5 @@ public class Engagement extends AbstractPosition {
 	public String toString() {
 		return "Is the ball on engagementPoint ? Answer :" + engagementPoint;
 	}
+	
 }

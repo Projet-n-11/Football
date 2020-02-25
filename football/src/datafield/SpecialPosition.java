@@ -1,5 +1,8 @@
 package datafield;
 
+import process.management.ObjectFactory;
+import process.management.ConstantPosition; 
+
 public class SpecialPosition {
 	private Corner corner1;
 	private Corner corner2;
@@ -14,33 +17,19 @@ public class SpecialPosition {
 	private SixYard sixYard2;
 	
 	public SpecialPosition() {
-		this.corner1 = null;
-		this.corner2 = null;
-		this.corner3 = null;
-		this.corner4 = null;
-		this.goal1 = null;
-		this.goal2 = null;
-		this.engagement = null;
-		this.penalty1 = null;
-		this.penalty2 = null;
-		this.sixYard1 = null;
-		this.sixYard2 = null;
+		this.corner1=ObjectFactory.creaCorner(false, ConstantPosition.CORNER1X,ConstantPosition.CORNER1Y);
+		this.corner2 = ObjectFactory.creaCorner(false, ConstantPosition.CORNER2X,ConstantPosition.CORNER2Y);
+		this.corner3 = ObjectFactory.creaCorner(false, ConstantPosition.CORNER3X,ConstantPosition.CORNER3Y);
+		this.corner4 = ObjectFactory.creaCorner(false, ConstantPosition.CORNER4X,ConstantPosition.CORNER4Y);
+		this.goal1 = ObjectFactory.creaGoal(false, ConstantPosition.GOAL1X, ConstantPosition.GOALY1,ConstantPosition.GOALY2);
+		this.goal2 = ObjectFactory.creaGoal(false, ConstantPosition.GOAL2X, ConstantPosition.GOALY1,ConstantPosition.GOALY2);
+		this.engagement = ObjectFactory.creaEngagement(true,ConstantPosition.ENGAGEMENTX , ConstantPosition.ENGAGEMENTY);
+		this.penalty1 = ObjectFactory.creaPenalty(false, ConstantPosition.PENALTY1X, ConstantPosition.PENALTY1Y);
+		this.penalty2 = ObjectFactory.creaPenalty(false, ConstantPosition.PENALTY2X, ConstantPosition.PENALTY2Y);;
+		this.sixYard1 = ObjectFactory.creaSixYard(false, ConstantPosition.SIXYARD1X, ConstantPosition.SIXYARD1Y);
+		this.sixYard2 = ObjectFactory.creaSixYard(false, ConstantPosition.SIXYARD2X, ConstantPosition.SIXYARD2Y);
 	}
-	public SpecialPosition(Corner corner1, Corner corner2, Corner corner3, Corner corner4, Goal goal1, Goal goal2, Engagement engagement,
-			Penalty penalty1, Penalty penalty2, SixYard sixYard1, SixYard sixYard2) {
-		this.corner1 = corner1;
-		this.corner2 = corner2;
-		this.corner3 = corner3;
-		this.corner4 = corner4;
-		this.goal1 = goal1;
-		this.goal2 = goal2;
-		this.engagement = engagement;
-		this.penalty1 = penalty1;
-		this.penalty2 = penalty2;
-		this.sixYard1 = sixYard1;
-		this.sixYard2 = sixYard2;
-	}
-	
+
 	public Corner getCorner1() {
 		return corner1;
 	}
@@ -111,4 +100,6 @@ public class SpecialPosition {
 		return "Les corners sont aux positions: " + corner1 + corner2 + corner3 + corner4 + " \nLes cages sont aux positions: " + goal1 + goal2 + "\n Le point d'engagement et à l a position: " + engagement
 				+"\nLes pénaltys sont aux positions: " + penalty1 + penalty2 + "\nLes six-mètres sont aux positions: " + sixYard1 + sixYard2;
 	}
+	
+	
 }

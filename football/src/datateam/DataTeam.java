@@ -30,26 +30,6 @@ public class DataTeam {
 	}
 
 
-	public int getNumberPlayers() {
-		return numberPlayers;
-	}
-
-
-	public void setNumberPlayers(int numberPlayers) {
-		this.numberPlayers = numberPlayers;
-	}
-
-
-	public int getSubstitute() {
-		return substitute;
-	}
-
-
-	public void setSubstitute(int substitute) {
-		this.substitute = substitute;
-	}
-
-
 	public HashMap<String, DataPlayer> getPlayers() {
 		return players;
 	}
@@ -81,7 +61,7 @@ public class DataTeam {
 
 
 	public String toString() {
-		return "DataTeam [teamName=" + teamName + ", numberPlayers=" + numberPlayers + ", substitute=" + substitute
+		return "DataTeam [teamName=" + teamName + ", numberPlayers=" + ", substitute=" + substitute
 				+ ", players=" + players + ", color=" + color + ", positiononField=" + positiononField + "]";
 	}
 	
