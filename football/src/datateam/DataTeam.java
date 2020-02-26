@@ -62,7 +62,7 @@ public class DataTeam {
 
 	public String toString() {
 		return "Team :" + teamName +  " | Substitute :" + substitute
-				+ " | Players=" + players + "| Color=" + color + "| PositiononField=" + positiononField + "]";
+				 + "| Color=" + color + "| PositiononField=" + positiononField + " | Players : \n" + players +"]";
 	}
 	
 	
