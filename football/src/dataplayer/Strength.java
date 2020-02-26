@@ -15,6 +15,6 @@ public class Strength {
 	}
 	
 	public String toString() {
-		return "Strength value is : " + valueStrength;
+		return "STRENGTH : " + valueStrength;
 	}
 }

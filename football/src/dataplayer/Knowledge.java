@@ -16,6 +16,6 @@ public class Knowledge {
 	}
 	
 	public String toString() {
-		return "Knowledge is : " + valueKnowledge;
+		return "" + valueKnowledge;
 	}
 }

@@ -15,6 +15,6 @@ public class Precision {
 	}
 	
 	public String toString() {
-		return "Precision value = " + valuePrecision;
+		return "PRECISION : " + valuePrecision;
 	}
 }
