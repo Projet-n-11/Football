@@ -27,6 +27,6 @@ public class PowerForceField extends AbstractSpecsSP {
 	}
 	
 	public String toString() {
-		return "The color of the Force Field is " + COLORFIELD + " and it has a radius of " + RADIUSCAGE + " and it's enable for " + whichTeam; 
+		return "COLOR : " + COLORFIELD + ", RADIUS : " + RADIUSCAGE + ", TEAM : " + whichTeam; 
 	}
 }

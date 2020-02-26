@@ -12,7 +12,7 @@ public class PowerSuperSpeed extends AbstractSpecsSP {
 	}
 	
 	public String toString() {
-		return "Speed will be multiplied by : " + MULTIPLICATIONSPEED;
+		return "SPEED MULTIPICATED BY : " + MULTIPLICATIONSPEED;
 	}
 	
 }

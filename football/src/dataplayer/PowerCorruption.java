@@ -13,6 +13,6 @@ public class PowerCorruption extends AbstractSpecsSP {
 	}
 	
 	public String toString() {
-		return "The corruption radius is : " + RADIUSCORRUPTION;
+		return "CORRUPTION RADIUS : " + RADIUSCORRUPTION;
 	}
 }
