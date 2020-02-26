@@ -23,6 +23,6 @@ public class PlayerDefender extends AbstractDataPlayerType {
 	}
 	
 	public String toString() {
-		return "KNOWLEDGE : " + knowledge.toString() + " STRENGTH : " + strength.toString();
+		return "Defender,KNOWLEDGE," + knowledge.toString() + ",STRENGTH," + strength.toString();
 	}
 }

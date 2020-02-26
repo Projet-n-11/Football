@@ -7,14 +7,14 @@ public class DataPlayer {
 	private DataSuperPowers playerSuperPower;
 	private String team;
 	private boolean isPhysical;
-	private int positionx, positiony;
+	private int positionx,positiony;
 	private int playerSize;
 	private String colorPlayer;
 	
 	public DataPlayer() {
 		Acceleration a = new Acceleration(10);
 		Precision p = new Precision(5);
-		PlayerForward pf = new PlayerForward(a, p);
+		PlayerForward pf = new PlayerForward(a,p);
 		PlayerSpeed ps = new PlayerSpeed(2);
 		this.playerName = "DefaultPlayer";
 		this.playerNumber = "0";
@@ -29,7 +29,7 @@ public class DataPlayer {
 		this.colorPlayer = "White";
 	}
 	
-	public DataPlayer(String playerName, String playerNumber, AbstractDataPlayerType playerType, DataSuperPowers playerSuperPower, String team, boolean isPhysical, int playerSize, String colorPlayer, int positionx, int positiony) {
+	public DataPlayer(String playerName,String playerNumber,AbstractDataPlayerType playerType,DataSuperPowers playerSuperPower,String team,boolean isPhysical,int playerSize,String colorPlayer,int positionx,int positiony) {
 		this.playerName = playerName;
 		this.playerNumber = playerNumber;
 		this.playerType = playerType;
@@ -123,9 +123,9 @@ public class DataPlayer {
 	}
 	
 	public String toString() {
-		return " NUMBER : " + playerNumber + ", PLAYERTYPE : " + playerType.toString()
-				+ ", PLAYERSUPERPOWER : " + playerSuperPower.toString() + ", TEAM : " + team + ", ISPHYSICAL : " + isPhysical
-				+ ", POSITION : X = " + positionx + " ; Y =" + positiony + ", PLAYERSIZE : " + playerSize + ", COLORPLAYER : " + colorPlayer + "]\n";
+		return " NUMBER," + playerNumber + ",PLAYERTYPE," + playerType.toString()
+				+ ",PLAYERSUPERPOWER," + playerSuperPower.toString() + ",TEAM," + team + ",ISPHYSICAL," + isPhysical
+				+ ",POSITION,X=" + positionx + ",Y=" + positiony + ",PLAYERSIZE," + playerSize + ",COLORPLAYER," + colorPlayer + "]\n";
 	}
 	
 }

@@ -27,6 +27,6 @@ public class PlayerSpeed {
 		this.speedY=speedY;
 	}
 	public String toString() {
-		return "Speed X = " + speedX+"Speed Y"+speedY;
+		return "Speed_X=" + speedX+"Speed_Y="+speedY;
 	}
 }

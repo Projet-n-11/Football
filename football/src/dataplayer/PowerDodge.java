@@ -27,6 +27,6 @@ public class PowerDodge extends AbstractSpecsSP{
 	}
 	
 	public String toString() {
-		return "HAVEBALL : " + haveBall + "ISNOTPHYSICAL : " + isnotPhysical;
+		return "HAVEBALL," + haveBall + ",ISNOTPHYSICAL," + isnotPhysical;
 	}
 }

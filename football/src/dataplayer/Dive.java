@@ -16,6 +16,6 @@ public class Dive {
 	}
 	
 	public String toString() {
-		return "valueDive = " + valueDive;
+		return "" + valueDive;
 	}
 }

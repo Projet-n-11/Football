@@ -11,6 +11,6 @@ public class PowerMagnet extends AbstractSpecsSP {
 		return RADIUSMAGNETIC;
 	}
 	public String toString() {
-		return "RADIUS MAGNETIC FIELD : " + RADIUSMAGNETIC;
+		return "RADIUS_MAGNETIC_FIELD," + RADIUSMAGNETIC;
 	}
 }

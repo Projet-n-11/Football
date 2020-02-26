@@ -15,6 +15,6 @@ public class Reflex {
 	}
 	
 	public String toString() {
-		return "ACCELERATION : " + valueAcceleration; 
+		return "" + valueAcceleration; 
 	}
 }

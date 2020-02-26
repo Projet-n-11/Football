@@ -16,6 +16,6 @@ public class ReadPlay {
 	}
 	
 	public String toString() {
-		return "READPLAY : " + valueReadPlay;
+		return "" + valueReadPlay;
 	}
 }

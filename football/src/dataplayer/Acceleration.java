@@ -16,6 +16,6 @@ public class Acceleration {
 	}
 	
 	public String toString() {
-		return "The acceleration value is : " + valueAcceleration;
+		return "" + valueAcceleration;
 	}
 }

@@ -27,6 +27,6 @@ public class PowerForceField extends AbstractSpecsSP {
 	}
 	
 	public String toString() {
-		return "COLOR : " + COLORFIELD + ", RADIUS : " + RADIUSCAGE + ", TEAM : " + whichTeam; 
+		return "COLOR," + COLORFIELD + ",RADIUS," + RADIUSCAGE + ",TEAM," + whichTeam; 
 	}
 }
