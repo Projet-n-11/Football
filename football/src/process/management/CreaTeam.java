@@ -14,17 +14,16 @@ public class CreaTeam {
 	 * @return DataTeam
 	 * @throws IOException
 	 */
-	public DataTeam creaTeam(String teamName) throws IOException {
+	public static DataTeam creaTeam(String teamName) throws IOException {
 		int i =0;
 		
 		// gets the ArrayList<String> with all the data to create players of the teamName's team
 		RecupTeam teamList = new RecupTeam(teamName);
-		
 		// associate name of the player with their DataPlayer
 		HashMap<String, DataPlayer> userPlayers = new HashMap<String, DataPlayer>();
 		
 			// on parcours avec i : chaque ligne représentant les données d'un joueur
-			while (i<=teamList.getNumberPlayers()) {			
+			while (i<teamList.getNumberPlayers()) {			
 				userPlayers.put(teamList.getTeamPlayerName(i),CreaPlayer.creaPlayer(teamList, i) );
 				i++;
 				System.gc();
@@ -34,14 +33,5 @@ public class CreaTeam {
 		return new DataTeam (teamName, teamList.getNumberPlayers(), userPlayers,teamList.getTeamColor(), 0);
 	}
 		
-		// répéter pour la team du bot
 		
-		
-
-	
-	
-	// NOTES;
-    // instancier les joueurs et les 2 équipes, 
-    // laisser l’utilisateur choisir sa stratégie : File fTactics = new File ("tactics.txt");
-    // choisir les joueurs parmi la liste proposée dans l’équipe qu’il a choisie
 }

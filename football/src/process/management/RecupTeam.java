@@ -23,10 +23,8 @@ public class RecupTeam {
 		ArrayList<String> team = new ArrayList<String>();
 		int found=0;
 		
-		while ( ((line = br.readLine()) != null) && found==0) {	// lecture doc
+		while ( ((line = br.readLine()) != null) && found==0) {	// reading doc
 			if (found!=0) break;
-			// si line révèle une équipe qui correspond au choix du joueur:
-			
 			if (readCountry(line).compareTo(teamName)==0) {									
 				found=1;
 				do {
@@ -93,11 +91,12 @@ public class RecupTeam {
 		int i = 0;
 		while (k!=0) {
 		while (str.charAt(i)!=',') {i++;}
-		i=i+2;
+		i++;
 		k--;
 		}
-		while (str.charAt(i)!=',') {
+		while ((i!=str.length())&&(str.charAt(i)!=',')) {
 			tmp += str.charAt(i);
+			i++;
 		}
 		return tmp;
 	}

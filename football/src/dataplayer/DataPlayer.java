@@ -29,11 +29,11 @@ public class DataPlayer {
 		this.colorPlayer = "White";
 	}
 	
-	public DataPlayer(String playerName, String playerNumber, AbstractDataPlayerType playerType, String team, boolean isPhysical, int playerSize, String colorPlayer, int positionx, int positiony) {
+	public DataPlayer(String playerName, String playerNumber, AbstractDataPlayerType playerType, DataSuperPowers playerSuperPower, String team, boolean isPhysical, int playerSize, String colorPlayer, int positionx, int positiony) {
 		this.playerName = playerName;
 		this.playerNumber = playerNumber;
 		this.playerType = playerType;
-		this.playerSuperPower = null;
+		this.playerSuperPower = playerSuperPower;
 		this.team = team;
 		this.isPhysical = isPhysical;
 		this.positionx = positionx;
@@ -125,7 +125,7 @@ public class DataPlayer {
 	public String toString() {
 		return "DataPlayer [playerName=" + playerName + ", playerNumber=" + playerNumber + ", playerType=" + playerType.toString()
 				+ ", playerSuperPower=" + playerSuperPower.toString() + ", team=" + team + ", isPhysical=" + isPhysical
-				+ ", position: x =" + positionx + " ; y =" + positiony + ", playerSize=" + playerSize + ", colorPlayer=" + colorPlayer + "]";
+				+ ", position: x =" + positionx + " ; y =" + positiony + ", playerSize=" + playerSize + ", colorPlayer=" + colorPlayer + "]\n";
 	}
 	
 }

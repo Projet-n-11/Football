@@ -39,17 +39,17 @@ public class CreaPlayer {
 				playerType = new PlayerMidFielder(r,p);
 			}
 			// forward
-			else {
+			else if (teamsLists.getTeamPlayerType(i).compareTo("forward")==0) {
 				int a = Integer.parseInt(teamsLists.getTeamSpecialStats(i).charAt(0)+"");
 				int b = Integer.parseInt(teamsLists.getTeamSpecialStats(i).charAt(1)+"");
 				Acceleration r = new Acceleration(a);
 				Precision p = new Precision(b);
 				playerType = new PlayerForward(r,p);
 			}
-		
-		
-		DataPlayer dataplayer = new DataPlayer(teamsLists.getTeamPlayerName(i),teamsLists.getTeamNumberOfOnePlayer(i),playerType,teamsLists.getTeamName(),true,2,teamsLists.getTeamColor(),0,0);
-		return dataplayer;
+			else return null;
+	
+			DataPlayer dataplayer = new DataPlayer(teamsLists.getTeamPlayerName(i),teamsLists.getTeamNumberOfOnePlayer(i),playerType,CreaDataSuperPowers.creaDataSuperPowers(),teamsLists.getTeamName(),true,2,teamsLists.getTeamColor(),0,0);
+			return dataplayer;
 	}
 	
 }
