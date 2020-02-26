@@ -6,18 +6,15 @@ package process.scores;
  * 
  * @author Tianxiao.Liu@u-cergy.fr
  **/
+
 public class Chronometer {
-	private CyclicCounter hour = new CyclicCounter(0, 59, 0);
-	private CyclicCounter minute = new CyclicCounter(0, 59, 0);
+	private CyclicCounter minute = new CyclicCounter(0, 92, 0);
 	private CyclicCounter second = new CyclicCounter(0, 59, 0);
 
 	public void increment() {
 		second.increment();
 		if (second.getValue() == 0) {
 			minute.increment();
-			if (minute.getValue() == 0) {
-				hour.increment();
-			}
 		}
 
 	}
@@ -26,14 +23,7 @@ public class Chronometer {
 		second.decrement();
 		if (second.getValue() == 59) {
 			minute.decrement();
-			if (minute.getValue() == 59) {
-				hour.decrement();
-			}
 		}
-	}
-
-	public CyclicCounter getHour() {
-		return hour;
 	}
 
 	public CyclicCounter getMinute() {
@@ -45,7 +35,7 @@ public class Chronometer {
 	}
 
 	public String toString() {
-		return hour.toString() + " : " + minute.toString() + " : " + second.toString();
+		return minute.toString() + " : " + second.toString();
 	}
 
 	public static String transform(int value) {
@@ -59,7 +49,6 @@ public class Chronometer {
 	}
 
 	public void init() {
-		hour.setValue(0);
 		minute.setValue(0);
 		second.setValue(0);
 	}
