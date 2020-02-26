@@ -40,6 +40,9 @@ public class RecupTeam {
 		this.team = team;
 	}
 	
+
+	
+	
 	private static String readCountry(String line) {
 		String country = "";
 		int i = 0;
@@ -49,6 +52,22 @@ public class RecupTeam {
 		} while ( line.charAt(i)!=',' );
 		
 		return country;
+	}
+	
+	public static String getCountriesNames() throws IOException {
+		String str = "", lastCountry = "_";
+		File fTeams = new File("teams.csv");
+		BufferedReader br = new BufferedReader (new FileReader(fTeams));
+		String line = "";
+		
+		while ( (line = br.readLine()) != null) {	// reading doc
+			if (readCountry(line).compareTo(lastCountry)!=0) {									
+				str += readCountry(line)+"\n";
+				lastCountry = readCountry(line);
+			}
+		}
+		br.close();
+		return str;
 	}
 
 	public int getNumberPlayers() {
