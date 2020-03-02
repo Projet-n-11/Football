@@ -8,15 +8,17 @@ public class DataTeam {
 	private HashMap<String, DataPlayer> substitute;
 	private String color;
 	private int positiononField;
+	private int defaultStrategy;
 	
 	
 	public DataTeam(String teamName, int numberPlayers, HashMap<String, DataPlayer> players,
-			String color, int positiononField) {
+			String color, int positiononField, int defaultStrategy) {
 		this.teamName = teamName;
 		this.players = players;
 		this.color = color;
 		this.positiononField = positiononField;
 		players = new HashMap<String, DataPlayer>();
+		this.defaultStrategy = defaultStrategy;
 	}
 
 
@@ -61,8 +63,7 @@ public class DataTeam {
 
 
 	public String toString() {
-		return "Team :" + teamName +  " | Substitute :" + substitute
-				 + "| Color=" + color + "| PositiononField=" + positiononField + " | Players : \n" + players +"]";
+		return "" + teamName +  "," + substitute + "," + color + "," + positiononField + "," + defaultStrategy + "\n" + players ;
 	}
 	
 	

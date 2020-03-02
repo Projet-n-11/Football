@@ -15,23 +15,17 @@ public class CreaTeam {
 	 * @throws IOException
 	 */
 	public static DataTeam creaTeam(String teamName) throws IOException {
-		int i =0;
-		
+		int i =0;	
 		// gets the ArrayList<String> with all the data to create players of the teamName's team
 		RecupTeam teamList = new RecupTeam(teamName);
 		// associate name of the player with their DataPlayer
 		HashMap<String, DataPlayer> userPlayers = new HashMap<String, DataPlayer>();
-		
 			// associating each line of data for one player, to their name
 			while (i<teamList.getNumberPlayers()) {		
 				userPlayers.put( teamList.getTeamPlayerName(i), PlayerFactory.creaPlayer(teamList, i) );
 				i++;
 				System.gc();
 			}
-			
-		
-		return new DataTeam (teamName, teamList.getNumberPlayers(), userPlayers,teamList.getTeamColor(), 0);
-	}
-		
-		
+		return new DataTeam (teamName, teamList.getNumberPlayers(), userPlayers,teamList.getTeamColor(), 0, teamList.defaultStrategy());
+	}		
 }

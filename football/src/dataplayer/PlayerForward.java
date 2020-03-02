@@ -4,9 +4,10 @@ public class PlayerForward extends AbstractDataPlayerType {
 	private Acceleration acceleration;
 	private Precision precision;
 	
-	public PlayerForward(Acceleration acceleration, Precision precision) {
+	public PlayerForward(Acceleration acceleration, Precision precision, int titularPlayer) {
 		this.acceleration = acceleration;
 		this.precision = precision;
+		this.setTitularPlayer(titularPlayer);
 	}
 	
 	public Acceleration getAcceleration() {
@@ -26,6 +27,6 @@ public class PlayerForward extends AbstractDataPlayerType {
 	}
 	
 	public String toString() {
-		return acceleration.toString() + "," + precision.toString();
+		return "Attaquant," + acceleration.toString() + "," + precision.toString();
 	}
 }

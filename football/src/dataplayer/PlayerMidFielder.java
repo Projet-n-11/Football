@@ -4,9 +4,10 @@ public class PlayerMidFielder extends AbstractDataPlayerType {
 	private ReadPlay readPlay;
 	private Precision precision;
 	
-	public PlayerMidFielder(ReadPlay readPlay, Precision precision) {
+	public PlayerMidFielder(ReadPlay readPlay, Precision precision, int titularPlayer) {
 		this.readPlay = readPlay;
 		this.precision = precision;
+		this.setTitularPlayer(titularPlayer);
 	}
 	public ReadPlay getReadPlay() {
 		return readPlay;
@@ -22,6 +23,6 @@ public class PlayerMidFielder extends AbstractDataPlayerType {
 	}
 	
 	public String toString() {
-		return readPlay.toString() + "," + precision.toString();
+		return "Milieu," + readPlay.toString() + "," + precision.toString();
 	}
 }

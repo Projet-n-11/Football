@@ -14,7 +14,7 @@ public class DataPlayer {
 	public DataPlayer() {
 		Acceleration a = new Acceleration(10);
 		Precision p = new Precision(5);
-		PlayerForward pf = new PlayerForward(a,p);
+		PlayerForward pf = null;
 		PlayerSpeed ps = new PlayerSpeed(2);
 		this.playerName = "DefaultPlayer";
 		this.playerNumber = "0";
@@ -124,7 +124,7 @@ public class DataPlayer {
 	
 	public String toString() {
 		return playerNumber + "," + playerType.toString() + "," + playerSuperPower.toString() + "," + team + "," + isPhysical
-				+ "," + positionx + "," + positiony + "," + playerSize + "," + colorPlayer + "]\n";
+				+ "," + positionx + "," + positiony + "," + playerSize + "," + colorPlayer + ","+ playerType.getTitularPlayer() + "]\n";
 	}
 	
 }

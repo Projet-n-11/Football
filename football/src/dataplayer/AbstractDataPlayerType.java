@@ -4,6 +4,7 @@ public abstract class AbstractDataPlayerType{
 	private PlayerHealth health;
 	private PlayerStress stress;
 	private PlayerSpeed speed;
+	private int titularPlayer;
 	
 	public PlayerHealth getHeath() {
 		return health;
@@ -23,7 +24,13 @@ public abstract class AbstractDataPlayerType{
 	public void setSpeed(PlayerSpeed speed) {
 		this.speed = speed;
 	}
-	public String toString() {
+	public int getTitularPlayer() {
+		return titularPlayer;
+	}
+	public void setTitularPlayer(int titularPlayer) {
+		this.titularPlayer = titularPlayer;
+	}
+	public String toString() {	// inutile : redéfini dans les classes concrètes
 		return "Health =" + health + ", stress=" + stress + ", speed=" + speed;
 	}
 }

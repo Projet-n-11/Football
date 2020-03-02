@@ -33,17 +33,17 @@ public class PlayerFactory {
 	 * stats completed by data given in parameters
 	 */
 	
-	public static PlayerGoalie creaPlayerGoalie(Reflex r, Dive d) {
-		return new PlayerGoalie(r,d);
+	public static PlayerGoalie creaPlayerGoalie(Reflex r, Dive d, int t) {
+		return new PlayerGoalie(r,d,t);
 	}
-	public static PlayerDefender creaPlayerDefender(Knowledge k, Strength s) {
-		return new PlayerDefender(k,s);
+	public static PlayerDefender creaPlayerDefender(Knowledge k, Strength s, int t) {
+		return new PlayerDefender(k,s,t);
 	}
-	public static PlayerMidFielder creaPlayerMidFielder(ReadPlay r, Precision p) {
-		return new PlayerMidFielder(r,p);
+	public static PlayerMidFielder creaPlayerMidFielder(ReadPlay r, Precision p, int t) {
+		return new PlayerMidFielder(r,p,t);
 	}
-	public static PlayerForward creaPlayerForward(Acceleration a, Precision p) {
-		return new PlayerForward(a,p);
+	public static PlayerForward creaPlayerForward(Acceleration a, Precision p, int t) {
+		return new PlayerForward(a,p,t);
 	}
 	
 	/**
@@ -64,7 +64,8 @@ public class PlayerFactory {
 		int b = Integer.parseInt(teamsLists.getTeamSpecialStats(i).charAt(1)+"");
 		Dive dive = creaDive(a);
 		Reflex reflex = creaReflex(b);
-		playerType = creaPlayerGoalie(reflex,dive);
+		int c = teamsLists.getTitularPlayer(i);
+		playerType = creaPlayerGoalie(reflex,dive,c);
 	}
 	// defender
 	else if (teamsLists.getTeamPlayerType(i).compareTo("defender")==0) {
@@ -72,7 +73,8 @@ public class PlayerFactory {
 		int b = Integer.parseInt(teamsLists.getTeamSpecialStats(i).charAt(1)+"");
 		Knowledge k = creaKnowledge(a);
 		Strength s = creaStrength(b);
-		playerType = creaPlayerDefender(k,s);
+		int c = teamsLists.getTitularPlayer(i);
+		playerType = creaPlayerDefender(k,s,c);
 	}
 	// midfielder
 	else if (teamsLists.getTeamPlayerType(i).compareTo("midfielder")==0) {
@@ -80,7 +82,8 @@ public class PlayerFactory {
 		int b = Integer.parseInt(teamsLists.getTeamSpecialStats(i).charAt(1)+"");
 		ReadPlay r = creaReadPlay(a);
 		Precision p = creaPrecision(b);
-		playerType = creaPlayerMidFielder(r,p);
+		int c = teamsLists.getTitularPlayer(i);
+		playerType = creaPlayerMidFielder(r,p,c);
 	}
 	// forward
 	else if (teamsLists.getTeamPlayerType(i).compareTo("forward")==0) {
@@ -88,7 +91,8 @@ public class PlayerFactory {
 		int b = Integer.parseInt(teamsLists.getTeamSpecialStats(i).charAt(1)+"");
 		Acceleration r = creaAcceleration(a);
 		Precision p = creaPrecision(b);
-		playerType = creaPlayerForward(r,p);
+		int c = teamsLists.getTitularPlayer(i);
+		playerType = creaPlayerForward(r,p,c);
 	}
 	else
 		return null;

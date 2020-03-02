@@ -4,9 +4,10 @@ public class PlayerDefender extends AbstractDataPlayerType {
 	private Knowledge knowledge;
 	private Strength strength;
 	
-	public PlayerDefender(Knowledge knowledge, Strength strength) {
+	public PlayerDefender(Knowledge knowledge, Strength strength, int titularPlayer) {
 		this.knowledge = knowledge;
 		this.strength = strength;
+		this.setTitularPlayer(titularPlayer);
 	}
 	
 	public Knowledge getKnowledge() {
@@ -23,6 +24,6 @@ public class PlayerDefender extends AbstractDataPlayerType {
 	}
 	
 	public String toString() {
-		return knowledge.toString() + "," + strength.toString();
+		return "Défenseur," + knowledge.toString() + "," + strength.toString();
 	}
 }

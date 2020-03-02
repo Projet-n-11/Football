@@ -98,6 +98,15 @@ public class RecupTeam {
 		return scrollAndGet(team.get(i),8)+scrollAndGet(team.get(i),9);
 	}
 	
+	public int getTitularPlayer(int i) {
+		return Integer.parseInt(scrollAndGet(team.get(i),10));
+	}
+	
+	public int defaultStrategy() {
+		return Integer.parseInt(scrollAndGet(team.get(0),11));
+	}
+	
+	
 	/**
 	 * scrollAndGet checks the line, skips k datas until it reachs the good one and returns it
 	 * first data = 0.
