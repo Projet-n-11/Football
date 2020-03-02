@@ -24,7 +24,7 @@ public abstract class AbstractSpecsSP{
 
 	@Override
 	public String toString() {
-		return "durationTime=" + durationTime + ", activation=" + activation;
+		return "" + durationTime + "," + activation;
 	}
 	
 }

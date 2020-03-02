@@ -26,6 +26,6 @@ public class PlayerForward extends AbstractDataPlayerType {
 	}
 	
 	public String toString() {
-		return acceleration.toString() + precision.toString();
+		return acceleration.toString() + "," + precision.toString();
 	}
 }

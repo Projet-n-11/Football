@@ -123,9 +123,8 @@ public class DataPlayer {
 	}
 	
 	public String toString() {
-		return " NUMBER," + playerNumber + ",PLAYERTYPE," + playerType.toString()
-				+ ",PLAYERSUPERPOWER," + playerSuperPower.toString() + ",TEAM," + team + ",ISPHYSICAL," + isPhysical
-				+ ",POSITION,X=" + positionx + ",Y=" + positiony + ",PLAYERSIZE," + playerSize + ",COLORPLAYER," + colorPlayer + "]\n";
+		return playerNumber + "," + playerType.toString() + "," + playerSuperPower.toString() + "," + team + "," + isPhysical
+				+ "," + positionx + "," + positiony + "," + playerSize + "," + colorPlayer + "]\n";
 	}
 	
 }

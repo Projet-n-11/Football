@@ -1,7 +1,7 @@
 package dataplayer;
 
 public class Reflex {
-	private float valueAcceleration;
+	private int valueAcceleration;
 
 	public Reflex(int valueAcceleration) {
 		this.valueAcceleration = valueAcceleration;
@@ -10,7 +10,7 @@ public class Reflex {
 		return valueAcceleration;
 	}
 
-	public void setValueAcceleration(float valueAcceleration) {
+	public void setValueAcceleration(int valueAcceleration) {
 		this.valueAcceleration = valueAcceleration;
 	}
 	

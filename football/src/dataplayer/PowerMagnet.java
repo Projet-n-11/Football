@@ -8,9 +8,9 @@ public class PowerMagnet extends AbstractSpecsSP {
 	}
 	
 	public float getRadiusMagnetic() {
-		return RADIUSMAGNETIC;
+		return RADIUSMAGNETIC;	//radius magnetic field
 	}
 	public String toString() {
-		return "RADIUS_MAGNETIC_FIELD," + RADIUSMAGNETIC;
+		return "" + RADIUSMAGNETIC;
 	}
 }

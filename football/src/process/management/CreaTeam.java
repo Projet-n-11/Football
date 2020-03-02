@@ -22,9 +22,9 @@ public class CreaTeam {
 		// associate name of the player with their DataPlayer
 		HashMap<String, DataPlayer> userPlayers = new HashMap<String, DataPlayer>();
 		
-			// on parcours avec i : chaque ligne représentant les données d'un joueur
-			while (i<teamList.getNumberPlayers()) {			
-				userPlayers.put(teamList.getTeamPlayerName(i),CreaPlayer.creaPlayer(teamList, i) );
+			// associating each line of data for one player, to their name
+			while (i<teamList.getNumberPlayers()) {		
+				userPlayers.put( teamList.getTeamPlayerName(i), PlayerFactory.creaPlayer(teamList, i) );
 				i++;
 				System.gc();
 			}

@@ -1,9 +1,9 @@
 package dataplayer;
 
 public class Acceleration {
-	private float valueAcceleration;
+	private int valueAcceleration;
 
-	public Acceleration(float valueAcceleration) {
+	public Acceleration(int valueAcceleration) {
 		this.valueAcceleration = valueAcceleration;
 	}
 	
@@ -11,7 +11,7 @@ public class Acceleration {
 		return valueAcceleration;
 	}
 
-	public void setValueAcceleration(float valueAcceleration) {
+	public void setValueAcceleration(int valueAcceleration) {
 		this.valueAcceleration = valueAcceleration;
 	}
 	
