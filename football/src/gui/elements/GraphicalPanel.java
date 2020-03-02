@@ -12,7 +12,6 @@ public class GraphicalPanel extends JFrame {
 
 	public GraphicalPanel() throws IOException {
 		super("Football Simulator V.0.0.1");
-		this.setTitle("Ma première fenêtre Java");
 	    this.setSize(900, 602);
 	    this.setContentPane(new JLabel(new ImageIcon(new ImageIcon("C:\\Users\\aladd\\Desktop\\menuimg.png").getImage().getScaledInstance(this.getWidth(),this.getHeight(), Image.SCALE_DEFAULT))));
 	    this.setLocationRelativeTo(null);

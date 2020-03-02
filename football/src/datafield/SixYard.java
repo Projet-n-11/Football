@@ -4,7 +4,7 @@ public class SixYard extends AbstractPosition {
 	private boolean sixYardPoint;
 
 	public SixYard(boolean sixYardPoint, int positionX, int positionY) {
-		super(positionX, positionY);
+		super(positionX, positionY, "SY");
 		this.sixYardPoint = sixYardPoint;
 	}
 	public boolean isSixYardPoint() {

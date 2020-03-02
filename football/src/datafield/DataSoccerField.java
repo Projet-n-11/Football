@@ -14,7 +14,7 @@ public class DataSoccerField {
 	}
 
 	public String toString() {
-		return "DataSoccerField [WIDTH=" + WIDTH + ", HEIGHT=" + HEIGHT + ", INITIALPOINT=" + INITIALPOINT
-				+ ", hmField=" + hmField + ", SPECIALPOS=" + SPECIALPOS + "]";
+		return "WIDTH=" + WIDTH + ", HEIGHT=" + HEIGHT + ", INITIALPOINT=" + INITIALPOINT
+				+ ", hmField=" + hmField + ", SPECIALPOS=" + SPECIALPOS;
 	}
 }

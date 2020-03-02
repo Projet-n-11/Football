@@ -3,10 +3,12 @@ package datafield;
 public class Penalty extends AbstractPosition {
 	
 	private boolean fault;
+	private int posX, posY;
 	
-	public Penalty( boolean fault, int positionX, int positionY) {
-		super(positionX, positionY);
-		
+	public Penalty(boolean fault, int positionX, int positionY) {
+		super(positionX, positionY, "PE");
+		this.posX = positionX;
+		this.posY = positionY;
 		this.fault = fault;
 	}
 
@@ -19,7 +21,7 @@ public class Penalty extends AbstractPosition {
 
 	@Override
 	public String toString() {
-		return "Penalty [fault=" + fault + "position:"+super.getPositionX()+";"+super.getPositionY()+"]";
+		return "Fault =" + fault + "position:"+super.getPositionContent(posX, posY) + "]";
 	}
 	
 	

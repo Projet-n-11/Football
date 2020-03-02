@@ -12,12 +12,10 @@ import datafield.SixYard;
  *
  */
 public class ObjectFactory {
-	
 
 	public static Corner creaCorner(boolean isCorner,int positionX,int positionY) {
-		return new Corner( isCorner, positionX, positionY);
+		return new Corner(isCorner, positionX, positionY);
 	}
-	
 	public static Engagement creaEngagement(boolean engagementPoint, int positionX, int positionY) {
 		return new Engagement(engagementPoint,positionX,positionY);
 	}

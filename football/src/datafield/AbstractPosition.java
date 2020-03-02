@@ -1,28 +1,53 @@
 package datafield;
 
 public abstract class AbstractPosition{
-	private int positionx, positiony;
+	private String position[][];
+	private int posX, posY;
 	
-	public AbstractPosition(int positionx, int positiony) {
-		this.positionx = positionx;
-		this.positiony = positiony;
+	public AbstractPosition(int positionx, int positiony, String element) {
+		this.posX = positionx; 
+		this.posY = positiony;
+		this.position[posX][posY] = element;
 	}
+	
+	
 	public int getPositionX() {
-		return positionx;
+		return posX;
 	}
-	public void setPositionX(int newPositionX) {
-		this.positionx = newPositionX;
+
+
+	public void setPositionX(int posX) {
+		this.posX = posX;
+	}
+
+
+	public int getPositionY() {
+		return posY;
+	}
+
+
+	public void setPositionY(int posY) {
+		this.posY = posY;
+	}
+
+
+	public String getPositionContent(int x, int y) {
+		return position[x][y];
 	}
 	
-	public int getPositionY() {
-		return positiony;
+	public void setPositionX(int x, int y, String newelement) {
+		this.position[x][y] = newelement;
 	}
-	public void setPositionY(int newPositionY) {
-		this.positiony = newPositionY;
-	}
+	
 	
 	public String toString() {
-		return "X =" + positionx + " ; Y =" + positiony;
+		String content = "";
+		for(int i = 0; i<position.length; i++) {
+			for(int j=0; j <position[i].length; j++) {
+				content += position[i][j];
+			}
+		}
+		return content;
 	}
 	
 }

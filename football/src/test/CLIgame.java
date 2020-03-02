@@ -1,10 +1,15 @@
 package test;
 
+import java.io.IOException;
 import java.util.Scanner;
+
+import datateam.DataTeam;
+import process.management.CreaTeam;
+import process.management.RecupTeam;
 
 public class CLIgame {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		Scanner scan = new Scanner(System.in);
 		Boolean badchoice = false;
 		String choice = "";
@@ -34,15 +39,15 @@ public class CLIgame {
 		if(choice.equals("1")) {
 			System.out.println("Please choose a team.");
 			System.out.println("YOU vs IA");
-			for(int numberteam = 0; numberteam < 30 ; numberteam++) {
-				System.out.println(numberteam);
-			}
+			System.out.println("Teams available : \n" + RecupTeam.getCountriesNames());
+			choice = scan.nextLine();
+			System.out.println("Your choice is : " + choice);
+			DataTeam team1 = CreaTeam.creaTeam(choice);
+			System.out.println(team1.toString());
 		}
 		else if (choice.equals("2")) {
 			System.out.println("The available teams are :");
-			for(int numberteam = 0; numberteam < 30 ; numberteam++) {
-				System.out.println(numberteam);
-			}
+			System.out.println(RecupTeam.getCountriesNames());
 		}
 		else if(choice.contentEquals("3")) {
 			System.out.println("Made by Aladdine Ben Romdhane - Quitterie Pilon - Laura Fustinoni");
