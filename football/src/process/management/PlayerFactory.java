@@ -101,7 +101,7 @@ public class PlayerFactory {
 	
 	
 	/**
-	 * The function DataPlayer gets a RecupTeam to access the full ArrayList with all the players data.
+	 * The function creaPlayer gets a RecupTeam to access the full ArrayList with all the players data.
 	 * i is to select one of the player and return its DataPlayer
 	 * @param teamsLists
 	 * @param i

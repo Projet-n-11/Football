@@ -40,8 +40,6 @@ public class RecupTeam {
 		this.team = team;
 	}
 	
-
-	
 	
 	private static String readCountry(String line) {
 		String country = "";
