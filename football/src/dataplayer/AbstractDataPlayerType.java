@@ -1,15 +1,15 @@
 package dataplayer;
 
 public abstract class AbstractDataPlayerType{
-	private PlayerHealth heath;
+	private PlayerHealth health;
 	private PlayerStress stress;
 	private PlayerSpeed speed;
 	
 	public PlayerHealth getHeath() {
-		return heath;
+		return health;
 	}
-	public void setHeath(PlayerHealth heath) {
-		this.heath = heath;
+	public void setHeath(PlayerHealth health) {
+		this.health = health;
 	}
 	public PlayerStress getStress() {
 		return stress;
@@ -24,6 +24,6 @@ public abstract class AbstractDataPlayerType{
 		this.speed = speed;
 	}
 	public String toString() {
-		return "heath=" + heath + ", stress=" + stress + ", speed=" + speed;
+		return "Health =" + health + ", stress=" + stress + ", speed=" + speed;
 	}
 }

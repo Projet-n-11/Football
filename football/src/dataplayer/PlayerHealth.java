@@ -15,6 +15,6 @@ public class PlayerHealth {
 	}
 	
 	public String toString() {
-		return "Health = " + health;
+		return "HP = " + health;
 	}
 }

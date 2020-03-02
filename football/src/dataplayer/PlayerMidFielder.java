@@ -22,6 +22,6 @@ public class PlayerMidFielder extends AbstractDataPlayerType {
 	}
 	
 	public String toString() {
-		return "Midfielder,READLPLAY,"+ readPlay.toString() +",PRECISION,"+ precision.toString();
+		return readPlay.toString() + precision.toString();
 	}
 }
