@@ -25,7 +25,6 @@ public class DrawField extends JPanel {
 		repaint();
 		setBackground(new Color(0, 128, 0));
 		//setBackground(new Color(0, 0, 0));
-
 	}
 	
 	public void paint(Graphics g) {

@@ -5,7 +5,6 @@ import dataplayer.DataPlayer;
 public class DataTeam {
 	private String teamName;
 	private HashMap<String, DataPlayer> players;
-	
 	private HashMap<String, DataPlayer> substitute;
 	private String color;
 	private int positiononField;
