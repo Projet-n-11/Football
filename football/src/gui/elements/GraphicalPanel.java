@@ -136,7 +136,7 @@ public class GraphicalPanel extends JFrame {
 	public class ActionCredits implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane jop1=new JOptionPane();
-			String message="Producing by : \n ALADDINE BEN ROMHDAM, LAURA FUSTINONI, QUITTERIE PILON";
+			String message="Producing by : \n ALADDINE BEN ROMDHANE, LAURA FUSTINONI, QUITTERIE PILON";
 			 try {
 		            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		            UIManager.put("OptionPane.background", Color.BLACK);

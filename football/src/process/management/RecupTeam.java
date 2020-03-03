@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class RecupTeam {
 	
 	private ArrayList<String> team;
+	private static ArrayList<String> nameTeams;
 	
 	/**
 	 * recupTeam takes a country name and return all the data of the players in an arrayList.
@@ -21,6 +22,7 @@ public class RecupTeam {
 		BufferedReader br = new BufferedReader (new FileReader(fTeams));
 		String line = "";
 		ArrayList<String> team = new ArrayList<String>();
+		ArrayList<String> nameTeams=new ArrayList<String>();
 		int found=0;
 		
 		while ( ((line = br.readLine()) != null) && found==0) {	// reading doc
@@ -52,20 +54,25 @@ public class RecupTeam {
 		return country;
 	}
 	
-	public static String getCountriesNames() throws IOException {
-		String str = "", lastCountry = "_";
+	public static ArrayList<String> getCountriesNames() throws IOException {
+		String lastCountry = "_";
+		
 		File fTeams = new File("teams.csv");
 		BufferedReader br = new BufferedReader (new FileReader(fTeams));
 		String line = "";
 		
 		while ( (line = br.readLine()) != null) {	// reading doc
 			if (readCountry(line).compareTo(lastCountry)!=0) {									
-				str += readCountry(line)+"\n";
+				nameTeams.add(readCountry(line));
 				lastCountry = readCountry(line);
 			}
 		}
 		br.close();
-		return str;
+		return nameTeams;
+	}
+	
+	public String printNameTeams() {
+		
 	}
 
 	public int getNumberPlayers() {
