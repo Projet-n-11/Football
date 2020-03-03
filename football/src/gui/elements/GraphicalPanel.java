@@ -35,6 +35,7 @@ public class GraphicalPanel extends JFrame {
 	private JButton kickOff;
 	private JButton options;
 	private JButton credits;
+	
 	private JButton leave;
 	
 	public GraphicalPanel() {
