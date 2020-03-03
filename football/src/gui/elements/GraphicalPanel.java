@@ -1,11 +1,9 @@
 package gui.elements;
 
-
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -13,13 +11,17 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import process.management.RecupTeam;
 
 public class GraphicalPanel extends JFrame {
 	
@@ -121,7 +123,16 @@ public class GraphicalPanel extends JFrame {
 
 	public class ActionKickOff implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			mainFrame.removeAll();
+		
+			mainFrame.getContentPane().removeAll();
+			mainFrame.repaint();
+			try {
+				mainFrame=choosingTeams();
+			} 
+			catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 		}
 	}
@@ -165,6 +176,28 @@ public class GraphicalPanel extends JFrame {
 			}
 		}
 		
+	}
+	
+	public JFrame choosingTeams() throws IOException {
+		JFrame frame= new JFrame();
+		JComboBox equipe;
+		String [] tabName = new String[200];
+		ArrayList<String> nameteam= RecupTeam.getCountriesNames();
+		int i=0;
+		for(Iterator<String> it= nameteam.iterator(); it.hasNext();) {
+			tabName[i]=it.next();
+			i++;
+		}
+		
+		equipe=new JComboBox(tabName);
+		
+		frame.add(equipe);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//this.pack();
+		frame.setPreferredSize(null);
+		frame.setVisible(true);
+		return frame;
 	}
 	
 	
