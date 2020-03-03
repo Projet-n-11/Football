@@ -16,14 +16,21 @@ public class PositionTactics {
 	}
 	
 	public void whatIsPType(HashMap<String, DataPlayer> players) {
-		Map<String, DataPlayer> map = players;
-		List<DataPlayer> values = new ArrayList<>(map.values());
+		ArrayList<DataPlayer> values = new ArrayList<>(players.values());
 		for(DataPlayer dp : values) {
+			if(dp.getPlayerType().getTitularPlayer() == 1)
             System.out.println(dp.getPlayerName() +" : " +  dp.getPlayerType());
         }
 	}
 	
-	public void placePlayer(DataPlayer player) {
-		
+	public void placePlayer(HashMap<String, DataPlayer> players, int teamStrategy) {
+		ArrayList<DataPlayer> values = new ArrayList<>(players.values());
+		for(DataPlayer dp: values) {
+			switch(teamStrategy) {
+				case 343:
+					//dp.setPositionX();
+					break;
+			}
+		}
 	}
 }

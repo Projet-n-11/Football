@@ -60,6 +60,14 @@ public class DataTeam {
 	public void setPositiononField(int positiononField) {
 		this.positiononField = positiononField;
 	}
+	
+	public int getDefaultStrategy() {
+		return defaultStrategy;
+	}
+	
+	public void setDefaultStrategy(int newStrategy) {
+		this.defaultStrategy = newStrategy;
+	}
 
 
 	public String toString() {
