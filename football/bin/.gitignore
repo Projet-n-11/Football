@@ -1,6 +1,4 @@
-/test/
-/dataplayer/
-/gui/
-/datafield/
 /process/
-/datateam/
+/datafield/
+/test/
+/gui/
