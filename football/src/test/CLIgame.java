@@ -39,7 +39,7 @@ public class CLIgame {
 		if(choice.equals("1")) {
 			System.out.println("Please choose a team.");
 			System.out.println("YOU vs IA");
-			System.out.println("Teams available : \n" + RecupTeam.getCountriesNames());
+			System.out.println("Teams available : \n" + RecupTeam.printNameTeams());
 			choice = scan.nextLine();
 			System.out.println("Your choice is : " + choice);
 			DataTeam team1 = CreaTeam.creaTeam(choice);
@@ -47,7 +47,7 @@ public class CLIgame {
 		}
 		else if (choice.equals("2")) {
 			System.out.println("The available teams are :");
-			System.out.println(RecupTeam.getCountriesNames());
+			System.out.println(RecupTeam.printNameTeams());
 		}
 		else if(choice.contentEquals("3")) {
 			System.out.println("Made by Aladdine Ben Romdhane - Quitterie Pilon - Laura Fustinoni");

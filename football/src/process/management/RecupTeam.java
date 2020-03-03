@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class RecupTeam {
@@ -22,7 +23,7 @@ public class RecupTeam {
 		BufferedReader br = new BufferedReader (new FileReader(fTeams));
 		String line = "";
 		ArrayList<String> team = new ArrayList<String>();
-		ArrayList<String> nameTeams=new ArrayList<String>();
+		
 		int found=0;
 		
 		while ( ((line = br.readLine()) != null) && found==0) {	// reading doc
@@ -56,13 +57,14 @@ public class RecupTeam {
 	
 	public static ArrayList<String> getCountriesNames() throws IOException {
 		String lastCountry = "_";
-		
+		nameTeams=new ArrayList<String>();
 		File fTeams = new File("teams.csv");
 		BufferedReader br = new BufferedReader (new FileReader(fTeams));
 		String line = "";
 		
 		while ( (line = br.readLine()) != null) {	// reading doc
-			if (readCountry(line).compareTo(lastCountry)!=0) {									
+			if (readCountry(line).compareTo(lastCountry)!=0) {	
+				
 				nameTeams.add(readCountry(line));
 				lastCountry = readCountry(line);
 			}
@@ -71,8 +73,13 @@ public class RecupTeam {
 		return nameTeams;
 	}
 	
-	public String printNameTeams() {
-		
+	public static String printNameTeams() throws IOException {
+		nameTeams=getCountriesNames();
+		String str="";
+		for(Iterator<String> it =nameTeams.iterator();it.hasNext();) {
+			str= str+it.next()+"\n";
+		}
+		return str;
 	}
 
 	public int getNumberPlayers() {
