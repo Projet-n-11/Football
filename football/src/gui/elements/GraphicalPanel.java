@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import process.management.RecupTeam;
+import javax.swing.ImageIcon;
 
 public class GraphicalPanel extends JFrame {
 	
@@ -90,14 +92,8 @@ public class GraphicalPanel extends JFrame {
 		mainFrame.getContentPane().add(jp4);
 		mainFrame.getContentPane().add(jp5);
 
+		initJFrame(mainFrame);
 		
-		
-		
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		//this.pack();
-		mainFrame.setPreferredSize(null);
-		mainFrame.setVisible(true);
 	}
 	
 	public static void main(String[] args) {
@@ -127,7 +123,23 @@ public class GraphicalPanel extends JFrame {
 			mainFrame.getContentPane().removeAll();
 			mainFrame.repaint();
 			try {
-				mainFrame=choosingTeams();
+				mainFrame.getContentPane().setLayout(new GridLayout(2,2));
+				JLabel jp1=new JLabel();
+				JLabel jp2=new JLabel(new ImageIcon("src/ressources/station.png"));
+				JPanel jp3=new JPanel();
+				JPanel jp4=new JPanel();
+				
+			
+				jp1.setLayout(new FlowLayout(FlowLayout.LEFT));
+				jp2.setLayout(new FlowLayout(FlowLayout.RIGHT));
+				jp3.setLayout(new FlowLayout(FlowLayout.LEFT));
+				jp4.setLayout(new FlowLayout(FlowLayout.RIGHT));
+				
+				jp1.add(choosingTeams());
+				mainFrame.add(jp1);
+				mainFrame.add(jp2);
+				initJFrame(mainFrame);
+				
 			} 
 			catch (IOException e1) {
 				// TODO Auto-generated catch block
@@ -178,8 +190,8 @@ public class GraphicalPanel extends JFrame {
 		
 	}
 	
-	public JFrame choosingTeams() throws IOException {
-		JFrame frame= new JFrame();
+	public JComboBox choosingTeams() throws IOException {
+		
 		JComboBox equipe;
 		String [] tabName = new String[200];
 		ArrayList<String> nameteam= RecupTeam.getCountriesNames();
@@ -190,15 +202,15 @@ public class GraphicalPanel extends JFrame {
 		}
 		
 		equipe=new JComboBox(tabName);
-		
-		frame.add(equipe);
+	
+		return equipe;
+	}
+	public void initJFrame(JFrame frame) {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//this.pack();
 		frame.setPreferredSize(null);
 		frame.setVisible(true);
-		return frame;
 	}
-	
 	
 }
