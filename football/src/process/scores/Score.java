@@ -1,11 +1,13 @@
 package process.scores;
 
+import datateam.DataTeam;
+
 public class Score {
 	
 	private int scoreTeam1;
 	private int scoreTeam2;
 	
-	public Score() {
+	public Score(DataTeam team1, DataTeam team2) {
 		scoreTeam1=0;
 		scoreTeam2=0;
 	}
@@ -41,6 +43,11 @@ public class Score {
 	@Override
 	public String toString() {
 		return "Score [scoreTeam1=" + scoreTeam1 + ", scoreTeam2=" + scoreTeam2 + "]";
+	}
+	
+	public int incrementScore(int score) {
+		return score++;
+		
 	}
 	
 }

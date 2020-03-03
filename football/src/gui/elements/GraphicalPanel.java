@@ -1,11 +1,6 @@
 package gui.elements;
 
-import java.awt.BorderLayout;
-import java.awt.Image;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,23 +9,26 @@ import javax.swing.JLabel;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class GraphicalPanel extends JFrame {
 	
 	
+	/**
+	 * 
+	 */
+	private JFrame mainFrame;
+	private static final long serialVersionUID = 1L;
 	private JLabel simulator;
 	private JButton kickOff;
 	private JButton options;
@@ -43,9 +41,9 @@ public class GraphicalPanel extends JFrame {
 	}
 	
 	public GraphicalPanel(String title) {
-		
-		this.getContentPane().setLayout(new GridLayout(6,1));
-		this.setSize(1000,500);
+		mainFrame=new JFrame();
+		mainFrame.getContentPane().setLayout(new GridLayout(6,1));
+		mainFrame.setSize(1000,500);
 		
 		JPanel jp1=new JPanel();
 		JPanel jp2=new JPanel();
@@ -84,20 +82,20 @@ public class GraphicalPanel extends JFrame {
 		leave.setSize(200,400);
 		jp5.add(leave);
 		
-		this.getContentPane().add(jp1);
-		this.getContentPane().add(jp2);
-		this.getContentPane().add(jp3);
-		this.getContentPane().add(jp4);
-		this.getContentPane().add(jp5);
+		mainFrame.getContentPane().add(jp1);
+		mainFrame.getContentPane().add(jp2);
+		mainFrame.getContentPane().add(jp3);
+		mainFrame.getContentPane().add(jp4);
+		mainFrame.getContentPane().add(jp5);
 
 		
 		
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//this.pack();
-		this.setPreferredSize(null);
-		this.setVisible(true);
+		mainFrame.setPreferredSize(null);
+		mainFrame.setVisible(true);
 	}
 	
 	public static void main(String[] args) {
@@ -123,6 +121,7 @@ public class GraphicalPanel extends JFrame {
 
 	public class ActionKickOff implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
+			mainFrame.removeAll();
 			
 		}
 	}
@@ -135,8 +134,8 @@ public class GraphicalPanel extends JFrame {
 	
 	public class ActionCredits implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane jop1=new JOptionPane();
-			String message="Producing by : \n ALADDINE BEN ROMDHANE, LAURA FUSTINONI, QUITTERIE PILON";
+			
+			String message="Produced by : \n ALADDINE BEN ROMDHANE \n LAURA FUSTINONI \n QUITTERIE PILON";
 			 try {
 		            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		            UIManager.put("OptionPane.background", Color.BLACK);
