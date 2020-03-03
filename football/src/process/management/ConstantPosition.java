@@ -9,11 +9,11 @@ public class ConstantPosition {
 	public static final int CORNER1X=INITIAL_POINT;
 	public static final int CORNER1Y=INITIAL_POINT;
 	public static final int CORNER2X=INITIAL_POINT;
-	public static final int CORNER2Y=WIDTH;
+	public static final int CORNER2Y=HEIGHT;
 	public static final int CORNER3X=WIDTH;
 	public static final int CORNER3Y=INITIAL_POINT;
 	public static final int CORNER4X=WIDTH;
-	public static final int CORNER4Y=WIDTH;
+	public static final int CORNER4Y=HEIGHT;
 	
 	public static final int PENALTY1X=INITIAL_POINT + 12;
 	public static final int PENALTY1Y=HEIGHT/2;
@@ -30,7 +30,7 @@ public class ConstantPosition {
 	
 	public static final int GOAL1X=INITIAL_POINT;
 	public static final int GOAL2X=WIDTH;
-	public static final int GOALY1=(HEIGHT/2) - 3;
-	public static final int GOALY2=(HEIGHT/2) - 3;
+	public static final int GOALY1=(HEIGHT/2) - 4;
+	public static final int GOALY2=(HEIGHT/2) + 4;
 
 }

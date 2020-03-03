@@ -12,6 +12,8 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
 
+import process.management.ConstantPosition;
+
 public class DrawField extends JPanel {
 
 	/**
@@ -54,10 +56,11 @@ public class DrawField extends JPanel {
 		g3.setColor(new Color(0,0,0,200));
 		g3.setStroke(stroke);
 		//g4
+		Stroke stroke2 = new BasicStroke(5/4);
 		g4.scale(scale, scale);
 		g4.translate(1, 1);
-		g4.setColor(new Color(0,0,0,200));
-		g4.setStroke(stroke);
+		g4.setColor(Color.RED);
+		g4.setStroke(stroke2);
 		
 		drawGrid(g3, fieldLength, fieldWidth);
 		drawTouchLines(g2, fieldLength, fieldWidth);
@@ -71,6 +74,7 @@ public class DrawField extends JPanel {
 		drawPenaltyAreas(g2, fieldLength, fieldWidth);
 		drawPenaltyMarks(g2, fieldLength, fieldWidth);
 		drawPenaltyArches(g2, fieldLength, fieldWidth);
+		drawSpecialPositions(g4,fieldLength,fieldWidth);
 	}
 	
 	private void drawPenaltyArches(Graphics2D g2, double fieldLength,
@@ -150,6 +154,17 @@ public class DrawField extends JPanel {
 	}
 	
 	private void drawSpecialPositions(Graphics2D g4, double fieldLength, double doubleWidth) {
-		g3.draw(new Line2D.Double(ConstantPosition.CORNER1X, 0, j ,90));
+		g4.draw(new Line2D.Double(ConstantPosition.CORNER1X, ConstantPosition.CORNER1Y, ConstantPosition.CORNER1X ,ConstantPosition.CORNER1Y));
+		g4.draw(new Line2D.Double(ConstantPosition.CORNER2X, ConstantPosition.CORNER2Y, ConstantPosition.CORNER2X ,ConstantPosition.CORNER2Y));
+		g4.draw(new Line2D.Double(ConstantPosition.CORNER3X, ConstantPosition.CORNER3Y, ConstantPosition.CORNER3X ,ConstantPosition.CORNER3Y));
+		g4.draw(new Line2D.Double(ConstantPosition.CORNER4X, ConstantPosition.CORNER4Y, ConstantPosition.CORNER4X ,ConstantPosition.CORNER4Y));
+		g4.draw(new Line2D.Double(ConstantPosition.PENALTY1X, ConstantPosition.PENALTY1Y, ConstantPosition.PENALTY1X ,ConstantPosition.PENALTY1Y));
+		g4.draw(new Line2D.Double(ConstantPosition.PENALTY2X, ConstantPosition.PENALTY2Y, ConstantPosition.PENALTY2X ,ConstantPosition.PENALTY2Y));
+		g4.draw(new Line2D.Double(ConstantPosition.ENGAGEMENTX, ConstantPosition.ENGAGEMENTY, ConstantPosition.ENGAGEMENTX ,ConstantPosition.ENGAGEMENTY));
+		g4.draw(new Line2D.Double(ConstantPosition.SIXYARD1X, ConstantPosition.SIXYARD1Y, ConstantPosition.SIXYARD1X ,ConstantPosition.SIXYARD1Y));
+		g4.draw(new Line2D.Double(ConstantPosition.SIXYARD2X, ConstantPosition.SIXYARD2Y, ConstantPosition.SIXYARD2X ,ConstantPosition.SIXYARD2Y));
+		g4.draw(new Line2D.Double(ConstantPosition.GOAL1X, ConstantPosition.GOALY1, ConstantPosition.GOAL1X ,ConstantPosition.GOALY2));
+		g4.draw(new Line2D.Double(ConstantPosition.GOAL2X, ConstantPosition.GOALY1, ConstantPosition.GOAL2X ,ConstantPosition.GOALY2));
+
 	}
 }
