@@ -92,7 +92,11 @@ public class GraphicalPanel extends JFrame {
 		mainFrame.getContentPane().add(jp4);
 		mainFrame.getContentPane().add(jp5);
 
-		initJFrame(mainFrame);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//this.pack();
+		mainFrame.setPreferredSize(null);
+		mainFrame.setVisible(true);
 		
 	}
 	
@@ -159,21 +163,8 @@ public class GraphicalPanel extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			
 			String message="Produced by : \n ALADDINE BEN ROMDHANE \n LAURA FUSTINONI \n QUITTERIE PILON";
-			 try {
-		            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		            UIManager.put("OptionPane.background", Color.BLACK);
-		            UIManager.put("Panel.background", Color.BLACK);
-		            UIManager.put("OptionPane.messageForeground", Color.WHITE);JOptionPane.showMessageDialog(null, message);
-		           
-				} catch (ClassNotFoundException ex) {
-		            System.err.println(ex.getMessage());
-		        } catch (InstantiationException ex) {
-		        	System.err.println(ex.getMessage());
-		        } catch (IllegalAccessException ex) {
-		        	System.err.println(ex.getMessage());
-		        } catch (UnsupportedLookAndFeelException ex) {
-		        	System.err.println(ex.getMessage());
-		        }
+			JOptionPane optionPane=new JOptionPane();
+			optionPane.showMessageDialog(null, message, "Credits", JOptionPane.INFORMATION_MESSAGE);
 			
 		}
 	}
@@ -184,7 +175,7 @@ public class GraphicalPanel extends JFrame {
 			
 			int op=optionPane.showConfirmDialog(null, "Etes vous sur de vouoir quitter le jeu?", "Quitter",JOptionPane.YES_NO_OPTION );
 			if(op==0) {
-				dispose();
+				System.exit(0);
 			}
 		}
 		
