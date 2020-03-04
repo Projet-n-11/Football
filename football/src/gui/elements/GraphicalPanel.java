@@ -65,7 +65,7 @@ public class GraphicalPanel extends JFrame {
 		simulator.setForeground(Color.RED);
 		jp1.add(simulator);
 		
-		kickOff=new JButton("Coup d'envoi");
+		kickOff=new JButton("Kick-off");
 		kickOff.setMinimumSize(getSize());
 		
 		kickOff.addActionListener(new ActionKickOff());
@@ -81,7 +81,7 @@ public class GraphicalPanel extends JFrame {
 		credits.addActionListener(new ActionCredits());
 		jp4.add(credits);
 		
-		leave=new JButton("Quitter le jeu");
+		leave=new JButton("Quit the game");
 		leave.addActionListener(new ActionLeave());
 		leave.setSize(200,400);
 		jp5.add(leave);
@@ -93,7 +93,6 @@ public class GraphicalPanel extends JFrame {
 		mainFrame.getContentPane().add(jp5);
 
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		//this.pack();
 		mainFrame.setPreferredSize(null);
 		mainFrame.setVisible(true);
@@ -173,7 +172,7 @@ public class GraphicalPanel extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane optionPane =new JOptionPane();
 			
-			int op=optionPane.showConfirmDialog(null, "Etes vous sur de vouoir quitter le jeu?", "Quitter",JOptionPane.YES_NO_OPTION );
+			int op=optionPane.showConfirmDialog(null, "You sure about that?", "Quit",JOptionPane.YES_NO_OPTION );
 			if(op==0) {
 				System.exit(0);
 			}
