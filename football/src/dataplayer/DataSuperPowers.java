@@ -45,8 +45,8 @@ public class DataSuperPowers {
 		this.magnet = magnet;
 	}
 	public String toString() {
-		return "[" + forceField + "," + superSpeed + "," + dodge
-				+ "," + corruption + "," + magnet + "]";
+		return "|" + forceField + "," + superSpeed + "," + dodge
+				+ "," + corruption + "," + magnet + "|";
 	}
 	
 }

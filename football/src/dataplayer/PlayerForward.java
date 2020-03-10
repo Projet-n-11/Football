@@ -9,7 +9,6 @@ public class PlayerForward extends AbstractDataPlayerType {
 		this.precision = precision;
 		this.setTitularPlayer(titularPlayer);
 		this.setPlayerTypeName("Attaquant");
-
 	}
 	
 	public Acceleration getAcceleration() {

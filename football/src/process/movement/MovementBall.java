@@ -15,7 +15,7 @@ public class MovementBall {
 	private final int BORDERBOTTOM = 42;
 	private final int BORDERLEFT = 7;
 	private final int BORDERRIGHT = 77;
-	private Score results=new Score();
+	private Score results=new Score(null, null);
 	public MovementBall(DataBall db, DataPlayer dp) {
 		
 		move(db,dp);

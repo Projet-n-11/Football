@@ -1,18 +1,21 @@
 package databall;
 
-public class DataBall {
+import datafield.AbstractPosition;
+
+public class DataBall extends AbstractPosition{
 	private final int BALLSIZE = 2;
 	private final String COLOR = "White";
 	private int positionx, positiony;
 	private int speedX, speedY;
+	
 	public DataBall() {
-		this.positionx =69;
-		this.positiony = 7;
+		super();
+		this.speedX = 0;
+		this.speedY = 0;
 	}
 	
 	public DataBall(int positionx, int positiony) {
-		this.positionx = positionx;
-		this.positiony = positiony;
+		super(positionx, positiony);
 	}
 	
 	public int getBallsize() {

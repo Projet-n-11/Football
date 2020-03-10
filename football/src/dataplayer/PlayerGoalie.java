@@ -26,6 +26,6 @@ public class PlayerGoalie extends AbstractDataPlayerType {
 	}
 	
 	public String toString() {
-		return  "Gardien," + reflex.toString() + "," + dive.toString(); 
+		return  "Reflex: " + reflex.toString() + "% ; Dive: " + dive.toString() + "%"; 
 	}
 }

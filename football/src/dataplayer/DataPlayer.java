@@ -1,18 +1,18 @@
 package dataplayer;
 
-public class DataPlayer {
+import datafield.AbstractPosition;
+public class DataPlayer extends AbstractPosition{
 	private String playerName;
 	private String playerNumber;
 	private AbstractDataPlayerType playerType;
 	private DataSuperPowers playerSuperPower;
 	private String team;
 	private boolean isPhysical;
-	private int positionx,positiony;
 	private int playerSize;
-	private String playerTypeName;
 	private String colorPlayer;
 	
 	public DataPlayer() {
+		super();
 		Acceleration a = new Acceleration(10);
 		Precision p = new Precision(5);
 		PlayerForward pf = null;
@@ -24,21 +24,18 @@ public class DataPlayer {
 		this.playerSuperPower = null;
 		this.team = "DefaultTeam";
 		this.isPhysical = true;
-		this.positionx = 40;
-		this.positiony = 0;
 		this.playerSize = 1;
 		this.colorPlayer = "White";
 	}
 	
 	public DataPlayer(String playerName,String playerNumber,AbstractDataPlayerType playerType,DataSuperPowers playerSuperPower,String team,boolean isPhysical,int playerSize,String colorPlayer,int positionx,int positiony) {
+		super(positionx, positiony);
 		this.playerName = playerName;
 		this.playerNumber = playerNumber;
 		this.playerType = playerType;
 		this.playerSuperPower = playerSuperPower;
 		this.team = team;
 		this.isPhysical = isPhysical;
-		this.positionx = positionx;
-		this.positiony = positiony;
 		this.playerSize = playerSize;
 		this.colorPlayer = colorPlayer;
 	}
@@ -91,22 +88,6 @@ public class DataPlayer {
 		this.isPhysical = isPhysical;
 	}
 	
-	public int getPositionX() {
-		return positionx;
-	}
-	
-	public void setPositionX(int positionx) {
-		this.positionx = positionx;
-	}
-	
-	public int getPositionY() {
-		return positiony;
-	}
-	
-	public void setPositionY(int positiony) {
-		this.positiony = positiony;
-	}
-	
 	public int getPlayerSize() {
 		return playerSize;
 	}
@@ -124,8 +105,8 @@ public class DataPlayer {
 	}
 	
 	public String toString() {
-		return playerNumber + "," + playerType.toString() + "," + playerSuperPower.toString() + "," + team + "," + isPhysical
-				+ "," + positionx + "," + positiony + "," + playerSize + "," + colorPlayer + ","+ playerType.getTitularPlayer() + "]\n";
+		return playerName + " N°: " + playerNumber + "," + playerType.toString() + ", Power: " + playerSuperPower.toString() + "," + team + "," + isPhysical +
+				"," + playerSize + "," + colorPlayer + ","+ playerType.getTitularPlayer() + "]\n";
 	}
 	
 }
