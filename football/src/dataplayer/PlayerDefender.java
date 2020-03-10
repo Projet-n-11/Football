@@ -8,6 +8,7 @@ public class PlayerDefender extends AbstractDataPlayerType {
 		this.knowledge = knowledge;
 		this.strength = strength;
 		this.setTitularPlayer(titularPlayer);
+		this.setPlayerTypeName("Défenseur");
 	}
 	
 	public Knowledge getKnowledge() {

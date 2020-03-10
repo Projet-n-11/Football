@@ -18,8 +18,8 @@ public class GraphicalField extends JFrame{
 	
 	DrawField df;
 	private static final long serialVersionUID = -1333721048498985453L;
-	private int widthx = 1010;
-	private int widthy = 625;
+	private int widthx = 780;
+	private int widthy = 620;
 	
 	public GraphicalField() {
 		super("Graphical Field v0.1");
@@ -33,7 +33,7 @@ public class GraphicalField extends JFrame{
 		setSize(widthx, widthy);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(true);
+		setResizable(false);
 		setVisible(true);
 	}
 

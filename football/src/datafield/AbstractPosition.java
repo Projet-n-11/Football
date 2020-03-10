@@ -10,7 +10,6 @@ public abstract class AbstractPosition{
 		this.position[posX][posY] = element;
 	}
 	
-	
 	public int getPositionX() {
 		return posX;
 	}
@@ -29,7 +28,6 @@ public abstract class AbstractPosition{
 	public void setPositionY(int posY) {
 		this.posY = posY;
 	}
-
 
 	public String getPositionContent(int x, int y) {
 		return position[x][y];

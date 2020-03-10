@@ -11,14 +11,18 @@ public class PositionTactics {
 
 	public PositionTactics(DataTeam team) throws IOException {
 		whatIsPType(team.getPlayers());
+		placePlayer(team.getPlayers(), team.getDefaultStrategy());
 	}
 
 	public void whatIsPType(HashMap<String, DataPlayer> players) {
 		ArrayList<DataPlayer> values = new ArrayList<>(players.values());
 		for (DataPlayer dp : values) {
-			if (dp.getPlayerType().getTitularPlayer() == 1)
+			if (dp.getPlayerType().getTitularPlayer() == 1) {
+				System.out.println(dp.getPlayerType().getPlayerTypeName());
 				System.out.println(dp.getPlayerName() + " : " + dp.getPlayerType());
+			}
 		}
+		
 	}
 
 	public void placePlayer(HashMap<String, DataPlayer> players, int teamStrategy) {
@@ -27,10 +31,13 @@ public class PositionTactics {
 			if (dp.getPlayerType().getTitularPlayer() == 1) {
 				switch (teamStrategy) {
 				case 343:
-					
+					if(dp.getPlayerType().getPlayerTypeName() == "Défenseur") {
+						System.out.println("Yo bruv u made it");
+					}
 					break;
 				}
 			}
 		}
 	}
+
 }

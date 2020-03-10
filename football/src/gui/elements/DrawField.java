@@ -30,10 +30,16 @@ public class DrawField extends JPanel {
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
+		//graphics for the field
 		Graphics2D g2 = (Graphics2D) g.create();
+		//graphics to create the tab
 		Graphics2D g3 = (Graphics2D) g.create();
+		//graphics for the special positions
 		Graphics2D g4 = (Graphics2D) g.create();
+		//graphics for the right field (tactics)
 		Graphics2D g5 = (Graphics2D) g.create();
+		//graphics for the left field (tactics)
+		Graphics2D g6 = (Graphics2D) g.create();
 		double width = getWidth();
 		double height = getHeight();
 		double fieldLength = 120d;
@@ -68,7 +74,11 @@ public class DrawField extends JPanel {
 		g5.translate(1,1);
 		g5.setColor(Color.YELLOW);
 		g5.setStroke(stroke2);
-		
+		//g6
+		g6.scale(scale, scale);
+		g6.translate(1,1);
+		g6.setColor(Color.BLUE);
+		g6.setStroke(stroke2);
 		drawGrid(g3, fieldLength, fieldWidth);
 		drawTouchLines(g2, fieldLength, fieldWidth);
 		drawGoalLines(g2, fieldLength, fieldWidth);
@@ -82,13 +92,15 @@ public class DrawField extends JPanel {
 		drawPenaltyMarks(g2, fieldLength, fieldWidth);
 		drawPenaltyArches(g2, fieldLength, fieldWidth);
 		drawSpecialPositions(g4, fieldLength, fieldWidth);
-		drawPlayersTactics(g5, fieldLength, fieldWidth);
+		drawPlayersTacticsR(g5, fieldLength, fieldWidth);
+		drawPlayersTacticsL(g6, fieldLength, fieldWidth);
+
 	}
 	
 	private void drawPenaltyArches(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
-//		double extent = 2*Math.toDegrees(Math.acos(6d/10d));
-		double extent = 106.26020470831196d;
+		double extent = 2*Math.toDegrees(Math.acos(6d/10d));
+		//double extent = 106.26020470831196d;
 		g2.draw(new Arc2D.Double(fieldLength-12-10, (fieldWidth/2)-10, 20, 20, 180-(extent/2), extent, Arc2D.OPEN));
 		g2.draw(new Arc2D.Double(12-10, (fieldWidth/2)-10, 20, 20, -extent/2, extent, Arc2D.OPEN));
 	}
@@ -152,12 +164,12 @@ public class DrawField extends JPanel {
 	}
 	
 	private void drawGrid(Graphics2D g3, double fieldLength, double fieldWidth) {
-		for(int i=0; i<90; i++) {
-			g3.draw(new Line2D.Double(0, i, 120 , i));
+		for(int i=0; i<ConstantPosition.HEIGHT; i++) {
+			g3.draw(new Line2D.Double(0, i, ConstantPosition.WIDTH , i));
 		}
 		
-		for(int j=0; j<120; j++) {
-			g3.draw(new Line2D.Double(j, 0, j ,90));
+		for(int j=0; j<ConstantPosition.WIDTH; j++) {
+			g3.draw(new Line2D.Double(j, 0, j ,ConstantPosition.HEIGHT));
 		}
 	}
 	
@@ -175,18 +187,31 @@ public class DrawField extends JPanel {
 		g4.draw(new Line2D.Double(ConstantPosition.GOAL2X, ConstantPosition.GOALY1, ConstantPosition.GOAL2X ,ConstantPosition.GOALY2));
 	}
 	
-	private void drawPlayersTactics(Graphics2D g5, double fieldLength, double doubleWidth) {
-		g5.draw(new Line2D.Double(ConstantTactics.GOALKEEPERX, ConstantTactics.GOALKEEPERY, ConstantTactics.GOALKEEPERX ,ConstantTactics.GOALKEEPERY));
-		g5.draw(new Line2D.Double(ConstantTactics.FRONT_DEFENDERX, ConstantTactics.FRONT_DEFENDERY, ConstantTactics.FRONT_DEFENDERX ,ConstantTactics.FRONT_DEFENDERY));
-		g5.draw(new Line2D.Double(ConstantTactics.LEFT_DEFENDERX, ConstantTactics.LEFT_DEFENDERY, ConstantTactics.LEFT_DEFENDERX ,ConstantTactics.LEFT_DEFENDERY));
-		g5.draw(new Line2D.Double(ConstantTactics.RIGHT_DEFENDERX, ConstantTactics.RIGHT_DEFENDERY, ConstantTactics.RIGHT_DEFENDERX ,ConstantTactics.RIGHT_DEFENDERY));
-		g5.draw(new Line2D.Double(ConstantTactics.LEFT_MIDFIELDERX, ConstantTactics.LEFT_MIDFIELDERY, ConstantTactics.LEFT_MIDFIELDERX ,ConstantTactics.LEFT_MIDFIELDERY));
-		g5.draw(new Line2D.Double(ConstantTactics.MIDLEFT_MIDFIELDERX, ConstantTactics.MIDLEFT_MIDFIELDERY, ConstantTactics.MIDLEFT_MIDFIELDERX ,ConstantTactics.MIDLEFT_MIDFIELDERY));
-		g5.draw(new Line2D.Double(ConstantTactics.MIDRIGHT_MIDFIELDERX, ConstantTactics.MIDRIGHT_MIDFIELDERY, ConstantTactics.MIDRIGHT_MIDFIELDERX ,ConstantTactics.MIDRIGHT_MIDFIELDERY));
-		g5.draw(new Line2D.Double(ConstantTactics.RIGHT_MIDFIELDERX, ConstantTactics.RIGHT_MIDFIELDERY, ConstantTactics.RIGHT_MIDFIELDERX ,ConstantTactics.RIGHT_MIDFIELDERY));
-		g5.draw(new Line2D.Double(ConstantTactics.RIGHT_FORWARDX, ConstantTactics.RIGHT_FORWARDY, ConstantTactics.RIGHT_FORWARDX ,ConstantTactics.RIGHT_FORWARDY));
-		g5.draw(new Line2D.Double(ConstantTactics.LEFT_FORWARDX, ConstantTactics.LEFT_FORWARDY, ConstantTactics.LEFT_FORWARDX ,ConstantTactics.LEFT_FORWARDY));
-		g5.draw(new Line2D.Double(ConstantTactics.MID_FORWARDX, ConstantTactics.MID_FORWARDY, ConstantTactics.MID_FORWARDX ,ConstantTactics.MID_FORWARDY));
+	private void drawPlayersTacticsR(Graphics2D g5, double fieldLength, double doubleWidth) {
+		g5.draw(new Line2D.Double(ConstantTactics.R_GOALKEEPERX, ConstantTactics.R_GOALKEEPERY, ConstantTactics.R_GOALKEEPERX ,ConstantTactics.R_GOALKEEPERY));
+		g5.draw(new Line2D.Double(ConstantTactics.R_LEFTCENTERBACKX_424, ConstantTactics.R_LEFTCENTERBACKY_424, ConstantTactics.R_LEFTCENTERBACKX_424 ,ConstantTactics.R_LEFTCENTERBACKY_424));
+		g5.draw(new Line2D.Double(ConstantTactics.R_RIGHTCENTERBACKX_424, ConstantTactics.R_RIGHTCENTERBACKY_424, ConstantTactics.R_RIGHTCENTERBACKX_424 ,ConstantTactics.R_RIGHTCENTERBACKY_424));
+		g5.draw(new Line2D.Double(ConstantTactics.R_LEFTFULLBACKX_424, ConstantTactics.R_LEFTFULLBACKY_424, ConstantTactics.R_LEFTFULLBACKX_424 ,ConstantTactics.R_LEFTFULLBACKY_424));
+		g5.draw(new Line2D.Double(ConstantTactics.R_RIGHTFULLBACKX_424, ConstantTactics.R_RIGHTFULLBACKY_424, ConstantTactics.R_RIGHTFULLBACKX_424 ,ConstantTactics.R_RIGHTFULLBACKY_424));
+		g5.draw(new Line2D.Double(ConstantTactics.R_LEFTHALFBACKX_424, ConstantTactics.R_LEFTHALFBACKY_424, ConstantTactics.R_LEFTHALFBACKX_424 ,ConstantTactics.R_LEFTHALFBACKY_424));
+		g5.draw(new Line2D.Double(ConstantTactics.R_RIGHTHALFBACKX_424, ConstantTactics.R_RIGHTHALFBACKY_424, ConstantTactics.R_RIGHTHALFBACKX_424 ,ConstantTactics.R_RIGHTHALFBACKY_424));
+		g5.draw(new Line2D.Double(ConstantTactics.R_LEFTWINGERX_424, ConstantTactics.R_LEFTWINGERY_424, ConstantTactics.R_LEFTWINGERX_424 ,ConstantTactics.R_LEFTWINGERY_424));
+		g5.draw(new Line2D.Double(ConstantTactics.R_RIGHTWINGERX_424, ConstantTactics.R_RIGHTWINGERY_424, ConstantTactics.R_RIGHTWINGERX_424 ,ConstantTactics.R_RIGHTWINGERY_424));
+		g5.draw(new Line2D.Double(ConstantTactics.R_LEFTFOWARDX_424, ConstantTactics.R_LEFTFOWARDY_424, ConstantTactics.R_LEFTFOWARDX_424 ,ConstantTactics.R_LEFTFOWARDY_424));
+		g5.draw(new Line2D.Double(ConstantTactics.R_RIGHTFOWARDX_424, ConstantTactics.R_RIGHTFOWARDY_424, ConstantTactics.R_RIGHTFOWARDX_424 ,ConstantTactics.R_RIGHTFOWARDY_424));
+	}
 
+	private void drawPlayersTacticsL(Graphics2D g5, double fieldLength, double doubleWidth) {
+		g5.draw(new Line2D.Double(ConstantTactics.L_GOALKEEPERX, ConstantTactics.L_GOALKEEPERY, ConstantTactics.L_GOALKEEPERX ,ConstantTactics.L_GOALKEEPERY));
+		g5.draw(new Line2D.Double(ConstantTactics.L_LEFT_DEFENDERX_235, ConstantTactics.L_LEFT_DEFENDERY_235, ConstantTactics.L_LEFT_DEFENDERX_235 ,ConstantTactics.L_LEFT_DEFENDERY_235));
+		g5.draw(new Line2D.Double(ConstantTactics.L_RIGHT_DEFENDERX_235, ConstantTactics.L_RIGHT_DEFENDERY_235, ConstantTactics.L_RIGHT_DEFENDERX_235 ,ConstantTactics.L_RIGHT_DEFENDERY_235));
+		g5.draw(new Line2D.Double(ConstantTactics.L_MID_HALFBACKX_235, ConstantTactics.L_MID_HALFBACKY_235, ConstantTactics.L_MID_HALFBACKX_235 ,ConstantTactics.L_MID_HALFBACKY_235));
+		g5.draw(new Line2D.Double(ConstantTactics.L_LEFT_HALFBACKX_235, ConstantTactics.L_LEFT_HALFBACKY_235, ConstantTactics.L_LEFT_HALFBACKX_235 ,ConstantTactics.L_LEFT_HALFBACKY_235));
+		g5.draw(new Line2D.Double(ConstantTactics.L_RIGHT_HALFBACKX_235, ConstantTactics.L_RIGHT_HALFBACKY_235, ConstantTactics.L_RIGHT_HALFBACKX_235 ,ConstantTactics.L_RIGHT_HALFBACKY_235));
+		g5.draw(new Line2D.Double(ConstantTactics.L_LEFT_WINGERX_235, ConstantTactics.L_LEFT_WINGERY_235, ConstantTactics.L_LEFT_WINGERX_235 ,ConstantTactics.L_LEFT_WINGERY_235));
+		g5.draw(new Line2D.Double(ConstantTactics.L_RIGHT_WINGERX_235, ConstantTactics.L_RIGHT_WINGERY_235, ConstantTactics.L_RIGHT_WINGERX_235 ,ConstantTactics.L_RIGHT_WINGERY_235));
+		g5.draw(new Line2D.Double(ConstantTactics.L_LEFT_FORWARDX_235, ConstantTactics.L_LEFT_FORWARDY_235, ConstantTactics.L_LEFT_FORWARDX_235 ,ConstantTactics.L_LEFT_FORWARDY_235));
+		g5.draw(new Line2D.Double(ConstantTactics.L_RIGHT_FORWARDX_235, ConstantTactics.L_RIGHT_FORWARDY_235, ConstantTactics.L_RIGHT_FORWARDX_235 ,ConstantTactics.L_RIGHT_FORWARDY_235));
+		g5.draw(new Line2D.Double(ConstantTactics.L_MID_FORWARDX_235, ConstantTactics.L_MID_FORWARDY_235, ConstantTactics.L_MID_FORWARDX_235 ,ConstantTactics.L_MID_FORWARDY_235));
 	}
 }

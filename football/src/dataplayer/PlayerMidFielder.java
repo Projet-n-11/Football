@@ -8,6 +8,8 @@ public class PlayerMidFielder extends AbstractDataPlayerType {
 		this.readPlay = readPlay;
 		this.precision = precision;
 		this.setTitularPlayer(titularPlayer);
+		this.setPlayerTypeName("Milieu");
+
 	}
 	public ReadPlay getReadPlay() {
 		return readPlay;

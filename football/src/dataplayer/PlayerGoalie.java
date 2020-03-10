@@ -8,6 +8,8 @@ public class PlayerGoalie extends AbstractDataPlayerType {
 		this.reflex = reflex;
 		this.dive = dive;
 		this.setTitularPlayer(titularPlayer);
+		this.setPlayerTypeName("Gardien");
+
 	}
 	
 	public Reflex getReflex() {

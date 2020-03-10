@@ -9,6 +9,7 @@ public class DataPlayer {
 	private boolean isPhysical;
 	private int positionx,positiony;
 	private int playerSize;
+	private String playerTypeName;
 	private String colorPlayer;
 	
 	public DataPlayer() {
@@ -85,7 +86,7 @@ public class DataPlayer {
 	public boolean isPhysical() {
 		return isPhysical;
 	}
-	
+	 
 	public void setPhysical(boolean isPhysical) {
 		this.isPhysical = isPhysical;
 	}
