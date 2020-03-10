@@ -1,5 +1,8 @@
 package gui.elements;
 
+import datateam.DataTeam;
+import process.management.CreaTeam;
+import process.management.RecupTeam;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -7,13 +10,17 @@ import javax.swing.JLabel;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.swing.JOptionPane;
@@ -22,7 +29,11 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import dataplayer.DataPlayer;
 import process.management.RecupTeam;
+
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 
 public class GraphicalPanel extends JFrame {
@@ -125,29 +136,62 @@ public class GraphicalPanel extends JFrame {
 		
 			mainFrame.getContentPane().removeAll();
 			mainFrame.repaint();
-			try {
-				mainFrame.getContentPane().setLayout(new GridLayout(2,2));
-				JLabel jp1=new JLabel();
-				JLabel jp2=new JLabel(new ImageIcon("src/ressources/station.png"));
-				JPanel jp3=new JPanel();
-				JPanel jp4=new JPanel();
-				
 			
-				jp1.setLayout(new FlowLayout(FlowLayout.LEFT));
-				jp2.setLayout(new FlowLayout(FlowLayout.RIGHT));
-				jp3.setLayout(new FlowLayout(FlowLayout.LEFT));
-				jp4.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			GridBagLayout grid= new GridBagLayout();
+			GridBagConstraints gbc= new GridBagConstraints();
+			
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+			mainFrame.setLayout(grid);
+			mainFrame.setTitle("Football Game");
+			
+			gbc.fill=GridBagConstraints.REMAINDER;
+			gbc.gridx= 0;
+			gbc.gridy=0;
+			gbc.gridwidth=2;
+			mainFrame.add(new JLabel("Choose your team:"),gbc);
+			
+			gbc.fill=GridBagConstraints.HORIZONTAL;
+			gbc.gridx=0;
+			gbc.gridy=1;
+			
+			gbc.gridheight=3;
+			try {
+				ComboBoxModel modelMere = choosingTeams();
+				ComboBoxModel modelFrance = playersTitularTeam("France");
+				ComboBoxModel modelBrazil = playersTitularTeam("Brazil");
+				JComboBox mere=new JComboBox(modelMere);
+				JComboBox fille =new JComboBox();
+				mere.addItemListener(new ItemListener(){
+					public void itemStateChanged(ItemEvent e) {
+						
+						if(mere.getSelectedItem().equals("France")) {
+							
+							fille.setModel(modelFrance);
+							
+						}
+						else if(mere.getSelectedItem().equals("Brazil")) {
+							
+							fille.setModel(modelBrazil);
+							
+						}
+					} 
+				});
+				mainFrame.add(mere,gbc);
+				gbc.fill=GridBagConstraints.HORIZONTAL;
+				gbc.gridx=2;
+				gbc.gridy=1;
 				
-				jp1.add(choosingTeams());
-				mainFrame.add(jp1);
-				mainFrame.add(jp2);
-				initJFrame(mainFrame);
-				
-			} 
+				gbc.gridheight=3;
+				mainFrame.add(fille,gbc);
+			}
 			catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			
+			initJFrame(mainFrame);
+				
+			
 			
 		}
 	}
@@ -180,10 +224,10 @@ public class GraphicalPanel extends JFrame {
 		
 	}
 	
-	public JComboBox choosingTeams() throws IOException {
+	private DefaultComboBoxModel choosingTeams() throws IOException {
 		
-		JComboBox equipe;
-		String [] tabName = new String[200];
+		DefaultComboBoxModel equipe;
+		String [] tabName = new String[50];
 		ArrayList<String> nameteam= RecupTeam.getCountriesNames();
 		int i=0;
 		for(Iterator<String> it= nameteam.iterator(); it.hasNext();) {
@@ -191,16 +235,37 @@ public class GraphicalPanel extends JFrame {
 			i++;
 		}
 		
-		equipe=new JComboBox(tabName);
+		equipe=new DefaultComboBoxModel(tabName);
 	
 		return equipe;
 	}
-	public void initJFrame(JFrame frame) {
+	private void initJFrame(JFrame frame) {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//this.pack();
 		frame.setPreferredSize(null);
 		frame.setVisible(true);
+	}
+	
+	private DefaultComboBoxModel playersTitularTeam(String teamName) throws IOException {
+		DefaultComboBoxModel players;
+		String [] tabPlayer=new String[23];
+		DataTeam team= CreaTeam.creaTeam(teamName);
+		HashMap<String,DataPlayer> hm=team.getPlayers();
+		
+		ArrayList<DataPlayer> values=new ArrayList<>(hm.values());
+		int i=0;
+		
+		for(DataPlayer dp : values) {
+			if(dp.getPlayerType().getTitularPlayer()==1) {
+				tabPlayer[i]= dp.getPlayerName()+ " : " + dp.getPlayerType().getPlayerTypeName();
+				i++;
+			}
+		}
+		players=new DefaultComboBoxModel(tabPlayer);
+		
+		return players;
+		
 	}
 	
 }
