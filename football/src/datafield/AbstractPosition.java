@@ -27,6 +27,10 @@ public abstract class AbstractPosition{
 		return posY;
 	}
 	
+	public void setPositionY(int posY) {
+		this.posY = posY;
+	}
+	
 	public String toString() {
 		return "X= " + posX + "; Y= "+ posY;
 	}

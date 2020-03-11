@@ -79,7 +79,7 @@ public class DrawField extends JPanel {
 		g6.translate(1,1);
 		g6.setColor(Color.BLUE);
 		g6.setStroke(stroke2);
-		drawGrid(g3, fieldLength, fieldWidth);
+		//drawGrid(g3, fieldLength, fieldWidth);
 		drawTouchLines(g2, fieldLength, fieldWidth);
 		drawGoalLines(g2, fieldLength, fieldWidth);
 		drawCenterLine(g2, fieldLength, fieldWidth);
@@ -91,7 +91,7 @@ public class DrawField extends JPanel {
 		drawPenaltyAreas(g2, fieldLength, fieldWidth);
 		drawPenaltyMarks(g2, fieldLength, fieldWidth);
 		drawPenaltyArches(g2, fieldLength, fieldWidth);
-		drawSpecialPositions(g4, fieldLength, fieldWidth);
+		//drawSpecialPositions(g4, fieldLength, fieldWidth);
 		drawPlayersTacticsR(g5, fieldLength, fieldWidth);
 		drawPlayersTacticsL(g6, fieldLength, fieldWidth);
 

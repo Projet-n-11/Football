@@ -5,7 +5,6 @@ public class Goal extends AbstractPosition {
 	private int position2Y;
 	public Goal(boolean insideBall, int positionX, int positionY, int position2Y) {
 		super(positionX, positionY);
-		
 		this.position2Y=position2Y;
 		this.insideBall = insideBall;
 	}
