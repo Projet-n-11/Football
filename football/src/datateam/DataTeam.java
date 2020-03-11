@@ -12,7 +12,7 @@ public class DataTeam {
 	
 	
 	public DataTeam(String teamName, int numberPlayers, HashMap<String, DataPlayer> players,
-			String color, int positiononField, int defaultStrategy) {
+			String color, int positiononField, int[] defaultStrategy) {
 		this.teamName = teamName;
 		this.players = players;
 		this.color = color;
