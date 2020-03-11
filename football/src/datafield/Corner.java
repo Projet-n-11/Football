@@ -5,7 +5,7 @@ public class Corner extends AbstractPosition {
 	private boolean isCorner = false;
 	
 	public Corner(boolean isCorner, int positionX, int positionY) {
-		super(positionX, positionY, "C");
+		super(positionX, positionY);
 		this.isCorner = isCorner;
 	}
 	
