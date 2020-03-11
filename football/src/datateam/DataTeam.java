@@ -8,7 +8,7 @@ public class DataTeam {
 	private HashMap<String, DataPlayer> substitute;
 	private String color;
 	private int positiononField;
-	private int defaultStrategy;
+	private int[] defaultStrategy;
 	
 	
 	public DataTeam(String teamName, int numberPlayers, HashMap<String, DataPlayer> players,
@@ -61,11 +61,11 @@ public class DataTeam {
 		this.positiononField = positiononField;
 	}
 	
-	public int getDefaultStrategy() {
+	public int[] getDefaultStrategy() {
 		return defaultStrategy;
 	}
 	
-	public void setDefaultStrategy(int newStrategy) {
+	public void setDefaultStrategy(int[] newStrategy) {
 		this.defaultStrategy = newStrategy;
 	}
 
