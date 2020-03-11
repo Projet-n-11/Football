@@ -23,4 +23,16 @@ public class Positionning {
 	public AbstractPosition getElement(int posX, int posY) {
 		return position[posX][posY];
 	}
+	
+	public void testParcourir(int x, int y) {
+		int radiusVision = 15;
+		
+	}
+	/*
+	public AbstractPosition guessObject(int posX, int posY) {
+		if (position[posX][posY] instanceof Grass) {}
+		return null;
+	}
+	*/
+
 }
