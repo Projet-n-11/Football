@@ -11,7 +11,13 @@ public class Vision {
 	
 	private Positionning position;	// singleton !
 	
-	
+	/**
+	 * cette fonction prend en paramètre la position d'un joueur et lui rend une arrayList
+	 * constituée des objets qui l'entourent dans un "rayon" de 15 squares 
+	 * @param x
+	 * @param y
+	 * @return ArrayList<AbstractPosition> objects
+	 */
 	public ArrayList<AbstractPosition> testParcourir(int x, int y) {
 		ArrayList<AbstractPosition> objects = new ArrayList<AbstractPosition>();
 		int radiusVision = ConstantPosition.RADIUSVISION;

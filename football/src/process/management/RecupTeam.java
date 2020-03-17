@@ -115,8 +115,7 @@ public class RecupTeam {
 	}
 	
 	public int[] defaultStrategy() {
-		int strat = Integer.parseInt(scrollAndGet(team.get(0),11));
-		int[] tab = {strat-strat%100-strat%10 ,strat%100-strat%10, strat%10};		
+		int[] tab = {Integer.parseInt(scrollAndGet(team.get(0),11)) , Integer.parseInt(scrollAndGet(team.get(0),12)), Integer.parseInt(scrollAndGet(team.get(0),13))};		
 		return tab;
 	}
 	
