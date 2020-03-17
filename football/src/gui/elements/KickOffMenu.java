@@ -25,7 +25,7 @@ import datateam.DataTeam;
 import process.management.CreaTeam;
 import process.management.RecupTeam;
 
-public class KickOffMenu extends JFrame{
+public class KickOffMenu extends JFrame {
 	private JFrame mainFrame;
 	
 	public KickOffMenu() {
@@ -33,11 +33,18 @@ public class KickOffMenu extends JFrame{
 	}
 	
 	public KickOffMenu(String title) {
-		mainFrame=new JFrame();
+		mainFrame= new JFrame();
+		
+	}
+	
+	public void createKickOff(JFrame mainFrame) {
+		
+		try {
+		
 		mainFrame.getContentPane().setLayout(new GridLayout(4,1));
-		
-		
-		JLabel choice=new JLabel("Choose your team");
+		mainFrame.setSize(1000,500);
+		System.out.println("essai2");
+		JLabel choice=new JLabel("Choose your team :");
 		
 		mainFrame.getContentPane().add(choice);
 		mainFrame.getContentPane().add(new JLabel(""));
@@ -46,8 +53,8 @@ public class KickOffMenu extends JFrame{
 		GridLayout grid2=new GridLayout(1,2);
 		
 				
-		try {
-			System.out.println("truc de merde");
+		
+			
 			ComboBoxModel modelMere = choosingTeams();
 			ComboBoxModel modelTFrance = playersTitularTeam("France");
 			ComboBoxModel modelTBrazil = playersTitularTeam("Brazil");
@@ -83,18 +90,10 @@ public class KickOffMenu extends JFrame{
 		}
 		catch (IOException e1) {
 			// TODO Auto-generated catch block
-			System.err.println("erreur de merde");
+			System.err.println("erreur");
 		}
 			
 		
-		
-		
-		
-	}
-	
-	public static void main(String[] args) {
-		new KickOffMenu();
-		System.out.println("fait");
 	
 	}
 	

@@ -109,7 +109,8 @@ public class MainMenu extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			mainFrame.getContentPane().removeAll();
 			mainFrame.repaint();
-			
+			KickOffMenu kick=new KickOffMenu();
+			kick.createKickOff(mainFrame);
 		}
 		
 	}
