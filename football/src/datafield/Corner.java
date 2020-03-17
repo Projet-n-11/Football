@@ -1,6 +1,6 @@
 package datafield;
 
-public class Corner extends AbstractPosition {
+public class Corner extends Position {
 	
 	private boolean isCorner = false;
 	

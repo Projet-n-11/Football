@@ -1,7 +1,7 @@
 package dataplayer;
 
-import datafield.AbstractPosition;
-public class DataPlayer extends AbstractPosition{
+import datafield.Position;
+public class DataPlayer extends Position{
 	private String playerName;
 	private String playerNumber;
 	private AbstractDataPlayerType playerType;

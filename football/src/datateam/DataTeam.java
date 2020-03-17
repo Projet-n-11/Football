@@ -61,8 +61,8 @@ public class DataTeam {
 		this.positiononField = positiononField;
 	}
 	
-	public int[] getDefaultStrategy() {
-		return defaultStrategy;
+	public int getDefaultStrategy(int value) {
+		return defaultStrategy[value];
 	}
 	
 	public void setDefaultStrategy(int[] newStrategy) {

@@ -1,6 +1,8 @@
 package datafield;
 import java.util.HashMap;
 
+import process.management.ConstantPosition;
+
 public class DataSoccerField {
 	private final int INITIALPOINT = 25;
 	private HashMap<Integer,Square> hmField;
@@ -12,7 +14,7 @@ public class DataSoccerField {
 	}
 
 	public String toString() {
-		return "WIDTH=" + WIDTH + ", HEIGHT=" + HEIGHT + ", INITIALPOINT=" + INITIALPOINT
+		return "WIDTH=" + ConstantPosition.WIDTH + ", HEIGHT=" + ConstantPosition.HEIGHT + ", INITIALPOINT=" + INITIALPOINT
 				+ ", hmField=" + hmField + ", SPECIALPOS=" + SPECIALPOS;
 	}
 }

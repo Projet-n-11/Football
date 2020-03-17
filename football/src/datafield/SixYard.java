@@ -1,6 +1,6 @@
 package datafield;
 
-public class SixYard extends AbstractPosition {
+public class SixYard extends Position {
 	private boolean sixYardPoint;
 
 	public SixYard(boolean sixYardPoint, int positionX, int positionY) {

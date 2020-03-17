@@ -1,6 +1,6 @@
 package datafield;
 
-public class Penalty extends AbstractPosition {
+public class Penalty extends Position {
 	
 	private boolean fault;
 	private int posX, posY;

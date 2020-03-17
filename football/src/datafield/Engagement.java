@@ -1,6 +1,6 @@
 package datafield;
 
-public class Engagement extends AbstractPosition {
+public class Engagement extends Position {
 	private boolean engagementPoint;
 
 	public Engagement(boolean engagementPoint, int positionX, int positionY) {

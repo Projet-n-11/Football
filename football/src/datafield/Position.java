@@ -1,14 +1,14 @@
 package datafield;
 
-public abstract class AbstractPosition{
+public class Position{
 	private int posX, posY;
 	
-	public AbstractPosition() {
+	public Position() {
 		this.posX = 0;
 		this.posY = 0;
 	}
 	
-	public AbstractPosition(int positionx, int positiony) {
+	public Position(int positionx, int positiony) {
 		this.posX = positionx; 
 		this.posY = positiony;
 	}

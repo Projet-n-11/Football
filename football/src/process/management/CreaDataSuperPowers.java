@@ -23,7 +23,7 @@ public class CreaDataSuperPowers {
 		AbstractSpecsSP magnet = new PowerMagnet(0, false);
 		
 		// tous des AbstractSpecsSP
-		DataSuperPowers dataPowers = new DataSuperPowers(forceField, superSpeed, dodge, corruption, magnet) ;
+		DataSuperPowers dataPowers = new DataSuperPowers(forceField, superSpeed, dodge, corruption, magnet);
 		return dataPowers;
 	}
 }

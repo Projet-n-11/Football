@@ -1,8 +1,8 @@
 package databall;
 
-import datafield.AbstractPosition;
+import datafield.Position;
 
-public class DataBall extends AbstractPosition{
+public class DataBall extends Position{
 	private final int BALLSIZE = 2;
 	private final String COLOR = "White";
 	private int positionx, positiony;

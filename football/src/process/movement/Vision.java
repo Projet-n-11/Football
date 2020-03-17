@@ -2,14 +2,14 @@ package process.movement;
 
 import java.util.ArrayList;
 
-import datafield.AbstractPosition;
+import datafield.Position;
 import datafield.Grass;
 import process.management.ConstantPosition;
-import process.management.Positionning;
+import process.management.Positioning;
 
 public class Vision {
 	
-	private Positionning position;	// singleton !
+	private Positioning position;	// singleton !
 	
 	/**
 	 * cette fonction prend en paramètre la position d'un joueur et lui rend une arrayList
@@ -18,8 +18,8 @@ public class Vision {
 	 * @param y
 	 * @return ArrayList<AbstractPosition> objects
 	 */
-	public ArrayList<AbstractPosition> testParcourir(int x, int y) {
-		ArrayList<AbstractPosition> objects = new ArrayList<AbstractPosition>();
+	public ArrayList<Position> testParcourir(int x, int y) {
+		ArrayList<Position> objects = new ArrayList<Position>();
 		int radiusVision = ConstantPosition.RADIUSVISION;
 		int i=0, j=0, verticalLimit=0;
 		for (i=(-radiusVision); i<=radiusVision ;i++) {

@@ -1,6 +1,6 @@
 package datafield;
 
-public class Goal extends AbstractPosition {
+public class Goal extends Position {
 	private boolean insideBall;
 	private int position2Y;
 	public Goal(boolean insideBall, int positionX, int positionY, int position2Y) {
