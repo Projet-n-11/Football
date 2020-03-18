@@ -24,6 +24,10 @@ public class Counter {
 		value++;
 	}
 
+	public void setEqual(int newValue) {
+		value = newValue;
+	}
+	
 	public void decrement() {
 		value--;
 	}

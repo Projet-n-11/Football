@@ -1,6 +1,11 @@
 package process.management;
 
 import datafield.Position;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+
 import datafield.Grass;
 
 /*
@@ -36,7 +41,7 @@ public class Positioning {
 	}
 	
 	//This method will print each box from the array into a file named "output.txt" (USELESS CHECKING METHOD)
-	/*public void printAllElementsFromTable() throws FileNotFoundException {
+	public void printAllElementsFromTable() throws FileNotFoundException {
 		PrintStream o = new PrintStream(new File("output.txt")); 
 		PrintStream console = System.out;
 		System.setOut(o);
@@ -47,5 +52,5 @@ public class Positioning {
 		}
 		System.setOut(console);;
 		System.out.println("Done");
-	}*/
+	}
 }

@@ -10,6 +10,7 @@ import process.management.RecupTeam;
 public class CLIgame {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
+		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
 		Boolean badchoice = false;
 		String choice = "";

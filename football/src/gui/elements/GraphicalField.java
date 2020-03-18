@@ -1,12 +1,14 @@
 package gui.elements;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class GraphicalField extends JFrame{
+public class GraphicalField extends JPanel {
 
 	/*
 	 *  GraphicalField is the frame that will generate the Soccer field, it will
@@ -19,25 +21,18 @@ public class GraphicalField extends JFrame{
 	DrawField df;
 	private static final long serialVersionUID = -1333721048498985453L;
 	private int widthx = 1000;
-	private int widthy = 780;
+	private int widthy = 900;
 	
 	public GraphicalField() {
-		super("Graphical Field v0.1");
 		initLayout();
 	}
 	
 	private void initLayout() {
 		df = new DrawField();
+		df.setPreferredSize(new Dimension(400, 400));
 		add(df);
 		setBackground(new Color(0, 128, 0));
 		setSize(widthx, widthy);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
 		setVisible(true);
-	}
-
-	public static void main(String[] args) {
-		new GraphicalField();
 	}
 }

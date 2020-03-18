@@ -25,11 +25,16 @@ public class CyclicCounter extends BoundedCounter {
 	public void increment() {
 		if (getValue() < getMax()) {
 			super.increment();
-		} else {
+		}
+		else {
 			setValue(getMin());
 		}
 	}
 
+	public void setEqual() {
+		super.setEqual(getMax());
+	}
+	
 	@Override
 	public String toString() {
 		return Chronometer.transform(getValue());

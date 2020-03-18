@@ -19,6 +19,6 @@ public class TestPositionTactics {
 		PositionTactics pt = new PositionTactics(team1, p, alreadyPlacedLeft);
 		alreadyPlacedLeft=true;
 		PositionTactics pt2 = new PositionTactics(team2, p, alreadyPlacedLeft);
-		//p.printAllElementsFromTable();
+		p.printAllElementsFromTable();
 	}
 }

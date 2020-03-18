@@ -15,13 +15,16 @@ import java.util.Iterator;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import dataplayer.DataPlayer;
 import datateam.DataTeam;
+import gui.elements.MainMenu.ActionOptions;
 import process.management.CreaTeam;
 import process.management.RecupTeam;
 
@@ -40,21 +43,18 @@ public class KickOffMenu extends JFrame {
 	public void createKickOff(JFrame mainFrame) {
 		
 		try {
-		
 		mainFrame.getContentPane().setLayout(new GridLayout(4,1));
 		mainFrame.setSize(1000,500);
 		System.out.println("essai2");
 		JLabel choice=new JLabel("Choose your team :");
-		
+		JButton start = new JButton("Start");
+
 		mainFrame.getContentPane().add(choice);
 		mainFrame.getContentPane().add(new JLabel(""));
 		
 		GridLayout grid1=new GridLayout(1,2);
 		GridLayout grid2=new GridLayout(1,2);
-		
 				
-		
-			
 			ComboBoxModel modelMere = choosingTeams();
 			ComboBoxModel modelTFrance = playersTitularTeam("France");
 			ComboBoxModel modelTBrazil = playersTitularTeam("Brazil");
@@ -81,12 +81,16 @@ public class KickOffMenu extends JFrame {
 					}
 				} 
 			});
+			start.setSize(200,400);
+			start.addActionListener(new ActionStart());
 			
 			mainFrame.getContentPane().add(mere,grid1);
 			mainFrame.getContentPane().add(new JLabel(""),grid1);
 			mainFrame.getContentPane().add(filleT,grid2);
 			mainFrame.getContentPane().add(filleS,grid2);
+			mainFrame.getContentPane().add(start, grid1);
 			initJFrame(mainFrame);
+			
 		}
 		catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -99,11 +103,20 @@ public class KickOffMenu extends JFrame {
 	
 	private void initJFrame(JFrame frame) {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		//this.pack();
 		frame.setPreferredSize(null);
 		frame.setVisible(true);
 	}
+	
+	public class ActionStart implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			mainFrame.getContentPane().removeAll();
+			mainFrame.repaint();
+			MatchScreen match = new MatchScreen();
+		}
+		
+	}
+	
 	private DefaultComboBoxModel choosingTeams() throws IOException {
 		
 		DefaultComboBoxModel equipe;

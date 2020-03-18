@@ -32,6 +32,9 @@ public class BoundedCounter extends Counter {
 		}
 	}
 
+	public void setEqual() {
+		super.setEqual(getMax());
+	}
 	public int getMax() {
 		return max;
 	}
