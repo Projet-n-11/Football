@@ -29,7 +29,7 @@ public class GraphicalField extends JPanel {
 	
 	private void initLayout() {
 		df = new DrawField();
-		df.setPreferredSize(new Dimension(400, 400));
+		df.setPreferredSize(new Dimension(900, 700));
 		add(df);
 		setBackground(new Color(0, 128, 0));
 		setSize(widthx, widthy);

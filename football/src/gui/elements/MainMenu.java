@@ -150,6 +150,7 @@ public class MainMenu extends JFrame {
 		//this.pack();
 		frame.setPreferredSize(null);
 		frame.setVisible(true);
+		frame.setLocation(450,300);
 	}
 	
 	public JFrame getJFrameMainMenu() {

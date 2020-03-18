@@ -54,7 +54,10 @@ public class KickOffMenu extends JFrame {
 		
 		GridLayout grid1=new GridLayout(1,2);
 		GridLayout grid2=new GridLayout(1,2);
+		
 				
+		
+			
 			ComboBoxModel modelMere = choosingTeams();
 			ComboBoxModel modelTFrance = playersTitularTeam("France");
 			ComboBoxModel modelTBrazil = playersTitularTeam("Brazil");
