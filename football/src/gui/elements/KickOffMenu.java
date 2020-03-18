@@ -28,29 +28,28 @@ import gui.elements.MainMenu.ActionOptions;
 import process.management.CreaTeam;
 import process.management.RecupTeam;
 
-public class KickOffMenu extends JFrame {
-	private JFrame mainFrame;
+public class KickOffMenu extends JPanel {
 	
+	private JPanel panel;
 	public KickOffMenu() {
 		this("Configuration");
 	}
 	
 	public KickOffMenu(String title) {
-		mainFrame= new JFrame();
+		panel= new JPanel();
 		
 	}
 	
-	public void createKickOff(JFrame mainFrame) {
+	public JPanel createKickOff() {
 		
 		try {
-		mainFrame.getContentPane().setLayout(new GridLayout(4,1));
-		mainFrame.setSize(1000,500);
-		System.out.println("essai2");
+		
+		
 		JLabel choice=new JLabel("Choose your team :");
 		JButton start = new JButton("Start");
-
-		mainFrame.getContentPane().add(choice);
-		mainFrame.getContentPane().add(new JLabel(""));
+		panel.setLayout(new GridLayout(4,1));
+		panel.add(choice);
+		panel.add(new JLabel(""));
 		
 		GridLayout grid1=new GridLayout(1,2);
 		GridLayout grid2=new GridLayout(1,2);
@@ -87,12 +86,12 @@ public class KickOffMenu extends JFrame {
 			start.setSize(200,400);
 			start.addActionListener(new ActionStart());
 			
-			mainFrame.getContentPane().add(mere,grid1);
-			mainFrame.getContentPane().add(new JLabel(""),grid1);
-			mainFrame.getContentPane().add(filleT,grid2);
-			mainFrame.getContentPane().add(filleS,grid2);
-			mainFrame.getContentPane().add(start, grid1);
-			initJFrame(mainFrame);
+			panel.add(mere,grid1);
+			panel.add(new JLabel(""),grid1);
+			panel.add(filleT,grid2);
+			panel.add(filleS,grid2);
+			panel.add(start, grid1);
+		
 			
 		}
 		catch (IOException e1) {
@@ -100,31 +99,34 @@ public class KickOffMenu extends JFrame {
 			System.err.println("erreur");
 		}
 			
-		
+		return panel;
 	
 	}
 	
+	
+	
+	public class ActionStart implements ActionListener{
+
+		public void actionPerformed(ActionEvent e) {
+			
+			MatchScreen match = new MatchScreen();
+			panel= match.initLayout();
+			
+		}
+			
+	}
 	private void initJFrame(JFrame frame) {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.pack();
 		frame.setPreferredSize(null);
 		frame.setVisible(true);
 	}
-	
-	public class ActionStart implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-			mainFrame.getContentPane().removeAll();
-			mainFrame.repaint();
-			MatchScreen match = new MatchScreen();
-		}
-		
-	}
-	
 	private DefaultComboBoxModel choosingTeams() throws IOException {
 		
 		DefaultComboBoxModel equipe;
-		String [] tabName = new String[50];
+		
 		ArrayList<String> nameteam= RecupTeam.getCountriesNames();
+		String [] tabName = new String[nameteam.size()];
 		int i=0;
 		for(Iterator<String> it= nameteam.iterator(); it.hasNext();) {
 			tabName[i]=it.next();

@@ -11,33 +11,33 @@ import javax.swing.JPanel;
 
 import process.scores.ChronometerGUI;
 
-public class MatchScreen extends JFrame{
+public class MatchScreen extends JPanel{
 
 	private static final long serialVersionUID = 2301016752658769684L;
 	private int widthx = 1300;
 	private int widthy = 800;
 	
 	public MatchScreen() {
-		super("Match screen V0.4");
-		initLayout();
+		
+		JPanel container=initLayout();
 	}
 	
-	public void initLayout() {
+	public JPanel initLayout() {
 		JPanel container = new JPanel();
 		GraphicalField field = new GraphicalField();
 		ChronometerGUI chrono = new ChronometerGUI();
         this.setSize(widthx, widthy);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         container.setLayout(new BorderLayout());
         container.add(chrono,BorderLayout.NORTH);
         container.add(field, BorderLayout.CENTER);
         container.add(new JButton("BAS"),BorderLayout.SOUTH);
         container.add(new JButton("DROITE"),BorderLayout.EAST);
         container.add(new JButton("GAUCHE"),BorderLayout.WEST);
-        this.setContentPane(container);
-        this.setResizable(false);
+      
         this.setVisible(true);
         this.setLocation(350,150);
+        return container;
 	}
 
 }
