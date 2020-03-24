@@ -16,11 +16,11 @@ import datafield.Grass;
  * 
  */
 
-public class Positioning {
-	private Position[][] position = new Position[ConstantPosition.WIDTH+2][ConstantPosition.HEIGHT+2];
+public class Map {
+	private Position[][] map = new Position[ConstantPosition.WIDTH+2][ConstantPosition.HEIGHT+2];
 	
 	//The following constructor will initialize each box from the "position" array by inserting grass
-	public Positioning(){
+	public Map(){
 		for(int x=0; x<ConstantPosition.WIDTH; x++) {
 			for(int y=0; y<ConstantPosition.HEIGHT; y++) {
 				Grass grass = new Grass(x, y);
@@ -33,12 +33,12 @@ public class Positioning {
 	
 	//This hook method will set an element into the array
 	public void setElement(Position element) {
-		this.position[element.getPositionX()][element.getPositionY()] = element;
+		this.map[element.getPositionX()][element.getPositionY()] = element;
 	}
 	
 	//This hook method will get an element from the array
 	public Position getElement(int posX, int posY) {
-		return position[posX][posY];
+		return map[posX][posY];
 	}
 	
 	//This method will print each box from the array into a file named "output.txt" (USELESS CHECKING METHOD)
