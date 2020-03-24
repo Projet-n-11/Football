@@ -1,6 +1,8 @@
 package process.movement;
 
 import databall.DataBall;
+import datafield.Position;
+import datafield.SpecialPosition;
 import dataplayer.DataPlayer;
 
 
@@ -16,12 +18,14 @@ public class MovementPlayer {
 	private final int BORDERBOTTOM = 48;
 	private final int BORDERLEFT = 0;
 	private final int BORDERRIGHT = 84;
+	private SpecialPosition specPos;
 	//private int movX = 0;
 	//private int movY = 0;
-
 	
-	public MovementPlayer(DataBall db, DataPlayer dp) {
-		move(db, dp);
+	
+	
+	public MovementPlayer() {
+		specPos = new SpecialPosition();
 	}
 	
 	
@@ -33,8 +37,7 @@ public class MovementPlayer {
 		 * 
 		 * @param DataBall db, DataPlayer dp
 		 */
-	
-	public void move(DataBall db, DataPlayer dp) {
+	public void move(Position db, DataPlayer dp) {
 		/*
 		 * Player's conditions so he'll run to the ball's position
 		 * to get it. Only for the x axis.
@@ -47,7 +50,7 @@ public class MovementPlayer {
 						if(dp.getPositionX() - db.getPositionX() == 1) {
 							dp.setPositionX(dp.getPositionX() - 1);
 						}
-						else if(dp.getPositionX() - db.getPositionX() < dp.getPlayerType().getSpeed().getSpeedX() || dp.getPositionX() - db.getPositionX() == dp.getPlayerType().getSpeed().getSpeedX()) {
+						else if(dp.getPositionX() - db.getPositionX() <= dp.getPlayerType().getSpeed().getSpeedX() ) {
 							dp.setPositionX(db.getPositionX());
 						}
 						else {
@@ -60,7 +63,7 @@ public class MovementPlayer {
 						if(dp.getPositionX() - db.getPositionX() == 1) {
 							dp.setPositionX(dp.getPositionX() + 1);
 						}
-						else if(db.getPositionX() - dp.getPositionX() < dp.getPlayerType().getSpeed().getSpeedX() || db.getPositionX() - dp.getPositionX() == dp.getPlayerType().getSpeed().getSpeedX()) {
+						else if(db.getPositionX() - dp.getPositionX() <= dp.getPlayerType().getSpeed().getSpeedX()) {
 							dp.setPositionX(db.getPositionX());
 						}
 						else {
@@ -79,7 +82,7 @@ public class MovementPlayer {
 					if(dp.getPositionY() - db.getPositionY() == 1) {
 						dp.setPositionY(dp.getPositionY() - 1);
 					}
-					else if(dp.getPositionY() - db.getPositionY() < dp.getPlayerType().getSpeed().getSpeedY() || dp.getPositionY() - db.getPositionY() == dp.getPlayerType().getSpeed().getSpeedY()){
+					else if(dp.getPositionY() - db.getPositionY() <= dp.getPlayerType().getSpeed().getSpeedY()){
 						dp.setPositionY(db.getPositionY());
 					}
 					else {
@@ -92,7 +95,7 @@ public class MovementPlayer {
 					if(dp.getPositionY() - db.getPositionY() == 1) {
 						dp.setPositionY(dp.getPositionY() + 1);
 					}
-					else if(db.getPositionY() - dp.getPositionY() < dp.getPlayerType().getSpeed().getSpeedY() || db.getPositionY() - dp.getPositionY() == dp.getPlayerType().getSpeed().getSpeedY()){
+					else if(db.getPositionY() - dp.getPositionY() <= dp.getPlayerType().getSpeed().getSpeedY()){
 						dp.setPositionY(db.getPositionY());
 					}
 					else {
@@ -101,21 +104,39 @@ public class MovementPlayer {
 					//////////////////////////////////:
 				}	
 				System.out.println("Coordinates : x = " + dp.getPositionX() + " ; y = " + dp.getPositionY());
-				
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 		}
 	}
 
+	public void runWithBall(Position ball, DataPlayer player, boolean itsUserRound) {
+		int d= 0;
+		Position goal;
+		if (itsUserRound) // in order to know which goal to go...
+		{
+			goal = specPos.getGoal2();
+		}
+		else goal = specPos.getGoal1();
+		 
+		int x = player.getPositionX();
+		int y = player.getPositionY(); //stock old position to know direction and then which side place ball
+		
+		move(goal, player);
+		if ( ( y - player.getPositionY() )>=0 ) // d is to place ball on the good side of player
+		{
+			d = 1;
+		}
+		else 
+		{
+			d = -1;
+		} 
+		ball.setPositionX(player.getPositionX());
+		ball.setPositionY(player.getPositionY()+d);
+	}
+	
 	/*
-	 * Méthod limits will be delimiting the players limitations on the playfield
+	 * Method limits will be delimiting the players limitations on the playfield
 	 * so the player can get out of the field
 	 * @param DataBall db, DataPlayer dp
 	 */
-	
 	public Boolean limits(DataPlayer dp) {
 		
 		if(dp.getPositionX() == BORDERLEFT || dp.getPositionX() < BORDERLEFT) {
@@ -148,5 +169,5 @@ public class MovementPlayer {
 			return true;
 		}
 	}
-	
+
 }

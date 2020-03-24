@@ -3,92 +3,108 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import datafield.Grass;
 import datafield.Position;
+import datafield.SpecialPosition;
 import dataplayer.DataPlayer;
 import datateam.DataTeam;
-import process.scores.Chronometer;
-import process.scores.Score;
-import process.management.CreaTeam;
 import process.movement.Vision;
+import process.movement.MovementPlayer;
 
-public class Match {
+public class Match {	// if singleton : re-chech every variables
 	
 	
-	public Boolean goal, outOfField, falt;
-	public DataTeam userTeam;
-	public DataTeam botTeam;
-	public final int NB_TEAMS = 2;
+	public static Boolean goal, outOfField, falt;
 	
-	public void initiateObjectsForTheMatch(DataTeam userTeam, DataTeam botTeam) throws IOException {
-		
-		// à remplacer par le processus normal de choix d'équipe
-		userTeam = CreaTeam.creaTeam("France");
-		
-		// on récupère les noms de toutes les équipes
-		ArrayList<String> list = RecupTeam.getCountriesNames();
-		int rand = 0;
-		String otherTeamCurrentlyBrazil = "";
-			
-		/*
-		 * while team randomly choosen is user team;
-		 * generate random number <= number of teams
-		 * then use it to collect the name of the team in the list
-		 */
-		do {
-			rand = (int)Math.random() * ( NB_TEAMS );
-			otherTeamCurrentlyBrazil = list.get(rand);
-		} while (otherTeamCurrentlyBrazil.compareTo(userTeam.getTeamName())==0);	
-		botTeam = CreaTeam.creaTeam(otherTeamCurrentlyBrazil);
-	}
-	
-	
-	public void match() { 		
+	/**
+	 * Used in playerBehavior();
+	 * allow one action for each soccer-player
+	 * @param userTeam
+	 * @param botTeam
+	 */
+	public static void matchOneRound(DataTeam userTeam, DataTeam botTeam) { 		
 		
 		Iterator<DataPlayer> itUser;
 		Iterator<DataPlayer> itBot;
 		DataPlayer currentPlayer;
 		Boolean itsUserRound = true;
 		Boolean bothHavePlayed;
-		Vision vision = new Vision();
-		ArrayList<Position>
+		Map positions = new Map();
+		MovementPlayer mp = new MovementPlayer();
+		SpecialPosition specPos = new SpecialPosition();
+		int i;
+		
+		//each round we initialize the list (iterator) of players to check
+		itUser = userTeam.getPlayers().values().iterator();
+		itBot = botTeam.getPlayers().values().iterator();
+		
+		itsUserRound = true;
 
-		while (!goal || !outOfField || !falt) {
+		// While there is nothing to interrupt the match, players are playing
+		// And while both teams have players to deal with:
+		while ((!goal || !outOfField || !falt) && (itUser.hasNext() || itBot.hasNext()) ){
 			
-			//each round we initialize the list (iterator) of players to check
-			itUser = userTeam.getPlayers().values().iterator();
-			itBot = botTeam.getPlayers().values().iterator();
-			itsUserRound = true;
-			
-			// while both teams have players to deal with:
-			while( itUser.hasNext() || itBot.hasNext() ) {
-				
 				bothHavePlayed = false;
+				Position posBall = null;	// singleton ?
 				
 				while (!bothHavePlayed) {
-					if(itsUserRound && itUser.hasNext()) { //careful : the end of the list may be reached,
-						currentPlayer = itUser.next();		// this is why we use hasNext()
+					if(itsUserRound && itUser.hasNext()) { //careful, but the end of the list may not be reached
+						currentPlayer = itUser.next();
 						itsUserRound = false;
+						bothHavePlayed = false;
 					}
 					else {
 						currentPlayer = itBot.next();
 						bothHavePlayed = true;
 					}
 					
-					
-					vision.see(currentPlayer.getPositionX(), currentPlayer.getPositionY());
+					ArrayList<Position> objectsSeen = Vision.see(currentPlayer.getPositionX(), currentPlayer.getPositionY());
 					
 					/**
-					 * this loop is about all players that AREN'T GOALIES.
+					 * for now, players will run after the ball
+					 */
+					for (i=0; i<objectsSeen.size() ; i++) {
+						/**
+						 * if one of the object seen is the ball :
+						 * check if it is close to player = the player owns the ball
+						 * if it is not, player have to run to the ball
+						 */
+						if (objectsSeen.get(i).getClass().getName().contentEquals("databall.DataBall")==true) {
+							
+							posBall = objectsSeen.get(i);
+							
+							/**
+							 * if the player owns the ball, he has to run to the goal.
+							 */
+							if (Vision.areClose(posBall,currentPlayer)) {
+								mp.runWithBall(posBall,currentPlayer, itsUserRound); // replace player AND ball to new destination
+							}
+							else {
+							Grass grass = new Grass(currentPlayer.getPositionX(),currentPlayer.getPositionY());
+					 		mp.move(posBall,currentPlayer); //should be static, modify only the attributes positionning data
+							positions.setElement(grass);
+							positions.setElement(currentPlayer);
+							}
+						}
+					}
+					
+					/**
+					 * to this later
 					 */
 					if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Gardien")!=0) {
-						
+						/**
+						 * this loop is about all players that AREN'T GOALIES.
+						 */
 						} 
 
 					
 				}
 				
-				// vérifier la situation : ballon sorti ? Joueurs en faute ?
-			}
+				// one test possible but the goal should not be considered as one square but an area
+				if (posBall.getPositionX()==specPos.getGoal1().getPositionX() && posBall.getPositionY()==specPos.getGoal1().getPositionY()) 
+				{
+					goal = true;
+				}
 		}
 	}
 	

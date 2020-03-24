@@ -23,8 +23,8 @@ public class Vision {
 		int radiusVision = ConstantPosition.RADIUSVISION;
 		int i=0, j=0, verticalLimit=0;
 		for (i=(-radiusVision); i<=radiusVision ;i++) {
-			if (i==-15 || i==15) verticalLimit=4;			// ideally; replace this part with
-			else if (i==(-14) || i==14) verticalLimit=7;	// trigonometrical calculus
+			if (i==-15 || i==15) verticalLimit=4;
+			else if (i==(-14) || i==14) verticalLimit=7;	
 			else if (i==(-13) || i==13) verticalLimit=9;
 			else if (i==(-12) || i==12) verticalLimit=10;
 			else if (i==(-11) || i==11) verticalLimit=11;
@@ -39,8 +39,25 @@ public class Vision {
 						} 
 					}
 		}
-		return objects;
-		
+		return objects;	
 	}
 	
+	/**
+	 * this position
+	 * @param player
+	 * @param ball
+	 * @return true/false
+	 */
+	public static Boolean areClose(Position a, Position b) {
+		int dx = a.getPositionX()-b.getPositionX();
+		int dy = a.getPositionY()-b.getPositionY();
+		if (dx<=1 && dx>=-1) 
+		{
+			if (dy<=1 && dy>=-1) 
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }
