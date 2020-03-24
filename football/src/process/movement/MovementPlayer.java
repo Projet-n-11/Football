@@ -1,6 +1,7 @@
 package process.movement;
 
 import databall.DataBall;
+import datafield.Position;
 import dataplayer.DataPlayer;
 
 
@@ -18,10 +19,11 @@ public class MovementPlayer {
 	private final int BORDERRIGHT = 84;
 	//private int movX = 0;
 	//private int movY = 0;
-
 	
-	public MovementPlayer(DataBall db, DataPlayer dp) {
-		move(db, dp);
+	
+	
+	public MovementPlayer() {
+
 	}
 	
 	
@@ -33,8 +35,7 @@ public class MovementPlayer {
 		 * 
 		 * @param DataBall db, DataPlayer dp
 		 */
-	
-	public void move(DataBall db, DataPlayer dp) {
+	public void move(Position db, DataPlayer dp) {
 		/*
 		 * Player's conditions so he'll run to the ball's position
 		 * to get it. Only for the x axis.
@@ -47,7 +48,7 @@ public class MovementPlayer {
 						if(dp.getPositionX() - db.getPositionX() == 1) {
 							dp.setPositionX(dp.getPositionX() - 1);
 						}
-						else if(dp.getPositionX() - db.getPositionX() < dp.getPlayerType().getSpeed().getSpeedX() || dp.getPositionX() - db.getPositionX() == dp.getPlayerType().getSpeed().getSpeedX()) {
+						else if(dp.getPositionX() - db.getPositionX() <= dp.getPlayerType().getSpeed().getSpeedX() ) {
 							dp.setPositionX(db.getPositionX());
 						}
 						else {
@@ -60,7 +61,7 @@ public class MovementPlayer {
 						if(dp.getPositionX() - db.getPositionX() == 1) {
 							dp.setPositionX(dp.getPositionX() + 1);
 						}
-						else if(db.getPositionX() - dp.getPositionX() < dp.getPlayerType().getSpeed().getSpeedX() || db.getPositionX() - dp.getPositionX() == dp.getPlayerType().getSpeed().getSpeedX()) {
+						else if(db.getPositionX() - dp.getPositionX() <= dp.getPlayerType().getSpeed().getSpeedX()) {
 							dp.setPositionX(db.getPositionX());
 						}
 						else {
@@ -79,7 +80,7 @@ public class MovementPlayer {
 					if(dp.getPositionY() - db.getPositionY() == 1) {
 						dp.setPositionY(dp.getPositionY() - 1);
 					}
-					else if(dp.getPositionY() - db.getPositionY() < dp.getPlayerType().getSpeed().getSpeedY() || dp.getPositionY() - db.getPositionY() == dp.getPlayerType().getSpeed().getSpeedY()){
+					else if(dp.getPositionY() - db.getPositionY() <= dp.getPlayerType().getSpeed().getSpeedY()){
 						dp.setPositionY(db.getPositionY());
 					}
 					else {
@@ -92,7 +93,7 @@ public class MovementPlayer {
 					if(dp.getPositionY() - db.getPositionY() == 1) {
 						dp.setPositionY(dp.getPositionY() + 1);
 					}
-					else if(db.getPositionY() - dp.getPositionY() < dp.getPlayerType().getSpeed().getSpeedY() || db.getPositionY() - dp.getPositionY() == dp.getPlayerType().getSpeed().getSpeedY()){
+					else if(db.getPositionY() - dp.getPositionY() <= dp.getPlayerType().getSpeed().getSpeedY()){
 						dp.setPositionY(db.getPositionY());
 					}
 					else {
@@ -110,12 +111,29 @@ public class MovementPlayer {
 		}
 	}
 
+	public void runWithBall(DataBall ball, DataPlayer player) {
+		int d= 0;
+		/* 
+		stock position of player
+		move(goal, player);
+		if ( ( stock.positionX() - player.positionY() )>=0 ) 
+		{
+			d = 1;
+		}
+		else 
+		{
+			d = -1;
+		}
+		*/ 
+		ball.setPositionX(player.getPositionX());
+		ball.setPositionY(player.getPositionY()+d);
+	}
+	
 	/*
-	 * Méthod limits will be delimiting the players limitations on the playfield
+	 * Method limits will be delimiting the players limitations on the playfield
 	 * so the player can get out of the field
 	 * @param DataBall db, DataPlayer dp
 	 */
-	
 	public Boolean limits(DataPlayer dp) {
 		
 		if(dp.getPositionX() == BORDERLEFT || dp.getPositionX() < BORDERLEFT) {
@@ -148,5 +166,5 @@ public class MovementPlayer {
 			return true;
 		}
 	}
-	
+
 }
