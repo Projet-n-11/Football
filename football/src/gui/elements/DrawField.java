@@ -89,8 +89,8 @@ public class DrawField extends JPanel {
 		drawPenaltyMarks(g2, fieldLength, fieldWidth);
 		drawPenaltyArches(g2, fieldLength, fieldWidth);
 		//drawSpecialPositions(g4, fieldLength, fieldWidth);
-		drawPlayersTacticsR(g5, fieldLength, fieldWidth);
-		drawPlayersTacticsL(g6, fieldLength, fieldWidth);
+		//drawPlayersTacticsR(g5, fieldLength, fieldWidth);
+		//drawPlayersTacticsL(g6, fieldLength, fieldWidth);
 	}
 	
 	private void drawPenaltyArches(Graphics2D g2, double fieldLength,
@@ -209,5 +209,8 @@ public class DrawField extends JPanel {
 		g5.draw(new Line2D.Double(ConstantTactics.L_RIGHT_FORWARDX343, ConstantTactics.L_RIGHT_FORWARDY343, ConstantTactics.L_RIGHT_FORWARDX343 ,ConstantTactics.L_RIGHT_FORWARDY343));
 		g5.draw(new Line2D.Double(ConstantTactics.L_LEFT_FORWARDX343, ConstantTactics.L_LEFT_FORWARDY343, ConstantTactics.L_LEFT_FORWARDX343 ,ConstantTactics.L_LEFT_FORWARDY343));
 		g5.draw(new Line2D.Double(ConstantTactics.L_MID_FORWARDX343, ConstantTactics.L_MID_FORWARDY343, ConstantTactics.L_MID_FORWARDX343 ,ConstantTactics.L_MID_FORWARDY_235));
+	}
+	
+	private void drawPlayers(Graphics2D gplayers, double fieldLength, double doubleWidth) {
 	}
 }

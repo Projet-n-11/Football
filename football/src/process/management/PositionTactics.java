@@ -24,7 +24,7 @@ public class PositionTactics {
 	private ArrayList<DataPlayer> valuesGoalie = new ArrayList<>();
 	private ArrayList<DataPlayer> valuesMidFielder = new ArrayList<>();
 	
-	public PositionTactics(DataTeam team, Positioning table, Boolean alreadyPlacedLeft) throws IOException {
+	public PositionTactics(DataTeam team, Map table, Boolean alreadyPlacedLeft) throws IOException {
 		//whatIsPlayerType(team.getPlayers()); 
 		determinateTypePlayers(team.getPlayers(), table);
 		placePlayers(team, table, alreadyPlacedLeft);
@@ -46,7 +46,7 @@ public class PositionTactics {
 	 * by determining if they are titular or not
 	 */
 	
-	public void determinateTypePlayers(HashMap<String, DataPlayer> players, Positioning table) throws NoSuchElementException{
+	public void determinateTypePlayers(HashMap<String, DataPlayer> players, Map table) throws NoSuchElementException{
 		ArrayList<DataPlayer> values = new ArrayList<>(players.values());
 		for (DataPlayer dp : values) {
 			if (dp.getPlayerType().getTitularPlayer() == 1) {
@@ -71,14 +71,14 @@ public class PositionTactics {
 	}
 	
 	//This method will be the one which will change the player coordinates and placement into the Array
-	public void setPosition(int positionX, int positionY, DataPlayer dp, Positioning table) {
+	public void setPosition(int positionX, int positionY, DataPlayer dp, Map table) {
 		dp.setPositionX(positionX);
 		dp.setPositionY(positionY);
 		table.setElement(dp);
 	}
 	
 	//placePlayers will regroup each next method placing every player into the field.
-	public void placePlayers(DataTeam dt, Positioning table, Boolean alreadyPlacedLeft) {
+	public void placePlayers(DataTeam dt, Map table, Boolean alreadyPlacedLeft) {
 		placePlayersGoalie(table, alreadyPlacedLeft);
 		placePlayersDefender(dt, table, alreadyPlacedLeft);
 		placePlayersMidFielder(dt, table, alreadyPlacedLeft);
@@ -86,7 +86,7 @@ public class PositionTactics {
 	}
 	
 	//placePlayersGoalie will place the goalie player into the field
-	public void placePlayersGoalie(Positioning table, Boolean alreadyPlacedLeft) {
+	public void placePlayersGoalie(Map table, Boolean alreadyPlacedLeft) {
 		for(DataPlayer dp : valuesGoalie) {
 			if(alreadyPlacedLeft == false) {
 				setPosition(ConstantTactics.L_GOALKEEPERX, ConstantTactics.L_GOALKEEPERY, dp, table);
@@ -98,7 +98,7 @@ public class PositionTactics {
 	}
 	
 	//placePlayersDefender will place each defender into the field following the team's tactics
-	public void placePlayersDefender(DataTeam dt, Positioning table, Boolean alreadyPlacedLeft) {
+	public void placePlayersDefender(DataTeam dt, Map table, Boolean alreadyPlacedLeft) {
 		boolean set1 = false;
 		boolean set2 = false;
 		boolean set3 = false;
@@ -206,7 +206,7 @@ public class PositionTactics {
 	}
 	
 	//placePlayersMidFielder will place each mid fielder into the field following the team's tactics
-	public void placePlayersMidFielder(DataTeam dt, Positioning table, Boolean alreadyPlacedLeft) {
+	public void placePlayersMidFielder(DataTeam dt, Map table, Boolean alreadyPlacedLeft) {
 		boolean set1 = false;
 		boolean set2 = false;
 		boolean set3 = false;
@@ -315,7 +315,7 @@ public class PositionTactics {
 	}
 	
 	//placePlayersForward will place the forward player into the field following the team's tactics
-	public void placePlayersForward(DataTeam dt, Positioning table, Boolean alreadyPlacedLeft) {
+	public void placePlayersForward(DataTeam dt, Map table, Boolean alreadyPlacedLeft) {
 		boolean set1 = false;
 		boolean set2 = false;
 		boolean set3 = false;

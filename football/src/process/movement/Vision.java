@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import datafield.Position;
 import datafield.Grass;
 import process.management.ConstantPosition;
-import process.management.Positioning;
+import process.management.Map;
 
 public class Vision {
 	
-	private static Positioning position;	// singleton !
+	private static Map position;	// singleton !
 	
 	/**
 	 * this function takes in parameters the position of a player and return
