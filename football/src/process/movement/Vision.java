@@ -9,16 +9,16 @@ import process.management.Positioning;
 
 public class Vision {
 	
-	private Positioning position;	// singleton !
+	private static Positioning position;	// singleton !
 	
 	/**
-	 * cette fonction prend en paramètre la position d'un joueur et lui rend une arrayList
-	 * constituée des objets qui l'entourent dans un "rayon" de 15 squares 
+	 * this function takes in parameters the position of a player and return
+	 * an arrayList of all objects around it (radius of 15 squares)
 	 * @param x
 	 * @param y
 	 * @return ArrayList<AbstractPosition> objects
 	 */
-	public ArrayList<Position> testParcourir(int x, int y) {
+	public static ArrayList<Position> see(int x, int y) {
 		ArrayList<Position> objects = new ArrayList<Position>();
 		int radiusVision = ConstantPosition.RADIUSVISION;
 		int i=0, j=0, verticalLimit=0;

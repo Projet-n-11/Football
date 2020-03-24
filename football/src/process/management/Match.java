@@ -1,11 +1,15 @@
 package process.management;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import datafield.Position;
+import dataplayer.DataPlayer;
 import datateam.DataTeam;
 import process.scores.Chronometer;
 import process.scores.Score;
 import process.management.CreaTeam;
+import process.movement.Vision;
 
 public class Match {
 	
@@ -24,8 +28,7 @@ public class Match {
 		ArrayList<String> list = RecupTeam.getCountriesNames();
 		int rand = 0;
 		String otherTeamCurrentlyBrazil = "";
-		
-		
+			
 		/*
 		 * while team randomly choosen is user team;
 		 * generate random number <= number of teams
@@ -34,33 +37,58 @@ public class Match {
 		do {
 			rand = (int)Math.random() * ( NB_TEAMS );
 			otherTeamCurrentlyBrazil = list.get(rand);
-		} while (otherTeamCurrentlyBrazil.compareTo(userTeam.getTeamName())==0);
-		
+		} while (otherTeamCurrentlyBrazil.compareTo(userTeam.getTeamName())==0);	
 		botTeam = CreaTeam.creaTeam(otherTeamCurrentlyBrazil);
 	}
 	
-	public void match() { // à changer de nom pour " run() " ? car c'est un processus à lancer
-									// vérifier l'histoire des thread / runs simultanés, pour ne pas planter le logiciel
+	
+	public void match() { 		
 		
-		
-		
-		int i = 0;
+		Iterator<DataPlayer> itUser;
+		Iterator<DataPlayer> itBot;
+		DataPlayer currentPlayer;
+		Boolean itsUserRound = true;
+		Boolean bothHavePlayed;
+		Vision vision = new Vision();
+		ArrayList<Position>
+
 		while (!goal || !outOfField || !falt) {
 			
-			// les joueurs font une action,	essayer une alternance entre les joueurs de chaque équipe
-			// on balaye les 11 joueurs de l'équipe;
-			for (i=0; i<11; i++) {
-				
-				/**
-				 * this loop is about all players that aren't Goalies.
-				 */
-				/*if (userTeam.getPlayers(i).getPlayerTypeName().compareTo("Gardien")!=0) {
-					} // si c'est un gardien ;*/
-				//userTeam.getPlayers().getPlayer(i);
-				
-			}
+			//each round we initialize the list (iterator) of players to check
+			itUser = userTeam.getPlayers().values().iterator();
+			itBot = botTeam.getPlayers().values().iterator();
+			itsUserRound = true;
 			
-			// vérifier la situation : ballon sorti ? Joueurs en faute ?
+			// while both teams have players to deal with:
+			while( itUser.hasNext() || itBot.hasNext() ) {
+				
+				bothHavePlayed = false;
+				
+				while (!bothHavePlayed) {
+					if(itsUserRound && itUser.hasNext()) { //careful : the end of the list may be reached,
+						currentPlayer = itUser.next();		// this is why we use hasNext()
+						itsUserRound = false;
+					}
+					else {
+						currentPlayer = itBot.next();
+						bothHavePlayed = true;
+					}
+					
+					
+					vision.see(currentPlayer.getPositionX(), currentPlayer.getPositionY());
+					
+					/**
+					 * this loop is about all players that AREN'T GOALIES.
+					 */
+					if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Gardien")!=0) {
+						
+						} 
+
+					
+				}
+				
+				// vérifier la situation : ballon sorti ? Joueurs en faute ?
+			}
 		}
 	}
 	
