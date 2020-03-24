@@ -5,7 +5,7 @@ import datafield.Position;
 public class DataBall extends Position{
 	private final int BALLSIZE = 2;
 	private final String COLOR = "White";
-	private int positionx, positiony;
+	
 	private int speedX, speedY;
 	
 	public DataBall() {
@@ -25,20 +25,7 @@ public class DataBall extends Position{
 	public String getColor() {
 		return COLOR;
 	}
-	
-	public int getPositionX() {
-		return positionx;
-	}
-	
-	public void setPositionX(int positionx) {
-		this.positionx = positionx;
-	}
-	public int getPositionY() {
-		return positiony;
-	}
-	public void setPositionY(int positiony) {
-		this.positiony = positiony;
-	}
+
 	public int getSpeedX() {
 		return speedX;
 	}
@@ -53,7 +40,7 @@ public class DataBall extends Position{
 		this.speedY=speedY;
 	}
 	public String toString() {
-		return "Ball size is : " + BALLSIZE + " and it's color is : " + COLOR + " for the position | x : " + positionx + " ; y =" + positiony;
+		return "Ball size is : " + BALLSIZE + " and it's color is : " + COLOR + " for the position | x : " + getPositionX() + " ; y =" + getPositionY();
 	}
 	
 }

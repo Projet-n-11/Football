@@ -6,7 +6,7 @@ import dataplayer.DataPlayer;
 public class PositionBall {
 
 	public PositionBall(DataBall db, Map table) {
-		placeBallEngagement(db, table);
+		
 	}
 	
 	public void setPositionBall(int positionX, int positionY, DataBall db, Map table) {
@@ -16,7 +16,7 @@ public class PositionBall {
 	}
 	
 	public void placeBallEngagement(DataBall db, Map table) {
-		setPositionBall(ConstantTactics.L_GOALKEEPERX, ConstantTactics.L_GOALKEEPERY, db, table);
+		setPositionBall(ConstantPosition.ENGAGEMENTX, ConstantPosition.ENGAGEMENTY, db, table);
 	}
 	
 }
