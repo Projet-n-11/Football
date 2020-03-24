@@ -1,6 +1,6 @@
 package datafield;
 
-import process.management.ObjectFactory;
+import process.management.SpecialPositionFactory;
 import process.management.ConstantPosition; 
 
 public class SpecialPosition {
@@ -17,17 +17,17 @@ public class SpecialPosition {
 	private SixYard sixYard2;
 	
 	public SpecialPosition() {
-		this.corner1=ObjectFactory.creaCorner(false, ConstantPosition.CORNER1X,ConstantPosition.CORNER1Y);
-		this.corner2 = ObjectFactory.creaCorner(false, ConstantPosition.CORNER2X,ConstantPosition.CORNER2Y);
-		this.corner3 = ObjectFactory.creaCorner(false, ConstantPosition.CORNER3X,ConstantPosition.CORNER3Y);
-		this.corner4 = ObjectFactory.creaCorner(false, ConstantPosition.CORNER4X,ConstantPosition.CORNER4Y);
-		this.goal1 = ObjectFactory.creaGoal(false, ConstantPosition.GOAL1X, ConstantPosition.GOALY1,ConstantPosition.GOALY2);
-		this.goal2 = ObjectFactory.creaGoal(false, ConstantPosition.GOAL2X, ConstantPosition.GOALY1,ConstantPosition.GOALY2);
-		this.engagement = ObjectFactory.creaEngagement(true,ConstantPosition.ENGAGEMENTX , ConstantPosition.ENGAGEMENTY);
-		this.penalty1 = ObjectFactory.creaPenalty(false, ConstantPosition.PENALTY1X, ConstantPosition.PENALTY1Y);
-		this.penalty2 = ObjectFactory.creaPenalty(false, ConstantPosition.PENALTY2X, ConstantPosition.PENALTY2Y);;
-		this.sixYard1 = ObjectFactory.creaSixYard(false, ConstantPosition.SIXYARD1X, ConstantPosition.SIXYARD1Y);
-		this.sixYard2 = ObjectFactory.creaSixYard(false, ConstantPosition.SIXYARD2X, ConstantPosition.SIXYARD2Y);
+		this.corner1=SpecialPositionFactory.creaCorner(false, ConstantPosition.CORNER1X,ConstantPosition.CORNER1Y);
+		this.corner2 = SpecialPositionFactory.creaCorner(false, ConstantPosition.CORNER2X,ConstantPosition.CORNER2Y);
+		this.corner3 = SpecialPositionFactory.creaCorner(false, ConstantPosition.CORNER3X,ConstantPosition.CORNER3Y);
+		this.corner4 = SpecialPositionFactory.creaCorner(false, ConstantPosition.CORNER4X,ConstantPosition.CORNER4Y);
+		this.goal1 = SpecialPositionFactory.creaGoal(false, ConstantPosition.GOAL1X, ConstantPosition.GOALY1,ConstantPosition.GOALY2);
+		this.goal2 = SpecialPositionFactory.creaGoal(false, ConstantPosition.GOAL2X, ConstantPosition.GOALY1,ConstantPosition.GOALY2);
+		this.engagement = SpecialPositionFactory.creaEngagement(true,ConstantPosition.ENGAGEMENTX , ConstantPosition.ENGAGEMENTY);
+		this.penalty1 = SpecialPositionFactory.creaPenalty(false, ConstantPosition.PENALTY1X, ConstantPosition.PENALTY1Y);
+		this.penalty2 = SpecialPositionFactory.creaPenalty(false, ConstantPosition.PENALTY2X, ConstantPosition.PENALTY2Y);;
+		this.sixYard1 = SpecialPositionFactory.creaSixYard(false, ConstantPosition.SIXYARD1X, ConstantPosition.SIXYARD1Y);
+		this.sixYard2 = SpecialPositionFactory.creaSixYard(false, ConstantPosition.SIXYARD2X, ConstantPosition.SIXYARD2Y);
 	}
 
 	public Corner getCorner1() {

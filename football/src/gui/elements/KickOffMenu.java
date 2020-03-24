@@ -109,6 +109,7 @@ public class KickOffMenu extends JPanel {
 
 		public void actionPerformed(ActionEvent e) {
 			
+			panel.removeAll();
 			MatchScreen match = new MatchScreen();
 			panel= match.initLayout();
 			

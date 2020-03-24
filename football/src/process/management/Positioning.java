@@ -15,8 +15,9 @@ import datafield.Grass;
  * @author Aladdine Ben Romdhane
  * 
  */
+
 public class Positioning {
-	private Position[][] position = new Position[ConstantPosition.WIDTH][ConstantPosition.HEIGHT];
+	private Position[][] position = new Position[ConstantPosition.WIDTH+2][ConstantPosition.HEIGHT+2];
 	
 	//The following constructor will initialize each box from the "position" array by inserting grass
 	public Positioning(){

@@ -11,7 +11,7 @@ import datafield.SixYard;
  * @author quitt
  *
  */
-public class ObjectFactory {
+public class SpecialPositionFactory {
 
 	public static Corner creaCorner(boolean isCorner,int positionX,int positionY) {
 		return new Corner(isCorner, positionX, positionY);

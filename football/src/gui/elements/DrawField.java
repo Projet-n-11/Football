@@ -41,8 +41,8 @@ public class DrawField extends JPanel {
 		double height = getHeight();
 		double fieldLength = 120d;
 		double fieldWidth = 90d;
-		double scaleWidth = fieldLength+2;
-		double scaleHeight = fieldWidth+2;
+		double scaleWidth = fieldLength+2.5;
+		double scaleHeight = fieldWidth+2.5;
 		double scale;
 		if((width/height) >= (110d/70d)) {
 			scale = height/scaleHeight;
@@ -76,7 +76,7 @@ public class DrawField extends JPanel {
 		g6.translate(1,1);
 		g6.setColor(Color.BLUE);
 		g6.setStroke(stroke2);
-		//drawGrid(g3, fieldLength, fieldWidth);
+		drawGrid(g3, fieldLength, fieldWidth);
 		drawTouchLines(g2, fieldLength, fieldWidth);
 		drawGoalLines(g2, fieldLength, fieldWidth);
 		drawCenterLine(g2, fieldLength, fieldWidth);
@@ -160,12 +160,12 @@ public class DrawField extends JPanel {
 	}
 	
 	private void drawGrid(Graphics2D g3, double fieldLength, double fieldWidth) {
-		for(int i=0; i<ConstantPosition.HEIGHT; i++) {
-			g3.draw(new Line2D.Double(0, i, ConstantPosition.WIDTH , i));
+		for(int i=-1; i<ConstantPosition.HEIGHT+2; i++) {
+			g3.draw(new Line2D.Double(-1, i, ConstantPosition.WIDTH+1, i));
 		}
 		
-		for(int j=0; j<ConstantPosition.WIDTH; j++) {
-			g3.draw(new Line2D.Double(j, 0, j ,ConstantPosition.HEIGHT));
+		for(int j=-1; j<ConstantPosition.WIDTH+2; j++) {
+			g3.draw(new Line2D.Double(j, -1, j ,ConstantPosition.HEIGHT+1));
 		}
 	}
 	
