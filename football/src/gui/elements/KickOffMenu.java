@@ -111,8 +111,6 @@ public class KickOffMenu extends JPanel {
 			
 			panel.removeAll();
 			MatchScreen match = new MatchScreen();
-			panel= match.initLayout();
-			
 		}
 			
 	}

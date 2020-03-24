@@ -4,11 +4,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class GraphicalField extends JPanel {
+import datateam.DataTeam;
+import process.management.CreaTeam;
+
+public class GraphicalField extends JFrame {
 
 	/*
 	 *  GraphicalField is the frame that will generate the Soccer field, it will
@@ -23,7 +27,7 @@ public class GraphicalField extends JPanel {
 	private int widthx = 1000;
 	private int widthy = 900;
 	
-	public GraphicalField() {
+	public GraphicalField(){
 		initLayout();
 	}
 	
@@ -34,5 +38,9 @@ public class GraphicalField extends JPanel {
 		setBackground(new Color(0, 128, 0));
 		setSize(widthx, widthy);
 		setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+		new GraphicalField();
 	}
 }

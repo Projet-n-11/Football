@@ -18,27 +18,26 @@ public class MatchScreen extends JFrame{
 	private int widthy = 800;
 	
 	public MatchScreen() {
-		JPanel container=initLayout();
+		initLayout();
 	}
 	
-	public JPanel initLayout() {
-		JPanel container = new JPanel();
+	public void initLayout() {
 		GraphicalField field = new GraphicalField();
 		ChronometerGUI chrono = new ChronometerGUI();
         this.setSize(widthx, widthy);
+        
         this.setLayout(new BorderLayout());
         this.add(chrono,BorderLayout.NORTH);
         this.add(field, BorderLayout.CENTER);
         this.add(new JButton("BAS"),BorderLayout.SOUTH);
         this.add(new JButton("DROITE"),BorderLayout.EAST);
         this.add(new JButton("GAUCHE"),BorderLayout.WEST);
-      
         this.setVisible(true);
         this.setLocation(350,150);
-        return container;
 	}
-
+	
 	public static void main(String[] args) {
 		new MatchScreen();
 	}
+
 }

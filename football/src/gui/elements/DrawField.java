@@ -8,24 +8,32 @@ import java.awt.Stroke;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import dataplayer.DataPlayer;
+import datateam.DataTeam;
 import process.management.ConstantPosition;
 import process.management.ConstantTactics;
+import process.management.CreaTeam;
+import process.management.Map;
+import process.management.PositionTactics;
 
 public class DrawField extends JPanel {
 
 	private static final long serialVersionUID = 8187623550893249601L;
 
 	public DrawField() {
-		repaint();
+		//repaint();
 		setBackground(new Color(0, 128, 0));
 		//setBackground(new Color(0, 0, 0));
 	}
 	
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//graphics for the field
 		Graphics2D g2 = (Graphics2D) g.create();
@@ -91,9 +99,10 @@ public class DrawField extends JPanel {
 		//drawSpecialPositions(g4, fieldLength, fieldWidth);
 		//drawPlayersTacticsR(g5, fieldLength, fieldWidth);
 		//drawPlayersTacticsL(g6, fieldLength, fieldWidth);
+		//drawPlayers(g2, fieldLength, fieldWidth, dt);
 	}
 	
-	private void drawPenaltyArches(Graphics2D g2, double fieldLength,
+	public void drawPenaltyArches(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
 		double extent = 2*Math.toDegrees(Math.acos(6d/10d));
 		//double extent = 106.26020470831196d;
@@ -101,30 +110,30 @@ public class DrawField extends JPanel {
 		g2.draw(new Arc2D.Double(12-10, (fieldWidth/2)-10, 20, 20, -extent/2, extent, Arc2D.OPEN));
 	}
 
-	private void drawPenaltyMarks(Graphics2D g2, double fieldLength,
+	public void drawPenaltyMarks(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
 		g2.fill(new Ellipse2D.Double(fieldLength-12-(10d/36), (fieldWidth/2)-(10d/36), (20d/36), (20d/36)));
 		g2.fill(new Ellipse2D.Double(12-(10d/36), (fieldWidth/2)-(10d/36), (20d/36), (20d/36)));
 	}
 
-	private void drawPenaltyAreas(Graphics2D g2, double fieldLength,
+	public void drawPenaltyAreas(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
 		g2.draw(new Rectangle2D.Double(0, (fieldWidth/2)-22, 18, 42));
 		g2.draw(new Rectangle2D.Double(fieldLength-18, (fieldWidth/2)-22, 18, 42));
 	}
 
-	private void drawGoalAreas(Graphics2D g2, double fieldLength,
+	public void drawGoalAreas(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
 		g2.draw(new Rectangle2D.Double(0, (fieldWidth/2)-10, 6, 20));
 		g2.draw(new Rectangle2D.Double(fieldLength-6, (fieldWidth/2)-10, 6, 20));
 	}
 
-	private void drawGoals(Graphics2D g2, double fieldLength, double fieldWidth) {
+	public void drawGoals(Graphics2D g2, double fieldLength, double fieldWidth) {
 		g2.draw(new Rectangle2D.Double(-1, (fieldWidth/2)-4, 1, 8));
 		g2.draw(new Rectangle2D.Double(fieldLength, (fieldWidth/2)-4, 1, 8));
 	}
 
-	private void drawCornerArches(Graphics2D g2, double fieldLength,
+	public void drawCornerArches(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
 		g2.draw(new Arc2D.Double(-1, -1, 2, 2, 270, 90, Arc2D.OPEN));
 		g2.draw(new Arc2D.Double(fieldLength-1, -1, 2, 2, 180, 90, Arc2D.OPEN));
@@ -132,34 +141,34 @@ public class DrawField extends JPanel {
 		g2.draw(new Arc2D.Double(-1, fieldWidth-1, 2, 2, 0, 90, Arc2D.OPEN));
 	}
 
-	private void drawCenterMark(Graphics2D g2, double fieldLength,
+	public void drawCenterMark(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
 		g2.fill(new Ellipse2D.Double((fieldLength/2)-(10d/36), (fieldWidth/2)-(10d/36), (20d/36), (20d/36)));
 	}
 
-	private void drawCenterCircle(Graphics2D g2, double fieldLength,
+	public void drawCenterCircle(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
 		g2.draw(new Ellipse2D.Double((fieldLength/2)-10, (fieldWidth/2)-10, 20, 20));
 	}
 
-	private void drawCenterLine(Graphics2D g2, double fieldLength,
+	public void drawCenterLine(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
 		g2.draw(new Line2D.Double(fieldLength/2, 0, fieldLength/2, fieldWidth));
 	}
 
-	private void drawGoalLines(Graphics2D g2, double fieldLength,
+	public void drawGoalLines(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
 		g2.draw(new Line2D.Double(0, 0, 0, fieldWidth));
 		g2.draw(new Line2D.Double(fieldLength, 0, fieldLength, fieldWidth));
 	}
 
-	private void drawTouchLines(Graphics2D g2, double fieldLength,
+	public void drawTouchLines(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
 		g2.draw(new Line2D.Double(0, 0, fieldLength, 0));
 		g2.draw(new Line2D.Double(0, fieldWidth, fieldLength, fieldWidth));
 	}
 	
-	private void drawGrid(Graphics2D g3, double fieldLength, double fieldWidth) {
+	public void drawGrid(Graphics2D g3, double fieldLength, double fieldWidth) {
 		for(int i=-1; i<ConstantPosition.HEIGHT+2; i++) {
 			g3.draw(new Line2D.Double(-1, i, ConstantPosition.WIDTH+1, i));
 		}
@@ -169,7 +178,7 @@ public class DrawField extends JPanel {
 		}
 	}
 	
-	private void drawSpecialPositions(Graphics2D g4, double fieldLength, double doubleWidth) {
+	public void drawSpecialPositions(Graphics2D g4, double fieldLength, double doubleWidth) {
 		g4.draw(new Line2D.Double(ConstantPosition.CORNER1X, ConstantPosition.CORNER1Y, ConstantPosition.CORNER1X ,ConstantPosition.CORNER1Y));
 		g4.draw(new Line2D.Double(ConstantPosition.CORNER2X, ConstantPosition.CORNER2Y, ConstantPosition.CORNER2X ,ConstantPosition.CORNER2Y));
 		g4.draw(new Line2D.Double(ConstantPosition.CORNER3X, ConstantPosition.CORNER3Y, ConstantPosition.CORNER3X ,ConstantPosition.CORNER3Y));
@@ -183,7 +192,7 @@ public class DrawField extends JPanel {
 		g4.draw(new Line2D.Double(ConstantPosition.GOAL2X, ConstantPosition.GOALY1, ConstantPosition.GOAL2X ,ConstantPosition.GOALY2));
 	}
 	
-	private void drawPlayersTacticsR(Graphics2D g5, double fieldLength, double doubleWidth) {
+	public void drawPlayersTacticsR(Graphics2D g5, double fieldLength, double doubleWidth) {
 		g5.draw(new Line2D.Double(ConstantTactics.R_GOALKEEPERX, ConstantTactics.R_GOALKEEPERY, ConstantTactics.R_GOALKEEPERX ,ConstantTactics.R_GOALKEEPERY));
 		g5.draw(new Line2D.Double(ConstantTactics.R_LEFTCENTERBACKX_424, ConstantTactics.R_LEFTCENTERBACKY_424, ConstantTactics.R_LEFTCENTERBACKX_424 ,ConstantTactics.R_LEFTCENTERBACKY_424));
 		g5.draw(new Line2D.Double(ConstantTactics.R_RIGHTCENTERBACKX_424, ConstantTactics.R_RIGHTCENTERBACKY_424, ConstantTactics.R_RIGHTCENTERBACKX_424 ,ConstantTactics.R_RIGHTCENTERBACKY_424));
@@ -197,7 +206,7 @@ public class DrawField extends JPanel {
 		g5.draw(new Line2D.Double(ConstantTactics.R_RIGHTFOWARDX_424, ConstantTactics.R_RIGHTFOWARDY_424, ConstantTactics.R_RIGHTFOWARDX_424 ,ConstantTactics.R_RIGHTFOWARDY_424));
 	}
 
-	private void drawPlayersTacticsL(Graphics2D g5, double fieldLength, double doubleWidth) {
+	public void drawPlayersTacticsL(Graphics2D g5, double fieldLength, double doubleWidth) {
 		g5.draw(new Line2D.Double(ConstantTactics.L_GOALKEEPERX, ConstantTactics.L_GOALKEEPERY, ConstantTactics.L_GOALKEEPERX ,ConstantTactics.L_GOALKEEPERY));
 		g5.draw(new Line2D.Double(ConstantTactics.L_FRONT_DEFENDERX343, ConstantTactics.L_FRONT_DEFENDERY343, ConstantTactics.L_FRONT_DEFENDERX343 ,ConstantTactics.L_FRONT_DEFENDERY343));
 		g5.draw(new Line2D.Double(ConstantTactics.L_LEFT_DEFENDERX343, ConstantTactics.L_LEFT_DEFENDERY343, ConstantTactics.L_LEFT_DEFENDERX343 ,ConstantTactics.L_LEFT_DEFENDERY343));
@@ -211,6 +220,14 @@ public class DrawField extends JPanel {
 		g5.draw(new Line2D.Double(ConstantTactics.L_MID_FORWARDX343, ConstantTactics.L_MID_FORWARDY343, ConstantTactics.L_MID_FORWARDX343 ,ConstantTactics.L_MID_FORWARDY_235));
 	}
 	
-	private void drawPlayers(Graphics2D gplayers, double fieldLength, double doubleWidth) {
+	public static void drawPlayers(Graphics2D gplayers, double fieldLength, double doubleWidth, DataTeam dt) throws IOException {
+		/*DataTeam dt = CreaTeam.creaTeam("France");
+		Map p = new Map();
+		Boolean alreadyPlacedLeft = false;
+		PositionTactics pt = new PositionTactics(dt, p, alreadyPlacedLeft);*/
+		ArrayList<DataPlayer> values = new ArrayList<>(dt.getPlayers().values());
+		for(DataPlayer player : values) {
+			gplayers.draw(new Line2D.Double(player.getPositionX(), player.getPositionY(), player.getPositionX(), player.getPositionY()));
+		}
 	}
 }

@@ -38,7 +38,6 @@ public class PositionTactics {
 				System.out.println(dp.getPlayerName() + " : " + dp.getPlayerType());
 			}
 		}
-		
 	}
 
 	/*
