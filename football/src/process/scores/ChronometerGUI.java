@@ -18,7 +18,7 @@ public class ChronometerGUI extends JPanel implements Runnable {
 	
 	 //The normal speed is 1000, e.q. one refresh per second (1000 milliseconds).
 	 
-	private static final int CHRONO_SPEED = 1000;
+	private static final int CHRONO_SPEED = 200;
 
 	private static final long serialVersionUID = 1L;
 

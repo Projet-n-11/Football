@@ -39,14 +39,13 @@ public class Match {	// if singleton : re-chech every variables
 		itBot = botTeam.getPlayers().values().iterator();
 		
 		itsUserRound = true;
-
+		bothHavePlayed = false;
+		Position posBall = new Position(ball.getPositionX(), ball.getPositionY());	// singleton ?
 		// While there is nothing to interrupt the match, players are playing
 		// And while both teams have players to deal with:
 		while ((itUser.hasNext() || itBot.hasNext())){
+			bothHavePlayed = false;
 			itsUserRound = true;
-				bothHavePlayed = false;
-				Position posBall = new Position(ball.getPositionX(), ball.getPositionY());	// singleton ?
-				
 				while (!bothHavePlayed) {
 					if(itsUserRound && itUser.hasNext()) { //careful, but the end of the list may not be reached
 						currentPlayer = itUser.next();
@@ -69,7 +68,7 @@ public class Match {	// if singleton : re-chech every variables
 						 * check if it is close to player = the player owns the ball
 						 * if it is not, player have to run to the ball
 						 */
-						if (objectsSeen.get(i).getClass().getName().contentEquals("databall.DataBall")==true) {
+						if (objectsSeen.get(i) instanceof DataBall ) {
 							
 							posBall = objectsSeen.get(i);
 							

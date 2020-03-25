@@ -114,13 +114,15 @@ public class MovementPlayer {
 		{
 			goal = specPos.getGoal2();
 		}
-		else goal = specPos.getGoal1();
+		else{
+			goal = specPos.getGoal1();
+		}
 		 
-		//int x = player.getPositionX();
-		int y = player.getPositionY(); //stock old position to know direction and then which side place ball
+		int x = player.getPositionX();
+		//int y = player.getPositionY(); //stock old position to know direction and then which side place ball
 		
 		move(goal, player);
-		if ( ( y - player.getPositionY() )>=0 ) // d is to place ball on the good side of player
+		if ( ( x - player.getPositionX() )>=0 ) // d is to place ball on the good side of player
 		{
 			d = 1;
 		}
@@ -128,8 +130,8 @@ public class MovementPlayer {
 		{
 			d = -1;
 		} 
-		ball.setPositionX(player.getPositionX());
-		ball.setPositionY(player.getPositionY()+d);
+		ball.setPositionX(player.getPositionX()+d);
+		ball.setPositionY(player.getPositionY());
 	}
 	
 	/*

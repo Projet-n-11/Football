@@ -28,6 +28,7 @@ import process.management.Match;
 import process.management.PositionBall;
 import process.management.PositionTactics;
 import process.movement.MovementBall;
+import process.movement.MovementPlayer;
 
 public class DrawField extends JPanel implements Runnable {
 
@@ -279,12 +280,11 @@ public class DrawField extends JPanel implements Runnable {
 				alreadyPlacedLeft = true;
 				PositionTactics pt2 = new PositionTactics(team2, p, alreadyPlacedLeft);
 				PositionBall pb = new PositionBall(ball, p);
-				Thread.sleep(500);
+				Thread.sleep(250);
 				pb.setPositionBall(ConstantPosition.ENGAGEMENTX + posXinc, ConstantPosition.ENGAGEMENTY, ball, p);
 				MovementBall mb = new MovementBall(ball, p);
-				match.matchOneRound(team, team2, p, ball);
-				//MovementPlayer mp = new MovementPlayer();
-				System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
+				//match.matchOneRound(team, team2, p, ball);
+				//System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
 				this.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();

@@ -3,6 +3,7 @@ package process.movement;
 import java.util.ArrayList;
 
 import datafield.Position;
+import dataplayer.DataPlayer;
 import datafield.Grass;
 import process.management.ConstantPosition;
 import process.management.Map;
@@ -66,10 +67,10 @@ public class Vision {
         int x = ball.getPositionX();
         int y = ball.getPositionY();
         if ( (x+1<122) || (x-1>=0) || (y+1<92) || (y-1>=0) ) {
-            if (position.getElement(x, y+1).getClass().getName().contentEquals("dataplayer.DataPlayer")==true
-                    || position.getElement(x-1, y).getClass().getName().contentEquals("dataplayer.DataPlayer")==true
-                    || position.getElement(x+1, y).getClass().getName().contentEquals("dataplayer.DataPlayer")==true
-                    || position.getElement(x, y-1).getClass().getName().contentEquals("dataplayer.DataPlayer")==true) {
+            if (position.getElement(x, y+1) instanceof DataPlayer
+                    || position.getElement(x-1, y) instanceof DataPlayer
+                    || position.getElement(x+1, y) instanceof DataPlayer
+                    || position.getElement(x, y-1) instanceof DataPlayer) {
                 return true;
             }
         }
