@@ -48,8 +48,9 @@ public class Map {
 		System.setOut(o);
 		for(int x=0; x<ConstantPosition.WIDTH; x++) {
 			for(int y=0; y<ConstantPosition.HEIGHT; y++) {
-				System.out.println(getElement(x, y));
+				System.out.print(getElement(x, y));
 			}
+			System.out.println("");
 		}
 		System.setOut(console);;
 		System.out.println("Done");
