@@ -1,6 +1,10 @@
 package process.management;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import datateam.DataTeam;
 import process.scores.Chronometer;
 import process.scores.Score;
 import process.management.Map;
@@ -10,9 +14,18 @@ public class Engine
 	
 	volatile boolean run_flag = true;
 	Map maps = new Map();
+	DataTeam userTeam;
+	DataTeam botTeam;
+	Match m;
+	Boolean bool;
 	
 	/**
 	 * 0: init
+	 * 1: menu start
+	 * 2: select team
+	 * 3: select strategy
+	 * 4: match
+	 * 5: pause
 	 * 8: bug
 	 * 9: quit
 	 */
@@ -46,36 +59,92 @@ public class Engine
 		while(run_flag) 
 		{
 			
-			if(state == 0) // Init state
+			if(state == 0)  // Init state
 			{  
-				System.out.println("Initialisation_state");
-				boolean tmp_bool = initialisation_function();
-				
-				if(tmp_bool != true) {
-					state = 8;
-				}
+			// INITIALIZE FIRST GRAPHICAL ELEMENTS
+			// SHOW "START" frame
+			// wait for user to click, or thread.sleep(...);
 				state = 1;
-						
 			}
+			
+			
 			else if(state == 1) // menu state
 			{
-				String command = menu();
-				if(command.equals("1")) {
-					System.out.println("Launch a new game");
+			// DISPLAY GRAPHICAL MENU : CHOOSE TEAM / QUIT /... ;
+				menu();
+				
+				String example_choice = "";
+				if(example_choice.equals("2")) {
+					// go choose a team
 					state = 2;
 					
-				}else if(command.equals("9")) {
-					System.out.println("Good bye !!!");
-					state = 9;
-					
+				}else if(example_choice.equals("9")) {
+					// quit
+					state = 9;	
 				}
 				
 			}
-			else if(state == 2) // Game state
-			{
-				display_maps();
-				player_behavior();
+			
+			
+			else if(state == 2) // Choose teams, initialise teams/players
+			{	
+				// initialize both teams
+				if (initialisation_function()==false)
+				{
+					System.out.println("error in state "+state);
+					state = 8; // error state
+				}
+				else
+				{
+					state = 3; // choose strategy and players
+				}				
 			}
+			
+			
+			else if (state == 3) // compose team, select strategy
+			{
+				// select 11 players among all the players available
+				// select strategy
+				// In Both Case We have titular players and one strategy by Default
+				// do not forget a way to go back, to change team -> state = 2
+				state = 4;
+			}
+			
+			else if (state == 4) // game state
+			{
+				display_maps();		// GRAPHICAL DISPLAY
+				player_behavior(); // this method calls class Match
+				// do not forget timer, which pulls state=4 to 6 (or by choice player)
+				// do not forget a pause
+			}
+			
+			
+			else if (state == 5) // pause
+			{
+				String whatDoesPlayerWant = "";
+				if (whatDoesPlayerWant.contentEquals("quit")==true)
+				{
+					state = 9;
+				}
+				if (whatDoesPlayerWant.contentEquals("re_Start")==true)
+				{
+					state = 1;
+				}
+			}
+			
+			
+			else if (state == 6) // end of match
+			{
+				// display statistics
+				
+				Boolean example = true;
+				if (example)
+				{
+					state = 2;
+				}
+			}
+			
+			
 			else if(state == 8) // Error state
 			{
 				System.out.println("Error detected");
@@ -86,8 +155,7 @@ public class Engine
 				System.out.println("Quit");
 				run_flag = false;
 			}
-			
-			
+						
 			Thread.sleep(1000);
 		}
 		
@@ -95,27 +163,12 @@ public class Engine
 	}
 	
 	private void player_behavior() {
-		// TODO Auto-generated method stub
-		
+		m.matchOneRound(userTeam, botTeam);
 	}
 
-	private void display_maps() {
-		System.out.println("GAME iteration");
-		System.out.println("-------------------------");
-		for(int x = 0; x< ConstantPosition.WIDTH;x++) {
-			
-			for(int y = 0; y< ConstantPosition.HEIGHT;y++) {
-				if(maps.getElement(x,y).getClass().getName().equals("datafield.Grass") ) {
-					System.out.print("o");
-				}
-				if(maps.getElement(x,y).getClass().getName().equals("datafield.Goal") ) {
-					System.out.print("-");
-				}
-			}
-			System.out.print("\n");
-		}
-		System.out.println("-------------------------");
-		
+	private void display_maps() 
+	{
+		// the GUI show the actual map
 	}
 
 	/**
@@ -124,8 +177,29 @@ public class Engine
 	 */
 	public boolean initialisation_function() 
 	{
-		System.out.println("Initialisation accomplie !");
-		
+		ArrayList<String> ListOfTeams;
+		try 
+		{
+			ListOfTeams = RecupTeam.getCountriesNames();
+			// CHOOSE THE TEAM FROM ListOfTeams -> teamName
+			String teamName = "";
+			userTeam = CreaTeam.creaTeam(teamName);
+			
+			int rand;
+			String str = "";
+			
+			do {
+				rand = (int)Math.random()*ListOfTeams.size();
+				str = ListOfTeams.get(rand);
+			} while (teamName.contentEquals(str)==true);
+			
+			botTeam = CreaTeam.creaTeam(str);
+			
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
 		return true;
 	}
 	
@@ -138,15 +212,6 @@ public class Engine
 		System.out.println("9. quit");
 
 		return sc.nextLine();
-	}
-	
-	/**
-	 * Non-used !
-	 * @return
-	 */
-	public boolean game() 
-	{
-		return false;
 	}
 	
 	

@@ -22,7 +22,7 @@ public class Match {	// if singleton : re-chech every variables
 	 * @param userTeam
 	 * @param botTeam
 	 */
-	public static void matchOneRound(DataTeam userTeam, DataTeam botTeam) { 		
+	public void matchOneRound(DataTeam userTeam, DataTeam botTeam) { 		
 		
 		Iterator<DataPlayer> itUser;
 		Iterator<DataPlayer> itBot;

@@ -103,7 +103,7 @@ public class MovementPlayer {
 					}
 					//////////////////////////////////:
 				}	
-				System.out.println("Coordinates : x = " + dp.getPositionX() + " ; y = " + dp.getPositionY());
+				// System.out.println("Coordinates : x = " + dp.getPositionX() + " ; y = " + dp.getPositionY());
 		}
 	}
 
