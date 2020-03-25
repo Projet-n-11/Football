@@ -10,7 +10,7 @@ import datateam.DataTeam;
 import process.movement.Vision;
 import process.movement.MovementPlayer;
 
-public class Match {	// if singleton : re-chech every variables
+public class Match {	// if singleton : re-chech every variables 
 	
 	
 	public static Boolean goal, outOfField, falt;
