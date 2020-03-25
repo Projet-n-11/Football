@@ -2,6 +2,7 @@ package process.management;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import databall.DataBall;
 import datafield.Grass;
 import datafield.Position;
 import datafield.SpecialPosition;
@@ -21,7 +22,7 @@ public class Match {	// if singleton : re-chech every variables
 	 * @param userTeam
 	 * @param botTeam
 	 */
-	public void matchOneRound(DataTeam userTeam, DataTeam botTeam, Map positions) { 		
+	public void matchOneRound(DataTeam userTeam, DataTeam botTeam, Map positions, DataBall ball) { 		
 		
 		Iterator<DataPlayer> itUser;
 		Iterator<DataPlayer> itBot;
@@ -41,10 +42,10 @@ public class Match {	// if singleton : re-chech every variables
 
 		// While there is nothing to interrupt the match, players are playing
 		// And while both teams have players to deal with:
-		while ((!goal || !outOfField || !falt) && (itUser.hasNext() || itBot.hasNext()) ){
-			
+		while ((itUser.hasNext() || itBot.hasNext())){
+			itsUserRound = true;
 				bothHavePlayed = false;
-				Position posBall = null;	// singleton ?
+				Position posBall = new Position(ball.getPositionX(), ball.getPositionY());	// singleton ?
 				
 				while (!bothHavePlayed) {
 					if(itsUserRound && itUser.hasNext()) { //careful, but the end of the list may not be reached
@@ -57,7 +58,7 @@ public class Match {	// if singleton : re-chech every variables
 						bothHavePlayed = true;
 					}
 					
-					ArrayList<Position> objectsSeen = Vision.see(currentPlayer.getPositionX(), currentPlayer.getPositionY());
+					ArrayList<Position> objectsSeen = Vision.see(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
 					
 					/**
 					 * for now, players will run after the ball
@@ -76,7 +77,7 @@ public class Match {	// if singleton : re-chech every variables
 							 * TO TEST : we do not allow any player to go to the ball
 							 * if it is already possessed by another player
 							 */
-							if (v.isPossessed(posBall)==true)
+							if (v.isPossessed(posBall, positions)==true)
 							{
 								
 							}

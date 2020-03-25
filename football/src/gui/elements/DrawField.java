@@ -13,6 +13,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JPanel;
 
@@ -23,6 +24,7 @@ import process.management.ConstantPosition;
 import process.management.ConstantTactics;
 import process.management.CreaTeam;
 import process.management.Map;
+import process.management.Match;
 import process.management.PositionBall;
 import process.management.PositionTactics;
 import process.movement.MovementBall;
@@ -87,6 +89,7 @@ public class DrawField extends JPanel implements Runnable {
 		g3.setStroke(stroke);
 		//g4
 		Stroke stroke2 = new BasicStroke(5/4);
+		Stroke stroke3 = new BasicStroke(8/4);
 		g4.scale(scale, scale);
 		g4.translate(1, 1);
 		g4.setColor(Color.RED);
@@ -95,18 +98,18 @@ public class DrawField extends JPanel implements Runnable {
 		g5.scale(scale, scale);
 		g5.translate(1,1);
 		g5.setColor(Color.YELLOW);
-		g5.setStroke(stroke2);
+		g5.setStroke(stroke3);
 		//g6
 		g6.scale(scale, scale);
 		g6.translate(1,1);
 		g6.setColor(Color.BLUE);
-		g6.setStroke(stroke2);
+		g6.setStroke(stroke3);
 		//g7
 		g7.scale(scale, scale);
 		g7.translate(1,1);
 		g7.setColor(Color.BLACK);
 		g7.setStroke(stroke2);
-		drawGrid(g3, fieldLength, fieldWidth);
+		//drawGrid(g3, fieldLength, fieldWidth);
 		drawTouchLines(g2, fieldLength, fieldWidth);
 		drawGoalLines(g2, fieldLength, fieldWidth);
 		drawCenterLine(g2, fieldLength, fieldWidth);
@@ -259,40 +262,36 @@ public class DrawField extends JPanel implements Runnable {
 	}
 	
 	public static void drawBall(Graphics2D gball, double fieldLength, double doubleWidth) {
-		System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
 		gball.draw(new Line2D.Double(ball.getPositionX(), ball.getPositionY(), ball.getPositionX(), ball.getPositionY()));
 	}
 
 	@Override
 	public void run() {
 		boolean paused = false;
-		int posXinc = 0;
-		int posYinc = 0;
+		int posXinc = 2;
+		Match match = new Match();
 		//System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
-		while(paused == false) {
+		while(paused == false){
 			try {
 				boolean alreadyPlacedLeft = false;
 				Map p = new Map();
 				PositionTactics pt = new PositionTactics(team, p, alreadyPlacedLeft);
 				alreadyPlacedLeft = true;
 				PositionTactics pt2 = new PositionTactics(team2, p, alreadyPlacedLeft);
-				//System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
 				PositionBall pb = new PositionBall(ball, p);
-				Thread.sleep(100);
-				pb.setPositionBall(posXinc, posYinc, ball, p);
+				Thread.sleep(500);
+				pb.setPositionBall(ConstantPosition.ENGAGEMENTX + posXinc, ConstantPosition.ENGAGEMENTY, ball, p);
 				MovementBall mb = new MovementBall(ball, p);
+				match.matchOneRound(team, team2, p, ball);
 				//MovementPlayer mp = new MovementPlayer();
 				System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
 				this.repaint();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		posXinc++;
-		posYinc++;
 		}
 	}
 }

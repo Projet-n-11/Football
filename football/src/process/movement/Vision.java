@@ -9,7 +9,6 @@ import process.management.Map;
 
 public class Vision {
 	
-	private static Map position;	// singleton !
 	
 	/**
 	 * this function takes in parameters the position of a player and return
@@ -18,7 +17,7 @@ public class Vision {
 	 * @param y
 	 * @return ArrayList<AbstractPosition> objects
 	 */
-	public static ArrayList<Position> see(int x, int y) {
+	public static ArrayList<Position> see(int x, int y, Map position) {
 		ArrayList<Position> objects = new ArrayList<Position>();
 		int radiusVision = ConstantPosition.RADIUSVISION;
 		int i=0, j=0, verticalLimit=0;
@@ -33,13 +32,15 @@ public class Vision {
 			else if (i==(-7) || i==7) verticalLimit=14;
 			else if (i==(-4) || i==4) verticalLimit=15;
 			
-				for (j=(-verticalLimit); j<=verticalLimit; j++) {
-					if(!(position.getElement(i, j) instanceof Grass)) { 
-						objects.add(position.getElement(i, j));
-						} 
-					}
+			for (j=(-verticalLimit); j<=verticalLimit; j++) {
+                if (!(i<0 || i>122 || j<0 || j>92)) {
+                	if(!(position.getElement(i, j) instanceof Grass)) { 
+                		objects.add(position.getElement(i, j));
+                	}
+                }
+			}
 		}
-		return objects;	
+		return objects;
 	}
 	
 	/**
@@ -61,15 +62,17 @@ public class Vision {
 		return false;
 	}
 	
-	public Boolean isPossessed(Position ball) {
-		int x = ball.getPositionX();
-		int y = ball.getPositionY();
-		if (position.getElement(x, y+1).getClass().getName().contentEquals("dataplayer.DataPlayer")==true
-				|| position.getElement(x-1, y).getClass().getName().contentEquals("dataplayer.DataPlayer")==true
-				|| position.getElement(x+1, y).getClass().getName().contentEquals("dataplayer.DataPlayer")==true
-				|| position.getElement(x, y-1).getClass().getName().contentEquals("dataplayer.DataPlayer")==true) {
-			return true;
-		}
-		return false;
-	}
+	public Boolean isPossessed(Position ball, Map position) {
+        int x = ball.getPositionX();
+        int y = ball.getPositionY();
+        if ( (x+1<122) || (x-1>=0) || (y+1<92) || (y-1>=0) ) {
+            if (position.getElement(x, y+1).getClass().getName().contentEquals("dataplayer.DataPlayer")==true
+                    || position.getElement(x-1, y).getClass().getName().contentEquals("dataplayer.DataPlayer")==true
+                    || position.getElement(x+1, y).getClass().getName().contentEquals("dataplayer.DataPlayer")==true
+                    || position.getElement(x, y-1).getClass().getName().contentEquals("dataplayer.DataPlayer")==true) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
