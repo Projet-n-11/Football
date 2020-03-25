@@ -116,7 +116,7 @@ public class MovementPlayer {
 		}
 		else goal = specPos.getGoal1();
 		 
-		int x = player.getPositionX();
+		//int x = player.getPositionX();
 		int y = player.getPositionY(); //stock old position to know direction and then which side place ball
 		
 		move(goal, player);

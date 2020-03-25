@@ -1,5 +1,4 @@
 package process.management;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -32,6 +31,7 @@ public class Match {	// if singleton : re-chech every variables
 		Map positions = new Map();
 		MovementPlayer mp = new MovementPlayer();
 		SpecialPosition specPos = new SpecialPosition();
+		Vision v = new Vision();
 		int i;
 		
 		//each round we initialize the list (iterator) of players to check
@@ -74,9 +74,18 @@ public class Match {	// if singleton : re-chech every variables
 							posBall = objectsSeen.get(i);
 							
 							/**
+							 * TO TEST : we do not allow any player to go to the ball
+							 * if it is already possessed by another player
+							 */
+							if (v.isPossessed(posBall)==true)
+							{
+								
+							}
+							
+							/**
 							 * if the player owns the ball, he has to run to the goal.
 							 */
-							if (Vision.areClose(posBall,currentPlayer)) {
+							if (v.areClose(posBall,currentPlayer)) {
 								mp.runWithBall(posBall,currentPlayer, itsUserRound); // replace player AND ball to new destination
 							}
 							else {

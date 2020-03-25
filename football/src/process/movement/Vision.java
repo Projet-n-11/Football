@@ -34,7 +34,7 @@ public class Vision {
 			else if (i==(-4) || i==4) verticalLimit=15;
 			
 				for (j=(-verticalLimit); j<=verticalLimit; j++) {
-					if (!(position.getElement(i, j) instanceof Grass)) { 
+					if(!(position.getElement(i, j) instanceof Grass)) { 
 						objects.add(position.getElement(i, j));
 						} 
 					}
@@ -48,7 +48,7 @@ public class Vision {
 	 * @param ball
 	 * @return true/false
 	 */
-	public static Boolean areClose(Position a, Position b) {
+	public Boolean areClose(Position a, Position b) {
 		int dx = a.getPositionX()-b.getPositionX();
 		int dy = a.getPositionY()-b.getPositionY();
 		if (dx<=1 && dx>=-1) 
@@ -57,6 +57,18 @@ public class Vision {
 			{
 				return true;
 			}
+		}
+		return false;
+	}
+	
+	public Boolean isPossessed(Position ball) {
+		int x = ball.getPositionX();
+		int y = ball.getPositionY();
+		if (position.getElement(x, y+1).getClass().getName().contentEquals("dataplayer.DataPlayer")==true
+				|| position.getElement(x-1, y).getClass().getName().contentEquals("dataplayer.DataPlayer")==true
+				|| position.getElement(x+1, y).getClass().getName().contentEquals("dataplayer.DataPlayer")==true
+				|| position.getElement(x, y-1).getClass().getName().contentEquals("dataplayer.DataPlayer")==true) {
+			return true;
 		}
 		return false;
 	}
