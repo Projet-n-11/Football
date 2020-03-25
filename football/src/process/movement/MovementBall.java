@@ -65,7 +65,7 @@ public class MovementBall {
 				System.out.println(e.getMessage());
 			}
 			
-			pb.setPositionBall(db.getPositionX(), ConstantPosition.HEIGHT, db, table);
+			//pb.setPositionBall(db.getPositionX(), ConstantPosition.HEIGHT, db, table);
 		}
 		else if(limitsCornersLeft(db)) {
 			System.out.println("Corner Left");

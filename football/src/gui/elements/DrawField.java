@@ -2,6 +2,7 @@ package gui.elements;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
@@ -15,22 +16,36 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import databall.DataBall;
 import dataplayer.DataPlayer;
 import datateam.DataTeam;
 import process.management.ConstantPosition;
 import process.management.ConstantTactics;
 import process.management.CreaTeam;
 import process.management.Map;
+import process.management.PositionBall;
 import process.management.PositionTactics;
+import process.movement.MovementBall;
 
-public class DrawField extends JPanel {
+public class DrawField extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 8187623550893249601L;
-
-	public DrawField() {
-		//repaint();
+	
+	private DataTeam team, team2;
+	private static DataBall ball;
+	private static ArrayList<DataPlayer> listteam, listteam2;
+	
+	
+	public DrawField(DataTeam team, DataTeam team2, DataBall ball) {
+		this.team = team;
+		listteam = new ArrayList<>(team.getPlayers().values());
+		this.team2 = team2;
+		listteam2 = new ArrayList<>(team2.getPlayers().values());
+		this.ball = ball;
 		setBackground(new Color(0, 128, 0));
-		//setBackground(new Color(0, 0, 0));
+		setBackground(new Color(0, 128, 0));
+		setSize(1920, 1080);
+		setVisible(true);
 	}
 	
 	public void paintComponent(Graphics g){
@@ -41,10 +56,12 @@ public class DrawField extends JPanel {
 		Graphics2D g3 = (Graphics2D) g.create();
 		//graphics for the special positions
 		Graphics2D g4 = (Graphics2D) g.create();
-		//graphics for the right field (tactics)
+		//graphics for right field players (tactics)
 		Graphics2D g5 = (Graphics2D) g.create();
-		//graphics for the left field (tactics)
+		//graphics for left field players (tactics)
 		Graphics2D g6 = (Graphics2D) g.create();
+		//graphics for the ball (tactics)
+		Graphics2D g7 = (Graphics2D) g.create();
 		double width = getWidth();
 		double height = getHeight();
 		double fieldLength = 120d;
@@ -84,6 +101,11 @@ public class DrawField extends JPanel {
 		g6.translate(1,1);
 		g6.setColor(Color.BLUE);
 		g6.setStroke(stroke2);
+		//g7
+		g7.scale(scale, scale);
+		g7.translate(1,1);
+		g7.setColor(Color.BLACK);
+		g7.setStroke(stroke2);
 		drawGrid(g3, fieldLength, fieldWidth);
 		drawTouchLines(g2, fieldLength, fieldWidth);
 		drawGoalLines(g2, fieldLength, fieldWidth);
@@ -99,7 +121,13 @@ public class DrawField extends JPanel {
 		//drawSpecialPositions(g4, fieldLength, fieldWidth);
 		//drawPlayersTacticsR(g5, fieldLength, fieldWidth);
 		//drawPlayersTacticsL(g6, fieldLength, fieldWidth);
-		//drawPlayers(g2, fieldLength, fieldWidth, dt);
+		try {
+			drawPlayers(g6, g5, fieldLength, fieldWidth);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		drawBall(g7, fieldLength, fieldWidth);
 	}
 	
 	public void drawPenaltyArches(Graphics2D g2, double fieldLength,
@@ -220,14 +248,51 @@ public class DrawField extends JPanel {
 		g5.draw(new Line2D.Double(ConstantTactics.L_MID_FORWARDX343, ConstantTactics.L_MID_FORWARDY343, ConstantTactics.L_MID_FORWARDX343 ,ConstantTactics.L_MID_FORWARDY_235));
 	}
 	
-	public static void drawPlayers(Graphics2D gplayers, double fieldLength, double doubleWidth, DataTeam dt) throws IOException {
-		/*DataTeam dt = CreaTeam.creaTeam("France");
-		Map p = new Map();
-		Boolean alreadyPlacedLeft = false;
-		PositionTactics pt = new PositionTactics(dt, p, alreadyPlacedLeft);*/
-		ArrayList<DataPlayer> values = new ArrayList<>(dt.getPlayers().values());
-		for(DataPlayer player : values) {
-			gplayers.draw(new Line2D.Double(player.getPositionX(), player.getPositionY(), player.getPositionX(), player.getPositionY()));
+	public static void drawPlayers(Graphics2D gplayersteam, Graphics2D gplayersteam2, double fieldLength, double doubleWidth) throws IOException {
+		for(DataPlayer playersteam1 : listteam) {
+			gplayersteam.draw(new Line2D.Double(playersteam1.getPositionX(), playersteam1.getPositionY(), playersteam1.getPositionX(), playersteam1.getPositionY()));
+		}
+		
+		for(DataPlayer playersteam2 : listteam2) {
+			gplayersteam2.draw(new Line2D.Double(playersteam2.getPositionX(), playersteam2.getPositionY(), playersteam2.getPositionX(), playersteam2.getPositionY()));
+		}
+	}
+	
+	public static void drawBall(Graphics2D gball, double fieldLength, double doubleWidth) {
+		System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
+		gball.draw(new Line2D.Double(ball.getPositionX(), ball.getPositionY(), ball.getPositionX(), ball.getPositionY()));
+	}
+
+	@Override
+	public void run() {
+		boolean paused = false;
+		int posXinc = 0;
+		int posYinc = 0;
+		//System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
+		while(paused == false) {
+			try {
+				boolean alreadyPlacedLeft = false;
+				Map p = new Map();
+				PositionTactics pt = new PositionTactics(team, p, alreadyPlacedLeft);
+				alreadyPlacedLeft = true;
+				PositionTactics pt2 = new PositionTactics(team2, p, alreadyPlacedLeft);
+				//System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
+				PositionBall pb = new PositionBall(ball, p);
+				Thread.sleep(100);
+				pb.setPositionBall(posXinc, posYinc, ball, p);
+				MovementBall mb = new MovementBall(ball, p);
+				//MovementPlayer mp = new MovementPlayer();
+				System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
+				this.repaint();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		posXinc++;
+		posYinc++;
 		}
 	}
 }

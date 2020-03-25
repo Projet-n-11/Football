@@ -21,14 +21,13 @@ public class Match {	// if singleton : re-chech every variables
 	 * @param userTeam
 	 * @param botTeam
 	 */
-	public void matchOneRound(DataTeam userTeam, DataTeam botTeam) { 		
+	public void matchOneRound(DataTeam userTeam, DataTeam botTeam, Map positions) { 		
 		
 		Iterator<DataPlayer> itUser;
 		Iterator<DataPlayer> itBot;
 		DataPlayer currentPlayer;
 		Boolean itsUserRound = true;
 		Boolean bothHavePlayed;
-		Map positions = new Map();
 		MovementPlayer mp = new MovementPlayer();
 		SpecialPosition specPos = new SpecialPosition();
 		Vision v = new Vision();

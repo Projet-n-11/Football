@@ -4,8 +4,8 @@ import dataplayer.DataPlayer;
 
 public class DataTeam {
 	private String teamName;
-	private HashMap<String, DataPlayer> players;
-	private HashMap<String, DataPlayer> substitute;
+	private volatile HashMap<String, DataPlayer> players;
+	private volatile HashMap<String, DataPlayer> substitute;
 	private String color;
 	private int positiononField;
 	private int[] defaultStrategy;

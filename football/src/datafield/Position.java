@@ -1,7 +1,7 @@
 package datafield;
 
 public class Position{
-	private int posX, posY;
+	private volatile int posX, posY;
 	
 	public Position() {
 		this.posX = 0;
