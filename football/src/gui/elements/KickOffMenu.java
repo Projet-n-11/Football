@@ -11,19 +11,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 
 import databall.DataBall;
@@ -51,7 +55,7 @@ public class KickOffMenu extends JPanel {
 	}
 	
 	public JPanel createKickOff() {
-		try {
+		try{
 			JLabel choice=new JLabel("Choose your team :");
 			JButton startButton = new JButton("Start");
 			JButton returnButton = new JButton("Back to Main Menu");
@@ -65,13 +69,42 @@ public class KickOffMenu extends JPanel {
 			ComboBoxModel<String> modelSFrance= playersSubstituteTeam("France");
 			ComboBoxModel<String> modelSBrazil = playersSubstituteTeam("Brazil");
 			JComboBox<String> mere=new JComboBox(modelMere);
-			
+			ButtonGroup group = new ButtonGroup();
+			JRadioButton  tactics343 = new JRadioButton ("3-4-3");
+			JRadioButton  tactics424 = new JRadioButton ("4-2-4");
+			JRadioButton  tactics235 = new JRadioButton ("2-3-5");
+			JPanel tactics = new JPanel();
+			JLabel tacticsLabel = new JLabel("Select your tactics !");
 			GridBagConstraints gc = new GridBagConstraints();
-	        gc.fill = GridBagConstraints.HORIZONTAL;
+			
+	        gc.fill = GridBagConstraints.CENTER;
 	        gc.insets = new Insets(10, 10, 10, 10);;
 			panel.setLayout(new GridBagLayout());
+			tactics.setLayout(new GridBagLayout());
+			tactics343.setMnemonic(KeyEvent.VK_C); 
+			tactics343.setSelected(true);
+			tactics424.setMnemonic(KeyEvent.VK_C); 
+			tactics424.setSelected(false);
+			tactics235.setMnemonic(KeyEvent.VK_C); 
+			tactics235.setSelected(false);
+			group.add(tactics343);
+			group.add(tactics424);
+			group.add(tactics235);
+			gc.gridx = 0;
+	        gc.gridy = 0;
+			tactics.add(tacticsLabel, gc);
+			gc.gridx = 0;
+	        gc.gridy = 1;
+			tactics.add(tactics343, gc);
+			gc.gridx = 1;
+	        gc.gridy = 1;
+			tactics.add(tactics424, gc);
+			gc.gridx = 2;
+	        gc.gridy = 1;
+			tactics.add(tactics235, gc);
 			jsfilleT.setViewportView(filleT);
 			jsfilleS.setViewportView(filleS);
+			
 			mere.addItemListener(new ItemListener(){
 				public void itemStateChanged(ItemEvent e) {
 					if(mere.getSelectedItem().equals("France")) {
@@ -82,12 +115,23 @@ public class KickOffMenu extends JPanel {
 						filleT.setModel(modelTBrazil);
 						filleS.setModel(modelSBrazil);	
 					}
+					else {
+						String TitularPlayers[] = {"Choose", "Your", "Team", "To", "Get", "Titular", "Players..."};
+						final DefaultComboBoxModel<String> modelTitular = new DefaultComboBoxModel<String>(TitularPlayers);
+						String SubstitutePlayers[] = {"Choose", "Your", "Team", "To", "Get", "Substitute", "Players..."};
+						final DefaultComboBoxModel<String> modelSubstitute = new DefaultComboBoxModel<String>(SubstitutePlayers);
+						filleT.setModel(modelTitular);
+						filleS.setModel(modelSubstitute);
+					}
 				} 
 			});
+			
 			startButton.setSize(200,400);
 			startButton.addActionListener(new ActionStart());
 			returnButton.setSize(200,400);
 			returnButton.addActionListener(new ActionReturn());
+			gc.fill = GridBagConstraints.HORIZONTAL;
+			
 			gc.gridx = 0;
 	        gc.gridy = 0;
 			panel.add(choice, gc);
@@ -112,6 +156,9 @@ public class KickOffMenu extends JPanel {
 			gc.gridx = 0;
 	        gc.gridy = 7;
 			panel.add(startButton, gc);
+			gc.gridx = 2;
+	        gc.gridy = 3;
+			panel.add(tactics, gc);
 		}
 		catch (IOException e1){
 			System.err.println("erreur");
@@ -169,8 +216,10 @@ public class KickOffMenu extends JPanel {
 		DefaultComboBoxModel<String>equipe;
 		
 		ArrayList<String> nameteam= RecupTeam.getCountriesNames();
-		String [] tabName = new String[nameteam.size()];
+		String [] tabName = new String[nameteam.size()+1];
 		int i=0;
+		tabName[i] = "Choose your team...";
+		i++;
 		for(Iterator<String> it= nameteam.iterator(); it.hasNext();) {
 			tabName[i]=it.next();
 			i++;
