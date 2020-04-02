@@ -282,6 +282,16 @@ public class DrawField extends JPanel implements Runnable {
 				Thread.sleep(250);
 				pb.setPositionBall(ConstantPosition.ENGAGEMENTX + posXinc, ConstantPosition.ENGAGEMENTY + posXinc, ball, p);
 				MovementBall mb = new MovementBall(ball, p);
+				MovementPlayer mp = new MovementPlayer();
+				ArrayList<DataPlayer> allPlayersFromTeam1=new ArrayList<>(team.getPlayers().values());
+				ArrayList<DataPlayer> allPlayersFromTeam2=new ArrayList<>(team2.getPlayers().values());
+				ArrayList<DataPlayer> allPlayers = new ArrayList<>();
+				allPlayers.addAll(allPlayersFromTeam1);
+				allPlayers.addAll(allPlayersFromTeam2);
+				for(DataPlayer dp : allPlayers) {
+					mp.runWithBall(ball, dp, true);
+					Thread.sleep(100);
+				}
 				match.matchOneRound(team, team2, p, ball);
 				//System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
 				this.repaint();
