@@ -139,6 +139,7 @@ public class MovementPlayer {
 	 * so the player can get out of the field
 	 * @param DataBall db, DataPlayer dp
 	 */
+	
 	public Boolean limits(DataPlayer dp) {
 		
 		if(dp.getPositionX() == BORDERLEFT || dp.getPositionX() < BORDERLEFT) {

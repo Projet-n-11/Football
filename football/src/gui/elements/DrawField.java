@@ -38,7 +38,6 @@ public class DrawField extends JPanel implements Runnable {
 	private static DataBall ball;
 	private static ArrayList<DataPlayer> listteam, listteam2;
 	
-	
 	public DrawField(DataTeam team, DataTeam team2, DataBall ball) {
 		this.team = team;
 		listteam = new ArrayList<>(team.getPlayers().values());
@@ -269,7 +268,7 @@ public class DrawField extends JPanel implements Runnable {
 	@Override
 	public void run() {
 		boolean paused = false;
-		int posXinc = 2;
+		int posXinc = 1;
 		Match match = new Match();
 		//System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
 		while(paused == false){
@@ -281,9 +280,9 @@ public class DrawField extends JPanel implements Runnable {
 				PositionTactics pt2 = new PositionTactics(team2, p, alreadyPlacedLeft);
 				PositionBall pb = new PositionBall(ball, p);
 				Thread.sleep(250);
-				pb.setPositionBall(ConstantPosition.ENGAGEMENTX + posXinc, ConstantPosition.ENGAGEMENTY, ball, p);
+				pb.setPositionBall(ConstantPosition.ENGAGEMENTX + posXinc, ConstantPosition.ENGAGEMENTY + posXinc, ball, p);
 				MovementBall mb = new MovementBall(ball, p);
-				//match.matchOneRound(team, team2, p, ball);
+				match.matchOneRound(team, team2, p, ball);
 				//System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
 				this.repaint();
 			} catch (InterruptedException e) {

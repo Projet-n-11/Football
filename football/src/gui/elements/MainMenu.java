@@ -2,25 +2,18 @@ package gui.elements;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-
-
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-
-
 import javax.swing.JButton;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
-public class MainMenu extends JFrame {
+public class MainMenu extends JPanel {
 	private JFrame mainFrame;
-	
 	private JLabel simulator;
 	private JButton kickOff;
 	private JButton options;
@@ -28,14 +21,12 @@ public class MainMenu extends JFrame {
 	
 	private JButton leave;
 	
-	public MainMenu() {
+	public MainMenu(){
 		this("Fooball Game");
 	}
 	
 	public MainMenu(String title) {
 		mainFrame=new JFrame();
-		mainFrame.getContentPane().setLayout(new GridLayout(6,1));
-		mainFrame.setSize(1000,500);
 		
 		JPanel jp1=new JPanel();
 		JPanel jp2=new JPanel();
@@ -60,12 +51,12 @@ public class MainMenu extends JFrame {
 		jp2.add(kickOff);
 		
 		options =new JButton("Options");
-		options.setSize(200,400);
+		options.setSize(300,400);
 		options.addActionListener(new ActionOptions());
 		jp3.add(options);
 		
 		credits=new JButton("Credits");
-		credits.setSize(200,400);
+		credits.setSize(300,400);
 		credits.addActionListener(new ActionCredits());
 		jp4.add(credits);
 		
@@ -74,55 +65,36 @@ public class MainMenu extends JFrame {
 		leave.setSize(200,400);
 		jp5.add(leave);
 		
+		mainFrame.getContentPane().setLayout(new GridLayout(6,1));
 		mainFrame.getContentPane().add(jp1);
 		mainFrame.getContentPane().add(jp2);
 		mainFrame.getContentPane().add(jp3);
 		mainFrame.getContentPane().add(jp4);
 		mainFrame.getContentPane().add(jp5);
-
-		initJFrame(mainFrame);
-		
+		mainFrame.setSize(1300,800);
+		mainFrame.setLocation(350,150);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setPreferredSize(null);
+		mainFrame.setVisible(true);
 	}
-	
-	public static void main(String[] args) {
-		new GraphicalPanel();
-	
-	}
-	/*public void paint(Graphics g)
-    {
-        try
-        {
-            Image img=ImageIO.read(new File ("\ressources\icone.jpeg"));
-            g.drawImage(img, 0, 0, 1440, 900, this);
-            ImageLoader Image=new ImageLoader();
-            ImageLoader Image2=new ImageLoader();
-            this.add(Image);
-            this.add(Image2);
-        }
-        catch (Exception e )
-        {
-             
-        }
-    }*/
 
 	public class ActionKickOff implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			mainFrame.getContentPane().removeAll();
 			mainFrame.repaint();
-			mainFrame.setSize(1000,500);
 			KickOffMenu kick=new KickOffMenu();
-			
 			mainFrame.getContentPane().setLayout(new GridLayout(1,1));
 			mainFrame.getContentPane().add(kick.createKickOff());	
-			initJFrame(mainFrame);
+			mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			mainFrame.setPreferredSize(null);
+			mainFrame.setVisible(true);
 		}
-		
-		
 	}
 	
 	public class ActionOptions implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			
+			JOptionPane optionPane=new JOptionPane();
+			optionPane.showMessageDialog(null, "Nothing to see right now...", "Options Menu", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
@@ -131,7 +103,7 @@ public class MainMenu extends JFrame {
 			
 			String message="Produced by : \n ALADDINE BEN ROMDHANE \n LAURA FUSTINONI \n QUITTERIE PILON";
 			JOptionPane optionPane=new JOptionPane();
-			optionPane.showMessageDialog(null, message, "Credits", JOptionPane.INFORMATION_MESSAGE);
+			optionPane.showMessageDialog(null, message, "Credits Menu", JOptionPane.INFORMATION_MESSAGE);
 			
 		}
 	}
@@ -140,22 +112,12 @@ public class MainMenu extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane optionPane =new JOptionPane();
 			
-			int op=optionPane.showConfirmDialog(null, "You sure about that?", "Quit",JOptionPane.YES_NO_OPTION );
+			int op=optionPane.showConfirmDialog(null, "You sure about that?", "Quit",JOptionPane.YES_NO_OPTION);
 			if(op==0) {
 				System.exit(0);
 			}
 		}
 		
-	}
-	
-	
-	private void initJFrame(JFrame frame) {
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		//this.pack();
-		frame.setPreferredSize(null);
-		frame.setVisible(true);
-		frame.setLocation(450,300);
 	}
 	
 	public JFrame getJFrameMainMenu() {

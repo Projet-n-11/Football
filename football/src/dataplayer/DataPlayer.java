@@ -15,21 +15,19 @@ public class DataPlayer extends Position{
 		super();
 		Acceleration a = new Acceleration(10);
 		Precision p = new Precision(5);
-		PlayerForward pf = null;
-		PlayerSpeed ps = new PlayerSpeed(2);
+	//  PlayerSpeed ps = new PlayerSpeed(2);
 		this.playerName = "DefaultPlayer";
 		this.playerNumber = "0";
-		this.playerType = pf;
-		this.playerType.setSpeed(ps);
 		this.playerSuperPower = null;
 		this.team = "DefaultTeam";
 		this.isPhysical = true;
 		this.playerSize = 1;
 		this.colorPlayer = "White";
 	}
-	
-	public DataPlayer(String playerName,String playerNumber,AbstractDataPlayerType playerType,DataSuperPowers playerSuperPower,String team,boolean isPhysical,int playerSize,String colorPlayer,int positionx,int positiony) {
+
+	public DataPlayer(String playerName,String playerNumber,AbstractDataPlayerType playerType, DataSuperPowers playerSuperPower,String team,boolean isPhysical,int playerSize,String colorPlayer,int positionx,int positiony) {
 		super(positionx, positiony);
+		this.playerType = playerType;
 		this.playerName = playerName;
 		this.playerNumber = playerNumber;
 		this.playerType = playerType;

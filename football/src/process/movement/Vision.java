@@ -43,7 +43,6 @@ public class Vision {
 		}
 		return objects;
 	}
-	
 	/**
 	 * this position
 	 * @param player

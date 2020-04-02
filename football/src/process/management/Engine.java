@@ -4,9 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import databall.DataBall;
 import datateam.DataTeam;
-import process.scores.Chronometer;
-import process.scores.Score;
 import process.management.Map;
 
 public class Engine 
@@ -16,6 +15,7 @@ public class Engine
 	Map maps = new Map();
 	DataTeam userTeam;
 	DataTeam botTeam;
+	DataBall ball;
 	Match m;
 	Boolean bool;
 	
@@ -158,12 +158,11 @@ public class Engine
 						
 			Thread.sleep(1000);
 		}
-		
 		return 0;
 	}
 	
 	private void player_behavior() {
-		m.matchOneRound(userTeam, botTeam);
+		m.matchOneRound(userTeam, botTeam, maps, ball);
 	}
 
 	private void display_maps() 

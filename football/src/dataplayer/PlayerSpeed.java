@@ -10,22 +10,25 @@ public class PlayerSpeed {
 	}
 	public PlayerSpeed(int speed) {
 		this.speedX = speed;
-		this.speedY=speed;
+		this.speedY= speed;
 	}
 	
 	public int getSpeedX() {
 		return speedX;
 	}
-
+	
 	public void setSpeedX(int speed) {
-		this.speedX = speedX;
+		this.speedX = speed;
 	}
+	
 	public int getSpeedY() {
 		return speedY;
 	}
+	
 	public void setSpeedY(int speedY) {
 		this.speedY=speedY;
 	}
+	
 	public String toString() {
 		return "Speed :" + speedX;
 	}

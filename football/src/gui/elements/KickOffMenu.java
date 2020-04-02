@@ -1,9 +1,12 @@
 package gui.elements;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -19,16 +22,23 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
+import databall.DataBall;
 import dataplayer.DataPlayer;
 import datateam.DataTeam;
-import gui.elements.MainMenu.ActionOptions;
+import process.management.ConstantPosition;
 import process.management.CreaTeam;
 import process.management.RecupTeam;
 
 public class KickOffMenu extends JPanel {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private JPanel panel;
 	public KickOffMenu() {
@@ -41,88 +51,122 @@ public class KickOffMenu extends JPanel {
 	}
 	
 	public JPanel createKickOff() {
-		
 		try {
-		
-		
-		JLabel choice=new JLabel("Choose your team :");
-		JButton start = new JButton("Start");
-		panel.setLayout(new GridLayout(4,1));
-		panel.add(choice);
-		panel.add(new JLabel(""));
-		
-		GridLayout grid1=new GridLayout(1,2);
-		GridLayout grid2=new GridLayout(1,2);
-		
-				
-		
+			JLabel choice=new JLabel("Choose your team :");
+			JButton startButton = new JButton("Start");
+			JButton returnButton = new JButton("Back to Main Menu");
+			JList<String> filleT =new JList<String>();
+			JScrollPane jsfilleT = new JScrollPane();
+			JList<String> filleS= new JList<String>();
+			JScrollPane jsfilleS = new JScrollPane();
+			ComboBoxModel<String> modelMere = choosingTeams();
+			ComboBoxModel<String> modelTFrance = playersTitularTeam("France");
+			ComboBoxModel<String> modelTBrazil = playersTitularTeam("Brazil");
+			ComboBoxModel<String> modelSFrance= playersSubstituteTeam("France");
+			ComboBoxModel<String> modelSBrazil = playersSubstituteTeam("Brazil");
+			JComboBox<String> mere=new JComboBox(modelMere);
 			
-			ComboBoxModel modelMere = choosingTeams();
-			ComboBoxModel modelTFrance = playersTitularTeam("France");
-			ComboBoxModel modelTBrazil = playersTitularTeam("Brazil");
-			ComboBoxModel modelSFrance= playersSubstituteTeam("France");
-			ComboBoxModel modelSBrazil = playersSubstituteTeam("Brazil");
-			
-			JComboBox mere=new JComboBox(modelMere);
-			JComboBox filleT =new JComboBox();
-			JComboBox filleS= new JComboBox();
+			GridBagConstraints gc = new GridBagConstraints();
+	        gc.fill = GridBagConstraints.HORIZONTAL;
+	        gc.insets = new Insets(10, 10, 10, 10);;
+			panel.setLayout(new GridBagLayout());
+			jsfilleT.setViewportView(filleT);
+			jsfilleS.setViewportView(filleS);
 			mere.addItemListener(new ItemListener(){
 				public void itemStateChanged(ItemEvent e) {
-					
 					if(mere.getSelectedItem().equals("France")) {
-						
 						filleT.setModel(modelTFrance);
 						filleS.setModel(modelSFrance);
-						
 					}
 					else if(mere.getSelectedItem().equals("Brazil")) {
-						
 						filleT.setModel(modelTBrazil);
-						filleS.setModel(modelSBrazil);
-						
+						filleS.setModel(modelSBrazil);	
 					}
 				} 
 			});
-			start.setSize(200,400);
-			start.addActionListener(new ActionStart());
-			
-			panel.add(mere,grid1);
-			panel.add(new JLabel(""),grid1);
-			panel.add(filleT,grid2);
-			panel.add(filleS,grid2);
-			panel.add(start, grid1);
-		
-			
+			startButton.setSize(200,400);
+			startButton.addActionListener(new ActionStart());
+			returnButton.setSize(200,400);
+			returnButton.addActionListener(new ActionReturn());
+			gc.gridx = 0;
+	        gc.gridy = 0;
+			panel.add(choice, gc);
+			gc.gridx = 0;
+	        gc.gridy = 1;
+			panel.add(mere,gc);
+			gc.gridx = 0;
+	        gc.gridy = 2;
+			panel.add(new JLabel("Joueurs Titulaires"), gc);
+			gc.gridx = 0;
+	        gc.gridy = 3;
+			panel.add(jsfilleT, gc);
+			gc.gridx = 0;
+	        gc.gridy = 4;
+			panel.add(new JLabel("Joueurs Remplaçants"), gc);
+			gc.gridx = 0;
+	        gc.gridy = 5;
+			panel.add(jsfilleS, gc);
+			gc.gridx = 0;
+	        gc.gridy = 6;
+			panel.add(returnButton, gc);
+			gc.gridx = 0;
+	        gc.gridy = 7;
+			panel.add(startButton, gc);
 		}
-		catch (IOException e1) {
-			// TODO Auto-generated catch block
+		catch (IOException e1){
 			System.err.println("erreur");
 		}
-			
 		return panel;
-	
+		
 	}
 	
-	
-	
 	public class ActionStart implements ActionListener{
-
 		public void actionPerformed(ActionEvent e) {
-			
 			panel.removeAll();
-			MatchScreen match = new MatchScreen();
+			DataTeam team1 = null;
+			DataTeam team2 = null;
+			try {
+				team1 = CreaTeam.creaTeam("France");
+				team2 = CreaTeam.creaTeam("Brazil");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			DataBall ball = new DataBall(ConstantPosition.ENGAGEMENTX, ConstantPosition.ENGAGEMENTY);
+			MatchScreen match = new MatchScreen(team1, team2, ball);
+			
+			panel.setLayout(new BorderLayout());
+			panel.setSize(1300,800);
+			panel.setLocation(350,150);
+			panel.setVisible(true);
+			panel.add(match);
+			panel.repaint();
 		}
 			
 	}
+	public class ActionReturn implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			MainMenu mm = new MainMenu();
+			
+			panel.setLayout(new BorderLayout());
+			panel.setSize(1300,800);
+			panel.setLocation(350,150);
+			panel.setVisible(true);
+			panel.add(mm);
+			panel.repaint();
+		}
+			
+	}
+	
 	private void initJFrame(JFrame frame) {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.pack();
 		frame.setPreferredSize(null);
 		frame.setVisible(true);
 	}
-	private DefaultComboBoxModel choosingTeams() throws IOException {
+	
+	private DefaultComboBoxModel<String> choosingTeams() throws IOException {
 		
-		DefaultComboBoxModel equipe;
+		DefaultComboBoxModel<String>equipe;
 		
 		ArrayList<String> nameteam= RecupTeam.getCountriesNames();
 		String [] tabName = new String[nameteam.size()];
@@ -133,12 +177,13 @@ public class KickOffMenu extends JPanel {
 		}
 	
 	
-		equipe=new DefaultComboBoxModel(tabName);
+		equipe=new DefaultComboBoxModel<String>(tabName);
 
 		return equipe;
 	}
-	private DefaultComboBoxModel playersSubstituteTeam(String teamName) throws IOException {
-		DefaultComboBoxModel substitute;
+	
+	private DefaultComboBoxModel<String> playersSubstituteTeam(String teamName) throws IOException {
+		DefaultComboBoxModel<String> substitute;
 		String [] tabPlayer=new String[23];
 		DataTeam team= CreaTeam.creaTeam(teamName);
 		HashMap<String,DataPlayer> hm=team.getPlayers();
@@ -152,12 +197,13 @@ public class KickOffMenu extends JPanel {
 				i++;
 			}
 		}
-		substitute=new DefaultComboBoxModel(tabPlayer);
+		substitute=new DefaultComboBoxModel<String>(tabPlayer);
 		
 		return substitute;
 	}
-	private DefaultComboBoxModel playersTitularTeam(String teamName) throws IOException {
-		DefaultComboBoxModel players;
+	
+	private DefaultComboBoxModel<String> playersTitularTeam(String teamName) throws IOException {
+		DefaultComboBoxModel<String> players;
 		String [] tabPlayer=new String[23];
 		DataTeam team= CreaTeam.creaTeam(teamName);
 		HashMap<String,DataPlayer> hm=team.getPlayers();
@@ -171,7 +217,7 @@ public class KickOffMenu extends JPanel {
 				i++;
 			}
 		}
-		players=new DefaultComboBoxModel(tabPlayer);
+		players=new DefaultComboBoxModel<String>(tabPlayer);
 		
 		return players;
 		

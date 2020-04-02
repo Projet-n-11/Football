@@ -88,7 +88,7 @@ public class MovementBall {
 			pb.setPositionBall(ConstantPosition.SIXYARD2X, ConstantPosition.SIXYARD2Y, db, table);
 		}
 		else {
-			System.out.println("no problem with limits");
+			//System.out.println("no problem with limits");
 		}
 	}
 		

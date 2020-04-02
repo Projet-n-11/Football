@@ -7,6 +7,12 @@ public abstract class AbstractDataPlayerType{
 	private String playerTypeName;
 	private int titularPlayer;
 	
+	public AbstractDataPlayerType() {
+		health = new PlayerHealth(100);
+		stress = new PlayerStress(0);
+		speed = new PlayerSpeed(1);
+	}
+	
 	public PlayerHealth getHeath() {
 		return health;
 	}
@@ -22,9 +28,12 @@ public abstract class AbstractDataPlayerType{
 	public PlayerSpeed getSpeed() {
 		return speed;
 	}
-	public void setSpeed(PlayerSpeed speed) {
-		this.speed = speed;
+	
+	public void setSpeed(int speed) {
+		this.speed.setSpeedX(speed);
+		this.speed.setSpeedY(speed);
 	}
+	
 	public int getTitularPlayer() {
 		return titularPlayer;
 	}

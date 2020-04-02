@@ -36,22 +36,17 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 
-public class GraphicalPanel extends JFrame {
+public class MainFrame extends JFrame {
 	
-	
-	/**
-	 * 
-	 */
 	private JFrame mainFrame;
 
-	public GraphicalPanel() {
-		
-			MainMenu menu = new MainMenu();
-			mainFrame= menu.getJFrameMainMenu();
+	public MainFrame() {
+		MainMenu menu = new MainMenu();
+		mainFrame= menu.getJFrameMainMenu();
 	}
 	
 	public static void main(String args[]) {
-		new GraphicalPanel();
+		new MainFrame();
 	}
 
 }

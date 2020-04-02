@@ -13,7 +13,7 @@ import databall.DataBall;
 import datateam.DataTeam;
 import process.scores.ChronometerGUI;
 
-public class MatchScreen extends JFrame implements Runnable{
+public class MatchScreen extends JPanel implements Runnable{
 
 	private static final long serialVersionUID = 2301016752658769684L;
 	private int widthx = 1300;
@@ -27,15 +27,12 @@ public class MatchScreen extends JFrame implements Runnable{
 		GraphicalField field = new GraphicalField(team, team2, ball);
 		ChronometerGUI chrono = new ChronometerGUI();
 		
-        this.setSize(widthx, widthy);
         this.setLayout(new BorderLayout());
         this.add(chrono,BorderLayout.NORTH);
         this.add(field, BorderLayout.CENTER);
         this.add(new JButton("Score des équipes"),BorderLayout.SOUTH);
         this.add(new JButton("joueurs de l'équipe 2"),BorderLayout.EAST);
         this.add(new JButton("joueurs de l'équipe 1"),BorderLayout.WEST);
-        this.setVisible(true);
-        this.setLocation(350,150);
 	}
 
 	@Override
