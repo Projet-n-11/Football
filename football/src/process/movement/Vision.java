@@ -34,9 +34,9 @@ public class Vision {
 			else if (i==(-4) || i==4) verticalLimit=15;
 			
 			for (j=(-verticalLimit); j<=verticalLimit; j++) {
-                if (!(i<0 || i>122 || j<0 || j>92)) {
-                	if(!(position.getElement(i, j) instanceof Grass)) { 
-                		objects.add(position.getElement(i, j));
+                if (!(i+x<0 || i+x>122 || j+y<0 || j+y>92)) {
+                	if(!(position.getElement(i+x, j+y) instanceof Grass)) { 
+                		objects.add(position.getElement(i+x, j+y));
                 	}
                 }
 			}
