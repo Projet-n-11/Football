@@ -13,11 +13,9 @@ import databall.DataBall;
 import datateam.DataTeam;
 import process.scores.ChronometerGUI;
 
-public class MatchScreen extends JPanel implements Runnable{
+public class MatchScreen extends JPanel{
 
 	private static final long serialVersionUID = 2301016752658769684L;
-	private int widthx = 1300;
-	private int widthy = 800;
 	
 	public MatchScreen(DataTeam team, DataTeam team2, DataBall ball) {
 		initLayout(team, team2, ball);
@@ -35,9 +33,4 @@ public class MatchScreen extends JPanel implements Runnable{
         this.add(new JButton("joueurs de l'équipe 1"),BorderLayout.WEST);
 	}
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
 }

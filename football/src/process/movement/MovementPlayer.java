@@ -12,7 +12,7 @@ import dataplayer.DataPlayer;
  * 
  * @author Aladdine Ben Romdhane
  */
-public class MovementPlayer {
+public class MovementPlayer{
 
 	private final int BORDERTOP = 0;
 	private final int BORDERBOTTOM = 48;
@@ -172,5 +172,6 @@ public class MovementPlayer {
 			return true;
 		}
 	}
+
 
 }

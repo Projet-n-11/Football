@@ -3,8 +3,10 @@ package gui.elements;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
@@ -36,13 +38,13 @@ public class DrawField extends JPanel implements Runnable {
 	
 	private DataTeam team, team2;
 	private static DataBall ball;
-	private static ArrayList<DataPlayer> listteam, listteam2;
+	private static ArrayList<DataPlayer> Pteam, IAteam;
 	
 	public DrawField(DataTeam team, DataTeam team2, DataBall ball) {
 		this.team = team;
-		listteam = new ArrayList<>(team.getPlayers().values());
+		Pteam = new ArrayList<>(team.getPlayers().values());
 		this.team2 = team2;
-		listteam2 = new ArrayList<>(team2.getPlayers().values());
+		IAteam = new ArrayList<>(team2.getPlayers().values());
 		this.ball = ball;
 		setBackground(new Color(0, 128, 0));
 		setBackground(new Color(0, 128, 0));
@@ -50,7 +52,7 @@ public class DrawField extends JPanel implements Runnable {
 		setVisible(true);
 	}
 	
-	public void paintComponent(Graphics g){
+	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//graphics for the field
 		Graphics2D g2 = (Graphics2D) g.create();
@@ -223,53 +225,32 @@ public class DrawField extends JPanel implements Runnable {
 		g4.draw(new Line2D.Double(ConstantPosition.GOAL2X, ConstantPosition.GOALY1, ConstantPosition.GOAL2X ,ConstantPosition.GOALY2));
 	}
 	
-	public void drawPlayersTacticsR(Graphics2D g5, double fieldLength, double doubleWidth) {
-		g5.draw(new Line2D.Double(ConstantTactics.R_GOALKEEPERX, ConstantTactics.R_GOALKEEPERY, ConstantTactics.R_GOALKEEPERX ,ConstantTactics.R_GOALKEEPERY));
-		g5.draw(new Line2D.Double(ConstantTactics.R_LEFTCENTERBACKX_424, ConstantTactics.R_LEFTCENTERBACKY_424, ConstantTactics.R_LEFTCENTERBACKX_424 ,ConstantTactics.R_LEFTCENTERBACKY_424));
-		g5.draw(new Line2D.Double(ConstantTactics.R_RIGHTCENTERBACKX_424, ConstantTactics.R_RIGHTCENTERBACKY_424, ConstantTactics.R_RIGHTCENTERBACKX_424 ,ConstantTactics.R_RIGHTCENTERBACKY_424));
-		g5.draw(new Line2D.Double(ConstantTactics.R_LEFTFULLBACKX_424, ConstantTactics.R_LEFTFULLBACKY_424, ConstantTactics.R_LEFTFULLBACKX_424 ,ConstantTactics.R_LEFTFULLBACKY_424));
-		g5.draw(new Line2D.Double(ConstantTactics.R_RIGHTFULLBACKX_424, ConstantTactics.R_RIGHTFULLBACKY_424, ConstantTactics.R_RIGHTFULLBACKX_424 ,ConstantTactics.R_RIGHTFULLBACKY_424));
-		g5.draw(new Line2D.Double(ConstantTactics.R_LEFTHALFBACKX_424, ConstantTactics.R_LEFTHALFBACKY_424, ConstantTactics.R_LEFTHALFBACKX_424 ,ConstantTactics.R_LEFTHALFBACKY_424));
-		g5.draw(new Line2D.Double(ConstantTactics.R_RIGHTHALFBACKX_424, ConstantTactics.R_RIGHTHALFBACKY_424, ConstantTactics.R_RIGHTHALFBACKX_424 ,ConstantTactics.R_RIGHTHALFBACKY_424));
-		g5.draw(new Line2D.Double(ConstantTactics.R_LEFTWINGERX_424, ConstantTactics.R_LEFTWINGERY_424, ConstantTactics.R_LEFTWINGERX_424 ,ConstantTactics.R_LEFTWINGERY_424));
-		g5.draw(new Line2D.Double(ConstantTactics.R_RIGHTWINGERX_424, ConstantTactics.R_RIGHTWINGERY_424, ConstantTactics.R_RIGHTWINGERX_424 ,ConstantTactics.R_RIGHTWINGERY_424));
-		g5.draw(new Line2D.Double(ConstantTactics.R_LEFTFOWARDX_424, ConstantTactics.R_LEFTFOWARDY_424, ConstantTactics.R_LEFTFOWARDX_424 ,ConstantTactics.R_LEFTFOWARDY_424));
-		g5.draw(new Line2D.Double(ConstantTactics.R_RIGHTFOWARDX_424, ConstantTactics.R_RIGHTFOWARDY_424, ConstantTactics.R_RIGHTFOWARDX_424 ,ConstantTactics.R_RIGHTFOWARDY_424));
-	}
-
-	public void drawPlayersTacticsL(Graphics2D g5, double fieldLength, double doubleWidth) {
-		g5.draw(new Line2D.Double(ConstantTactics.L_GOALKEEPERX, ConstantTactics.L_GOALKEEPERY, ConstantTactics.L_GOALKEEPERX ,ConstantTactics.L_GOALKEEPERY));
-		g5.draw(new Line2D.Double(ConstantTactics.L_FRONT_DEFENDERX343, ConstantTactics.L_FRONT_DEFENDERY343, ConstantTactics.L_FRONT_DEFENDERX343 ,ConstantTactics.L_FRONT_DEFENDERY343));
-		g5.draw(new Line2D.Double(ConstantTactics.L_LEFT_DEFENDERX343, ConstantTactics.L_LEFT_DEFENDERY343, ConstantTactics.L_LEFT_DEFENDERX343 ,ConstantTactics.L_LEFT_DEFENDERY343));
-		g5.draw(new Line2D.Double(ConstantTactics.L_RIGHT_DEFENDERX343, ConstantTactics.L_RIGHT_DEFENDERY343, ConstantTactics.L_RIGHT_DEFENDERX343 ,ConstantTactics.L_RIGHT_DEFENDERY343));
-		g5.draw(new Line2D.Double(ConstantTactics.L_LEFT_MIDFIELDERX343, ConstantTactics.L_LEFT_MIDFIELDERY343, ConstantTactics.L_LEFT_MIDFIELDERX343 ,ConstantTactics.L_LEFT_MIDFIELDERY343));
-		g5.draw(new Line2D.Double(ConstantTactics.L_MIDLEFT_MIDFIELDERX343, ConstantTactics.L_MIDLEFT_MIDFIELDERY343, ConstantTactics.L_MIDLEFT_MIDFIELDERX343 ,ConstantTactics.L_MIDLEFT_MIDFIELDERY343));
-		g5.draw(new Line2D.Double(ConstantTactics.L_MIDRIGHT_MIDFIELDERX343, ConstantTactics.L_MIDRIGHT_MIDFIELDERY343, ConstantTactics.L_MIDRIGHT_MIDFIELDERX343 ,ConstantTactics.L_MIDRIGHT_MIDFIELDERY343));
-		g5.draw(new Line2D.Double(ConstantTactics.L_RIGHT_MIDFIELDERX343, ConstantTactics.L_RIGHT_MIDFIELDERY343, ConstantTactics.L_RIGHT_MIDFIELDERX343 ,ConstantTactics.L_RIGHT_MIDFIELDERY343));
-		g5.draw(new Line2D.Double(ConstantTactics.L_RIGHT_FORWARDX343, ConstantTactics.L_RIGHT_FORWARDY343, ConstantTactics.L_RIGHT_FORWARDX343 ,ConstantTactics.L_RIGHT_FORWARDY343));
-		g5.draw(new Line2D.Double(ConstantTactics.L_LEFT_FORWARDX343, ConstantTactics.L_LEFT_FORWARDY343, ConstantTactics.L_LEFT_FORWARDX343 ,ConstantTactics.L_LEFT_FORWARDY343));
-		g5.draw(new Line2D.Double(ConstantTactics.L_MID_FORWARDX343, ConstantTactics.L_MID_FORWARDY343, ConstantTactics.L_MID_FORWARDX343 ,ConstantTactics.L_MID_FORWARDY_235));
-	}
-	
 	public static void drawPlayers(Graphics2D gplayersteam, Graphics2D gplayersteam2, double fieldLength, double doubleWidth) throws IOException {
-		for(DataPlayer playersteam1 : listteam) {
+		Font font = new Font("Serif", Font.PLAIN, 2);
+		gplayersteam.setFont(font);
+		gplayersteam2.setFont(font);
+		for(DataPlayer playersteam1 : Pteam) {
+			gplayersteam.drawString(playersteam1.getPlayerName(), playersteam1.getPositionX()-2, playersteam1.getPositionY()-2);
 			gplayersteam.draw(new Line2D.Double(playersteam1.getPositionX(), playersteam1.getPositionY(), playersteam1.getPositionX(), playersteam1.getPositionY()));
 		}
 		
-		for(DataPlayer playersteam2 : listteam2) {
+		for(DataPlayer playersteam2 : IAteam) {
+			gplayersteam2.drawString(playersteam2.getPlayerName(), playersteam2.getPositionX()-2, playersteam2.getPositionY()-2);
 			gplayersteam2.draw(new Line2D.Double(playersteam2.getPositionX(), playersteam2.getPositionY(), playersteam2.getPositionX(), playersteam2.getPositionY()));
 		}
 	}
 	
 	public static void drawBall(Graphics2D gball, double fieldLength, double doubleWidth) {
-		gball.draw(new Line2D.Double(ball.getPositionX(), ball.getPositionY(), ball.getPositionX(), ball.getPositionY()));
+		gball.draw(new Ellipse2D.Double(ball.getPositionX(), ball.getPositionY(), 0.6, 0.6));
 	}
 
 	@Override
 	public void run() {
 		boolean paused = false;
 		int posXinc = 1;
-		Match match = new Match();
+		ArrayList<DataPlayer> allPlayersFromTeam1=new ArrayList<>(team.getPlayers().values());
+		ArrayList<DataPlayer> allPlayersFromTeam2=new ArrayList<>(team2.getPlayers().values());
+		ArrayList<DataPlayer> allPlayers = new ArrayList<>();
 		//System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
 		while(paused == false){
 			try {
@@ -282,18 +263,9 @@ public class DrawField extends JPanel implements Runnable {
 				Thread.sleep(250);
 				pb.setPositionBall(ConstantPosition.ENGAGEMENTX + posXinc, ConstantPosition.ENGAGEMENTY + posXinc, ball, p);
 				MovementBall mb = new MovementBall(ball, p);
-				MovementPlayer mp = new MovementPlayer();
-				ArrayList<DataPlayer> allPlayersFromTeam1=new ArrayList<>(team.getPlayers().values());
-				ArrayList<DataPlayer> allPlayersFromTeam2=new ArrayList<>(team2.getPlayers().values());
-				ArrayList<DataPlayer> allPlayers = new ArrayList<>();
+				
 				allPlayers.addAll(allPlayersFromTeam1);
 				allPlayers.addAll(allPlayersFromTeam2);
-				for(DataPlayer dp : allPlayers) {
-					mp.runWithBall(ball, dp, true);
-					Thread.sleep(100);
-				}
-				match.matchOneRound(team, team2, p, ball);
-				//System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
 				this.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();

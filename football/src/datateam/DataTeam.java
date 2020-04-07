@@ -65,6 +65,9 @@ public class DataTeam {
 		return defaultStrategy[value];
 	}
 	
+	public String getStrategy() {
+		return "" + defaultStrategy[0] + defaultStrategy[1] + defaultStrategy[2];
+	}
 	public void setDefaultStrategy(int[] newStrategy) {
 		this.defaultStrategy = newStrategy;
 	}

@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 
 
 public class MainMenu extends JPanel {
+	
+	private static final long serialVersionUID = -3358895820336739941L;
 	private JFrame mainFrame;
 	private JLabel simulator;
 	private JButton kickOff;
@@ -27,7 +29,10 @@ public class MainMenu extends JPanel {
 	
 	public MainMenu(String title) {
 		mainFrame=new JFrame();
-		
+		initLayout();
+	}
+
+	public void initLayout() {
 		JPanel jp1=new JPanel();
 		JPanel jp2=new JPanel();
 		JPanel jp3=new JPanel();
@@ -77,7 +82,7 @@ public class MainMenu extends JPanel {
 		mainFrame.setPreferredSize(null);
 		mainFrame.setVisible(true);
 	}
-
+	
 	public class ActionKickOff implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			mainFrame.getContentPane().removeAll();

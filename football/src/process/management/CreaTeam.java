@@ -22,7 +22,7 @@ public class CreaTeam {
 		HashMap<String, DataPlayer> userPlayers = new HashMap<String, DataPlayer>();
 			// associating each line of data for one player, to their name
 			while (i<teamList.getNumberPlayers()) {		
-				userPlayers.put( teamList.getTeamPlayerName(i), PlayerFactory.creaPlayer(teamList, i) );
+				userPlayers.put(teamList.getTeamPlayerName(i), PlayerFactory.creaPlayer(teamList, i) );
 				i++;
 				System.gc();
 			}
