@@ -15,6 +15,10 @@ public class ConstantTactics {
 	public static final int R_GOALKEEPERY = HEIGHT / 2;
 	public static final int L_GOALKEEPERX = INITIAL_POINT + 1;
 	public static final int L_GOALKEEPERY = HEIGHT / 2;
+	public static final int ENGAGEMENT_PLAYER1X = WIDTH/2;
+	public static final int ENGAGEMENT_PLAYER1Y = HEIGHT/2 - 8;
+	public static final int ENGAGEMENT_PLAYER2X = WIDTH/2;
+	public static final int ENGAGEMENT_PLAYER2Y = HEIGHT/2 + 8;
 	
 	/*
 	 * 3 - 4 - 3

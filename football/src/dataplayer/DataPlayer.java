@@ -10,6 +10,7 @@ public class DataPlayer extends Position{
 	private boolean isPhysical;
 	private int playerSize;
 	private String colorPlayer;
+	private boolean haveball;
 	
 	public DataPlayer() {
 		super();
@@ -23,6 +24,7 @@ public class DataPlayer extends Position{
 		this.isPhysical = true;
 		this.playerSize = 1;
 		this.colorPlayer = "White";
+		this.haveball = false;
 	}
 
 	public DataPlayer(String playerName,String playerNumber,AbstractDataPlayerType playerType, DataSuperPowers playerSuperPower,String team,boolean isPhysical,int playerSize,String colorPlayer,int positionx,int positiony) {
@@ -100,6 +102,14 @@ public class DataPlayer extends Position{
 	
 	public void setColorPlayer(String colorPlayer) {
 		this.colorPlayer = colorPlayer;
+	}
+	
+	public boolean getHaveBall() {
+		return haveball;
+	}
+	
+	public void setHaveBall(boolean haveball) {
+		this.haveball = haveball;
 	}
 	
 	public String toString() {
