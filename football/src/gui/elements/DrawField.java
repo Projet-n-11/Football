@@ -33,7 +33,7 @@ import process.movement.MovementBall;
 import process.movement.MovementPlayer;
 import process.movement.Vision;
 
-public class DrawField extends JPanel implements Runnable {
+public class DrawField extends JPanel {
 
 	private static final long serialVersionUID = 8187623550893249601L;
 	
@@ -243,52 +243,5 @@ public class DrawField extends JPanel implements Runnable {
 	
 	public static void drawBall(Graphics2D gball, double fieldLength, double doubleWidth) {
 		gball.draw(new Ellipse2D.Double(ball.getPositionX(), ball.getPositionY(), 0.6, 0.6));
-	}
-
-	@Override
-	public void run() {
-		boolean paused = false;
-		int posXinc = 1;
-		ArrayList<DataPlayer> allPlayersFromTeam1=new ArrayList<>(team.getPlayers().values());
-		ArrayList<DataPlayer> allPlayersFromTeam2=new ArrayList<>(team2.getPlayers().values());
-		ArrayList<DataPlayer> allPlayers = new ArrayList<>();
-		//System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
-		while(paused == false){
-			try {
-				boolean alreadyPlacedLeft = false;
-				Map p = new Map();
-				PositionTactics pt = new PositionTactics(team, p, alreadyPlacedLeft);
-				alreadyPlacedLeft = true;
-				PositionTactics pt2 = new PositionTactics(team2, p, alreadyPlacedLeft);
-				PositionBall pb = new PositionBall(ball, p);
-				Thread.sleep(250);
-				Random random = new Random();
-				pb.setPositionBall(ConstantPosition.ENGAGEMENTX + random.nextInt(30), ConstantPosition.ENGAGEMENTY + random.nextInt(10), ball, p);
-				MovementBall mb = new MovementBall(ball, p);
-				MovementPlayer mp = new MovementPlayer();
-				Match m = new Match();
-				Vision vision = new Vision();
-				allPlayers.addAll(allPlayersFromTeam1);
-				allPlayers.addAll(allPlayersFromTeam2);
-				
-				for(DataPlayer dp: allPlayers) {
-					mp.move(ball, dp);
-					m.matchOneRound(team, team2, p, ball);
-					if(vision.areClose(ball, dp)) {
-						dp.setHaveBall(true);
-					}
-					
-					if(dp.getHaveBall() == true) {
-						System.out.println(dp.toString());
-					}
-				}
-				this.repaint();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		posXinc++;
-		}
 	}
 }

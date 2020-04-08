@@ -6,18 +6,20 @@ import java.util.Scanner;
 
 import databall.DataBall;
 import datateam.DataTeam;
+import gui.elements.MainFrame;
 import process.management.Map;
 
 public class Engine 
 {
 	
-	volatile boolean run_flag = true;
-	Map maps = new Map();
-	DataTeam userTeam;
-	DataTeam botTeam;
-	DataBall ball;
-	Match m;
-	Boolean bool;
+	private volatile boolean run_flag = true;
+	private Map maps = new Map();
+	private DataTeam userTeam;
+	private DataTeam botTeam;
+	private DataBall ball;
+	private Match m;
+	private Boolean bool;
+	private final int TIME_THREAD_SLEEP = 300;
 	
 	/**
 	 * 0: init
@@ -40,8 +42,6 @@ public class Engine
 	
 	public Engine()
 	{
-		
-		
 		try {
 			main_loop();
 		} catch (InterruptedException e) {
@@ -55,19 +55,15 @@ public class Engine
 	 */
 	public int main_loop() throws InterruptedException
 	{
-		
 		while(run_flag) 
 		{
 			
 			if(state == 0)  // Init state
 			{  
-			// INITIALIZE FIRST GRAPHICAL ELEMENTS
-			// SHOW "START" frame
-			// wait for user to click, or thread.sleep(...);
+				MainFrame mf = new MainFrame();
+				Thread.sleep(TIME_THREAD_SLEEP);
 				state = 1;
 			}
-			
-			
 			else if(state == 1) // menu state
 			{
 			// DISPLAY GRAPHICAL MENU : CHOOSE TEAM / QUIT /... ;
@@ -84,8 +80,6 @@ public class Engine
 				}
 				
 			}
-			
-			
 			else if(state == 2) // Choose teams, initialise teams/players
 			{	
 				// initialize both teams

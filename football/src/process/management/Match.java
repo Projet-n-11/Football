@@ -14,7 +14,7 @@ import process.movement.MovementPlayer;
 public class Match {	// if singleton : re-chech every variables 
 	
 	
-	public static Boolean goal, outOfField, falt;
+	public Boolean goal, outOfField, falt;
 	
 	/**
 	 * Used in playerBehavior();
@@ -60,6 +60,12 @@ public class Match {	// if singleton : re-chech every variables
 					
 					ArrayList<Position> objectsSeen = Vision.see(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
 					
+					/*System.out.println("---------------");
+					for(Position pos: objectsSeen) {
+						System.out.println(pos.toString());
+					}
+					System.out.println("---------------");*/
+					
 					/**
 					 * for now, players will run after the ball
 					 */
@@ -77,6 +83,7 @@ public class Match {	// if singleton : re-chech every variables
 							 * TO TEST : we do not allow any player to go to the ball
 							 * if it is already possessed by another player
 							 */
+							
 							if (v.isPossessed(posBall, positions)==true)
 							{
 								

@@ -1,10 +1,19 @@
 package gui.elements;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,55 +37,57 @@ public class MainMenu extends JPanel {
 	}
 	
 	public MainMenu(String title) {
-		mainFrame=new JFrame();
+		mainFrame = new JFrame();
 		initLayout();
 	}
 
 	public void initLayout() {
-		JPanel jp1=new JPanel();
-		JPanel jp2=new JPanel();
-		JPanel jp3=new JPanel();
-		JPanel jp4=new JPanel();
-		JPanel jp5=new JPanel();
+		JPanel simulatorPanel=new JPanel();
+		JPanel kickOffPanel=new JPanel();
+		JPanel optionsPanel=new JPanel();
+		JPanel creditsPanel=new JPanel();
+		JPanel leavePanel=new JPanel();
 	
-		jp1.setLayout(new FlowLayout(FlowLayout.CENTER));
-		jp2.setLayout(new FlowLayout(FlowLayout.CENTER));
-		jp3.setLayout(new FlowLayout(FlowLayout.CENTER));
-		jp4.setLayout(new FlowLayout(FlowLayout.CENTER));
-		jp5.setLayout(new FlowLayout(FlowLayout.CENTER));
+		simulatorPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		kickOffPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		optionsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		creditsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		leavePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 	
 		simulator=new JLabel("FOOTBALL SIMULATOR");
-		simulator.setForeground(Color.RED);
-		jp1.add(simulator);
+		simulator.setFont(new Font("Arial", Font.PLAIN, 40));
+		simulator.setForeground(Color.GREEN);
+		simulatorPanel.add(simulator);
 		
 		kickOff=new JButton("Kick-off");
+		kickOff.setSize(new Dimension(300, 100));
 		kickOff.setMinimumSize(getSize());
 		
 		kickOff.addActionListener(new ActionKickOff());
-		jp2.add(kickOff);
+		kickOffPanel.add(kickOff);
 		
 		options =new JButton("Options");
 		options.setSize(300,400);
 		options.addActionListener(new ActionOptions());
-		jp3.add(options);
+		optionsPanel.add(options);
 		
 		credits=new JButton("Credits");
 		credits.setSize(300,400);
 		credits.addActionListener(new ActionCredits());
-		jp4.add(credits);
+		creditsPanel.add(credits);
 		
 		leave=new JButton("Quit the game");
 		leave.addActionListener(new ActionLeave());
 		leave.setSize(200,400);
-		jp5.add(leave);
+		leavePanel.add(leave);
 		
 		mainFrame.getContentPane().setLayout(new GridLayout(6,1));
-		mainFrame.getContentPane().add(jp1);
-		mainFrame.getContentPane().add(jp2);
-		mainFrame.getContentPane().add(jp3);
-		mainFrame.getContentPane().add(jp4);
-		mainFrame.getContentPane().add(jp5);
-		mainFrame.setSize(1300,800);
+		mainFrame.getContentPane().add(simulatorPanel);
+		mainFrame.getContentPane().add(kickOffPanel);
+		mainFrame.getContentPane().add(optionsPanel);
+		mainFrame.getContentPane().add(creditsPanel);
+		mainFrame.getContentPane().add(leavePanel);
+        mainFrame.setSize(1300,800);
 		mainFrame.setLocation(350,150);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setPreferredSize(null);
@@ -87,7 +98,7 @@ public class MainMenu extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			mainFrame.getContentPane().removeAll();
 			mainFrame.repaint();
-			KickOffMenu kick=new KickOffMenu();
+			KickOffMenu kick = new KickOffMenu();
 			mainFrame.getContentPane().setLayout(new GridLayout(1,1));
 			mainFrame.getContentPane().add(kick.createKickOff());	
 			mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

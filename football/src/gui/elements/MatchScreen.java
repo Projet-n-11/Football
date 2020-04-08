@@ -25,6 +25,9 @@ public class MatchScreen extends JPanel{
 		GraphicalField field = new GraphicalField(team, team2, ball);
 		ChronometerGUI chrono = new ChronometerGUI();
 		
+		Thread matchgui = new Thread(field);
+		matchgui.start();
+		
         this.setLayout(new BorderLayout());
         this.add(chrono,BorderLayout.NORTH);
         this.add(field, BorderLayout.CENTER);
