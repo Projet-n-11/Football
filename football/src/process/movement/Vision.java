@@ -21,19 +21,10 @@ public class Vision {
 	public static ArrayList<Position> see(int x, int y, Map position) {
 		ArrayList<Position> objects = new ArrayList<Position>();
 		int radiusVision = ConstantPosition.RADIUSVISION;
-		int i=0, j=0, verticalLimit=0;
-		for (i=(-radiusVision); i<=radiusVision ;i++) {
-			if (i==-15 || i==15) verticalLimit=4;
-			else if (i==(-14) || i==14) verticalLimit=7;	
-			else if (i==(-13) || i==13) verticalLimit=9;
-			else if (i==(-12) || i==12) verticalLimit=10;
-			else if (i==(-11) || i==11) verticalLimit=11;
-			else if (i==(-10) || i==10) verticalLimit=12;
-			else if (i==(-9) || i==9) verticalLimit=13;
-			else if (i==(-7) || i==7) verticalLimit=14;
-			else if (i==(-4) || i==4) verticalLimit=15;
-			
-			for (j=(-verticalLimit); j<=verticalLimit; j++) {
+		int i=0, j=0; 
+
+		for (i=0; i<=radiusVision; i++) {
+			for (j=0; j<=radiusVision; j++) {
                 if (!(i+x<0 || i+x>120 || j+y<0 || j+y>90)) {
                 	if(!(position.getElement(i+x, j+y) instanceof Grass)) { 
                 		objects.add(position.getElement(i+x, j+y));
