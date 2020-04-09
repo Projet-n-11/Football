@@ -55,7 +55,6 @@ public class Match {	// if singleton : re-chech every variables
 		// And while both teams have players to deal with:
 		while ((itUser.hasNext() || itBot.hasNext())){
 			bothHavePlayed = false;
-			itsUserRound = true;
 			while (!bothHavePlayed) {
 				if(itsUserRound && itUser.hasNext()) { //careful, but the end of the list may not be reached
 					currentPlayer = itUser.next();
@@ -65,6 +64,7 @@ public class Match {	// if singleton : re-chech every variables
 				else {
 					currentPlayer = itBot.next();
 					bothHavePlayed = true;
+					itsUserRound = true;
 				}
 
 				ArrayList<Position> objectsSeen = Vision.see(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);

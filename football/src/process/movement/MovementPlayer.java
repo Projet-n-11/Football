@@ -117,10 +117,10 @@ public class MovementPlayer{
 		int goal;
 		if (itsUserRound) // in order to know which goal to go...
 		{
-			goal = specPos.getGoal2().getPositionX();
+			goal = specPos.getGoal1().getPositionX();
 		}
 		else{
-			goal = specPos.getGoal1().getPositionX();
+			goal = specPos.getGoal2().getPositionX();
 		}
 
 		int x = player.getPositionX();

@@ -7,6 +7,7 @@ import java.util.Iterator;
 import databall.DataBall;
 import dataplayer.DataPlayer;
 import datateam.DataTeam;
+import gui.elements.DrawField;
 import process.management.CreaTeam;
 import process.management.Map;
 import process.management.Match;
@@ -15,8 +16,13 @@ public class TestMatch {
 
 	public static void main(String[] args) throws IOException {
 		
+		
 		DataTeam teamA = CreaTeam.creaTeam("France");
 		DataTeam teamB = CreaTeam.creaTeam("Brazil");
+		
+		//DrawField df = new DrawField(teamA, teamB, );
+		//df.run();
+		/*
 		DataPlayer tmp;
 		
 		Map map = new Map();
@@ -58,6 +64,7 @@ public class TestMatch {
 		// stratégies : 424 et 343
 		
 		map.printAllElementsFromTable();
+		*/
 	}
 
 }
