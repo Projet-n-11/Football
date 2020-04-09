@@ -17,12 +17,12 @@ import datafield.Grass;
  */
 
 public class Map {
-	private Position[][] map = new Position[ConstantPosition.WIDTH+2][ConstantPosition.HEIGHT+2];
+	private Position[][] map = new Position[ConstantPosition.WIDTH+5][ConstantPosition.HEIGHT+5];
 	
 	//The following constructor will initialize each box from the "position" array by inserting grass
 	public Map(){
-		for(int x=0; x<ConstantPosition.WIDTH; x++) {
-			for(int y=0; y<ConstantPosition.HEIGHT; y++) {
+		for(int x=0; x<ConstantPosition.WIDTH+5; x++) {
+			for(int y=0; y<ConstantPosition.HEIGHT+5; y++) {
 				Grass grass = new Grass(x, y);
 				grass.setPositionX(x);
 				grass.setPositionY(y);

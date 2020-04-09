@@ -15,6 +15,7 @@ import databall.DataBall;
 import dataplayer.DataPlayer;
 import datateam.DataTeam;
 import process.management.ConstantPosition;
+import process.management.ConstantValues;
 import process.management.CreaTeam;
 import process.management.Map;
 import process.management.Match;
@@ -22,6 +23,7 @@ import process.management.PositionBall;
 import process.management.PositionTactics;
 import process.movement.MovementBall;
 import process.movement.MovementPlayer;
+import process.scores.Score;
 
 public class GraphicalField extends JPanel implements Runnable{
 
@@ -39,11 +41,14 @@ public class GraphicalField extends JPanel implements Runnable{
 	private DataTeam team, team2;
 	private DataBall ball;
 	private DrawField df;
+	private Score score;
+	private static final int GAME_SPEED = ConstantValues.GAME_SPEED;
 	
-	public GraphicalField(DataTeam team, DataTeam team2, DataBall ball){
+	public GraphicalField(DataTeam team, DataTeam team2, DataBall ball, Score score){
 		this.team = team;
 		this.team2 = team2;
 		this.ball = ball;
+		this.score = score;
 		initLayout(this.team, this.team2, ball);
 	}
 	
@@ -59,40 +64,32 @@ public class GraphicalField extends JPanel implements Runnable{
 	@Override
 	public void run() {
 		boolean paused = false;
-		int posXinc = 1;
+		boolean keepFirstTrack = true;
 		ArrayList<DataPlayer> allPlayersFromTeam1=new ArrayList<>(team.getPlayers().values());
 		ArrayList<DataPlayer> allPlayersFromTeam2=new ArrayList<>(team2.getPlayers().values());
 		ArrayList<DataPlayer> allPlayers = new ArrayList<>();
 		boolean alreadyPlacedLeft = false;
-		Map p = new Map();
-		try {
-			PositionTactics pt = new PositionTactics(team, p, alreadyPlacedLeft);
-			alreadyPlacedLeft = true;
-			PositionTactics pt2 = new PositionTactics(team2, p, alreadyPlacedLeft);
-			
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		PositionBall pb = new PositionBall(ball, p);
+		Map field = new Map();
+		PositionBall pb = new PositionBall(ball, field);
 		
-		MovementBall mb = new MovementBall(ball, p);
-		Match m = new Match();				
-		
+		Match m = new Match(team, team2, field, ball);				
+		PositionTactics pt = new PositionTactics(team, field, alreadyPlacedLeft);
+		pt.placePlayers(team, field, alreadyPlacedLeft);
+		alreadyPlacedLeft = true;
+		PositionTactics pt2 = new PositionTactics(team2, field, alreadyPlacedLeft);
+		pt2.placePlayers(team, field, alreadyPlacedLeft);
+		alreadyPlacedLeft = false;
+		MovementBall mb = new MovementBall(ball, field, score, pt, pt2, team, team2);
 		while(paused == false){
 			try {
-				//allPlayers.removeAll(allPlayers);
-				//System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
-				//allPlayers.addAll(allPlayersFromTeam1);
-				//allPlayers.addAll(allPlayersFromTeam2);
-				m.matchOneRound(team, team2, p, ball);
-				pb.setPositionBall(ball.getPositionX(), ball.getPositionY(), ball, p);
+				mb.move(ball, pb, field, score, pt, pt2, team, team2);
+				m.matchOneRound();
+				pb.setPositionBall(ball.getPositionX(), ball.getPositionY(), ball, field);
 				this.repaint();
-				Thread.sleep(250);
+				Thread.sleep(GAME_SPEED);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		posXinc++;
 		}
 	}
 }

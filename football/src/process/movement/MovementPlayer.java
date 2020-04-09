@@ -2,6 +2,7 @@ package process.movement;
 
 import java.util.Random;
 
+import databall.DataBall;
 import datafield.Position;
 import datafield.SpecialPosition;
 import dataplayer.DataPlayer;
@@ -112,7 +113,7 @@ public class MovementPlayer{
 	}
 
 	public void runWithBall(Position ball, DataPlayer player, boolean itsUserRound) {
-		int d= 0;
+		int d = 0;
 		int goal;
 		if (itsUserRound) // in order to know which goal to go...
 		{
@@ -129,11 +130,11 @@ public class MovementPlayer{
 
 		if ( ( x - player.getPositionX() )>=0 ) // d is to place ball on the good side of player
 		{
-			d = 1;
+			d = +5;
 		}
 		else 
 		{
-			d = -1;
+			d = -5;
 		} 
 		ball.setPositionX(player.getPositionX()+d);
 		ball.setPositionY(player.getPositionY());
@@ -150,7 +151,7 @@ public class MovementPlayer{
 					player.setPositionX(player.getPositionX() - 1);
 				}
 				else if(player.getPositionX() - goalx <= player.getPlayerType().getSpeed().getSpeedX() ) {
-					player.setPositionX(goalx+1);
+					player.setPositionX(goalx);
 				}
 				else {
 					player.setPositionX(player.getPositionX() - player.getPlayerType().getSpeed().getSpeedX());
@@ -191,6 +192,32 @@ public class MovementPlayer{
 				}
 			}
 		}
+	}
+	
+	public void passBalltoPal(DataPlayer player, DataPlayer player2, DataBall ball) {
+		Position posPlayer = new Position(player.getPositionX(), player.getPositionY());
+		Position posPlayer2 = new Position(player2.getPositionX(), player2.getPositionY());
+		int deltaX = 0;
+		int deltaY = 0;
+		if(posPlayer.getPositionX() > posPlayer2.getPositionX()) {
+			deltaX = posPlayer.getPositionX() - posPlayer2.getPositionX();
+		}
+		else if (posPlayer.getPositionX() < posPlayer2.getPositionX()){
+			deltaX = posPlayer2.getPositionX() - posPlayer.getPositionX();
+		}
+		
+		if(posPlayer.getPositionY() > posPlayer2.getPositionY()) {
+			deltaY = posPlayer.getPositionY() - posPlayer2.getPositionY();
+		}
+		else if (posPlayer.getPositionX() < posPlayer2.getPositionX()){
+			deltaY = posPlayer2.getPositionY() - posPlayer.getPositionY();
+		}
+		
+		int speed_towards_palX = deltaX/4;
+		int speed_towards_palY = deltaY/4;
+		
+		ball.setSpeedX(speed_towards_palX);
+		ball.setSpeedY(speed_towards_palY);
 	}
 	
 	/*

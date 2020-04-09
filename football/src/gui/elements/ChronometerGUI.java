@@ -1,9 +1,13 @@
-package process.scores;
+package gui.elements;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import process.management.ConstantValues;
+import process.scores.Chronometer;
+import process.scores.CyclicCounter;
 
 /**
  * Main GUI class for chronometer.
@@ -18,7 +22,7 @@ public class ChronometerGUI extends JPanel implements Runnable {
 	
 	 //The normal speed is 1000, e.q. one refresh per second (1000 milliseconds).
 	 
-	private static final int CHRONO_SPEED = 200;
+	private static final int CHRONO_SPEED = ConstantValues.GAME_SPEED;
 
 	private static final long serialVersionUID = 1L;
 
@@ -83,6 +87,9 @@ public class ChronometerGUI extends JPanel implements Runnable {
 	
 	public void run() {
 		while (!stop) {
+			if(chronometer.getMinute().getValue() == 90) {
+				stop = true;
+			}
 			try {
 				Thread.sleep(CHRONO_SPEED);
 			} catch (InterruptedException e) {

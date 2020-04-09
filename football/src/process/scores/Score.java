@@ -47,7 +47,6 @@ public class Score {
 	
 	public int incrementScore(int score) {
 		return score++;
-		
 	}
 	
 }

@@ -24,20 +24,8 @@ public class PositionTactics {
 	private ArrayList<DataPlayer> valuesGoalie = new ArrayList<>();
 	private ArrayList<DataPlayer> valuesMidFielder = new ArrayList<>();
 	
-	public PositionTactics(DataTeam team, Map table, Boolean alreadyPlacedLeft) throws IOException {
-		//whatIsPlayerType(team.getPlayers()); 
+	public PositionTactics(DataTeam team, Map table, Boolean alreadyPlacedLeft){
 		determinateTypePlayers(team.getPlayers(), table);
-		placePlayers(team, table, alreadyPlacedLeft);
-	}
-
-	//This method consist of printing each team's player role
-	public void whatIsPlayerType(HashMap<String, DataPlayer> players) {
-		ArrayList<DataPlayer> values = new ArrayList<>(players.values());
-		for (DataPlayer dp : values) {
-			if (dp.getPlayerType().getTitularPlayer() == 1) {
-				System.out.println(dp.getPlayerName() + " : " + dp.getPlayerType());
-			}
-		}
 	}
 
 	/*
