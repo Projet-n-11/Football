@@ -19,11 +19,8 @@ public class MovementBall {
 	public MovementBall(DataBall db, Map table){
 		PositionBall pb;
 		pb=new PositionBall(db, table);
-		
 		move(db,pb,table);
-		
-		
-		
+
 	}
 	
 	public void move(DataBall db, PositionBall pb, Map table) {

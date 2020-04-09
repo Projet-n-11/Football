@@ -93,9 +93,11 @@ public class Match {	// if singleton : re-chech every variables
 							 * if the player owns the ball, he has to run to the goal.
 							 */
 							if (v.areClose(posBall,currentPlayer)) {
+								currentPlayer.setHaveBall(true);
 								mp.runWithBall(posBall,currentPlayer, itsUserRound); // replace player AND ball to new destination
 							}
 							else {
+							currentPlayer.setHaveBall(false);
 							Grass grass = new Grass(currentPlayer.getPositionX(),currentPlayer.getPositionY());
 					 		mp.move(posBall,currentPlayer); //should be static, modify only the attributes positionning data
 							positions.setElement(grass);

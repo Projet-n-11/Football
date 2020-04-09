@@ -1,5 +1,7 @@
 package datafield;
 
+import process.management.ConstantPosition;
+
 public class Position{
 	private volatile int posX, posY;
 	

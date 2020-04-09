@@ -9,8 +9,7 @@ import datateam.DataTeam;
 import gui.elements.MainFrame;
 import process.management.Map;
 
-public class Engine 
-{
+public class Engine {
 	
 	private volatile boolean run_flag = true;
 	private Map maps = new Map();
@@ -60,8 +59,8 @@ public class Engine
 			
 			if(state == 0)  // Init state
 			{  
-				MainFrame mf = new MainFrame();
-				Thread.sleep(TIME_THREAD_SLEEP);
+				//MainFrame mf = new MainFrame();
+				//Thread.sleep(TIME_THREAD_SLEEP);
 				state = 1;
 			}
 			else if(state == 1) // menu state

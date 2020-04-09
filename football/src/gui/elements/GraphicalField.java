@@ -14,12 +14,14 @@ import javax.swing.JPanel;
 import databall.DataBall;
 import dataplayer.DataPlayer;
 import datateam.DataTeam;
+import process.management.ConstantPosition;
 import process.management.CreaTeam;
 import process.management.Map;
 import process.management.Match;
 import process.management.PositionBall;
 import process.management.PositionTactics;
 import process.movement.MovementBall;
+import process.movement.MovementPlayer;
 
 public class GraphicalField extends JPanel implements Runnable{
 
@@ -61,26 +63,33 @@ public class GraphicalField extends JPanel implements Runnable{
 		ArrayList<DataPlayer> allPlayersFromTeam1=new ArrayList<>(team.getPlayers().values());
 		ArrayList<DataPlayer> allPlayersFromTeam2=new ArrayList<>(team2.getPlayers().values());
 		ArrayList<DataPlayer> allPlayers = new ArrayList<>();
+		boolean alreadyPlacedLeft = false;
+		Map p = new Map();
+		try {
+			PositionTactics pt = new PositionTactics(team, p, alreadyPlacedLeft);
+			alreadyPlacedLeft = true;
+			PositionTactics pt2 = new PositionTactics(team2, p, alreadyPlacedLeft);
+			
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		PositionBall pb = new PositionBall(ball, p);
+		
+		MovementBall mb = new MovementBall(ball, p);
+		Match m = new Match();				
+		
 		while(paused == false){
-			try {		
+			try {
+				//allPlayers.removeAll(allPlayers);
 				//System.out.println(ball.getPositionX() + " : " + ball.getPositionY());
-				boolean alreadyPlacedLeft = false;
-				Map p = new Map();
-				PositionTactics pt = new PositionTactics(team, p, alreadyPlacedLeft);
-				alreadyPlacedLeft = true;
-				PositionTactics pt2 = new PositionTactics(team2, p, alreadyPlacedLeft);
-				PositionBall pb = new PositionBall(ball, p);
-				pb.setPositionBall(20+posXinc, 10 + posXinc, ball, p);
-				MovementBall mb = new MovementBall(ball, p);
-				Match m = new Match();
-				allPlayers.addAll(allPlayersFromTeam1);
-				allPlayers.addAll(allPlayersFromTeam2);
+				//allPlayers.addAll(allPlayersFromTeam1);
+				//allPlayers.addAll(allPlayersFromTeam2);
 				m.matchOneRound(team, team2, p, ball);
+				pb.setPositionBall(ball.getPositionX(), ball.getPositionY(), ball, p);
 				this.repaint();
 				Thread.sleep(250);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		posXinc++;

@@ -161,6 +161,7 @@ public class KickOffMenu extends JPanel {
 						else if(tactics433.isSelected()) {
 							teamPlayer.setDefaultStrategy(new int[] {4,3,3});
 						}
+						
 						DataBall ball = new DataBall(ConstantPosition.ENGAGEMENTX, ConstantPosition.ENGAGEMENTY);
 						MatchScreen match = new MatchScreen(teamPlayer, teamIA, ball);
 						
