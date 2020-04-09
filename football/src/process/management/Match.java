@@ -109,7 +109,6 @@ public class Match {	// if singleton : re-chech every variables
 									mp.passBalltoPal(currentPlayer, botPlayers, ball);
 								}
 								else {
-									System.out.println("Fdp");
 								}
 							}
 						}
