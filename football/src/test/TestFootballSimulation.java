@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import databall.DataBall;
 import datateam.DataTeam;
+import gui.elements.MainFrame;
 import gui.elements.MatchScreen;
 import process.management.ConstantPosition;
 import process.management.CreaTeam;
@@ -15,12 +16,11 @@ import process.management.PositionBall;
 /*
  * This class is used to test if the Positioning class works
  */
-public class TestPositionTactics {
+public class TestFootballSimulation {
 	
-	public static void main(String[] args) throws IOException, InterruptedException {
-		DataTeam team1 = CreaTeam.creaTeam("France");
-		DataTeam team2 = CreaTeam.creaTeam("Brazil");
-		DataBall ball = new DataBall(ConstantPosition.ENGAGEMENTX, ConstantPosition.ENGAGEMENTY);
-		MatchScreen match = new MatchScreen(team1, team2, ball);
+	public static void main(String[] args){
+		MainFrame mainframe = new MainFrame();
+		/*Thread guiThread = new Thread(mainframe);
+		guiThread.start();*/
 	}
 }
