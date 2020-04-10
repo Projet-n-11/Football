@@ -96,6 +96,7 @@ public class PlayerFactory {
 	}
 	else
 		return null;
+	playerType.setSpeed(Integer.parseInt(teamsLists.getPlayerSpeed(i)));
 	return playerType;
 	}
 	

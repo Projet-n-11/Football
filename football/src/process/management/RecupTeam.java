@@ -104,7 +104,11 @@ public class RecupTeam {
 	
 	public String getTeamPlayerType(int i) {
 		return scrollAndGet(team.get(i),4);
-	}	
+	}
+	
+	public String getPlayerSpeed(int i) {
+		return scrollAndGet(team.get(i),5);
+	}
 
 	public String getTeamSpecialStats(int i) {
 		return scrollAndGet(team.get(i),8)+scrollAndGet(team.get(i),9);
