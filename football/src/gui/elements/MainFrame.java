@@ -1,5 +1,7 @@
 package gui.elements;
 
+import java.awt.Graphics;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,5 +19,4 @@ public class MainFrame extends JFrame {
 	public static void main(String args[]) {
 		new MainFrame();
 	}
-
 }

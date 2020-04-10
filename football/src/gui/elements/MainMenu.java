@@ -25,6 +25,7 @@ public class MainMenu extends JPanel {
 	
 	private static final long serialVersionUID = -3358895820336739941L;
 	private JFrame mainFrame;
+	private JPanel panelButtons, simulatorPanel, kickOffPanel, optionsPanel, creditsPanel, leavePanel;
 	private JLabel simulator;
 	private JButton kickOff;
 	private JButton options;
@@ -42,51 +43,61 @@ public class MainMenu extends JPanel {
 	}
 
 	public void initLayout() {
-		JPanel simulatorPanel=new JPanel();
-		JPanel kickOffPanel=new JPanel();
-		JPanel optionsPanel=new JPanel();
-		JPanel creditsPanel=new JPanel();
-		JPanel leavePanel=new JPanel();
+		panelButtons = new JPanel();
+		simulatorPanel = new JPanel();
+		kickOffPanel = new JPanel();
+		optionsPanel = new JPanel();
+		creditsPanel = new JPanel();
+		leavePanel = new JPanel();
 	
 		simulatorPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		kickOffPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		optionsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		creditsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		leavePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-	
-		simulator=new JLabel("FOOTBALL SIMULATOR");
+        
+		ImageIcon img = new ImageIcon(".\\src\\ressources\\menu-img.png");
+		simulator=new JLabel("", img, JLabel.CENTER);
 		simulator.setFont(new Font("Arial", Font.PLAIN, 40));
 		simulator.setForeground(Color.GREEN);
 		simulatorPanel.add(simulator);
-		
+		simulatorPanel.setBackground(new Color(80, 206, 89));
+
 		kickOff=new JButton("Kick-off");
 		kickOff.setSize(new Dimension(300, 100));
 		kickOff.setMinimumSize(getSize());
-		
 		kickOff.addActionListener(new ActionKickOff());
 		kickOffPanel.add(kickOff);
+		kickOffPanel.setBackground(new Color(80, 206, 89));
 		
 		options =new JButton("Options");
 		options.setSize(300,400);
 		options.addActionListener(new ActionOptions());
 		optionsPanel.add(options);
+		optionsPanel.setBackground(new Color(80, 206, 89));
 		
 		credits=new JButton("Credits");
 		credits.setSize(300,400);
 		credits.addActionListener(new ActionCredits());
 		creditsPanel.add(credits);
+		creditsPanel.setBackground(new Color(80, 206, 89));
 		
 		leave=new JButton("Quit the game");
 		leave.addActionListener(new ActionLeave());
 		leave.setSize(200,400);
 		leavePanel.add(leave);
+		leavePanel.setBackground(new Color(80, 206, 89));
 		
-		mainFrame.getContentPane().setLayout(new GridLayout(6,1));
-		mainFrame.getContentPane().add(simulatorPanel);
-		mainFrame.getContentPane().add(kickOffPanel);
-		mainFrame.getContentPane().add(optionsPanel);
-		mainFrame.getContentPane().add(creditsPanel);
-		mainFrame.getContentPane().add(leavePanel);
+		panelButtons.setLayout(new GridLayout(6,1));
+		panelButtons.add(simulatorPanel);
+		panelButtons.add(kickOffPanel);
+		panelButtons.add(optionsPanel);
+		panelButtons.add(creditsPanel);
+		panelButtons.add(leavePanel);
+		
+		mainFrame.getContentPane().setLayout(new BorderLayout());
+		panelButtons.setBackground(new Color(80, 206, 89));
+		mainFrame.getContentPane().add(panelButtons);
         mainFrame.setSize(1300,800);
 		mainFrame.setLocation(350,150);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -139,6 +150,7 @@ public class MainMenu extends JPanel {
 	public JFrame getJFrameMainMenu() {
 		return mainFrame;
 	}
+	
 }
 
 

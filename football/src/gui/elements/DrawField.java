@@ -47,6 +47,7 @@ public class DrawField extends JPanel {
 		this.team2 = team2;
 		IAteam = new ArrayList<>(team2.getPlayers().values());
 		this.ball = ball;
+		
 		setBackground(new Color(0, 128, 0));
 		setBackground(new Color(0, 128, 0));
 		setSize(1920, 1080);
@@ -67,6 +68,7 @@ public class DrawField extends JPanel {
 		Graphics2D g6 = (Graphics2D) g.create();
 		//graphics for the ball (tactics)
 		Graphics2D g7 = (Graphics2D) g.create();
+		
 		double width = getWidth();
 		double height = getHeight();
 		double fieldLength = 120d;
@@ -125,15 +127,13 @@ public class DrawField extends JPanel {
 		drawPenaltyMarks(g2, fieldLength, fieldWidth);
 		drawPenaltyArches(g2, fieldLength, fieldWidth);
 		//drawSpecialPositions(g4, fieldLength, fieldWidth);
-		//drawPlayersTacticsR(g5, fieldLength, fieldWidth);
-		//drawPlayersTacticsL(g6, fieldLength, fieldWidth);
 		try {
 			drawPlayers(g6, g5, fieldLength, fieldWidth);
+			drawBall(g7, fieldLength, fieldWidth);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		drawBall(g7, fieldLength, fieldWidth);
 	}
 	
 	public void drawPenaltyArches(Graphics2D g2, double fieldLength,
@@ -227,7 +227,7 @@ public class DrawField extends JPanel {
 	}
 	
 	public static void drawPlayers(Graphics2D gplayersteam, Graphics2D gplayersteam2, double fieldLength, double doubleWidth) throws IOException {
-		Font font = new Font("Serif", Font.PLAIN, 2);
+		Font font = new Font("SANS_SERIF", Font.BOLD, 2);
 		gplayersteam.setFont(font);
 		gplayersteam2.setFont(font);
 		for(DataPlayer playersteam1 : Pteam) {
@@ -242,6 +242,6 @@ public class DrawField extends JPanel {
 	}
 	
 	public static void drawBall(Graphics2D gball, double fieldLength, double doubleWidth) {
-		gball.draw(new Ellipse2D.Double(ball.getPositionX(), ball.getPositionY(), 0.6, 0.6));
+		gball.draw(new Ellipse2D.Double(ball.getPositionX(), ball.getPositionY(), 0.4, 0.4));
 	}
 }

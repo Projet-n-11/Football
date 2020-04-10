@@ -1,14 +1,13 @@
 package gui.elements;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Rectangle;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -33,7 +32,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.TransferHandler;
 import javax.swing.*;
 
@@ -67,6 +65,7 @@ public class KickOffMenu extends JPanel {
 
 	public KickOffMenu(String title) {
 		panel= new JPanel();
+		panel.setBackground(new Color(80, 206, 89));
 	}
 
 	public JPanel createKickOff() {
@@ -77,7 +76,7 @@ public class KickOffMenu extends JPanel {
 			returnButton = new JButton("Back to Main Menu");
 
 			filleT = new JList<String>();
-			filleS= new JList<String>();
+			filleS = new JList<String>();
 			jsfilleT = new JScrollPane();
 			jsfilleS = new JScrollPane();
 			modelP = choosingTeams();
@@ -96,7 +95,9 @@ public class KickOffMenu extends JPanel {
 			tactics433 = new JRadioButton ("4-3-3");
 			tactics = new JPanel();
 			tacticsLabelPanel = new JPanel();
+			tacticsLabelPanel.setBackground(new Color(80, 206, 89));
 			players = new JPanel();
+			players.setBackground(new Color(80, 206, 89));
 
 			gc = new GridBagConstraints();
 
@@ -111,8 +112,10 @@ public class KickOffMenu extends JPanel {
 			gc.insets = new Insets(10, 10, 10, 10);;
 			panel.setLayout(new GridBagLayout());
 			players.setLayout(new GridBagLayout());
+			
 			jsfilleS.setViewportView(filleS);
-
+			jsfilleT.setViewportView(filleT);
+			
 			Pteams.addItemListener(new ItemListener(){
 
 				public void itemStateChanged(ItemEvent e) {
@@ -166,7 +169,20 @@ public class KickOffMenu extends JPanel {
 						else if(tactics433.isSelected()) {
 							teamPlayer.setDefaultStrategy(new int[] {4,3,3});
 						}
-
+						
+						for(DataPlayer players: teamPlayer.getPlayers().values()) {
+							for(int nb_elts=0; nb_elts < filleT.getModel().getSize(); nb_elts++) {
+								if(filleT.getModel().getElementAt(nb_elts).contains(players.getPlayerName())) {
+									players.setPlayerTitular(1);
+								}
+							}
+							
+							for(int nb_elts=0; nb_elts < filleS.getModel().getSize(); nb_elts++) {
+								if(filleS.getModel().getElementAt(nb_elts).contains(players.getPlayerName())) {
+									players.setPlayerTitular(0);								}
+							}
+						}
+						
 						DataBall ball = new DataBall(ConstantPosition.ENGAGEMENTX, ConstantPosition.ENGAGEMENTY);
 						Score score = new Score(teamPlayer, teamIA);
 						MatchScreen match = new MatchScreen(teamPlayer, teamIA, ball, score);
@@ -222,6 +238,7 @@ public class KickOffMenu extends JPanel {
 							errorPanel.repaint();
 						}
 						errorPanel.add(labERROR);
+						errorPanel.setBackground(new Color(80, 206, 89));
 						errorPanel.repaint();
 						gc.gridx = 0;
 						gc.gridy = 5;
@@ -383,9 +400,11 @@ public class KickOffMenu extends JPanel {
 		group.add(tactics235);
 		group.add(tactics442);
 		group.add(tactics433);
+		gc.fill = GridBagConstraints.VERTICAL;
 		gc.gridx = 2;
 		gc.gridy = 1;
 		panel.add(tacticsLabelPanel, gc);
+		gc.fill = GridBagConstraints.HORIZONTAL;
 		gc.gridx = 0;
 		gc.gridy = 0;
 		tactics.add(tactics343, gc);
@@ -395,7 +414,6 @@ public class KickOffMenu extends JPanel {
 		gc.gridx = 2;
 		gc.gridy = 0;
 		tactics.add(tactics235, gc);
-		jsfilleT.setViewportView(filleT);
 		gc.gridx = 0;
 		gc.gridy = 1;
 		tactics.add(tactics442, gc);
@@ -419,9 +437,11 @@ public class KickOffMenu extends JPanel {
 		gc.gridx = 2;
 		gc.gridy = 6;
 		panel.add(startButton, gc);
+		gc.fill = GridBagConstraints.VERTICAL;
 		gc.gridx = 2;
 		gc.gridy = 3;
 		panel.add(tactics, gc);
+		gc.fill = GridBagConstraints.HORIZONTAL;
 		gc.gridx = 2;
 		gc.gridy = 4;
 		panel.add(choiceIA, gc);
@@ -445,6 +465,8 @@ public class KickOffMenu extends JPanel {
 	}
 
 	public class TransferPlayers extends TransferHandler {
+
+		private static final long serialVersionUID = 1L;
 		private int[] indices = null;
 		private int addIndex = -1; //Location where items were added
 		private int addCount = 0;  //Number of items added.
@@ -471,8 +493,8 @@ public class KickOffMenu extends JPanel {
 				return false;
 			}
 
-			JList list = (JList)info.getComponent();
-			DefaultListModel listModel = (DefaultListModel)list.getModel();
+			JList<String> list = (JList<String>) info.getComponent();
+			DefaultListModel<String> listModel = (DefaultListModel<String>) list.getModel();
 			JList.DropLocation dl = (JList.DropLocation)info.getDropLocation();
 			int index = dl.getIndex();
 			boolean insert = dl.isInsert();
@@ -504,7 +526,7 @@ public class KickOffMenu extends JPanel {
 		//as a single string, for export.
 
 		protected String exportString(JComponent c) {
-			JList list = (JList)c;
+			JList<String> list = (JList<String>)c;
 			indices = list.getSelectedIndices();
 			Object[] values = list.getSelectedValues();
 
@@ -528,8 +550,9 @@ public class KickOffMenu extends JPanel {
 		//intact.
 		protected void cleanup(JComponent c, boolean remove) {
 			if (remove && indices != null) {
-				JList source = (JList)c;
-				DefaultListModel model  = (DefaultListModel)source.getModel();
+				@SuppressWarnings("unchecked")
+				JList<String> source = (JList<String>) c;
+				DefaultListModel<String> model  = (DefaultListModel<String>)source.getModel();
 
 				//If we are moving items around in the same list, we
 				//need to adjust the indices accordingly, since those

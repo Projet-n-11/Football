@@ -19,7 +19,7 @@ public class RecupTeam {
 	 * @throws IOException
 	 */
 	public RecupTeam(String teamName) throws IOException {
-		File fTeams = new File("teams.csv");
+		File fTeams = new File(".\\src\\ressources\\teams.csv");
 		BufferedReader br = new BufferedReader (new FileReader(fTeams));
 		String line = "";
 		ArrayList<String> team = new ArrayList<String>();
@@ -58,7 +58,7 @@ public class RecupTeam {
 	public static ArrayList<String> getCountriesNames() throws IOException {
 		String lastCountry = "_";
 		nameTeams=new ArrayList<String>();
-		File fTeams = new File("teams.csv");
+		File fTeams = new File(".\\src\\ressources\\teams.csv");
 		BufferedReader br = new BufferedReader (new FileReader(fTeams));
 		String line = "";
 		

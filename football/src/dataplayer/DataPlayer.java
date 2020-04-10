@@ -16,7 +16,6 @@ public class DataPlayer extends Position{
 		super();
 		Acceleration a = new Acceleration(10);
 		Precision p = new Precision(5);
-	//  PlayerSpeed ps = new PlayerSpeed(2);
 		this.playerName = "DefaultPlayer";
 		this.playerNumber = "0";
 		this.playerSuperPower = null;
@@ -115,6 +114,10 @@ public class DataPlayer extends Position{
 	public String toString() {
 		return playerName + " N°: " + playerNumber + "," + playerType.toString() + ", Power: " + playerSuperPower.toString() + "," + team + "," + isPhysical +
 				"," + playerSize + "," + colorPlayer + ","+ playerType.getTitularPlayer() + "]\n";
+	}
+
+	public void setPlayerTitular(int isTitular) {
+		this.playerType.setTitularPlayer(isTitular);
 	}
 	
 }
