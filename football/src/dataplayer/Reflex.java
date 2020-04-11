@@ -1,20 +1,20 @@
 package dataplayer;
 
 public class Reflex {
-	private int valueAcceleration;
+	private int valueReflex;
 
-	public Reflex(int valueAcceleration) {
-		this.valueAcceleration = valueAcceleration;
+	public Reflex(int valueReflex) {
+		this.valueReflex = valueReflex;
 	}
-	public float getValueAcceleration() {
-		return valueAcceleration;
+	public int getValueReflex() {
+		return valueReflex;
 	}
 
-	public void setValueAcceleration(int valueAcceleration) {
-		this.valueAcceleration = valueAcceleration;
+	public void setValueReflex(int valueReflex) {
+		this.valueReflex = valueReflex;
 	}
 	
 	public String toString() {
-		return "" + valueAcceleration; 
+		return "" + valueReflex; 
 	}
 }
