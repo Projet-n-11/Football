@@ -179,7 +179,8 @@ public class KickOffMenu extends JPanel {
 							
 							for(int nb_elts=0; nb_elts < filleS.getModel().getSize(); nb_elts++) {
 								if(filleS.getModel().getElementAt(nb_elts).contains(players.getPlayerName())) {
-									players.setPlayerTitular(0);								}
+									players.setPlayerTitular(0);								
+								}
 							}
 						}
 						

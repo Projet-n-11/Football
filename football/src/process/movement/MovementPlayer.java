@@ -50,7 +50,7 @@ public class MovementPlayer{
 		Boolean positionOnX = false;
 		Boolean positionOnY = false;
 
-		if(db.getPositionX() < dp.getPositionX()) {
+		/*if(db.getPositionX() < dp.getPositionX()) {
 			if(dp.getPositionX() - db.getPositionX() == 1) {
 				dp.setPositionX(dp.getPositionX() - 1);
 			}
@@ -81,7 +81,7 @@ public class MovementPlayer{
 		 * to get it. Only for the y axis.
 		 *  
 		 */
-		if(db.getPositionY() < dp.getPositionY()) {
+		/*if(db.getPositionY() < dp.getPositionY()) {
 			if(dp.getPositionY() - db.getPositionY() == 1) {
 				dp.setPositionY(dp.getPositionY() - 1);
 			}
@@ -109,7 +109,7 @@ public class MovementPlayer{
 
 		if(positionOnX == true && positionOnY == true) {
 			dp.setHaveBall(true);
-		}
+		}*/
 	}
 
 	public void runWithBall(Position ball, DataPlayer player, boolean itsUserRound) {

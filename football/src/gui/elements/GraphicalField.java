@@ -64,22 +64,24 @@ public class GraphicalField extends JPanel implements Runnable{
 	@Override
 	public void run() {
 		boolean paused = false;
-		boolean keepFirstTrack = true;
-		ArrayList<DataPlayer> allPlayersFromTeam1=new ArrayList<>(team.getPlayers().values());
-		ArrayList<DataPlayer> allPlayersFromTeam2=new ArrayList<>(team2.getPlayers().values());
-		ArrayList<DataPlayer> allPlayers = new ArrayList<>();
 		boolean alreadyPlacedLeft = false;
+		//Initializing each elements from the game (map, placing the ball, placing each players following their tactics)
 		Map field = new Map();
 		PositionBall pb = new PositionBall(ball, field);
-		
-		Match m = new Match(team, team2, field, ball);				
 		PositionTactics pt = new PositionTactics(team, field, alreadyPlacedLeft);
 		pt.placePlayers(team, field, alreadyPlacedLeft);
 		alreadyPlacedLeft = true;
 		PositionTactics pt2 = new PositionTactics(team2, field, alreadyPlacedLeft);
 		pt2.placePlayers(team, field, alreadyPlacedLeft);
 		alreadyPlacedLeft = false;
+		
+		ArrayList<DataPlayer> allPlayersFromTeam1=new ArrayList<DataPlayer>(team.getPlayers().values());
+		ArrayList<DataPlayer> allPlayersFromTeam2=new ArrayList<DataPlayer>(team2.getPlayers().values());
+		ArrayList<DataPlayer> allPlayers = new ArrayList<DataPlayer>();
+		
+		Match m = new Match(team, team2, field, ball);		
 		MovementBall mb = new MovementBall(ball, field, score, pt, pt2, team, team2);
+		
 		while(paused == false){
 			try {
 				mb.move(ball, pb, field, score, pt, pt2, team, team2);

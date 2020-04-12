@@ -8,7 +8,7 @@ public class PlayerMidFielder extends AbstractDataPlayerType {
 		this.readPlay = readPlay;
 		this.precision = precision;
 		this.setTitularPlayer(titularPlayer);
-		this.setPlayerTypeName("MidFilder");
+		this.setPlayerTypeName("Midfielder");
 
 	}
 	public ReadPlay getReadPlay() {
@@ -25,6 +25,6 @@ public class PlayerMidFielder extends AbstractDataPlayerType {
 	}
 	
 	public String toString() {
-		return "Milieu," + readPlay.toString() + "," + precision.toString();
+		return "MidFielder," + readPlay.toString() + "," + precision.toString();
 	}
 }

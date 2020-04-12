@@ -16,7 +16,4 @@ public class MainFrame extends JFrame {
 		mainFrame = menu.getJFrameMainMenu();
 	}
 	
-	public static void main(String args[]) {
-		new MainFrame();
-	}
 }

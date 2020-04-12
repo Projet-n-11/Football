@@ -37,16 +37,16 @@ public class PositionTactics {
 		ArrayList<DataPlayer> values = new ArrayList<>(players.values());
 		for (DataPlayer dp : values) {
 			if (dp.getPlayerType().getTitularPlayer() == 1) {
-				if(dp.getPlayerType().getPlayerTypeName() == "Gardien") {
+				if(dp.getPlayerType().getPlayerTypeName() == "Goalie") {
 					valuesGoalie.add(dp);
 				}
-				else if(dp.getPlayerType().getPlayerTypeName() == "Défenseur") {
+				else if(dp.getPlayerType().getPlayerTypeName() == "Defender") {
 					valuesDefender.add(dp);
 				}
-				else if(dp.getPlayerType().getPlayerTypeName() == "Attaquant") {
+				else if(dp.getPlayerType().getPlayerTypeName() == "Forward") {
 					valuesForward.add(dp);
 				}
-				else if(dp.getPlayerType().getPlayerTypeName() == "Milieu") {
+				else if(dp.getPlayerType().getPlayerTypeName() == "Midfielder") {
 					valuesMidFielder.add(dp);
 				}
 				else {

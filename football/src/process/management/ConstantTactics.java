@@ -38,9 +38,9 @@ public class ConstantTactics {
 		public static final int L_MIDRIGHT_MIDFIELDERY343 = HEIGHT/2 + 8;
 		public static final int L_RIGHT_MIDFIELDERX343 = WIDTH/2 - 10;
 		public static final int L_RIGHT_MIDFIELDERY343 = HEIGHT/2 + 30;
-		public static final int L_RIGHT_FORWARDX343 = WIDTH/2;
+		public static final int L_RIGHT_FORWARDX343 = WIDTH/2 - 7;
 		public static final int L_RIGHT_FORWARDY343 = HEIGHT/2 - 8;
-		public static final int L_LEFT_FORWARDX343 = WIDTH/2;
+		public static final int L_LEFT_FORWARDX343 = WIDTH/2 - 7;
 		public static final int L_LEFT_FORWARDY343 = HEIGHT/2 + 8;
 		public static final int L_MID_FORWARDX343 = WIDTH/2 - 10;
 		public static final int L_MID_FORWARDY343 = HEIGHT/2;
@@ -60,9 +60,9 @@ public class ConstantTactics {
 		public static final int R_MIDRIGHT_MIDFIELDERY343 = HEIGHT/2 + 8;
 		public static final int R_RIGHT_MIDFIELDERX343 = WIDTH/2 + 10;
 		public static final int R_RIGHT_MIDFIELDERY343 = HEIGHT/2 + 30;
-		public static final int R_RIGHT_FORWARDX343 = WIDTH/2;
+		public static final int R_RIGHT_FORWARDX343 = WIDTH/2 + 7;
 		public static final int R_RIGHT_FORWARDY343 = HEIGHT/2 - 8;
-		public static final int R_LEFT_FORWARDX343 = WIDTH/2;
+		public static final int R_LEFT_FORWARDX343 = WIDTH/2 + 7;
 		public static final int R_LEFT_FORWARDY343 = HEIGHT/2 + 8;
 		public static final int R_MID_FORWARDX343 = WIDTH/2 + 10;
 		public static final int R_MID_FORWARDY343 = HEIGHT/2;

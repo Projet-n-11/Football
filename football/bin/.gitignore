@@ -1,8 +1,4 @@
-/gui/
-/process/
-/datateam/
-/test/
-/databall/
-/datafield/
 /dataplayer/
-/ressources/
+/process/
+/gui/
+/test/
