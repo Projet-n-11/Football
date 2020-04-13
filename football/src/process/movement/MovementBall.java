@@ -6,6 +6,7 @@ import dataplayer.PlayerSpeed;
 import datateam.DataTeam;
 import datafield.Corner;
 import datafield.Goal;
+import datafield.Grass;
 import datafield.SpecialPosition;
 import process.management.PositionBall;
 import process.management.PositionTactics;
@@ -18,32 +19,52 @@ import process.management.Map;
  */
 public class MovementBall {
 
-	private DataBall db;
-	private Map table;
+	private static DataBall ball;
+	private static Map table;
 	private Score score;
 
-	public MovementBall(DataBall db, Map table, Score score,
+	public MovementBall(DataBall ball, Map table, Score score,
 			PositionTactics pt, PositionTactics pt2, DataTeam PTeam, DataTeam IATeam){
 		
-		this.db = db;
-		this.table = table;
+		MovementBall.ball = ball;
+		MovementBall.table = table;
 		this.score = score;
 		PositionBall pb;
-		pb = new PositionBall(db, table);
+		pb = new PositionBall(ball, table);
 		try {
-			move(db, pb, table, score, pt, pt2, PTeam, IATeam);
+			move(pb, table, pt, pt2, PTeam, IATeam);
 		} catch (InterruptedException e) {
 			System.err.println("Movement problem, reinstall the game!");
 		}
 
 	}
+	
+	public void roll() {
+		if (ball.getSpeedX()!=0 || ball.getSpeedY()!=0)
+		{
+			System.out.println("roll !");
+			Grass grass = new Grass(ball.getPositionX(), ball.getPositionY());
+			table.setElement(grass);
+			ball.setPositionX(ball.getPositionX()+ball.getSpeedX());
+			ball.setPositionY(ball.getPositionY()+ball.getSpeedY());
+			table.setElement(ball);
+		}
+	}
+	
+	public static void setPositionBall(int x, int y) {
+		Grass grass = new Grass(ball.getPositionX(), ball.getPositionY());
+		table.setElement(grass);
+		ball.setPositionX(x);
+		ball.setPositionY(y);
+		table.setElement(ball);		
+	}
 
-	public void move(DataBall db, PositionBall pb, Map table, Score score,
+	public void move(PositionBall pb, Map table,
 			PositionTactics pt, PositionTactics pt2, DataTeam PTeam, DataTeam IATeam) throws InterruptedException {
 		
 		boolean alreadyPlacedLeft = false;
 		
-		if(limitsGoalLeft(db)) {
+		if(limitsGoalLeft()) {
 			System.out.println("GOAL !!! Congratulations team2");
 			Thread.sleep(500);
 			score.setScoreTeam1(score.getScoreTeam2()+1);
@@ -52,10 +73,10 @@ public class MovementBall {
 			pt2.placePlayers(IATeam, table, alreadyPlacedLeft);
 			alreadyPlacedLeft = false;
 			Thread.sleep(200);
-			pb.placeBallEngagement(db, table);
+			pb.placeBallEngagement(ball, table);
 		}
 
-		else if(limitsGoalRight(db)) {
+		else if(limitsGoalRight()) {
 			System.out.println("GOAL !!! Congratulations team1");
 			Thread.sleep(500);
 			score.setScoreTeam2(score.getScoreTeam2()+1);
@@ -64,34 +85,34 @@ public class MovementBall {
 			pt2.placePlayers(IATeam, table, alreadyPlacedLeft);
 			alreadyPlacedLeft = false;
 			Thread.sleep(200);
-			pb.placeBallEngagement(db, table);
+			pb.placeBallEngagement(ball, table);
 		}
-		else if (limitsSideLineTop(db)) {
+		else if (limitsSideLineTop()) {
 			System.out.println("THROW (top)!!!");
 			Thread.sleep(200);
-			pb.setPositionBall(db.getPositionX(), ConstantPosition.INITIAL_POINT, db, table);
+			pb.setPositionBall(ball.getPositionX(), ConstantPosition.INITIAL_POINT, ball, table);
 		}
-		else if (limitsSideLineBottom(db)) {
+		else if (limitsSideLineBottom()) {
 			System.out.println("THROW (bottom)!!!");
 			Thread.sleep(200);
-			pb.setPositionBall(db.getPositionX(), ConstantPosition.HEIGHT, db, table);
+			pb.setPositionBall(ball.getPositionX(), ConstantPosition.HEIGHT, ball, table);
 		}
-		else if(limitsCornersLeft(db)) {
+		else if(limitsCornersLeft()) {
 			System.out.println("Corner Left");
 			Thread.sleep(200);
-			pb.setPositionBall(ConstantPosition.SIXYARD1X, ConstantPosition.SIXYARD1Y, db, table);
+			pb.setPositionBall(ConstantPosition.SIXYARD1X, ConstantPosition.SIXYARD1Y, ball, table);
 		}
-		else if(limitsCornersRight(db)) {
+		else if(limitsCornersRight()) {
 			System.out.println("Corner Right");
 			Thread.sleep(200);
-			pb.setPositionBall(ConstantPosition.SIXYARD2X, ConstantPosition.SIXYARD2Y, db, table);
+			pb.setPositionBall(ConstantPosition.SIXYARD2X, ConstantPosition.SIXYARD2Y, ball, table);
 		}
 	}
 
-	public boolean limitsGoalLeft (DataBall db) {
+	public boolean limitsGoalLeft () {
 
-		if(db.getPositionX()<ConstantPosition.GOAL1X) {
-			if(db.getPositionY()>ConstantPosition.GOALY1 && db.getPositionY()<ConstantPosition.GOALY2) {
+		if(ball.getPositionX()<ConstantPosition.GOAL1X) {
+			if(ball.getPositionY()>ConstantPosition.GOALY1 && ball.getPositionY()<ConstantPosition.GOALY2) {
 				return true;
 			}
 			else {
@@ -104,9 +125,9 @@ public class MovementBall {
 
 	}
 
-	public boolean limitsGoalRight(DataBall db) {
-		if(db.getPositionX()>ConstantPosition.GOAL2X) {
-			if(db.getPositionY()>ConstantPosition.GOALY1 && db.getPositionY()<ConstantPosition.GOALY2) {
+	public boolean limitsGoalRight() {
+		if(ball.getPositionX()>ConstantPosition.GOAL2X) {
+			if(ball.getPositionY()>ConstantPosition.GOALY1 && ball.getPositionY()<ConstantPosition.GOALY2) {
 				return true;
 			}
 			else {
@@ -118,9 +139,9 @@ public class MovementBall {
 		}
 	}
 
-	public boolean limitsSideLineTop(DataBall db) {
-		if(db.getPositionX()>ConstantPosition.INITIAL_POINT && db.getPositionX()<ConstantPosition.WIDTH) {
-			if(db.getPositionY()<ConstantPosition.INITIAL_POINT) {
+	public boolean limitsSideLineTop() {
+		if(ball.getPositionX()>ConstantPosition.INITIAL_POINT && ball.getPositionX()<ConstantPosition.WIDTH) {
+			if(ball.getPositionY()<ConstantPosition.INITIAL_POINT) {
 				return true;
 			}
 			else {
@@ -132,10 +153,10 @@ public class MovementBall {
 		}
 
 	}
-	public boolean limitsSideLineBottom(DataBall db) {
-		if(db.getPositionX()>ConstantPosition.INITIAL_POINT && db.getPositionX()<ConstantPosition.WIDTH) {
+	public boolean limitsSideLineBottom() {
+		if(ball.getPositionX()>ConstantPosition.INITIAL_POINT && ball.getPositionX()<ConstantPosition.WIDTH) {
 
-			if(db.getPositionY()>ConstantPosition.HEIGHT) {
+			if(ball.getPositionY()>ConstantPosition.HEIGHT) {
 				return true;
 			}
 			else {
@@ -147,13 +168,13 @@ public class MovementBall {
 		}
 	}
 
-	public boolean limitsCornersLeft(DataBall db) {
+	public boolean limitsCornersLeft() {
 
-		if(db.getPositionX()<ConstantPosition.CORNER1X) {
-			if(db.getPositionY()>ConstantPosition.CORNER1Y && db.getPositionY()<ConstantPosition.GOALY1) {
+		if(ball.getPositionX()<ConstantPosition.CORNER1X) {
+			if(ball.getPositionY()>ConstantPosition.CORNER1Y && ball.getPositionY()<ConstantPosition.GOALY1) {
 				return true;
 			}
-			else if (db.getPositionY()<ConstantPosition.CORNER2Y && db.getPositionY()>ConstantPosition.GOALY2) {
+			else if (ball.getPositionY()<ConstantPosition.CORNER2Y && ball.getPositionY()>ConstantPosition.GOALY2) {
 				return true;
 			}
 			else {
@@ -165,13 +186,13 @@ public class MovementBall {
 		}
 	}
 
-	public boolean limitsCornersRight(DataBall db) {
+	public boolean limitsCornersRight() {
 
-		if(db.getPositionX()>ConstantPosition.CORNER3X) {
-			if(db.getPositionY()>ConstantPosition.CORNER3Y && db.getPositionY()<ConstantPosition.GOALY1) {
+		if(ball.getPositionX()>ConstantPosition.CORNER3X) {
+			if(ball.getPositionY()>ConstantPosition.CORNER3Y && ball.getPositionY()<ConstantPosition.GOALY1) {
 				return true;
 			}
-			else if (db.getPositionY()<ConstantPosition.CORNER4Y && db.getPositionY()>ConstantPosition.GOALY2) {
+			else if (ball.getPositionY()<ConstantPosition.CORNER4Y && ball.getPositionY()>ConstantPosition.GOALY2) {
 				return true;
 			}
 			else {

@@ -3,10 +3,12 @@ package process.movement;
 import java.util.Random;
 
 import databall.DataBall;
+import datafield.Grass;
 import datafield.Position;
 import datafield.SpecialPosition;
 import dataplayer.DataPlayer;
 import process.management.ConstantPosition;
+import process.management.Map;
 
 
 /*
@@ -21,32 +23,20 @@ public class MovementPlayer{
 	private final int BORDERBOTTOM = 48;
 	private final int BORDERLEFT = 0;
 	private final int BORDERRIGHT = 84;
-	private SpecialPosition specPos;
-	//private int movX = 0;
-	//private int movY = 0;
+	private Map map;
 
 
-
-	public MovementPlayer() {
-		specPos = new SpecialPosition();
+	public MovementPlayer(Map map, DataBall ball) {
+		this.map = map;
 	}
 
-
-	//We didn't took the player speed (with the class PlayerSpeed) so we will just add 1 or subtract 1 to get an elementary move.
-
-	/*
-	 * Method Move will be the method that moves the players based to 
-	 * where the ball is, at every moment
-	 * 
-	 * @param DataBall db, DataPlayer dp
-	 */
-	
-	public void move(Position db, DataPlayer dp) {
+	public void move(DataPlayer dp, DataBall db) {
 		/*
 		 * Player's conditions so he'll run to the ball's position
-		 * to get it. Only for the x axis.
-		 * 
+		 * to get it. Only for the x axis. 
 		 */	
+		Grass grass = new Grass(dp.getPositionX(), dp.getPositionY());
+		map.setElement(grass);
 		Boolean positionOnX = false;
 		Boolean positionOnY = false;
 
@@ -72,14 +62,10 @@ public class MovementPlayer{
 				dp.setPositionX(dp.getPositionX() + dp.getPlayerType().getSpeed().getSpeedX());
 			}
 		}
-		else if(db.getPositionX() == dp.getPositionX()) {
-			positionOnX = true;
-		}
 
 		/*
 		 * Player's conditions so he'll run to the ball's position
 		 * to get it. Only for the y axis.
-		 *  
 		 */
 		if(db.getPositionY() < dp.getPositionY()) {
 			if(dp.getPositionY() - db.getPositionY() == 1) {
@@ -103,95 +89,84 @@ public class MovementPlayer{
 				dp.setPositionY(dp.getPositionY() + dp.getPlayerType().getSpeed().getSpeedY());
 			}
 		}
-		else if(db.getPositionY() == dp.getPositionY()) {
-			positionOnY = true;
-		}
 
-		if(positionOnX == true && positionOnY == true) {
-			dp.setHaveBall(true);
-		}
 	}
 
-	public void runWithBall(Position ball, DataPlayer player, boolean itsUserRound) {
-		int d = 0;
-		int goal;
-		if (itsUserRound) // in order to know which goal to go...
-		{
-			goal = specPos.getGoal1().getPositionX();
-		}
-		else{
-			goal = specPos.getGoal2().getPositionX();
-		}
-
-		int x = player.getPositionX();
-		//int y = player.getPositionY(); //stock old position to know direction and then which side place ball
-
-		runtoCages(player, goal);
-
-		if ( ( x - player.getPositionX() )>=0 ) // d is to place ball on the good side of player
-		{
-			d = +5;
-		}
-		else 
-		{
-			d = -5;
-		} 
-		ball.setPositionX(player.getPositionX()+d);
-		ball.setPositionY(player.getPositionY());
-	}
-
-	public void runtoCages(DataPlayer player, int goalx) {
+	/**
+	 * runtoCages is called when player own the ball and is distant from cages.
+	 * @param player
+	 * @param itsUserRound
+	 * @param ball
+	 */
+	public void runtoCages(DataPlayer player, Boolean itsUserRound, DataBall ball) {
 		Random r = new Random();
+		int goalx;
 		int GOALY1 = ConstantPosition.GOALY1;
 		int GOALY2 = ConstantPosition.GOALY2;
 		int cages = r.nextInt(GOALY2 - GOALY1) + GOALY1;
-		if(player.getHaveBall()) {
-			if(goalx < player.getPositionX()) {
-				if(player.getPositionX() - goalx == 1) {
-					player.setPositionX(player.getPositionX() - 1);
-				}
-				else if(player.getPositionX() - goalx <= player.getPlayerType().getSpeed().getSpeedX() ) {
-					player.setPositionX(goalx);
-				}
-				else {
-					player.setPositionX(player.getPositionX() - player.getPlayerType().getSpeed().getSpeedX());
-				}
+		int d;
+		int oldPlayerPosX = player.getPositionX();
+		int oldPlayerPosY = player.getPositionY();
+		
+		if (itsUserRound) 
+		{
+			goalx = ConstantPosition.GOAL1X;
+			d = -3;
+		} else
+		{
+			goalx = ConstantPosition.GOAL2X;
+			d = 3;
+		}
+		
+		if(goalx < player.getPositionX()) {
+			if(player.getPositionX() - goalx == 1) {
+				player.setPositionX(player.getPositionX() - 1);
 			}
-			else if(goalx > player.getPositionX()) {
-				if(player.getPositionX() - goalx == 1) {
-					player.setPositionX(player.getPositionX() + 1);
-				}
-				else if(goalx - player.getPositionX() <= player.getPlayerType().getSpeed().getSpeedX()) {
-					player.setPositionX(goalx);
-				}
-				else {
-					player.setPositionX(player.getPositionX() + player.getPlayerType().getSpeed().getSpeedX());
-				}
+			else if(player.getPositionX() - goalx <= player.getPlayerType().getSpeed().getSpeedX() ) {
+				player.setPositionX(goalx);
 			}
-
-			if(cages < player.getPositionY()) {
-				if(player.getPositionY() - cages == 1) {
-					player.setPositionY(player.getPositionY() - 1);
-				}
-				else if(player.getPositionY() - cages <= player.getPlayerType().getSpeed().getSpeedY()){
-					player.setPositionY(cages);
-				}
-				else {
-					player.setPositionY(player.getPositionY() - player.getPlayerType().getSpeed().getSpeedY());
-				}
-			}
-			else if(cages > player.getPositionY()) {
-				if(player.getPositionY() - cages == 1) {
-					player.setPositionY(player.getPositionY() + 1);
-				}
-				else if(cages - player.getPositionY() <= player.getPlayerType().getSpeed().getSpeedY()){
-					player.setPositionY(cages);
-				}
-				else {
-					player.setPositionY(player.getPositionY() + player.getPlayerType().getSpeed().getSpeedY());
-				}
+			else {
+				player.setPositionX(player.getPositionX() - player.getPlayerType().getSpeed().getSpeedX());
 			}
 		}
+		else if(goalx > player.getPositionX()) {
+			if(player.getPositionX() - goalx == 1) {
+				player.setPositionX(player.getPositionX() + 1);
+			}
+			else if(goalx - player.getPositionX() <= player.getPlayerType().getSpeed().getSpeedX()) {
+				player.setPositionX(goalx);
+			}
+			else {
+				player.setPositionX(player.getPositionX() + player.getPlayerType().getSpeed().getSpeedX());
+			}
+		}
+
+		if(cages < player.getPositionY()) {
+			if(player.getPositionY() - cages == 1) {
+				player.setPositionY(player.getPositionY() - 1);
+			}
+			else if(player.getPositionY() - cages <= player.getPlayerType().getSpeed().getSpeedY()){
+				player.setPositionY(cages);
+			}
+			else {
+				player.setPositionY(player.getPositionY() - player.getPlayerType().getSpeed().getSpeedY());
+			}
+		}
+		else if(cages > player.getPositionY()) {
+			if(player.getPositionY() - cages == 1) {
+				player.setPositionY(player.getPositionY() + 1);
+			}
+			else if(cages - player.getPositionY() <= player.getPlayerType().getSpeed().getSpeedY()){
+				player.setPositionY(cages);
+			}
+			else {
+				player.setPositionY(player.getPositionY() + player.getPlayerType().getSpeed().getSpeedY());
+			}
+		}
+		Grass grass = new Grass(oldPlayerPosX, oldPlayerPosX);
+		System.out.println("grass " + oldPlayerPosX + " : " + oldPlayerPosY);
+		map.setElement(grass);
+		MovementBall.setPositionBall(player.getPositionX()+d, player.getPositionY());	
 	}
 	
 	public void passBalltoPal(DataPlayer player, DataPlayer player2, DataBall ball) {
@@ -220,6 +195,35 @@ public class MovementPlayer{
 		ball.setSpeedY(speed_towards_palY);
 	}
 	
+	public void shoot(DataPlayer player, DataBall ball, Boolean itsUserRound) {
+		if (itsUserRound)
+		{
+			player.setPositionX(player.getPositionX()+1); // player steps back
+		} else
+		{
+			player.setPositionX(player.getPositionX()-1); // player steps back
+		}
+		ball.setSpeedX(player.getPlayerType().getSpeed().getSpeedX()*2); // ball get the double of
+		ball.setSpeedY(player.getPlayerType().getSpeed().getSpeedY()*2); // the player's speed
+		player.setHaveBall(false);
+		ball.setOwnedBy(null);
+	}
+
+	public Boolean tryInterception(DataPlayer player, DataBall ball) {
+		
+		return null;
+	}
+	
+	public Boolean isCloseToBall(DataPlayer player, DataBall ball) {
+		if (Math.abs(player.getPositionX()-ball.getPositionX())==1 || player.getPositionX()-ball.getPositionX()==0)
+		{
+			if (Math.abs(player.getPositionY()-ball.getPositionY())==1 || player.getPositionY()-ball.getPositionY()==0)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 	/*
 	 * Method limits will be delimiting the players limitations on the playfield
 	 * so the player can get out of the field

@@ -1,12 +1,14 @@
 package databall;
 
 import datafield.Position;
+import dataplayer.DataPlayer;
 
 public class DataBall extends Position{
 	private final int BALLSIZE = 2;
 	private final String COLOR = "White";
 	
 	private int speedX, speedY;
+	private DataPlayer ownedBy;
 	
 	public DataBall() {
 		super();
@@ -41,6 +43,14 @@ public class DataBall extends Position{
 	}
 	public String toString() {
 		return "Ball size is : " + BALLSIZE + " and it's color is : " + COLOR + " for the position | x : " + getPositionX() + " ; y =" + getPositionY();
+	}
+
+	public DataPlayer getOwnedBy() {
+		return ownedBy;
+	}
+
+	public void setOwnedBy(DataPlayer ownedBy) {
+		this.ownedBy = ownedBy;
 	}
 	
 }

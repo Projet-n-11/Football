@@ -18,7 +18,7 @@ public class Vision {
 	 * @param y
 	 * @return ArrayList<AbstractPosition> objects
 	 */
-	public static ArrayList<Position> see(int x, int y, Map position) {
+	public ArrayList<Position> see(int x, int y, Map position) {
 		ArrayList<Position> objects = new ArrayList<Position>();
 		int radiusVision = ConstantPosition.RADIUSVISION;
 		int i=0, j=0; 
@@ -66,4 +66,22 @@ public class Vision {
         }
         return false;
     }
+	
+	public Boolean seeCages(int playerPosX, int playerPosY, Boolean itsUserRound) {
+		if (itsUserRound)
+		{
+			if (playerPosX<=10 && Math.abs(playerPosY)<=15)
+			{
+				return true;
+			}
+		}
+		else
+		{
+			if (playerPosX<=120-10 && Math.abs(playerPosY)<=15)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }

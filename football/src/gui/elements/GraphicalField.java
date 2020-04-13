@@ -79,12 +79,12 @@ public class GraphicalField extends JPanel implements Runnable{
 		ArrayList<DataPlayer> allPlayersFromTeam2=new ArrayList<DataPlayer>(team2.getPlayers().values());
 		ArrayList<DataPlayer> allPlayers = new ArrayList<DataPlayer>();
 		
-		Match m = new Match(team, team2, field, ball);
+		Match m = new Match(team, team2, field, ball, score, pt, pt2);
 		MovementBall mb = new MovementBall(ball, field, score, pt, pt2, team, team2);
 		
 		while(paused == false){
 			try {
-				mb.move(ball, pb, field, score, pt, pt2, team, team2);
+				mb.move(pb, field, pt, pt2, team, team2);
 				m.matchOneRound();
 				pb.setPositionBall(ball.getPositionX(), ball.getPositionY(), ball, field);
 				this.repaint();
