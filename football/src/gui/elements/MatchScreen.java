@@ -35,5 +35,4 @@ public class MatchScreen extends JPanel{
         this.add(new JButton("joueurs de l'équipe 2"),BorderLayout.EAST);
         this.add(new JButton("joueurs de l'équipe 1"),BorderLayout.WEST);
 	}
-
 }

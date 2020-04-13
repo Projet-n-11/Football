@@ -48,7 +48,7 @@ public class KickOffMenu extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel, tactics, players, tacticsLabelPanel;
-	private JLabel choiceP, choiceIA, tacticsPlayersLabel;
+	private JLabel choiceP, choiceIA, tacticsPlayersLabel, titularLabel, substituteLabel;
 	private JButton startButton, returnButton;
 	private JList<String> filleT, filleS;
 	private JScrollPane jsfilleT, jsfilleS;
@@ -56,7 +56,7 @@ public class KickOffMenu extends JPanel {
 	private ListModel<String> modelTFrance, modelTBrazil, modelSFrance, modelSBrazil;
 	private JComboBox<String> Pteams, IAteams;
 	private ButtonGroup group;
-	private JRadioButton tactics343, tactics424, tactics235, tactics442, tactics433;
+	private JRadioButton tactics343, tactics424, tactics235, tactics352, tactics433;
 	private GridBagConstraints gc;
 
 	public KickOffMenu() {
@@ -70,8 +70,8 @@ public class KickOffMenu extends JPanel {
 
 	public JPanel createKickOff() {
 		try{
-			choiceP = new JLabel("Choose your team :");
-			choiceIA = new JLabel("Choose the IA team : ");
+			choiceP = new JLabel("Select your team :");
+			choiceIA = new JLabel("Select the IA team : ");
 			startButton = new JButton("Start");
 			returnButton = new JButton("Back to Main Menu");
 
@@ -91,7 +91,7 @@ public class KickOffMenu extends JPanel {
 			tactics343 = new JRadioButton ("3-4-3");
 			tactics424 = new JRadioButton ("4-2-4");
 			tactics235 = new JRadioButton ("2-3-5");
-			tactics442 = new JRadioButton ("4-4-2");
+			tactics352 = new JRadioButton ("3-5-2");
 			tactics433 = new JRadioButton ("4-3-3");
 			tactics = new JPanel();
 			tacticsLabelPanel = new JPanel();
@@ -146,7 +146,7 @@ public class KickOffMenu extends JPanel {
 			startButton.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e) {
-					if(modelP.getSelectedItem().toString() != "Choose your team..." && modelIA.getSelectedItem().toString() != "Choose your team..." 
+					if(modelP.getSelectedItem().toString() != "Select your team..." && modelIA.getSelectedItem().toString() != "Select your team..." 
 							&& group.getSelection() != null && filleT.getModel().getSize() == 11 && filleS.getModel().getSize() == 12) {
 						panel.removeAll();
 						panel.setBorder(BorderFactory.createTitledBorder(""));
@@ -154,6 +154,8 @@ public class KickOffMenu extends JPanel {
 						DataTeam teamPlayer = CreaTeam.creaTeam(modelP.getSelectedItem().toString());
 						DataTeam teamIA = CreaTeam.creaTeam(modelIA.getSelectedItem().toString());
 
+						//System.out.println("Player tactics:" + teamPlayer.getDefaultStrategy(0) + teamPlayer.getDefaultStrategy(1) + teamPlayer.getDefaultStrategy(2));
+						//System.out.println("IA tactics:" + teamIA.getDefaultStrategy(0) + teamIA.getDefaultStrategy(1) + teamIA.getDefaultStrategy(2));
 						if(tactics343.isSelected()) {
 							teamPlayer.setDefaultStrategy(new int[] {3,4,3});
 						}
@@ -163,8 +165,8 @@ public class KickOffMenu extends JPanel {
 						else if(tactics235.isSelected()) {
 							teamPlayer.setDefaultStrategy(new int[] {2,3,5});
 						}
-						else if(tactics442.isSelected()) {
-							teamPlayer.setDefaultStrategy(new int[] {4,4,2});
+						else if(tactics352.isSelected()) {
+							teamPlayer.setDefaultStrategy(new int[] {3,5,2});
 						}
 						else if(tactics433.isSelected()) {
 							teamPlayer.setDefaultStrategy(new int[] {4,3,3});
@@ -179,7 +181,7 @@ public class KickOffMenu extends JPanel {
 							
 							for(int nb_elts=0; nb_elts < filleS.getModel().getSize(); nb_elts++) {
 								if(filleS.getModel().getElementAt(nb_elts).contains(players.getPlayerName())) {
-									players.setPlayerTitular(0);								
+									players.setPlayerTitular(0);					
 								}
 							}
 						}
@@ -198,28 +200,28 @@ public class KickOffMenu extends JPanel {
 					else {
 						JPanel errorPanel = new JPanel();
 						JLabel labERROR = new JLabel("");
-						if(modelP.getSelectedItem().toString() == "Choose your team..." && modelIA.getSelectedItem().toString() == "Choose your team..." 
+						if(modelP.getSelectedItem().toString() == "Select your team..." && modelIA.getSelectedItem().toString() == "Select your team..." 
 								&& group.getSelection() == null && filleT.getModel().getSize() != 11 && filleS.getModel().getSize() != 12) {
 							labERROR = new JLabel("Select your team, IA's team, your tactics and adjust your players to have 11 Titular players!");
 						}
-						else if(modelP.getSelectedItem().toString() == "Choose your team..." && group.getSelection() == null
+						else if(modelP.getSelectedItem().toString() == "Select your team..." && group.getSelection() == null
 								&& filleT.getModel().getSize() != 11 && filleS.getModel().getSize() != 12) {
 							labERROR = new JLabel("Select your team, your tactics and adjust your players to have 11 Titular players!");
 						}
-						else if(modelIA.getSelectedItem().toString() == "Choose your team..." 
+						else if(modelIA.getSelectedItem().toString() == "Select your team..." 
 								&& group.getSelection() == null && filleT.getModel().getSize() != 11 && filleS.getModel().getSize() != 12) {
 							labERROR = new JLabel("Select IA's team, your tactics and adjust your players to have 11 Titular players!");
 						}
 						else if(group.getSelection() == null && filleT.getModel().getSize() != 11 && filleS.getModel().getSize() != 12) {
 							labERROR = new JLabel("Select your tactics and adjust your players to have 11 Titular players!");
 						}
-						else if(modelP.getSelectedItem().toString() == "Choose your team..." && modelIA.getSelectedItem().toString() == "Choose your team...") {
+						else if(modelP.getSelectedItem().toString() == "Select your team..." && modelIA.getSelectedItem().toString() == "Select your team...") {
 							labERROR = new JLabel("Select your team and the IA's one!");
 						}
-						else if(group.getSelection() == null && modelIA.getSelectedItem().toString() == "Choose your team...") {
+						else if(group.getSelection() == null && modelIA.getSelectedItem().toString() == "Select your team...") {
 							labERROR = new JLabel("Select your tactics and select the IA's team !");
 						}
-						else if(modelP.getSelectedItem().toString() == "Choose your team..." && filleT.getModel().getSize() != 11 && filleS.getModel().getSize() != 12) {
+						else if(modelP.getSelectedItem().toString() == "Select your team..." && filleT.getModel().getSize() != 11 && filleS.getModel().getSize() != 12) {
 							labERROR = new JLabel("Select your team and adjust your players to have 11 Titular players!");
 						}
 						else if(filleT.getModel().getSize() != 11 && filleS.getModel().getSize() != 12) {
@@ -228,10 +230,10 @@ public class KickOffMenu extends JPanel {
 						else if(group.getSelection() == null) {
 							labERROR = new JLabel("Please select your tactics !");
 						}
-						else if(modelP.getSelectedItem().toString() == "Choose your team...") {
+						else if(modelP.getSelectedItem().toString() == "Select your team...") {
 							labERROR = new JLabel("Select your team !");
 						}
-						else if(modelIA.getSelectedItem().toString() == "Choose your team...") {
+						else if(modelIA.getSelectedItem().toString() == "Select your team...") {
 							labERROR = new JLabel("Select the IA's team !");
 						}
 						else {
@@ -268,7 +270,7 @@ public class KickOffMenu extends JPanel {
 		ArrayList<String> nameteam= RecupTeam.getCountriesNames();
 		String [] tabName = new String[nameteam.size()+1];
 
-		tabName[0] = "Choose your team...";
+		tabName[0] = "Select your team...";
 		int i=1;
 		for(Iterator<String> it= nameteam.iterator(); it.hasNext();) {
 			tabName[i]=it.next();
@@ -326,8 +328,8 @@ public class KickOffMenu extends JPanel {
 	}
 
 	public void paintPlayers(){
-		JLabel titularLabel = new JLabel("Titular players : " + filleT.getModel().getSize() + " players");
-		JLabel substituteLabel = new JLabel("Substitute players : " + filleS.getModel().getSize() + " players");
+		titularLabel = new JLabel("Titular players : " + filleT.getModel().getSize() + " players");
+		substituteLabel = new JLabel("Substitute players : " + filleS.getModel().getSize() + " players");
 		gc.gridx = 0;
 		gc.gridy = 1;
 		players.add(titularLabel, gc);
@@ -347,14 +349,14 @@ public class KickOffMenu extends JPanel {
 	}
 
 	public void addTactics() {
-		tacticsPlayersLabel = new JLabel("Select your tactics, and choose the right players :");
+		tacticsPlayersLabel = new JLabel("Select your tactics, and select the right players :");
 		tactics.setLayout(new GridBagLayout());
 		tacticsLabelPanel.setLayout(new BorderLayout());
 		tactics343.setMnemonic(KeyEvent.VK_C);
 		tactics343.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				tacticsLabelPanel.removeAll();
-				tacticsPlayersLabel = new JLabel("Choose 3 defenders, 4 midfielders and 3 fowards");
+				tacticsPlayersLabel = new JLabel("Select 3 defenders, 4 midfielders and 3 fowards");
 				tacticsLabelPanel.add(tacticsPlayersLabel);
 				tacticsLabelPanel.revalidate();
 			}
@@ -363,7 +365,7 @@ public class KickOffMenu extends JPanel {
 		tactics424.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				tacticsLabelPanel.removeAll();
-				tacticsPlayersLabel = new JLabel("Choose 4 defenders, 2 midfielders and 4 fowards");
+				tacticsPlayersLabel = new JLabel("Select 4 defenders, 2 midfielders and 4 fowards");
 				tacticsLabelPanel.add(tacticsPlayersLabel);
 				tacticsLabelPanel.revalidate();
 			}
@@ -372,16 +374,16 @@ public class KickOffMenu extends JPanel {
 		tactics235.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				tacticsLabelPanel.removeAll();
-				tacticsPlayersLabel = new JLabel("Choose 2 defenders, 3 midfielders and 5 fowards");
+				tacticsPlayersLabel = new JLabel("Select 2 defenders, 3 midfielders and 5 fowards");
 				tacticsLabelPanel.add(tacticsPlayersLabel);
 				tacticsLabelPanel.revalidate();
 			}
 		});
-		tactics442.setMnemonic(KeyEvent.VK_C);
-		tactics442.addItemListener(new ItemListener() {
+		tactics352.setMnemonic(KeyEvent.VK_C);
+		tactics352.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				tacticsLabelPanel.removeAll();
-				tacticsPlayersLabel = new JLabel("Choose 4 defenders, 4 midfielders and 2 fowards");
+				tacticsPlayersLabel = new JLabel("Select 4 defenders, 4 midfielders and 2 fowards");
 				tacticsLabelPanel.add(tacticsPlayersLabel);
 				tacticsLabelPanel.revalidate();
 			}
@@ -390,7 +392,7 @@ public class KickOffMenu extends JPanel {
 		tactics433.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				tacticsLabelPanel.removeAll();
-				tacticsPlayersLabel = new JLabel("Choose 4 defenders, 3 midfielders and 3 fowards");
+				tacticsPlayersLabel = new JLabel("Select 4 defenders, 3 midfielders and 3 fowards");
 				tacticsLabelPanel.add(tacticsPlayersLabel);
 				tacticsLabelPanel.revalidate();
 			}
@@ -399,7 +401,7 @@ public class KickOffMenu extends JPanel {
 		group.add(tactics343);
 		group.add(tactics424);
 		group.add(tactics235);
-		group.add(tactics442);
+		group.add(tactics352);
 		group.add(tactics433);
 		gc.fill = GridBagConstraints.VERTICAL;
 		gc.gridx = 2;
@@ -417,7 +419,7 @@ public class KickOffMenu extends JPanel {
 		tactics.add(tactics235, gc);
 		gc.gridx = 0;
 		gc.gridy = 1;
-		tactics.add(tactics442, gc);
+		tactics.add(tactics352, gc);
 		gc.gridx = 1;
 		gc.gridy = 1;
 		tactics.add(tactics433, gc);
@@ -540,7 +542,6 @@ public class KickOffMenu extends JPanel {
 					buff.append("\n");
 				}
 			}
-
 			return buff.toString();
 		}
 

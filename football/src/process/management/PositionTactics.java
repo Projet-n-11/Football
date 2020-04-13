@@ -139,6 +139,26 @@ public class PositionTactics {
 					}
 				}
 			}
+			else if(dt.getDefaultStrategy(0) == 4 && dt.getDefaultStrategy(1) == 3 && dt.getDefaultStrategy(2) == 3) {
+				for(DataPlayer dp : valuesDefender) {
+					if(set1 == false) {
+						setPosition(ConstantTactics.L_LEFTCENTERBACKX_433, ConstantTactics.L_LEFTCENTERBACKY_433, dp, table);
+						set1 = true;
+					}
+					else if(set2 == false) {
+						setPosition(ConstantTactics.L_RIGHTCENTERBACKX_433, ConstantTactics.L_RIGHTCENTERBACKY_433, dp, table);
+						set2 = true;
+					}
+					else if(set3 == false) {
+						setPosition(ConstantTactics.L_LEFTFULLBACKX_433, ConstantTactics.L_LEFTFULLBACKY_433, dp, table);
+						set3 = true;
+					}
+					else if(set4 == false) {
+						setPosition(ConstantTactics.L_RIGHTFULLBACKX_433, ConstantTactics.L_RIGHTFULLBACKY_433, dp, table);
+						set4 = true;
+					}
+				}
+			}
 		}
 		else {
 			if(dt.getDefaultStrategy(0) == 3 && dt.getDefaultStrategy(1) == 4 && dt.getDefaultStrategy(2) == 3) {
@@ -189,6 +209,26 @@ public class PositionTactics {
 					}
 				}
 			}
+			else if(dt.getDefaultStrategy(0) == 4 && dt.getDefaultStrategy(1) == 3 && dt.getDefaultStrategy(2) == 3) {
+				for(DataPlayer dp : valuesDefender) {
+					if(set1 == false) {
+						setPosition(ConstantTactics.R_LEFTCENTERBACKX_433, ConstantTactics.R_LEFTCENTERBACKY_433, dp, table);
+						set1 = true;
+					}
+					else if(set2 == false) {
+						setPosition(ConstantTactics.R_RIGHTCENTERBACKX_433, ConstantTactics.R_RIGHTCENTERBACKY_433, dp, table);
+						set2 = true;
+					}
+					else if(set3 == false) {
+						setPosition(ConstantTactics.R_LEFTFULLBACKX_433, ConstantTactics.R_LEFTFULLBACKY_433, dp, table);
+						set3 = true;
+					}
+					else if(set4 == false) {
+						setPosition(ConstantTactics.R_RIGHTFULLBACKX_433, ConstantTactics.R_RIGHTFULLBACKY_433, dp, table);
+						set4 = true;
+					}
+				}
+			}	
 		}
 	}
 	
@@ -247,6 +287,22 @@ public class PositionTactics {
 					}
 				}
 			}
+			else if(dt.getDefaultStrategy(0) == 4 && dt.getDefaultStrategy(1) == 3 && dt.getDefaultStrategy(2) == 3) {
+				for(DataPlayer dp : valuesMidFielder) {
+					if(set1 == false) {
+						setPosition(ConstantTactics.L_LEFTHALFBACKX_433, ConstantTactics.L_LEFTHALFBACKY_433, dp, table);
+						set1 = true;
+					}
+					else if(set2 == false) {
+						setPosition(ConstantTactics.L_RIGHTHALFBACKX_433, ConstantTactics.L_RIGHTHALFBACKY_433, dp, table);
+						set2 = true;
+					}
+					else if(set3 == false) {
+						setPosition(ConstantTactics.L_CENTERHALFBACKX_433, ConstantTactics.L_CENTERHALFBACKY_433, dp, table);
+						set3 = true;
+					}
+				}
+			}
 		}
 		else {
 			if(dt.getDefaultStrategy(0) == 3 && dt.getDefaultStrategy(1) == 4 && dt.getDefaultStrategy(2) == 3) {
@@ -295,6 +351,22 @@ public class PositionTactics {
 					else if(set2 == false) {
 						setPosition(ConstantTactics.R_RIGHTHALFBACKX_424, ConstantTactics.R_RIGHTHALFBACKY_424, dp, table);
 						set2 = true;
+					}
+				}
+			}
+			else if(dt.getDefaultStrategy(0) == 4 && dt.getDefaultStrategy(1) == 3 && dt.getDefaultStrategy(2) == 3) {
+				for(DataPlayer dp : valuesMidFielder) {
+					if(set1 == false) {
+						setPosition(ConstantTactics.R_LEFTHALFBACKX_433, ConstantTactics.R_LEFTHALFBACKY_433, dp, table);
+						set1 = true;
+					}
+					else if(set2 == false) {
+						setPosition(ConstantTactics.R_RIGHTHALFBACKX_433, ConstantTactics.R_RIGHTHALFBACKY_433, dp, table);
+						set2 = true;
+					}
+					else if(set3 == false) {
+						setPosition(ConstantTactics.R_CENTERHALFBACKX_433, ConstantTactics.R_CENTERHALFBACKY_433, dp, table);
+						set3 = true;
 					}
 				}
 			}
@@ -360,6 +432,22 @@ public class PositionTactics {
 					}
 				}
 			}
+			else if(dt.getDefaultStrategy(0) == 4 && dt.getDefaultStrategy(1) == 3 && dt.getDefaultStrategy(2) == 3) {
+				for(DataPlayer dp : valuesForward) {
+					if(set1 == false) {
+						setPosition(ConstantTactics.L_RIGHTFORWARDX_433, ConstantTactics.L_RIGHTFORWARDY_433, dp, table);
+						set1 = true;
+					}
+					else if(set2 == false) {
+						setPosition(ConstantTactics.L_LEFTFORWARDX_433, ConstantTactics.L_LEFTFORWARDY_433, dp, table);
+						set2 = true;
+					}
+					else if(set3 == false) {
+						setPosition(ConstantTactics.L_CENTERFORWARDX_433, ConstantTactics.L_CENTERFORWARDY_433, dp, table);
+						set3 = true;
+					}
+				}
+			}
 		}
 		else {
 			if(dt.getDefaultStrategy(0) == 3 && dt.getDefaultStrategy(1) == 4 && dt.getDefaultStrategy(2) == 3) {
@@ -411,6 +499,22 @@ public class PositionTactics {
 					else if(set4 == false) {
 						setPosition(ConstantTactics.R_RIGHTFOWARDX_424, ConstantTactics.R_RIGHTFOWARDY_424, dp, table);
 						set4 = true;
+					}
+				}
+			}
+			else if(dt.getDefaultStrategy(0) == 4 && dt.getDefaultStrategy(1) == 3 && dt.getDefaultStrategy(2) == 3) {
+				for(DataPlayer dp : valuesForward) {
+					if(set1 == false) {
+						setPosition(ConstantTactics.R_RIGHTFORWARDX_433, ConstantTactics.R_RIGHTFORWARDY_433, dp, table);
+						set1 = true;
+					}
+					else if(set2 == false) {
+						setPosition(ConstantTactics.R_LEFTFORWARDX_433, ConstantTactics.R_LEFTFORWARDY_433, dp, table);
+						set2 = true;
+					}
+					else if(set3 == false) {
+						setPosition(ConstantTactics.R_CENTERFORWARDX_433, ConstantTactics.R_CENTERFORWARDY_433, dp, table);
+						set3 = true;
 					}
 				}
 			}
