@@ -163,10 +163,11 @@ public class MovementPlayer{
 				player.setPositionY(player.getPositionY() + player.getPlayerType().getSpeed().getSpeedY());
 			}
 		}
-		Grass grass = new Grass(oldPlayerPosX, oldPlayerPosX);
-		System.out.println("grass " + oldPlayerPosX + " : " + oldPlayerPosY);
-		map.setElement(grass);
-		MovementBall.setPositionBall(player.getPositionX()+d, player.getPositionY());	
+		//Grass grass = new Grass(oldPlayerPosX, oldPlayerPosX);
+			System.out.println("grass " + oldPlayerPosX + " : " + oldPlayerPosY);
+		//map.setElement(grass);
+		MovementBall.setPositionBall(player.getPositionX()+d, player.getPositionY());
+			System.out.println("player " + player.getPositionX() + " ; " + player.getPositionY());
 	}
 	
 	public void passBalltoPal(DataPlayer player, DataPlayer player2, DataBall ball) {

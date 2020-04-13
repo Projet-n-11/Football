@@ -18,7 +18,6 @@ public class Position{
 		return posX;
 	}
 
-
 	public void setPositionX(int posX) {
 		this.posX = posX;
 	}
