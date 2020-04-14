@@ -126,7 +126,15 @@ public class Match {	// if singleton : re-chech every variables
 									mp.move(currentPlayer, ball);
 									if (mp.isCloseToBall(currentPlayer, ball));
 									{
-										if (mp.tryInterception(currentPlayer, ball)) mp.runtoCages(currentPlayer, itsUserRound, ball);
+										if (mp.tryInterception(currentPlayer, ball)) 
+										{
+										mp.runtoCages(currentPlayer, itsUserRound, ball);
+										System.out.println("INTERCEPTION !");
+										}
+										else
+										{
+										System.out.println("INTERCEPTION FAILED");	
+										}
 									}
 								}
 								else // ball is owned by ally : cover ally

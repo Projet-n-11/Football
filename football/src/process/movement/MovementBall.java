@@ -52,8 +52,7 @@ public class MovementBall {
 	}
 	
 	public static void setPositionBall(int x, int y) {
-		Grass grass = new Grass(ball.getPositionX(), ball.getPositionY());
-		table.setElement(grass);
+		table.removeElement(ball.getPositionX(), ball.getPositionY());
 		ball.setPositionX(x);
 		ball.setPositionY(y);
 		table.setElement(ball);		

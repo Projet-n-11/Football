@@ -3,7 +3,6 @@ package process.movement;
 import java.util.Random;
 
 import databall.DataBall;
-import datafield.Grass;
 import datafield.Position;
 import datafield.SpecialPosition;
 import dataplayer.DataPlayer;
@@ -34,9 +33,7 @@ public class MovementPlayer{
 		/*
 		 * Player's conditions so he'll run to the ball's position
 		 * to get it. Only for the x axis. 
-		 */	
-		Grass grass = new Grass(dp.getPositionX(), dp.getPositionY());
-		map.setElement(grass);
+		 */
 		Boolean positionOnX = false;
 		Boolean positionOnY = false;
 
@@ -163,11 +160,9 @@ public class MovementPlayer{
 				player.setPositionY(player.getPositionY() + player.getPlayerType().getSpeed().getSpeedY());
 			}
 		}
-		//Grass grass = new Grass(oldPlayerPosX, oldPlayerPosX);
-			System.out.println("grass " + oldPlayerPosX + " : " + oldPlayerPosY);
-		//map.setElement(grass);
+		map.removeElement(oldPlayerPosX, oldPlayerPosY);
+		map.setElement(player);
 		MovementBall.setPositionBall(player.getPositionX()+d, player.getPositionY());
-			System.out.println("player " + player.getPositionX() + " ; " + player.getPositionY());
 	}
 	
 	public void passBalltoPal(DataPlayer player, DataPlayer player2, DataBall ball) {
@@ -197,22 +192,73 @@ public class MovementPlayer{
 	}
 	
 	public void shoot(DataPlayer player, DataBall ball, Boolean itsUserRound) {
+		int direction;
 		if (itsUserRound)
 		{
+			direction = -1;
 			player.setPositionX(player.getPositionX()+1); // player steps back
 		} else
 		{
+			direction = 1;
 			player.setPositionX(player.getPositionX()-1); // player steps back
 		}
-		ball.setSpeedX(player.getPlayerType().getSpeed().getSpeedX()*2); // ball get the double of
-		ball.setSpeedY(player.getPlayerType().getSpeed().getSpeedY()*2); // the player's speed
+		ball.setSpeedX(direction*player.getPlayerType().getSpeed().getSpeedX()*2); // ball get the double of the player's speed
 		player.setHaveBall(false);
 		ball.setOwnedBy(null);
 	}
 
 	public Boolean tryInterception(DataPlayer player, DataBall ball) {
+		Random r = new Random();
+		int speedx = player.getPlayerType().getSpeed().getSpeedX();
+		int speedy = player.getPlayerType().getSpeed().getSpeedY();
+		int interceptorGrade = Math.abs(speedx*speedy)-player.getPlayerType().getStress();
 		
-		return null;
+		speedx = ball.getOwnedBy().getPlayerType().getSpeed().getSpeedX();
+		speedy = ball.getOwnedBy().getPlayerType().getSpeed().getSpeedY();
+		int ballPlayerGrade = Math.abs(speedx*speedy)-ball.getOwnedBy().getPlayerType().getStress();
+		
+		DataPlayer winner, looser;
+		
+		if (interceptorGrade>ballPlayerGrade)
+		{
+			winner = player;
+			looser = ball.getOwnedBy();
+		}
+		else if (ballPlayerGrade<interceptorGrade)
+		{
+			winner = ball.getOwnedBy();
+			looser = player;
+		}
+		else 
+		{
+			if (player.getPlayerType().getHealth()<ball.getOwnedBy().getPlayerType().getHealth())
+			{
+				winner = ball.getOwnedBy();
+				looser = player;
+			}
+			else if (player.getPlayerType().getHealth()<ball.getOwnedBy().getPlayerType().getHealth()) 
+			{
+				winner = player;
+				looser = ball.getOwnedBy();
+			}
+			else if (r.nextInt(2)==0)
+			{
+				winner = player;
+				looser = ball.getOwnedBy();
+			}
+			else
+			{
+				winner = ball.getOwnedBy();
+				looser = player;
+			}
+		}
+		
+		winner.getPlayerType().setStress(winner.getPlayerType().getStress()-5);
+		looser.getPlayerType().setStress(winner.getPlayerType().getStress()+5);
+		winner.setHaveBall(true);
+		looser.setHaveBall(false);
+		
+		return player.getHaveBall();
 	}
 	
 	public Boolean isCloseToBall(DataPlayer player, DataBall ball) {

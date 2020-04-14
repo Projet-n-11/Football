@@ -53,31 +53,17 @@ public class Vision {
 		return false;
 	}
 	
-	public Boolean isPossessed(Position ball, Map position) {
-        int x = ball.getPositionX();
-        int y = ball.getPositionY();
-        if ( (x+1<122) || (x-1>=0) || (y+1<92) || (y-1>=0) ) {
-            if (position.getElement(x, y+1) instanceof DataPlayer
-                    || position.getElement(x-1, y) instanceof DataPlayer
-                    || position.getElement(x+1, y) instanceof DataPlayer
-                    || position.getElement(x, y-1) instanceof DataPlayer) {
-                return true;
-            }
-        }
-        return false;
-    }
-	
 	public Boolean seeCages(int playerPosX, int playerPosY, Boolean itsUserRound) {
 		if (itsUserRound)
 		{
-			if (playerPosX<=10 && Math.abs(playerPosY)<=15)
+			if (playerPosX<=15 && playerPosY>30 && playerPosY<60)
 			{
 				return true;
 			}
 		}
 		else
 		{
-			if (playerPosX<=120-10 && Math.abs(playerPosY)<=15)
+			if (playerPosX>=120-15 && playerPosY>30 && playerPosY<60)
 			{
 				return true;
 			}

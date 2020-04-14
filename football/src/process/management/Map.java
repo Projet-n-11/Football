@@ -39,4 +39,8 @@ public class Map {
 	public Position getElement(int posX, int posY) {
 		return map[posX][posY];
 	}
+	
+	public void removeElement(int x, int y) {
+		this.map[x][y] = null;
+	}
 }

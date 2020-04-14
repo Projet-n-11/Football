@@ -13,17 +13,19 @@ public abstract class AbstractDataPlayerType{
 		speed = new PlayerSpeed(1);
 	}
 	
-	public PlayerHealth getHeath() {
-		return health;
+	public int getHealth() {
+		return health.getHealth();
 	}
-	public void setHeath(PlayerHealth health) {
-		this.health = health;
+	public void setHealth(int health) {
+		if (health>=0 && health<=100)
+		this.health.setHealth(health);
 	}
-	public PlayerStress getStress() {
-		return stress;
+	public int getStress() {
+		return stress.getStress();
 	}
-	public void setStress(PlayerStress stress) {
-		this.stress = stress;
+	public void setStress(int stress) {
+		if (stress>=0 && stress<=100)
+		this.stress.setStress(stress);
 	}
 	public PlayerSpeed getSpeed() {
 		return speed;
