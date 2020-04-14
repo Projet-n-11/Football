@@ -86,7 +86,7 @@ public class MovementPlayer{
 				dp.setPositionY(dp.getPositionY() + dp.getPlayerType().getSpeed().getSpeedY());
 			}
 		}
-
+		checkPosition(dp, itsBotRound);
 	}
 
 	/**
@@ -161,6 +161,7 @@ public class MovementPlayer{
 			}
 		}
 		map.removeElement(oldPlayerPosX, oldPlayerPosY);
+		checkPosition(player, itsBotRound);
 		map.setElement(player);
 		MovementBall.setPositionBall(player.getPositionX()+d, player.getPositionY());
 	}
