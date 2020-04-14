@@ -29,7 +29,7 @@ public class MovementPlayer{
 		this.map = map;
 	}
 
-	public void move(DataPlayer dp, DataBall db) {
+	public void move(DataPlayer dp, DataBall db, Boolean itsBotRound) {
 		/*
 		 * Player's conditions so he'll run to the ball's position
 		 * to get it. Only for the x axis. 
@@ -92,10 +92,10 @@ public class MovementPlayer{
 	/**
 	 * runtoCages is called when player own the ball and is distant from cages.
 	 * @param player
-	 * @param itsUserRound
+	 * @param itsBotRound
 	 * @param ball
 	 */
-	public void runtoCages(DataPlayer player, Boolean itsUserRound, DataBall ball) {
+	public void runtoCages(DataPlayer player, DataBall ball, Boolean itsBotRound) {
 		Random r = new Random();
 		int goalx;
 		int GOALY1 = ConstantPosition.GOALY1;
@@ -105,7 +105,7 @@ public class MovementPlayer{
 		int oldPlayerPosX = player.getPositionX();
 		int oldPlayerPosY = player.getPositionY();
 		
-		if (itsUserRound) 
+		if (itsBotRound) 
 		{
 			goalx = ConstantPosition.GOAL1X;
 			d = -3;
@@ -191,9 +191,9 @@ public class MovementPlayer{
 		ball.setSpeedY(speed_towards_palY);
 	}
 	
-	public void shoot(DataPlayer player, DataBall ball, Boolean itsUserRound) {
+	public void shoot(DataPlayer player, DataBall ball, Boolean itsBotRound) {
 		int direction;
-		if (itsUserRound)
+		if (itsBotRound)
 		{
 			direction = -1;
 			player.setPositionX(player.getPositionX()+1); // player steps back
@@ -308,6 +308,88 @@ public class MovementPlayer{
 		else {
 			return true;
 		}
+	}
+	
+	public void checkPosition(DataPlayer player, Boolean itsBotRound) {
+		int middleX = (ConstantPosition.WIDTH/2);
+		int limitOneThird1 = (ConstantPosition.WIDTH/3);
+		int limitOneThird2 = ConstantPosition.WIDTH-(ConstantPosition.WIDTH/3);
+		int GoalLimitX, GoalLimitY1 = ConstantPosition.HEIGHT/2-40/2, GoalLimitY2 = GoalLimitY1 = ConstantPosition.HEIGHT/2+40/2;;
+		if (itsBotRound)
+		{
+			GoalLimitX = ConstantPosition.INITIAL_POINT+15;
+		}
+		else
+		{
+			GoalLimitX = ConstantPosition.WIDTH-15;
+		}
+		if (player.getPlayerType().getPlayerTypeName().compareTo("Goalie")==0)		// Goalie
+		{
+			if (itsBotRound)
+			{
+				if (player.getPositionX()<GoalLimitX)
+				{
+					player.setPositionX(GoalLimitX);
+				}
+			}
+			else
+			{
+				if (player.getPositionX()>GoalLimitX)
+				{
+					player.setPositionX(GoalLimitX);
+				}
+			}
+			if (player.getPositionY()<GoalLimitY1)
+			{
+				player.setPositionY(GoalLimitY1);
+			}
+			else if (player.getPositionY()>GoalLimitY2)
+			{
+				player.setPositionY(GoalLimitY2);
+			}
+		}
+		else if (player.getPlayerType().getPlayerTypeName().compareTo("Defender")==0) // Defender
+		{
+			if (itsBotRound)
+			{
+				if (middleX>player.getPositionX())
+				{
+					player.setPositionX(middleX);
+				}
+			}
+			else
+				if (player.getPositionX()>middleX)
+				{
+					player.setPositionX(middleX);
+				}
+		}
+		else if (player.getPlayerType().getPlayerTypeName().compareTo("Midfielder")==0) // Midfielder
+		{
+			if (player.getPositionX()>limitOneThird2) 
+			{
+				player.setPositionX(limitOneThird2);
+			}
+			else if (player.getPositionX()<limitOneThird1)
+			{
+				player.setPositionX(limitOneThird1);
+			}
+		}
+		else 																			// forward
+		{
+			if (itsBotRound)
+			{
+				if (player.getPositionX()>limitOneThird2)
+				{
+					player.setPositionX(limitOneThird2);
+				}
+			}
+			else
+				if (player.getPositionX()<limitOneThird1)
+				{
+					player.setPositionX(limitOneThird1);
+				}
+		}
+	
 	}
 
 

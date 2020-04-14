@@ -108,7 +108,7 @@ public class Match {	// if singleton : re-chech every variables
 					else
 					{
 						System.out.println("and runs to cages");
-						mp.runtoCages(currentPlayer, itsUserRound, ball);
+						mp.runtoCages(currentPlayer, ball, itsUserRound);
 					}
 				}
 				else // player does not have ball
@@ -123,12 +123,12 @@ public class Match {	// if singleton : re-chech every variables
 							{
 								if (ball.getOwnedBy().getTeam().compareTo(currentPlayer.getTeam())!=0) // if ball is owned by ennemy
 								{
-									mp.move(currentPlayer, ball);
+									mp.move(currentPlayer, ball, itsUserRound);
 									if (mp.isCloseToBall(currentPlayer, ball));
 									{
 										if (mp.tryInterception(currentPlayer, ball)) 
 										{
-										mp.runtoCages(currentPlayer, itsUserRound, ball);
+										mp.runtoCages(currentPlayer, ball, itsUserRound);
 										System.out.println("INTERCEPTION !");
 										}
 										else
@@ -141,13 +141,13 @@ public class Match {	// if singleton : re-chech every variables
 								{
 									if (currentPlayer.getPositionX()-ball.getSpeedX()>15)
 									{
-										mp.move(currentPlayer, ball);
+										mp.move(currentPlayer, ball, itsUserRound);
 									}
 								}
 							}
 							else // case of free ball:
 							{
-								mp.move(currentPlayer, ball);
+								mp.move(currentPlayer, ball, itsUserRound);
 								if (mp.isCloseToBall(currentPlayer, ball)) // if free ball is reached : get ball.
 								{
 									currentPlayer.setHaveBall(true);
