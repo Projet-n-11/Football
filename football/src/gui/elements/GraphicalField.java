@@ -72,7 +72,7 @@ public class GraphicalField extends JPanel implements Runnable{
 		pt.placePlayers(team, field, alreadyPlacedLeft);
 		alreadyPlacedLeft = true;
 		PositionTactics pt2 = new PositionTactics(team2, field, alreadyPlacedLeft);
-		pt2.placePlayers(team, field, alreadyPlacedLeft);
+		pt2.placePlayers(team2, field, alreadyPlacedLeft);
 		alreadyPlacedLeft = false;
 		
 		ArrayList<DataPlayer> allPlayersFromTeam1=new ArrayList<DataPlayer>(team.getPlayers().values());

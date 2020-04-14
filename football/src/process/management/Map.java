@@ -20,14 +20,6 @@ public class Map {
 	
 	//The following constructor will initialize each box from the "position" array by inserting grass
 	public Map(){
-		for(int x=0; x<ConstantPosition.WIDTH+10; x++) {
-			for(int y=0; y<ConstantPosition.HEIGHT+10; y++) {
-				Grass grass = new Grass(x, y);
-				grass.setPositionX(x);
-				grass.setPositionY(y);
-				setElement(grass);
-			}
-		}
 	}
 	
 	//This hook method will set an element into the array

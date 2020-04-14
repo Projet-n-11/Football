@@ -49,7 +49,6 @@ public class DrawField extends JPanel {
 		this.ball = ball;
 		
 		setBackground(new Color(0, 128, 0));
-		setBackground(new Color(0, 128, 0));
 		setSize(1920, 1080);
 		setVisible(true);
 	}
@@ -69,19 +68,22 @@ public class DrawField extends JPanel {
 		//graphics for the ball (tactics)
 		Graphics2D g7 = (Graphics2D) g.create();
 		
-		double width = getWidth();
-		double height = getHeight();
-		double fieldLength = 120d;
-		double fieldWidth = 90d;
-		double scaleWidth = fieldLength+2.5;
-		double scaleHeight = fieldWidth+2.5;
+		double width = getWidth() - 35;
+		double height = getHeight() - 35;
+		double fieldLength = ConstantPosition.WIDTH;
+		double fieldWidth = ConstantPosition.HEIGHT;
+		double scaleWidth = fieldLength+3;
+		double scaleHeight = fieldWidth+3;
 		double scale;
-		if((width/height) >= (110d/70d)) {
+		
+		if((width/height) >= (120d/90d)) {
 			scale = height/scaleHeight;
 		} else {
 			scale = width/scaleWidth;
 		}
+		
 		Stroke stroke = new BasicStroke(2/20);
+		
 		//g2
 		g2.scale(scale, scale);
 		g2.translate(1, 1);
@@ -114,6 +116,7 @@ public class DrawField extends JPanel {
 		g7.translate(1,1);
 		g7.setColor(Color.BLACK);
 		g7.setStroke(stroke2);
+		
 		//drawGrid(g3, fieldLength, fieldWidth);
 		drawTouchLines(g2, fieldLength, fieldWidth);
 		drawGoalLines(g2, fieldLength, fieldWidth);
@@ -126,14 +129,9 @@ public class DrawField extends JPanel {
 		drawPenaltyAreas(g2, fieldLength, fieldWidth);
 		drawPenaltyMarks(g2, fieldLength, fieldWidth);
 		drawPenaltyArches(g2, fieldLength, fieldWidth);
-		//drawSpecialPositions(g4, fieldLength, fieldWidth);
-		try {
-			drawPlayers(g6, g5, fieldLength, fieldWidth);
-			drawBall(g7, fieldLength, fieldWidth);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		drawSpecialPositions(g4, fieldLength, fieldWidth);
+		drawPlayers(g6, g5, fieldLength, fieldWidth);
+		drawBall(g7, fieldLength, fieldWidth);
 	}
 	
 	public void drawPenaltyArches(Graphics2D g2, double fieldLength,
@@ -141,38 +139,38 @@ public class DrawField extends JPanel {
 		double extent = 2*Math.toDegrees(Math.acos(6d/10d));
 		//double extent = 106.26020470831196d;
 		g2.draw(new Arc2D.Double(fieldLength-12-10, (fieldWidth/2)-10, 20, 20, 180-(extent/2), extent, Arc2D.OPEN));
-		g2.draw(new Arc2D.Double(12-10, (fieldWidth/2)-10, 20, 20, -extent/2, extent, Arc2D.OPEN));
+		g2.draw(new Arc2D.Double(12-4, (fieldWidth/2)-10, 20, 20, -extent/2, extent, Arc2D.OPEN));
 	}
 
 	public void drawPenaltyMarks(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
 		g2.fill(new Ellipse2D.Double(fieldLength-12-(10d/36), (fieldWidth/2)-(10d/36), (20d/36), (20d/36)));
-		g2.fill(new Ellipse2D.Double(12-(10d/36), (fieldWidth/2)-(10d/36), (20d/36), (20d/36)));
+		g2.fill(new Ellipse2D.Double(18-(10d/36), (fieldWidth/2)-(10d/36), (20d/36), (20d/36)));
 	}
 
 	public void drawPenaltyAreas(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
-		g2.draw(new Rectangle2D.Double(0, (fieldWidth/2)-22, 18, 42));
+		g2.draw(new Rectangle2D.Double(6, (fieldWidth/2)-22, 18, 42));
 		g2.draw(new Rectangle2D.Double(fieldLength-18, (fieldWidth/2)-22, 18, 42));
 	}
 
 	public void drawGoalAreas(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
-		g2.draw(new Rectangle2D.Double(0, (fieldWidth/2)-10, 6, 20));
+		g2.draw(new Rectangle2D.Double(6, (fieldWidth/2)-10, 6, 20));
 		g2.draw(new Rectangle2D.Double(fieldLength-6, (fieldWidth/2)-10, 6, 20));
 	}
 
 	public void drawGoals(Graphics2D g2, double fieldLength, double fieldWidth) {
-		g2.draw(new Rectangle2D.Double(-1, (fieldWidth/2)-4, 1, 8));
+		g2.draw(new Rectangle2D.Double(5, (fieldWidth/2)-4, 1, 8));
 		g2.draw(new Rectangle2D.Double(fieldLength, (fieldWidth/2)-4, 1, 8));
 	}
 
 	public void drawCornerArches(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
-		g2.draw(new Arc2D.Double(-1, -1, 2, 2, 270, 90, Arc2D.OPEN));
-		g2.draw(new Arc2D.Double(fieldLength-1, -1, 2, 2, 180, 90, Arc2D.OPEN));
+		g2.draw(new Arc2D.Double(5, 5, 2, 2, 270, 90, Arc2D.OPEN));
+		g2.draw(new Arc2D.Double(fieldLength-1, 5, 2, 2, 180, 90, Arc2D.OPEN));
 		g2.draw(new Arc2D.Double(fieldLength-1, fieldWidth-1, 2, 2, 90, 90, Arc2D.OPEN));
-		g2.draw(new Arc2D.Double(-1, fieldWidth-1, 2, 2, 0, 90, Arc2D.OPEN));
+		g2.draw(new Arc2D.Double(5, fieldWidth-1, 2, 2, 0, 90, Arc2D.OPEN));
 	}
 
 	public void drawCenterMark(Graphics2D g2, double fieldLength,
@@ -187,28 +185,28 @@ public class DrawField extends JPanel {
 
 	public void drawCenterLine(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
-		g2.draw(new Line2D.Double(fieldLength/2, 0, fieldLength/2, fieldWidth));
+		g2.draw(new Line2D.Double(fieldLength/2, 6, fieldLength/2, fieldWidth));
 	}
 
 	public void drawGoalLines(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
-		g2.draw(new Line2D.Double(0, 0, 0, fieldWidth));
-		g2.draw(new Line2D.Double(fieldLength, 0, fieldLength, fieldWidth));
+		g2.draw(new Line2D.Double(6, 6, 6, fieldWidth));
+		g2.draw(new Line2D.Double(fieldLength, 6, fieldLength, fieldWidth));
 	}
 
 	public void drawTouchLines(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
-		g2.draw(new Line2D.Double(0, 0, fieldLength, 0));
-		g2.draw(new Line2D.Double(0, fieldWidth, fieldLength, fieldWidth));
+		g2.draw(new Line2D.Double(6, 6, fieldLength, 6));
+		g2.draw(new Line2D.Double(6, fieldWidth, fieldLength, fieldWidth));
 	}
 	
 	public void drawGrid(Graphics2D g3, double fieldLength, double fieldWidth) {
-		for(int i=-1; i<ConstantPosition.HEIGHT+2; i++) {
-			g3.draw(new Line2D.Double(-1, i, ConstantPosition.WIDTH+1, i));
+		for(int i=-1; i<ConstantPosition.HEIGHT + 7; i++) {
+			g3.draw(new Line2D.Double(-1, i, ConstantPosition.WIDTH + 7, i));
 		}
 		
-		for(int j=-1; j<ConstantPosition.WIDTH+2; j++) {
-			g3.draw(new Line2D.Double(j, -1, j ,ConstantPosition.HEIGHT+1));
+		for(int j=-1; j<ConstantPosition.WIDTH + 10; j++) {
+			g3.draw(new Line2D.Double(j, -1, j ,ConstantPosition.HEIGHT + 10));
 		}
 	}
 	
@@ -226,22 +224,26 @@ public class DrawField extends JPanel {
 		g4.draw(new Line2D.Double(ConstantPosition.GOAL2X, ConstantPosition.GOALY1, ConstantPosition.GOAL2X ,ConstantPosition.GOALY2));
 	}
 	
-	public static void drawPlayers(Graphics2D gplayersteam, Graphics2D gplayersteam2, double fieldLength, double doubleWidth) throws IOException {
+	public void drawPlayers(Graphics2D gplayersteam, Graphics2D gplayersteam2, double fieldLength, double doubleWidth){
 		Font font = new Font("SANS_SERIF", Font.BOLD, 2);
 		gplayersteam.setFont(font);
 		gplayersteam2.setFont(font);
 		for(DataPlayer playersteam1 : Pteam) {
-			gplayersteam.drawString(playersteam1.getPlayerName(), playersteam1.getPositionX()-2, playersteam1.getPositionY()-2);
-			gplayersteam.draw(new Line2D.Double(playersteam1.getPositionX(), playersteam1.getPositionY(), playersteam1.getPositionX(), playersteam1.getPositionY()));
+			if(playersteam1.getPlayerType().getTitularPlayer() == 1) {
+				gplayersteam.drawString(playersteam1.getPlayerName(), playersteam1.getPositionX()-2, playersteam1.getPositionY()-2);
+				gplayersteam.draw(new Line2D.Double(playersteam1.getPositionX(), playersteam1.getPositionY(), playersteam1.getPositionX(), playersteam1.getPositionY()));
+			}
 		}
 		
 		for(DataPlayer playersteam2 : IAteam) {
-			gplayersteam2.drawString(playersteam2.getPlayerName(), playersteam2.getPositionX()-2, playersteam2.getPositionY()-2);
-			gplayersteam2.draw(new Line2D.Double(playersteam2.getPositionX(), playersteam2.getPositionY(), playersteam2.getPositionX(), playersteam2.getPositionY()));
+			if(playersteam2.getPlayerType().getTitularPlayer() == 1) {
+				gplayersteam2.drawString(playersteam2.getPlayerName(), playersteam2.getPositionX()-2, playersteam2.getPositionY()-2);
+				gplayersteam2.draw(new Line2D.Double(playersteam2.getPositionX(), playersteam2.getPositionY(), playersteam2.getPositionX(), playersteam2.getPositionY()));
+			}
 		}
 	}
 	
-	public static void drawBall(Graphics2D gball, double fieldLength, double doubleWidth) {
+	public void drawBall(Graphics2D gball, double fieldLength, double doubleWidth) {
 		gball.draw(new Ellipse2D.Double(ball.getPositionX(), ball.getPositionY(), 0.4, 0.4));
 	}
 }

@@ -112,10 +112,10 @@ public class KickOffMenu extends JPanel {
 			gc.insets = new Insets(10, 10, 10, 10);;
 			panel.setLayout(new GridBagLayout());
 			players.setLayout(new GridBagLayout());
-			
+
 			jsfilleS.setViewportView(filleS);
 			jsfilleT.setViewportView(filleT);
-			
+
 			Pteams.addItemListener(new ItemListener(){
 
 				public void itemStateChanged(ItemEvent e) {
@@ -146,16 +146,14 @@ public class KickOffMenu extends JPanel {
 			startButton.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e) {
+					DataTeam teamPlayer = null;
+					DataTeam teamIA = null;
 					if(modelP.getSelectedItem().toString() != "Select your team..." && modelIA.getSelectedItem().toString() != "Select your team..." 
 							&& group.getSelection() != null && filleT.getModel().getSize() == 11 && filleS.getModel().getSize() == 12) {
-						panel.removeAll();
-						panel.setBorder(BorderFactory.createTitledBorder(""));
+						boolean everythingFine = false;
+						teamPlayer = CreaTeam.creaTeam(modelP.getSelectedItem().toString());
+						teamIA = CreaTeam.creaTeam(modelIA.getSelectedItem().toString());
 
-						DataTeam teamPlayer = CreaTeam.creaTeam(modelP.getSelectedItem().toString());
-						DataTeam teamIA = CreaTeam.creaTeam(modelIA.getSelectedItem().toString());
-
-						//System.out.println("Player tactics:" + teamPlayer.getDefaultStrategy(0) + teamPlayer.getDefaultStrategy(1) + teamPlayer.getDefaultStrategy(2));
-						//System.out.println("IA tactics:" + teamIA.getDefaultStrategy(0) + teamIA.getDefaultStrategy(1) + teamIA.getDefaultStrategy(2));
 						if(tactics343.isSelected()) {
 							teamPlayer.setDefaultStrategy(new int[] {3,4,3});
 						}
@@ -171,31 +169,79 @@ public class KickOffMenu extends JPanel {
 						else if(tactics433.isSelected()) {
 							teamPlayer.setDefaultStrategy(new int[] {4,3,3});
 						}
-						
+
 						for(DataPlayer players: teamPlayer.getPlayers().values()) {
 							for(int nb_elts=0; nb_elts < filleT.getModel().getSize(); nb_elts++) {
 								if(filleT.getModel().getElementAt(nb_elts).contains(players.getPlayerName())) {
 									players.setPlayerTitular(1);
 								}
 							}
-							
+
 							for(int nb_elts=0; nb_elts < filleS.getModel().getSize(); nb_elts++) {
 								if(filleS.getModel().getElementAt(nb_elts).contains(players.getPlayerName())) {
 									players.setPlayerTitular(0);					
 								}
 							}
 						}
-						
-						DataBall ball = new DataBall(ConstantPosition.ENGAGEMENTX, ConstantPosition.ENGAGEMENTY);
-						Score score = new Score(teamPlayer, teamIA);
-						MatchScreen match = new MatchScreen(teamPlayer, teamIA, ball, score);
 
-						panel.setLayout(new BorderLayout());
-						panel.setSize(1300,800);
-						panel.setLocation(350,150);
-						panel.setVisible(true);
-						panel.add(match);
-						panel.repaint();
+						int defenders = 0;
+						int midfielders = 0;
+						int forward = 0;
+						int goalie = 0;
+
+						for(DataPlayer players: teamPlayer.getPlayers().values()) {
+							if(players.getPlayerType().getTitularPlayer() == 1 && players.getPlayerType().getPlayerTypeName() == "Defender") {
+								defenders++;
+							}
+							else if(players.getPlayerType().getTitularPlayer() == 1 && players.getPlayerType().getPlayerTypeName() == "Midfielder") {
+								midfielders++;
+							}
+							else if(players.getPlayerType().getTitularPlayer() == 1 && players.getPlayerType().getPlayerTypeName() == "Forward") {
+								forward++;
+							}
+							else if(players.getPlayerType().getTitularPlayer() == 1 && players.getPlayerType().getPlayerTypeName() == "Goalie") {
+								goalie++;
+							}
+						}
+
+						if(goalie == 1 && defenders == 4 && midfielders == 3 && forward == 3 
+								&& teamPlayer.getDefaultStrategy(0) == 4 && teamPlayer.getDefaultStrategy(1) == 3 && teamPlayer.getDefaultStrategy(2) == 3) {
+							everythingFine = true;
+						}
+						else if(goalie == 1 && defenders == 3 && midfielders == 5 && forward == 2  
+								&& teamPlayer.getDefaultStrategy(0) == 3 && teamPlayer.getDefaultStrategy(1) == 5 && teamPlayer.getDefaultStrategy(2) == 2) {
+							everythingFine = true;
+						}
+						else if(goalie == 1 && defenders == 2 && midfielders == 3 && forward == 5  
+								&& teamPlayer.getDefaultStrategy(0) == 2 && teamPlayer.getDefaultStrategy(1) == 3 && teamPlayer.getDefaultStrategy(2) == 5) {
+							everythingFine = true;
+						}
+						else if(goalie == 1 && defenders == 4 && midfielders == 2 && forward == 4  
+								&& teamPlayer.getDefaultStrategy(0) == 4 && teamPlayer.getDefaultStrategy(1) == 2 && teamPlayer.getDefaultStrategy(2) == 4) {
+							everythingFine = true;
+						}
+						else if(goalie == 1 && defenders == 3 && midfielders == 4 && forward == 3  
+								&& teamPlayer.getDefaultStrategy(0) == 3 && teamPlayer.getDefaultStrategy(1) == 4 && teamPlayer.getDefaultStrategy(2) == 3) {
+							everythingFine = true;
+						}
+
+						if(everythingFine == true) {
+							panel.removeAll();
+							panel.setBorder(BorderFactory.createTitledBorder(""));
+							DataBall ball = new DataBall(ConstantPosition.ENGAGEMENTX, ConstantPosition.ENGAGEMENTY);
+							Score score = new Score(teamPlayer, teamIA);
+							MatchScreen match = new MatchScreen(teamPlayer, teamIA, ball, score);
+							panel.setLayout(new BorderLayout());
+							panel.setSize(1300,800);
+							panel.setLocation(350,150);
+							panel.setVisible(true);
+							panel.add(match);
+							panel.repaint();
+						}
+						else {
+							teamPlayer = null;
+							teamIA = null;
+						}
 					}
 					else {
 						JPanel errorPanel = new JPanel();
