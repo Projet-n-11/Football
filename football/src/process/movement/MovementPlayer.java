@@ -231,12 +231,12 @@ public class MovementPlayer{
 		}
 		else 
 		{
-			if (player.getPlayerType().getHealth()<ball.getOwnedBy().getPlayerType().getHealth())
+			if (player.getPlayerType().getStamina()<ball.getOwnedBy().getPlayerType().getStamina())
 			{
 				winner = ball.getOwnedBy();
 				looser = player;
 			}
-			else if (player.getPlayerType().getHealth()<ball.getOwnedBy().getPlayerType().getHealth()) 
+			else if (player.getPlayerType().getStamina()<ball.getOwnedBy().getPlayerType().getStamina()) 
 			{
 				winner = player;
 				looser = ball.getOwnedBy();

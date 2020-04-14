@@ -62,8 +62,8 @@ public class PlayerFactory {
 	if (teamsLists.getTeamPlayerType(i).compareTo("goalie")==0) {
 		int a = Integer.parseInt(teamsLists.getTeamSpecialStats(i).charAt(0)+"");
 		int b = Integer.parseInt(teamsLists.getTeamSpecialStats(i).charAt(1)+"");
-		Dive dive = creaDive(a);
-		Reflex reflex = creaReflex(b);
+		Reflex reflex = creaReflex(a);
+		Dive dive = creaDive(b);
 		int c = teamsLists.getTitularPlayer(i);
 		playerType = creaPlayerGoalie(reflex,dive,c);
 	}
@@ -97,6 +97,8 @@ public class PlayerFactory {
 	else
 		return null;
 	playerType.setSpeed(Integer.parseInt(teamsLists.getPlayerSpeed(i)));
+	playerType.setStress(Integer.parseInt(teamsLists.getPlayerStress(i)));
+	playerType.setStamina(Integer.parseInt(teamsLists.getPlayerStamina(i)));
 	return playerType;
 	}
 	

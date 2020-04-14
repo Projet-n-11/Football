@@ -1,24 +1,26 @@
 package dataplayer;
 
+import dataplayer.PlayerStamina;
+
 public abstract class AbstractDataPlayerType{
-	private PlayerHealth health;
+	private PlayerStamina stamina;
 	private PlayerStress stress;
 	private PlayerSpeed speed;
 	private String playerTypeName;
 	private int titularPlayer;
 	
 	public AbstractDataPlayerType() {
-		health = new PlayerHealth(100);
+		stamina = new PlayerStamina(100);
 		stress = new PlayerStress(0);
 		speed = new PlayerSpeed(1);
 	}
 	
-	public int getHealth() {
-		return health.getHealth();
+	public int getStamina() {
+		return stamina.getStamina();
 	}
-	public void setHealth(int health) {
-		if (health>=0 && health<=100)
-		this.health.setHealth(health);
+	public void setStamina(int stamina) {
+		if (stamina>=0 && stamina<=100)
+		this.stamina.setStamina(stamina);
 	}
 	public int getStress() {
 		return stress.getStress();
@@ -49,6 +51,6 @@ public abstract class AbstractDataPlayerType{
 		this.playerTypeName = playerTypeName;
 	}
 	public String toString() {	// inutile : redéfini dans les classes concrètes
-		return "Health =" + health + ", stress=" + stress + ", speed=" + speed;
+		return "stamina =" + stamina + ", stress=" + stress + ", speed=" + speed;
 	}
 }

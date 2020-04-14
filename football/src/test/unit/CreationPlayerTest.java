@@ -9,7 +9,7 @@ import java.io.IOException;
 import dataplayer.AbstractDataPlayerType;
 import dataplayer.DataPlayer;
 import dataplayer.PlayerGoalie;
-import dataplayer.PlayerHealth;
+import dataplayer.PlayerStamina;
 import dataplayer.PlayerSpeed;
 import dataplayer.PlayerStress;
 import process.management.PlayerFactory;
@@ -54,11 +54,11 @@ public class CreationPlayerTest {
 		assertTrue(type instanceof PlayerGoalie);
 		assertEquals("Goalie",type.getPlayerTypeName());
 		
-		PlayerHealth health=type.getHeath();
-		assertEquals(100,health.getHealth());
+		int stamina=type.getStamina();
+		assertEquals(100,stamina);
 		
-		PlayerStress stress=type.getStress();
-		assertEquals(0,stress.getStress());
+		int stress=type.getStress();
+		assertEquals(0,stress);
 		
 		PlayerSpeed speed=type.getSpeed();
 		assertEquals(1,speed.getSpeedX());

@@ -110,6 +110,14 @@ public class RecupTeam {
 		return scrollAndGet(team.get(i),5);
 	}
 
+	public String getPlayerStress(int i) {
+		return scrollAndGet(team.get(i),6);
+	}
+	
+	public String getPlayerStamina(int i) {
+		return scrollAndGet(team.get(i),7);
+	}
+	
 	public String getTeamSpecialStats(int i) {
 		return scrollAndGet(team.get(i),8)+scrollAndGet(team.get(i),9);
 	}

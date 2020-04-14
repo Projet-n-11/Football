@@ -13,7 +13,7 @@ public class TestMovementBall {
 		DataBall db=new DataBall(-1,5);
 		System.out.println(db);
 		
-		MovementBall mb=new MovementBall(db,table);
+		// MovementBall mb=new MovementBall(table, db);
 		System.out.println(db);
 		
 		System.out.println("..........test goal Right.........");
@@ -22,7 +22,7 @@ public class TestMovementBall {
 		db.setPositionY(43);
 		System.out.println(db);
 		
-		mb=new MovementBall(db,table);
+		// mb=new MovementBall(db,table);
 		System.out.println(db);
 		
 		
