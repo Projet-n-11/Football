@@ -39,7 +39,7 @@ public class MatchScreen extends JPanel{
         this.add(chrono,BorderLayout.NORTH);
        	this.add(field, BorderLayout.CENTER);
         this.add(scores,BorderLayout.SOUTH);
-        this.add(lppteam1,BorderLayout.EAST);
-        this.add(lppteam2,BorderLayout.WEST);
+        this.add(lppteam2,BorderLayout.EAST);
+        this.add(lppteam1,BorderLayout.WEST);
 	}
 }

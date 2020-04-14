@@ -111,6 +111,18 @@ public class DataPlayer extends Position{
 		this.haveball = haveball;
 	}
 	
+	public void setPlayerSpeed(int speed) {
+		this.playerType.setSpeed(speed);
+	}
+	
+	public void setPlayerStress(int stress) {
+		this.playerType.setStress(stress);
+	}
+	
+	public void setPlayerStamina(int stamina) {
+		this.playerType.setStamina(stamina);
+	}
+	
 	public String toString() {
 		return playerName + " N°: " + playerNumber + "," + playerType.toString() + ", Power: " + playerSuperPower.toString() + "," + team + "," + isPhysical +
 				"," + playerSize + "," + colorPlayer + ","+ playerType.getTitularPlayer() + "]\n";

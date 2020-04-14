@@ -53,7 +53,7 @@ public class KickOffMenu extends JPanel {
 	private JList<String> filleT, filleS;
 	private JScrollPane jsfilleT, jsfilleS;
 	private ComboBoxModel<String> modelP, modelIA;
-	private ListModel<String> modelTFrance, modelTBrazil, modelSFrance, modelSBrazil;
+	private ListModel<String> modelTFrance, modelTBrazil, modelSFrance, modelSBrazil, modelTGermany, modelSGermany, modelTTunisie, modelSTunisie;
 	private JComboBox<String> Pteams, IAteams;
 	private ButtonGroup group;
 	private JRadioButton tactics343, tactics424, tactics235, tactics352, tactics433;
@@ -84,6 +84,10 @@ public class KickOffMenu extends JPanel {
 			modelTBrazil = playersTitularTeam("Brazil");
 			modelSFrance = playersSubstituteTeam("France");
 			modelSBrazil = playersSubstituteTeam("Brazil");
+			modelTTunisie = playersTitularTeam("Tunisie");
+			modelTGermany = playersTitularTeam("Germany");
+			modelSTunisie = playersSubstituteTeam("Tunisie");
+			modelSGermany = playersSubstituteTeam("Germany");
 			modelIA = choosingTeams();
 			Pteams= new JComboBox<String>(modelP);
 			IAteams = new JComboBox<String>(modelIA);
@@ -131,6 +135,16 @@ public class KickOffMenu extends JPanel {
 						filleS.setModel(modelSBrazil);
 						paintPlayers();	
 
+					}
+					else if(Pteams.getSelectedItem().equals("Germany")) {
+						filleT.setModel(modelTGermany);
+						filleS.setModel(modelSGermany);
+						paintPlayers();	
+					}
+					else if(Pteams.getSelectedItem().equals("Tunisie")) {
+						filleT.setModel(modelTTunisie);
+						filleS.setModel(modelSTunisie);
+						paintPlayers();	
 					}
 					else {
 						final DefaultListModel<String> modelTitular = new DefaultListModel<String>();

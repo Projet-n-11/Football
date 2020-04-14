@@ -75,13 +75,13 @@ public class GraphicalField extends JPanel implements Runnable{
 		pt2.placePlayers(team2, field, alreadyPlacedLeft);
 		alreadyPlacedLeft = false;
 		
-		ArrayList<DataPlayer> allPlayersFromTeam1=new ArrayList<DataPlayer>(team.getPlayers().values());
-		ArrayList<DataPlayer> allPlayersFromTeam2=new ArrayList<DataPlayer>(team2.getPlayers().values());
+		ArrayList<DataPlayer> allPlayersFromTeam1 = new ArrayList<DataPlayer>(team.getPlayers().values());
+		ArrayList<DataPlayer> allPlayersFromTeam2 = new ArrayList<DataPlayer>(team2.getPlayers().values());
 		ArrayList<DataPlayer> allPlayers = new ArrayList<DataPlayer>();
 		
 		Match m = new Match(team, team2, field, ball, score, pt, pt2);
 		MovementBall mb = new MovementBall(ball, field, score, pt, pt2, team, team2);
-		
+		int ha = 0;
 		while(paused == false){
 			try {
 				mb.move(pb, field, pt, pt2, team, team2);
@@ -89,6 +89,14 @@ public class GraphicalField extends JPanel implements Runnable{
 				pb.setPositionBall(ball.getPositionX(), ball.getPositionY(), ball, field);
 				this.repaint();
 				Thread.sleep(GAME_SPEED);
+				ha++;
+				if(ha == 20) {
+					for(DataPlayer dp: allPlayersFromTeam1) {
+						dp.setPlayerSpeed(1);
+						dp.setPlayerStamina(10);
+						dp.setPlayerStress(100);
+					}
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

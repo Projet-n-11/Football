@@ -129,7 +129,7 @@ public class DrawField extends JPanel {
 		drawPenaltyAreas(g2, fieldLength, fieldWidth);
 		drawPenaltyMarks(g2, fieldLength, fieldWidth);
 		drawPenaltyArches(g2, fieldLength, fieldWidth);
-		drawSpecialPositions(g4, fieldLength, fieldWidth);
+		//drawSpecialPositions(g4, fieldLength, fieldWidth);
 		drawPlayers(g6, g5, fieldLength, fieldWidth);
 		drawBall(g7, fieldLength, fieldWidth);
 	}
