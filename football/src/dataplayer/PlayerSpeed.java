@@ -6,11 +6,11 @@ public class PlayerSpeed {
 
 	public PlayerSpeed() {
 		this.speedX = 1;
-		this.speedY=1;
+		this.speedY = 1;
 	}
 	public PlayerSpeed(int speed) {
 		this.speedX = speed;
-		this.speedY= speed;
+		this.speedY = speed;
 	}
 	
 	public int getSpeedX() {

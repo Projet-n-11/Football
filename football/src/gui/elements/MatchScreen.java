@@ -4,12 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import databall.DataBall;
+import dataplayer.DataPlayer;
 import datateam.DataTeam;
 import process.scores.Score;
 
@@ -26,13 +31,15 @@ public class MatchScreen extends JPanel{
 		ChronometerGUI chrono = new ChronometerGUI();
 		ScoresGUI scores = new ScoresGUI(score, team, team2);
 		Thread matchgui = new Thread(field);
+		ListPlayerPanel lppteam1 = new ListPlayerPanel(team);
+		ListPlayerPanel lppteam2 = new ListPlayerPanel(team2);
 		matchgui.start();
 		
         this.setLayout(new BorderLayout());
         this.add(chrono,BorderLayout.NORTH);
-        this.add(field, BorderLayout.CENTER);
+       	this.add(field, BorderLayout.CENTER);
         this.add(scores,BorderLayout.SOUTH);
-        this.add(new JButton("joueurs de l'équipe 2"),BorderLayout.EAST);
-        this.add(new JButton("joueurs de l'équipe 1"),BorderLayout.WEST);
+        this.add(lppteam1,BorderLayout.EAST);
+        this.add(lppteam2,BorderLayout.WEST);
 	}
 }

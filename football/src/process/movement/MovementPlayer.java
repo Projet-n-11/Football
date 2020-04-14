@@ -202,7 +202,7 @@ public class MovementPlayer{
 			direction = 1;
 			player.setPositionX(player.getPositionX()-1); // player steps back
 		}
-		ball.setSpeedX(direction*player.getPlayerType().getSpeed().getSpeedX()*2); // ball get the double of the player's speed
+		ball.setSpeedX( (int) ( direction*player.getPlayerType().getSpeed().getSpeedX()*1.2)); // ball's speed is 1.2 times of the player's speed
 		player.setHaveBall(false);
 		ball.setOwnedBy(null);
 	}

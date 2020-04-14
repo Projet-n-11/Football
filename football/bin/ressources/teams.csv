@@ -44,3 +44,49 @@ France,blue,Griezmann,7,forward,5,0,100,4,4,1,3,4,3
 France,blue,Mbappe,10,forward,5,0,100,5,4,1,3,4,3
 France,blue,Fekir,18,forward,5,0,100,4,3,0,3,4,3
 France,blue,Ben Yedder,20,forward,4,0,100,3,3,1,3,4,3
+Tunisie,red,Ben Mustapha,1,goalie,1,0,100,4,3,0,4,3,3
+Tunisie,red,Dahmen,16,goalie,1,0,100,1,5,0,4,3,3
+Tunisie,red,Cherifia,22,goalie,1,0,100,3,3,1,4,3,3
+Tunisie,red,Ben Aziza,2,defender,2,0,100,2,3,0,4,3,3
+Tunisie,red,Abdennour,3,defender,2,0,100,4,3,1,4,3,3
+Tunisie,red,Meriah,4,defender,3,0,100,4,4,1,4,3,3
+Tunisie,red,Haddahi,5,defender,3,0,100,3,3,0,4,3,3
+Tunisie,red,Boughattas,6,defender,2,0,100,3,3,0,4,3,3
+Tunisie,red,Maaloul,12,defender,2,0,100,5,4,1,4,3,3
+Tunisie,red,Drager,14,defender,3,0,100,3,4,0,4,3,3
+Tunisie,red,Ben Mohamed,19,defender,3,0,100,4,4,1,4,3,3
+Tunisie,red,Nagguez,21,defender,3,0,100,4,3,0,4,3,3
+Tunisie,red,Khaoui,8,midfielder,4,0,100,3,3,0,4,3,3
+Tunisie,red,Sassi,13,midfielder,3,0,100,4,5,1,4,3,3
+Tunisie,red,Ben Romdhane,15,midfielder,4,0,100,3,3,0,4,3,3
+Tunisie,red,Skhiri,17,midfielder,4,0,100,4,3,1,4,3,3
+Tunisie,red,Bguir,18,midfielder,3,0,100,3,2,0,4,3,3
+Tunisie,red,Rafia,20,midfielder,4,0,100,3,4,1,4,3,3
+Tunisie,red,Msakni,7,forward,4,0,100,3,5,1,4,3,3
+Tunisie,red,Badri,9,forward,4,0,100,2,3,0,4,3,3
+Tunisie,red,Khazri,10,forward,4,0,100,3,4,1,4,3,3
+Tunisie,red,Khenissi,11,forward,5,0,100,4,4,1,4,3,3
+Tunisie,red,Hassen,23,forward,5,0,100,4,2,0,4,3,3
+Germany,white,Neuer,1,goalie,1,0,100,4,5,1,3,5,2
+Germany,white,Leno,12,goalie,1,0,100,2,3,0,3,5,2
+Germany,white,Ter Stegen,22,goalie,1,0,100,3,3,0,3,5,2
+Germany,white,Hummels,7,defender,2,0,100,3,4,0,3,5,2
+Germany,white,Koch,2,defender,3,0,100,3,4,0,3,5,2
+Germany,white,Hector,3,defender,2,0,100,4,3,0,3,5,2
+Germany,white,Ginter,4,defender,3,0,100,3,3,0,3,5,2
+Germany,white,Thas,5,defender,3,0,100,2,4,0,3,5,2
+Germany,white,Can,23,defender,3,0,100,4,3,1,3,5,2
+Germany,white,Stark,17,defender,3,0,100,1,3,0,3,5,2
+Germany,white,Kimmich,6,defender,3,0,100,4,4,1,3,5,2
+Germany,white,Klostermann,13,defender,3,0,100,3,4,1,3,5,2
+Germany,white,Schulz,14,defender,2,0,100,3,3,0,3,5,2
+Germany,white,Kroos,8,midfielder,3,0,100,5,5,1,3,5,2
+Germany,white,Gnabry,20,midfielder,4,0,100,3,4,1,3,5,2
+Germany,white,Goretzka,18,midfielder,4,0,100,4,4,1,3,5,2
+Germany,white,Brandt,10,midfielder,4,0,100,5,4,1,3,5,2
+Germany,white,Gündogn,21,midfielder,3,0,100,4,3,1,3,5,2
+Germany,white,Amiri,11,midfielder,4,0,100,3,2,0,3,5,2
+Germany,white,Serdar,15,midfielder,4,0,100,3,2,0,3,5,2
+Germany,white,Rudy,16,midfielder,3,0,100,3,3,0,3,5,2
+Germany,white,Werner,9,forward,5,0,100,4,4,1,3,5,2
+Germany,white,Waldschmidt,19,forward,4,0,100,5,3,1,3,5,2
