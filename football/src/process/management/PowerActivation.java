@@ -33,9 +33,13 @@ public class PowerActivation {
 	public void activationSuperSpeed(DataPlayer player) {
 		int speed=player.getPlayerType().getSpeed().getSpeedX();
 		for(int j=0;j<10;j++) {
-			
 			PowerSuperSpeed superSpeed=(PowerSuperSpeed)player.getPlaySuperPower().getSuperSpeed();
 			player.getPlayerType().setSpeed(speed*superSpeed.getMultiplicationSpeed());
+			try {
+				Thread.sleep(ConstantValues.SUPERSPEED_DURATION);
+			} catch (InterruptedException e) {
+				System.err.println("Reinstall the game, problem with superspeed!");
+			}
 		}
 		player.getPlayerType().setSpeed(speed);
 		
