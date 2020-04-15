@@ -40,22 +40,16 @@ public class MovementPlayer{
 			if(player.getPositionX() - x == 1) {
 				player.setPositionX(player.getPositionX() - 1);
 			}
-			else if(player.getPositionX() - x <= player.getPlayerType().getSpeed().getSpeedX() ) {
-				player.setPositionX(x);
-			}
 			else {
-				player.setPositionX(player.getPositionX() - player.getPlayerType().getSpeed().getSpeedX());
+				player.setPositionX(player.getPositionX() - 1);
 			}
 		}
 		else if(x > player.getPositionX()) {
 			if(player.getPositionX() - x == 1) {
 				player.setPositionX(player.getPositionX() + 1);
 			}
-			else if(x - player.getPositionX() <= player.getPlayerType().getSpeed().getSpeedX()) {
-				player.setPositionX(x);
-			}
 			else {
-				player.setPositionX(player.getPositionX() + player.getPlayerType().getSpeed().getSpeedX());
+				player.setPositionX(player.getPositionX() + 1);
 			}
 		}
 
@@ -64,22 +58,16 @@ public class MovementPlayer{
 			if(player.getPositionY() - y == 1) {
 				player.setPositionY(player.getPositionY() - 1);
 			}
-			else if(player.getPositionY() - y <= player.getPlayerType().getSpeed().getSpeedY()){
-				player.setPositionY(y);
-			}
 			else {
-				player.setPositionY(player.getPositionY() - player.getPlayerType().getSpeed().getSpeedY());
+				player.setPositionY(player.getPositionY() - 1);
 			}
 		}
 		else if(y > player.getPositionY()) {
 			if(player.getPositionY() - y == 1) {
 				player.setPositionY(player.getPositionY() + 1);
 			}
-			else if(y - player.getPositionY() <= player.getPlayerType().getSpeed().getSpeedY()){
-				player.setPositionY(y);
-			}
 			else {
-				player.setPositionY(player.getPositionY() + player.getPlayerType().getSpeed().getSpeedY());
+				player.setPositionY(player.getPositionY() + 1);
 			}
 		}
 		checkPosition(player, itsBotRound);
@@ -115,22 +103,16 @@ public class MovementPlayer{
 			if(player.getPositionX() - goalx == 1) {
 				player.setPositionX(player.getPositionX() - 1);
 			}
-			else if(player.getPositionX() - goalx <= player.getPlayerType().getSpeed().getSpeedX() ) {
-				player.setPositionX(goalx);
-			}
 			else {
-				player.setPositionX(player.getPositionX() - player.getPlayerType().getSpeed().getSpeedX());
+				player.setPositionX(player.getPositionX() - 1);
 			}
 		}
 		else if(goalx > player.getPositionX()) {
 			if(player.getPositionX() - goalx == 1) {
 				player.setPositionX(player.getPositionX() + 1);
 			}
-			else if(goalx - player.getPositionX() <= player.getPlayerType().getSpeed().getSpeedX()) {
-				player.setPositionX(goalx);
-			}
 			else {
-				player.setPositionX(player.getPositionX() + player.getPlayerType().getSpeed().getSpeedX());
+				player.setPositionX(player.getPositionX() + 1);
 			}
 		}
 
@@ -138,22 +120,16 @@ public class MovementPlayer{
 			if(player.getPositionY() - cages == 1) {
 				player.setPositionY(player.getPositionY() - 1);
 			}
-			else if(player.getPositionY() - cages <= player.getPlayerType().getSpeed().getSpeedY()){
-				player.setPositionY(cages);
-			}
 			else {
-				player.setPositionY(player.getPositionY() - player.getPlayerType().getSpeed().getSpeedY());
+				player.setPositionY(player.getPositionY() - 1);
 			}
 		}
 		else if(cages > player.getPositionY()) {
 			if(player.getPositionY() - cages == 1) {
 				player.setPositionY(player.getPositionY() + 1);
 			}
-			else if(cages - player.getPositionY() <= player.getPlayerType().getSpeed().getSpeedY()){
-				player.setPositionY(cages);
-			}
 			else {
-				player.setPositionY(player.getPositionY() + player.getPlayerType().getSpeed().getSpeedY());
+				player.setPositionY(player.getPositionY() + 1);
 			}
 		}
 		map.removeElement(oldPlayerPosX, oldPlayerPosY);
@@ -199,7 +175,7 @@ public class MovementPlayer{
 			direction = 1;
 			player.setPositionX(player.getPositionX()-1); // player steps back
 		}
-		ball.setSpeedX( (int) ( direction*player.getPlayerType().getSpeed().getSpeedX()*1.2)); // ball's speed is 1.2 times of the player's speed
+		ball.setSpeedX( (int) ( direction*5)); // ball's speed is 1.2 times of the player's speed
 		player.setHaveBall(false);
 		ball.setOwnedBy(null);
 	}

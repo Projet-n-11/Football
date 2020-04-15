@@ -20,7 +20,7 @@ public class Vision {
 	 */
 	 public ArrayList<Position> see(int x, int y, Map position) {
 	        ArrayList<Position> objects = new ArrayList<Position>();
-	        int radiusVision = ConstantValues.RADIUSVISION;
+	        int radiusVision = ConstantValues.RADIUSVISION+15;
 	        int i=0, j=0; 
 
 	        for (i=-radiusVision; i<=radiusVision; i++) {

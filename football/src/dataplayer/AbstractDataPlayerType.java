@@ -6,6 +6,7 @@ public abstract class AbstractDataPlayerType{
 	private PlayerStamina stamina;
 	private PlayerStress stress;
 	private PlayerSpeed speed;
+	private int canHe;
 	private String playerTypeName;
 	private int titularPlayer;
 	
@@ -13,6 +14,7 @@ public abstract class AbstractDataPlayerType{
 		stamina = new PlayerStamina(100);
 		stress = new PlayerStress(0);
 		speed = new PlayerSpeed(1);
+		canHe = 0;
 	}
 	
 	public int getStamina() {
@@ -52,5 +54,13 @@ public abstract class AbstractDataPlayerType{
 	}
 	public String toString() {	// inutile : redéfini dans les classes concrètes
 		return "stamina =" + stamina + ", stress=" + stress + ", speed=" + speed;
+	}
+
+	public int getCanHe() {
+		return canHe;
+	}
+
+	public void setCanHe(int canHe) {
+		this.canHe = canHe;
 	}
 }

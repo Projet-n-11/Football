@@ -55,7 +55,6 @@ public class Match {	// if singleton : re-chech every variables
 
 		itsUserRound = true;
 		bothHavePlayed = false;
-		Position posBall = new Position(ball.getPositionX(), ball.getPositionY());	// singleton ?
 
 		/**
 		 * first we move the ball considering its own speed (if it was shoot)
@@ -65,12 +64,20 @@ public class Match {	// if singleton : re-chech every variables
 		if (ball.getOwnedBy()==null)
 		{
 			System.out.println("they see me rollin'...");
-			mb.roll();
+			if (ball.getCanIt()+ball.getSpeedX()>=5 || ball.getCanIt()+ball.getSpeedY()>=5)
+			{
+				mb.roll();				
+			}
+			else if (ball.getCanIt()+ball.getSpeedX()<5 || ball.getCanIt()+ball.getSpeedY()<5)
+			{
+				ball.setCanIt(ball.getCanIt()+1);
+			}
+
 		}
 		else {
 			System.out.print(ball.getOwnedBy().getPlayerName() + " owns the ball; ");
 		}
-		System.out.println(itUser.next().getPlayerName());
+		
 		// While there is nothing to interrupt the match, players are playing
 		// And while both teams have players to deal with:
 		while ((itUser.hasNext() || itBot.hasNext())){
@@ -86,8 +93,11 @@ public class Match {	// if singleton : re-chech every variables
 					bothHavePlayed = true;
 					itsUserRound = true;
 				}
-
-				if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Goalie")==0) {
+				
+				if (currentPlayer.getPlayerType().getCanHe()+currentPlayer.getPlayerType().getSpeed().getSpeedX()==5)
+				{	
+								
+					if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Goalie")==0) {
 					objectsSeen = v.Goalsee(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
 				}
 				else {
@@ -161,8 +171,6 @@ public class Match {	// if singleton : re-chech every variables
 
 						if (objectsSeen.get(i) instanceof DataBall ) { // player see ball
 
-							posBall = objectsSeen.get(i);
-
 							if (ball.getOwnedBy()!=null) // ball is not free:
 							{
 								if (ball.getOwnedBy().getTeam().compareTo(currentPlayer.getTeam())!=0) // if ball is owned by ennemy
@@ -203,6 +211,20 @@ public class Match {	// if singleton : re-chech every variables
 					}
 				}
 				objectsSeen.removeAll(objectsSeen);
+					
+					
+					
+					
+					
+				currentPlayer.getPlayerType().setCanHe(0); // CHANGER DE PLACE: on set à 0 seulement si le joueur a agi
+				}
+				else if (currentPlayer.getPlayerType().getCanHe()+currentPlayer.getPlayerType().getSpeed().getSpeedX()<5){		
+					currentPlayer.getPlayerType().setCanHe(currentPlayer.getPlayerType().getCanHe()+1);
+				}
+				
+				
+
+				
 			}
 		}
 	}

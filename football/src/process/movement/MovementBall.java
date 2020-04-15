@@ -73,7 +73,6 @@ public class MovementBall {
 			
 		}
 		
-		// THEN IF "THE BALL SEES NO ONE AROUND" SELECT SOME PLAYERS TO SEE IT... NAH ?
 		PositionBall pb = new PositionBall(ball, table);
 		try {
 			move(pb, table, pt, pt2, PTeam, IATeam);

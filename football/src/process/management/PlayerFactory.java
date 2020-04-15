@@ -97,6 +97,7 @@ public class PlayerFactory {
 	else
 		return null;
 	playerType.setSpeed(Integer.parseInt(teamsLists.getPlayerSpeed(i)));
+	playerType.setCanHe(5-playerType.getSpeed().getSpeedX());
 	playerType.setStress(Integer.parseInt(teamsLists.getPlayerStress(i)));
 	playerType.setStamina(Integer.parseInt(teamsLists.getPlayerStamina(i)));
 	return playerType;

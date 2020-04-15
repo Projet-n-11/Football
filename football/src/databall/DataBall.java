@@ -9,11 +9,13 @@ public class DataBall extends Position{
 	
 	private int speedX, speedY;
 	private DataPlayer ownedBy;
+	private int canIt;
 	
 	public DataBall() {
 		super();
 		this.speedX = 0;
 		this.speedY = 0;
+		setCanIt(0);
 	}
 	
 	public DataBall(int positionx, int positiony) {
@@ -51,6 +53,14 @@ public class DataBall extends Position{
 
 	public void setOwnedBy(DataPlayer ownedBy) {
 		this.ownedBy = ownedBy;
+	}
+
+	public int getCanIt() {
+		return canIt;
+	}
+
+	public void setCanIt(int canIt) {
+		this.canIt = canIt;
 	}
 	
 }
