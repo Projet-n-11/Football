@@ -32,4 +32,6 @@ public class MatchScreen extends JPanel{
         this.add(lppteam2,BorderLayout.EAST);
         this.add(lppteam1,BorderLayout.WEST);
 	}
+	
+	
 }

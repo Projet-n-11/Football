@@ -66,19 +66,24 @@ public class MainMenu extends JPanel {
 
 		kickOff=new JButton("Kick-off");
 		kickOff.setPreferredSize(new Dimension(200, 50));
-		kickOff.setMinimumSize(getSize());
+		kickOff.setBackground(new Color(255, 255, 255));
+		kickOff.setFocusPainted(false);
 		kickOff.addActionListener(new ActionKickOff());
 		kickOffPanel.add(kickOff);
 		kickOffPanel.setBackground(new Color(245, 235, 200));
 		
 		options =new JButton("Options");
 		options.setPreferredSize(new Dimension(200, 50));
+		options.setBackground(new Color(255, 255, 255));
+		options.setFocusPainted(false);
 		options.addActionListener(new ActionOptions());
 		optionsPanel.add(options);
 		optionsPanel.setBackground(new Color(245, 235, 200));
 		
 		credits=new JButton("Credits");
 		credits.setPreferredSize(new Dimension(200, 50));
+		credits.setBackground(new Color(255, 255, 255));
+		credits.setFocusPainted(false);
 		credits.addActionListener(new ActionCredits());
 		creditsPanel.add(credits);
 		creditsPanel.setBackground(new Color(245, 235, 200));
@@ -86,6 +91,8 @@ public class MainMenu extends JPanel {
 		leave=new JButton("Quit the game");
 		leave.addActionListener(new ActionLeave());
 		leave.setPreferredSize(new Dimension(200, 50));
+		leave.setBackground(new Color(255, 255, 255));
+		leave.setFocusPainted(false);
 		leavePanel.add(leave);
 		leavePanel.setBackground(new Color(245, 235, 200));
 		
@@ -121,7 +128,7 @@ public class MainMenu extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			mainFrame.getContentPane().removeAll();
 			mainFrame.repaint();
-			KickOffMenu kick = new KickOffMenu();
+			KickOffMenu kick = new KickOffMenu("KickOffMenu", getJFrameMainMenu());
 			mainFrame.getContentPane().setLayout(new GridLayout(1,1));
 			mainFrame.getContentPane().add(kick.createKickOff());	
 			mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

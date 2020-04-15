@@ -2,6 +2,8 @@ package gui.elements;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -47,6 +49,7 @@ public class KickOffMenu extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	private JFrame frame;
 	private JPanel panel, tactics, players, tacticsLabelPanel;
 	private JLabel choiceP, choiceIA, tacticsPlayersLabel, titularLabel, substituteLabel;
 	private JButton startButton, returnButton;
@@ -60,11 +63,12 @@ public class KickOffMenu extends JPanel {
 	private GridBagConstraints gc;
 
 	public KickOffMenu() {
-		this("Configuration");
+		this("Configuration", null);
 	}
 
-	public KickOffMenu(String title) {
-		panel= new JPanel();
+	public KickOffMenu(String title, JFrame frame) {
+		panel = new JPanel();
+		this.frame = frame;
 		panel.setBackground(new Color(245, 235, 200));
 	}
 
@@ -94,14 +98,21 @@ public class KickOffMenu extends JPanel {
 			modelIA = choosingTeams();
 			
 			Pteams= new JComboBox<String>(modelP);
+			Pteams.setBackground(new Color(255, 255, 255));
 			IAteams = new JComboBox<String>(modelIA);
+			IAteams.setBackground(new Color(255, 255, 255));
 			group = new ButtonGroup();
 
 			tactics343 = new JRadioButton ("3-4-3");
+			tactics343.setBackground(new Color(255, 255, 255));
 			tactics424 = new JRadioButton ("4-2-4");
+			tactics424.setBackground(new Color(255, 255, 255));
 			tactics235 = new JRadioButton ("2-3-5");
+			tactics235.setBackground(new Color(255, 255, 255));
 			tactics352 = new JRadioButton ("3-5-2");
+			tactics352.setBackground(new Color(255, 255, 255));
 			tactics433 = new JRadioButton ("4-3-3");
+			tactics433.setBackground(new Color(255, 255, 255));
 			tactics = new JPanel();
 			tactics.setBackground(new Color(245, 235, 200));
 			
@@ -169,7 +180,8 @@ public class KickOffMenu extends JPanel {
 				}
 			});
 
-			startButton.setSize(200,400);
+			startButton.setBackground(new Color(255, 255, 255));
+			startButton.setFocusPainted(false);
 			startButton.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e) {
@@ -319,6 +331,8 @@ public class KickOffMenu extends JPanel {
 							errorPanel.removeAll();
 							errorPanel.repaint();
 						}
+						labERROR.setFont(new Font("", Font.BOLD, 15));
+						labERROR.setForeground(Color.RED);
 						errorPanel.add(labERROR);
 						errorPanel.setBackground(new Color(245, 235, 200));
 						errorPanel.repaint();
@@ -331,7 +345,21 @@ public class KickOffMenu extends JPanel {
 			});
 
 			returnButton.setSize(200,400);
-			returnButton.addActionListener(new ActionReturn());
+			returnButton.setBackground(new Color(255, 255, 255));
+			returnButton.setFocusPainted(false);
+			returnButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					panel.removeAll();
+					frame.dispose();
+					MainMenu mm = new MainMenu();
+					panel.setLayout(new BorderLayout());
+					panel.setSize(1300,800);
+					panel.setLocation(350,150);
+					panel.setVisible(true);
+					panel.add(mm);
+					panel.repaint();
+				}
+			});
 			addObjectstoPanel();
 			panel.setBorder(BorderFactory.createTitledBorder("Select your team"));
 		}
@@ -530,20 +558,6 @@ public class KickOffMenu extends JPanel {
 		gc.gridx = 2;
 		gc.gridy = 5;
 		panel.add(IAteams, gc);
-	}
-
-	public class ActionReturn implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-			MainMenu mm = new MainMenu();
-
-			panel.setLayout(new BorderLayout());
-			panel.setSize(1300,800);
-			panel.setLocation(350,150);
-			panel.setVisible(true);
-			panel.add(mm);
-			panel.repaint();
-		}
-
 	}
 
 	public class TransferPlayers extends TransferHandler {
