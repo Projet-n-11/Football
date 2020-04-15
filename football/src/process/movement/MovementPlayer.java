@@ -91,7 +91,7 @@ public class MovementPlayer{
 	 * @param itsBotRound
 	 * @param ball
 	 */
-	public void runtoCages(DataPlayer player, DataBall ball, Boolean itsBotRound) {
+	public void runtoCages(DataPlayer player, DataBall ball, Boolean itsBotRound, MovementBall moveball) {
 		Random r = new Random();
 		int goalx;
 		int GOALY1 = ConstantPosition.GOALY1;
@@ -159,7 +159,7 @@ public class MovementPlayer{
 		map.removeElement(oldPlayerPosX, oldPlayerPosY);
 		checkPosition(player, itsBotRound);
 		map.setElement(player);
-		MovementBall.setPositionBall(player.getPositionX()+d, player.getPositionY());
+		moveball.setPositionBall(player.getPositionX()+d, player.getPositionY());
 	}
 	
 	public void passBalltoPal(DataPlayer player, DataPlayer player2, DataBall ball) {

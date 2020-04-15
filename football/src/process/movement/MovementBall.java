@@ -19,8 +19,8 @@ import process.management.Map;
  */
 public class MovementBall {
 
-	private static DataBall ball;
-	private static Map table;
+	private DataBall ball;
+	private Map table;
 	private Score score;
 	private PositionTactics pt;
 	private PositionTactics pt2;
@@ -30,8 +30,8 @@ public class MovementBall {
 	public MovementBall(DataBall ball, Map table, Score score,
 			PositionTactics pt, PositionTactics pt2, DataTeam PTeam, DataTeam IATeam){
 		
-		MovementBall.ball = ball;
-		MovementBall.table = table;
+		this.ball = ball;
+		this.table = table;
 		this.score = score;
 		this.pt = pt;
 		this.pt2 = pt2;
@@ -51,21 +51,39 @@ public class MovementBall {
 		if (ball.getSpeedX()!=0 || ball.getSpeedY()!=0)
 		{
 			System.out.println("roll !");
+			System.out.println(ball.getSpeedX() + " : " + ball.getSpeedY());
 			table.removeElement(ball.getPositionX(), ball.getPositionY());
 			ball.setPositionX(ball.getPositionX()+ball.getSpeedX());
 			ball.setPositionY(ball.getPositionY()+ball.getSpeedY());
 			table.setElement(ball);
+			
+			if (ball.getSpeedX()>0) {
+				ball.setSpeedX(ball.getSpeedX()-1);
+			}
+			else if (ball.getSpeedX()<0){
+				ball.setSpeedX(ball.getSpeedX()+1);
+			}
+			
+			if (ball.getSpeedY()>0) {
+				ball.setSpeedY(ball.getSpeedY()-1);
+			}
+			else if (ball.getSpeedY()<0){
+				ball.setSpeedY(ball.getSpeedY()+1);
+			}
+			
 		}
+		
+		// THEN IF "THE BALL SEES NO ONE AROUND" SELECT SOME PLAYERS TO SEE IT... NAH ?
 		PositionBall pb = new PositionBall(ball, table);
 		try {
 			move(pb, table, pt, pt2, PTeam, IATeam);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		// checker limites sorties ballon
+		// checker ball's exit limits
 	}
 	
-	public static void setPositionBall(int x, int y) {
+	public void setPositionBall(int x, int y) {
 		table.removeElement(ball.getPositionX(), ball.getPositionY());
 		ball.setPositionX(x);
 		ball.setPositionY(y);

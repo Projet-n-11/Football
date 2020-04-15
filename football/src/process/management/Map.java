@@ -18,6 +18,8 @@ import datafield.Grass;
 public class Map {
 	private Position[][] map = new Position[ConstantPosition.WIDTH+10][ConstantPosition.HEIGHT+10];
 	
+	public static Map carte = new Map();
+	
 	//The following constructor will initialize each box from the "position" array by inserting grass
 	public Map(){
 	}
@@ -34,5 +36,9 @@ public class Map {
 	
 	public void removeElement(int x, int y) {
 		this.map[x][y] = null;
+	}
+	
+	public static Map getInstance() {
+		return carte;
 	}
 }
