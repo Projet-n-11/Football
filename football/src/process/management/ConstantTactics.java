@@ -217,5 +217,18 @@ public class ConstantTactics {
 			public static final int R_CENTERFORWARDX_433 = WIDTH/2 + 10;
 			public static final int R_CENTERFORWARDY_433 = HEIGHT/2 + WIDTH/14;
 			
+			/*
+			 * 3-5-2
+			 */
+			
+			//3-5-2 FOR LEFT SIDE OF THE FIELD
+			
+			public static final int L_LEFT_DEFENDERX_352 = 
+			public static final int L_LEFT_DEFENDERY_352 = 
+			public static final int L_CENTER_DEFENDERX_352 = 
+			public static final int L_CENTER_DEFENDERY_352 = 		
+			public static final int L_RIGHT_DEFENDERX_352 = 
+			public static final int L_RIGHT_DEFENDERY_352 = 
+			
 			
 }
