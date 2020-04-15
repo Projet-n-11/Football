@@ -1,20 +1,10 @@
 package gui.elements;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import databall.DataBall;
-import dataplayer.DataPlayer;
 import datateam.DataTeam;
 import process.scores.Score;
 

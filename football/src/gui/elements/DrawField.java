@@ -37,8 +37,9 @@ public class DrawField extends JPanel {
 
 	private static final long serialVersionUID = 8187623550893249601L;
 	
+	@SuppressWarnings("unused")
 	private DataTeam team, team2;
-	private static DataBall ball;
+	private DataBall ball;
 	private static ArrayList<DataPlayer> Pteam, IAteam;
 	
 	public DrawField(DataTeam team, DataTeam team2, DataBall ball) {

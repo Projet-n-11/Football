@@ -15,7 +15,7 @@ import javax.swing.ListModel;
 import datateam.DataTeam;
 
 public class TransitionPanel extends JPanel{
-	private JLabel newTactic;
+	private JLabel textLabel;
 	private JPanel panel, tactics, players, tacticsLabelPanel;
 	private ListModel<String> modelT,modelS;
 	private JRadioButton tactics343, tactics424, tactics235, tactics352, tactics433;
@@ -25,7 +25,7 @@ public class TransitionPanel extends JPanel{
 	private JButton resume;
 	
 	public TransitionPanel() {
-		this("Changement of strategy");
+		this("Tactics changes");
 	}
 	
 	public TransitionPanel(String title) {
@@ -35,7 +35,7 @@ public class TransitionPanel extends JPanel{
 	
 	public JPanel changementTactics(DataTeam team) throws IOException {
 		
-		newTactic=new JLabel("Select your new tactic");
+		textLabel=new JLabel("Select your new tactic");
 		resume=new JButton("Resume");
 		
 		jsfilleT = new JScrollPane();
@@ -46,6 +46,8 @@ public class TransitionPanel extends JPanel{
 		
 		filleT = new JList<String>(modelT);
 		filleS = new JList<String>(modelS);
+		
+		return kick;
 		
 	}
 }

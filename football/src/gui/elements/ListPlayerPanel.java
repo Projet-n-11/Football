@@ -8,6 +8,8 @@ import java.awt.Insets;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 import dataplayer.DataPlayer;
 import datateam.DataTeam;
@@ -15,6 +17,7 @@ import process.management.ConstantValues;
 
 public class ListPlayerPanel extends JPanel implements Runnable {
 
+	private static final long serialVersionUID = 8160466410842954737L;
 	private GridBagConstraints c = new GridBagConstraints();
 	private JPanel playersteam1panel = new JPanel();
 	private JScrollPane jsteam1 = new JScrollPane();
@@ -32,7 +35,7 @@ public class ListPlayerPanel extends JPanel implements Runnable {
 
 		updateValuesList();
 		
-		jsteam1.setPreferredSize(new Dimension(300, 300));
+		jsteam1.setPreferredSize(new Dimension(340, 300));
 		jsteam1.setViewportView(playersteam1panel);
 		this.setLayout(new BorderLayout());
 		this.add(jsteam1);
@@ -47,6 +50,10 @@ public class ListPlayerPanel extends JPanel implements Runnable {
 			c.gridy = i;
 			PlayerPanel pp = new PlayerPanel(dp, team.getTeamName());
 			playersteam1panel.add(pp, c);
+			i++;
+			c.gridx = 0;
+			c.gridy = i;
+			playersteam1panel.add(new JSeparator(SwingConstants.HORIZONTAL), c);
 			i++;
 		}
 	}

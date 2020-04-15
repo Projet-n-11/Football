@@ -50,8 +50,6 @@ public class MovementBall {
 	public void roll() {
 		if (ball.getSpeedX()!=0 || ball.getSpeedY()!=0)
 		{
-			System.out.println("roll !");
-			System.out.println(ball.getSpeedX() + " : " + ball.getSpeedY());
 			table.removeElement(ball.getPositionX(), ball.getPositionY());
 			ball.setPositionX(ball.getPositionX()+ball.getSpeedX());
 			ball.setPositionY(ball.getPositionY()+ball.getSpeedY());

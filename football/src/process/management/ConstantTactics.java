@@ -162,9 +162,9 @@ public class ConstantTactics {
 		public static final int R_RIGHTFOWARDX_424 = WIDTH/2 + 7;
 		public static final int R_RIGHTFOWARDY_424 = HEIGHT/2 + WIDTH/14;
 		
-		/*
-		 * 4-3-3
-		*/
+	/*
+	 * 4-3-3
+	*/
 			//4-3-3 FOR LEFT SIDE OF THE FIELD
 			public static final int L_LEFTCENTERBACKX_433 = INITIAL_POINT + 21;
 			public static final int L_LEFTCENTERBACKY_433 = HEIGHT/2 + HEIGHT/10;
@@ -174,16 +174,12 @@ public class ConstantTactics {
 			public static final int L_LEFTFULLBACKY_433 = HEIGHT/8;
 			public static final int L_RIGHTFULLBACKX_433 = INITIAL_POINT + 25;
 			public static final int L_RIGHTFULLBACKY_433 = HEIGHT - HEIGHT/8;
-			
 			public static final int L_LEFTHALFBACKX_433 = INITIAL_POINT + 40;
 			public static final int L_LEFTHALFBACKY_433 = HEIGHT/2 + HEIGHT/5;
-			
 			public static final int L_RIGHTHALFBACKX_433 = INITIAL_POINT + 40;
 			public static final int L_RIGHTHALFBACKY_433 = HEIGHT/2 - HEIGHT/5;
-			
 			public static final int L_CENTERHALFBACKX_433 = INITIAL_POINT + 35;
 			public static final int L_CENTERHALFBACKY_433 = HEIGHT/2;
-			
 			public static final int L_RIGHTFORWARDX_433 = INITIAL_POINT + 55;
 			public static final int L_RIGHTFORWARDY_433 = HEIGHT/2 - 8;
 			public static final int L_LEFTFORWARDX_433 = WIDTH/2 - 7;
@@ -200,35 +196,69 @@ public class ConstantTactics {
 			public static final int R_LEFTFULLBACKY_433 = HEIGHT/8;
 			public static final int R_RIGHTFULLBACKX_433 = WIDTH - 25;
 			public static final int	R_RIGHTFULLBACKY_433 = HEIGHT - HEIGHT/8;
-			
 			public static final int R_LEFTHALFBACKX_433 = WIDTH - 40;
 			public static final int R_LEFTHALFBACKY_433 = HEIGHT/2 + HEIGHT/5;
-			
 			public static final int R_RIGHTHALFBACKX_433 = WIDTH - 40;
 			public static final int R_RIGHTHALFBACKY_433 = HEIGHT/2 - HEIGHT/5;
-			
 			public static final int R_CENTERHALFBACKX_433 = WIDTH - 35;
 			public static final int R_CENTERHALFBACKY_433 = HEIGHT/2;
-			
 			public static final int R_RIGHTFORWARDX_433 = WIDTH/2 + 7;
 			public static final int R_RIGHTFORWARDY_433 = HEIGHT - HEIGHT/8;
 			public static final int R_LEFTFORWARDX_433 = WIDTH/2 + 7;
 			public static final int R_LEFTFORWARDY_433 = HEIGHT/2 + HEIGHT/14;
 			public static final int R_CENTERFORWARDX_433 = WIDTH/2 + 10;
 			public static final int R_CENTERFORWARDY_433 = HEIGHT/2 + WIDTH/14;
+
 			
-			/*
-			 * 3-5-2
-			 */
+	/*
+	 * 3-2-5
+	 */
 			
-			//3-5-2 FOR LEFT SIDE OF THE FIELD
+			//3-2-5 FOR LEFT SIDE OF THE FIELD
+			public static final int L_LEFTDEFENDERX_352 = INITIAL_POINT + 21;
+			public static final int L_LEFTDEFENDERY_352 = HEIGHT/4;
+			public static final int L_CENTERDEFENDERX_352 = INITIAL_POINT + 21;
+			public static final int L_CENTERDEFENDERY_352 = HEIGHT / 2;
+			public static final int L_RIGHTDEFENDERX_352 = INITIAL_POINT + 21;
+			public static final int L_RIGHTDEFENDERY_352 = HEIGHT/2 + HEIGHT/4;
 			
-			public static final int L_LEFT_DEFENDERX_352 = 
-			public static final int L_LEFT_DEFENDERY_352 = 
-			public static final int L_CENTER_DEFENDERX_352 = 
-			public static final int L_CENTER_DEFENDERY_352 = 		
-			public static final int L_RIGHT_DEFENDERX_352 = 
-			public static final int L_RIGHT_DEFENDERY_352 = 
+			public static final int L_RIGHTFULLBACKX_352 = INITIAL_POINT + 35;
+			public static final int L_RIGHTFULLBACKY_352 = HEIGHT - HEIGHT/8;
+			public static final int L_RIGHTHALFBACKX_352 = INITIAL_POINT + 45;
+			public static final int L_RIGHTHALFBACKY_352 = HEIGHT/2 + HEIGHT/6;
+			public static final int L_LEFTHALFBACKX_352 = INITIAL_POINT + 35;
+			public static final int L_LEFTHALFBACKY_352 = HEIGHT/2;
+			public static final int L_CENTERHALFBACKX_352 = INITIAL_POINT + 45;
+			public static final int L_CENTERHALFBACKY_352 = HEIGHT/2 - HEIGHT/6;
+			public static final int L_LEFTFULLBACKX_352 = INITIAL_POINT + 35;
+			public static final int L_LEFTFULLBACKY_352 = HEIGHT/6;
 			
+			public static final int L_LEFTFORWARDX_352 = WIDTH/2 - 7;
+			public static final int L_LEFTFORWARDY_352 = HEIGHT/2 - 7;
+			public static final int L_RIGHTFORWARDX_352 = WIDTH/2 - 7;
+			public static final int L_RIGHTFORWARDY_352 = HEIGHT/2 + 7;
 			
+			//3-2-5 FOR RIGHT SIDE OF THE FIELD
+			public static final int R_LEFTDEFENDERX_352 = WIDTH - 21;
+			public static final int R_LEFTDEFENDERY_352 = HEIGHT/4;
+			public static final int	R_CENTERDEFENDERX_352 = WIDTH - 21;
+			public static final int R_CENTERDEFENDERY_352 = HEIGHT / 2;;
+			public static final int R_RIGHTDEFENDERX_352 = WIDTH - 21;
+			public static final int R_RIGHTDEFENDERY_352 = HEIGHT/2 + HEIGHT/4;
+			
+			public static final int R_RIGHTFULLBACKX_352 = WIDTH - 35;
+			public static final int R_RIGHTFULLBACKY_352 = HEIGHT - HEIGHT/8;
+			public static final int R_RIGHTHALFBACKX_352 = WIDTH - 45;
+			public static final int R_RIGHTHALFBACKY_352 = HEIGHT/2 + HEIGHT/6;
+			public static final int R_LEFTHALFBACKX_352 = WIDTH - 35;
+			public static final int R_LEFTHALFBACKY_352 = HEIGHT/2;
+			public static final int R_CENTERHALFBACKX_352 = WIDTH - 45;
+			public static final int R_CENTERHALFBACKY_352 = HEIGHT/2 - HEIGHT/6;
+			public static final int R_LEFTFULLBACKX_352 = WIDTH - 35;
+			public static final int R_LEFTFULLBACKY_352 = HEIGHT/6;
+			
+			public static final int R_LEFTFORWARDX_352 = WIDTH/2 + 7;
+			public static final int R_LEFTFORWARDY_352 = HEIGHT/2 - 7;
+			public static final int R_RIGHTFORWARDX_352 = WIDTH/2 + 7;
+			public static final int R_RIGHTFORWARDY_352 = HEIGHT/2 + 7;
 }

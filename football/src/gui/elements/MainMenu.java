@@ -5,14 +5,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -122,8 +118,7 @@ public class MainMenu extends JPanel {
 	
 	public class ActionOptions implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane optionPane=new JOptionPane();
-			optionPane.showMessageDialog(null, "Nothing to see right now...", "Options Menu", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Nothing to see right now...", "Options Menu", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
@@ -131,17 +126,15 @@ public class MainMenu extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			
 			String message="Produced by : \n ALADDINE BEN ROMDHANE \n LAURA FUSTINONI \n QUITTERIE PILON";
-			JOptionPane optionPane=new JOptionPane();
-			optionPane.showMessageDialog(null, message, "Credits Menu", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, message, "Credits Menu", JOptionPane.INFORMATION_MESSAGE);
 			
 		}
 	}
 	
 	public class ActionLeave implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane optionPane =new JOptionPane();
 			
-			int op=optionPane.showConfirmDialog(null, "You sure about that?", "Quit",JOptionPane.YES_NO_OPTION);
+			int op=JOptionPane.showConfirmDialog(null, "You sure about that?", "Quit",JOptionPane.YES_NO_OPTION);
 			if(op==0) {
 				System.exit(0);
 			}

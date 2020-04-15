@@ -11,15 +11,15 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import dataplayer.DataPlayer;
-import process.management.ConstantValues;
 
 public class PlayerPanel extends JPanel{
 
+	private static final long serialVersionUID = -2531717430806354491L;
 	private JPanel playerImagePanel, staminaPanel, stressPanel, barsPanel, speedPanel;
 	private GridBagConstraints c;
 	private JProgressBar staminaBar, stressBar;
-	private ImageIcon teamFaceFrance, teamFaceBrazil, teamFaceTunisie, teamFaceGermany, emptyStar, fullStar, overchargedStar;
-	private JLabel teamFaceLabel, overchargedstarLabel, speedStarsFull, speedStarsEmpty;
+	private ImageIcon teamFaceFrance, teamFaceBrazil, teamFaceTunisia, teamFaceGermany, teamFaceEngland, emptyStar, fullStar, overchargedStar;
+	private JLabel teamFaceLabel;
 	private DataPlayer player;
 	private String teamname;
 
@@ -37,8 +37,9 @@ public class PlayerPanel extends JPanel{
 		stressBar = new JProgressBar(0, 100);
 		teamFaceFrance = new ImageIcon(".\\src\\ressources\\france.png");
 		teamFaceBrazil = new ImageIcon(".\\src\\ressources\\brazil.png");
-		teamFaceTunisie = new ImageIcon(".\\src\\ressources\\tunisie.png");
+		teamFaceTunisia = new ImageIcon(".\\src\\ressources\\tunisia.png");
 		teamFaceGermany = new ImageIcon(".\\src\\ressources\\germany.png");
+		teamFaceEngland = new ImageIcon(".\\src\\ressources\\england.png");
 		emptyStar = new ImageIcon(".\\src\\ressources\\emptystar.png");
 		fullStar = new ImageIcon(".\\src\\ressources\\fullstar.png");
 		overchargedStar = new ImageIcon(".\\src\\ressources\\overchargedstar.png");
@@ -49,19 +50,19 @@ public class PlayerPanel extends JPanel{
 		else if(teamname.contains("Brazil")) {
 			teamFaceLabel = new JLabel(teamFaceBrazil, JLabel.CENTER);
 		}
-		else if(teamname.contains("Tunisie")) {
-			teamFaceLabel = new JLabel(teamFaceTunisie, JLabel.CENTER);
+		else if(teamname.contains("Tunisia")) {
+			teamFaceLabel = new JLabel(teamFaceTunisia, JLabel.CENTER);
 		}
 		else if(teamname.contains("Germany")) {
 			teamFaceLabel = new JLabel(teamFaceGermany, JLabel.CENTER);
+		}
+		else if(teamname.contains("England")) {
+			teamFaceLabel = new JLabel(teamFaceEngland, JLabel.CENTER);
 		}
 		else {
 			teamFaceLabel = new JLabel("Image not found", JLabel.CENTER);
 		}
 
-		overchargedstarLabel = new JLabel(overchargedStar, JLabel.CENTER);
-		speedStarsFull = new JLabel(fullStar, JLabel.CENTER);
-		speedStarsEmpty = new JLabel(emptyStar, JLabel.CENTER);
 		playerImagePanel = new JPanel();
 		staminaPanel = new JPanel();
 		stressPanel = new JPanel();
