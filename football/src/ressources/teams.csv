@@ -44,29 +44,29 @@ France,blue,Griezmann,7,forward,5,0,100,4,4,1,3,4,3
 France,blue,Mbappe,10,forward,5,0,100,5,4,1,3,4,3
 France,blue,Fekir,18,forward,5,0,100,4,3,0,3,4,3
 France,blue,Ben Yedder,20,forward,4,0,100,3,3,1,3,4,3
-Tunisie,red,Ben Mustapha,1,goalie,1,0,100,4,3,0,4,3,3
-Tunisie,red,Dahmen,16,goalie,1,0,100,1,5,0,4,3,3
-Tunisie,red,Cherifia,22,goalie,1,0,100,3,3,1,4,3,3
-Tunisie,red,Ben Aziza,2,defender,2,0,100,2,3,0,4,3,3
-Tunisie,red,Abdennour,3,defender,2,0,100,4,3,1,4,3,3
-Tunisie,red,Meriah,4,defender,3,0,100,4,4,1,4,3,3
-Tunisie,red,Haddahi,5,defender,3,0,100,3,3,0,4,3,3
-Tunisie,red,Boughattas,6,defender,2,0,100,3,3,0,4,3,3
-Tunisie,red,Maaloul,12,defender,2,0,100,5,4,1,4,3,3
-Tunisie,red,Drager,14,defender,3,0,100,3,4,0,4,3,3
-Tunisie,red,Ben Mohamed,19,defender,3,0,100,4,4,1,4,3,3
-Tunisie,red,Nagguez,21,defender,3,0,100,4,3,0,4,3,3
-Tunisie,red,Khaoui,8,midfielder,4,0,100,3,3,0,4,3,3
-Tunisie,red,Sassi,13,midfielder,3,0,100,4,5,1,4,3,3
-Tunisie,red,Ben Romdhane,15,midfielder,4,0,100,3,3,0,4,3,3
-Tunisie,red,Skhiri,17,midfielder,4,0,100,4,3,1,4,3,3
-Tunisie,red,Bguir,18,midfielder,3,0,100,3,2,0,4,3,3
-Tunisie,red,Rafia,20,midfielder,4,0,100,3,4,1,4,3,3
-Tunisie,red,Msakni,7,forward,4,0,100,3,5,1,4,3,3
-Tunisie,red,Badri,9,forward,4,0,100,2,3,0,4,3,3
-Tunisie,red,Khazri,10,forward,4,0,100,3,4,1,4,3,3
-Tunisie,red,Khenissi,11,forward,5,0,100,4,4,1,4,3,3
-Tunisie,red,Hassen,23,forward,5,0,100,4,2,0,4,3,3
+Tunisia,red,Ben Mustapha,1,goalie,1,0,100,4,3,0,4,3,3
+Tunisia,red,Dahmen,16,goalie,1,0,100,1,5,0,4,3,3
+Tunisia,red,Cherifia,22,goalie,1,0,100,3,3,1,4,3,3
+Tunisia,red,Ben Aziza,2,defender,2,0,100,2,3,0,4,3,3
+Tunisia,red,Abdennour,3,defender,2,0,100,4,3,1,4,3,3
+Tunisia,red,Meriah,4,defender,3,0,100,4,4,1,4,3,3
+Tunisia,red,Haddahi,5,defender,3,0,100,3,3,0,4,3,3
+Tunisia,red,Boughattas,6,defender,2,0,100,3,3,0,4,3,3
+Tunisia,red,Maaloul,12,defender,2,0,100,5,4,1,4,3,3
+Tunisia,red,Drager,14,defender,3,0,100,3,4,0,4,3,3
+Tunisia,red,Ben Mohamed,19,defender,3,0,100,4,4,1,4,3,3
+Tunisia,red,Nagguez,21,defender,3,0,100,4,3,0,4,3,3
+Tunisia,red,Khaoui,8,midfielder,4,0,100,3,3,0,4,3,3
+Tunisia,red,Sassi,13,midfielder,3,0,100,4,5,1,4,3,3
+Tunisia,red,Ben Romdhane,15,midfielder,4,0,100,3,3,0,4,3,3
+Tunisia,red,Skhiri,17,midfielder,4,0,100,4,3,1,4,3,3
+Tunisia,red,Bguir,18,midfielder,3,0,100,3,2,0,4,3,3
+Tunisia,red,Rafia,20,midfielder,4,0,100,3,4,1,4,3,3
+Tunisia,red,Msakni,7,forward,4,0,100,3,5,1,4,3,3
+Tunisia,red,Badri,9,forward,4,0,100,2,3,0,4,3,3
+Tunisia,red,Khazri,10,forward,4,0,100,3,4,1,4,3,3
+Tunisia,red,Khenissi,11,forward,5,0,100,4,4,1,4,3,3
+Tunisia,red,Hassen,23,forward,5,0,100,4,2,0,4,3,3
 Germany,white,Neuer,1,goalie,1,0,100,4,5,1,3,5,2
 Germany,white,Leno,12,goalie,1,0,100,2,3,0,3,5,2
 Germany,white,Ter Stegen,22,goalie,1,0,100,3,3,0,3,5,2

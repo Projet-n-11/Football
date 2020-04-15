@@ -53,7 +53,7 @@ public class KickOffMenu extends JPanel {
 	private JList<String> filleT, filleS;
 	private JScrollPane jsfilleT, jsfilleS;
 	private ComboBoxModel<String> modelP, modelIA;
-	private ListModel<String> modelTFrance, modelTBrazil, modelSFrance, modelSBrazil, modelTGermany, modelSGermany, modelTTunisie, modelSTunisie;
+	private ListModel<String> modelTFrance, modelTBrazil, modelSFrance, modelSBrazil, modelTGermany, modelSGermany, modelTTunisia, modelSTunisia;
 	private JComboBox<String> Pteams, IAteams;
 	private ButtonGroup group;
 	private JRadioButton tactics343, tactics424, tactics235, tactics352, tactics433;
@@ -84,9 +84,9 @@ public class KickOffMenu extends JPanel {
 			modelTBrazil = playersTitularTeam("Brazil");
 			modelSFrance = playersSubstituteTeam("France");
 			modelSBrazil = playersSubstituteTeam("Brazil");
-			modelTTunisie = playersTitularTeam("Tunisie");
+			modelTTunisia = playersTitularTeam("Tunisia");
 			modelTGermany = playersTitularTeam("Germany");
-			modelSTunisie = playersSubstituteTeam("Tunisie");
+			modelSTunisia = playersSubstituteTeam("Tunisia");
 			modelSGermany = playersSubstituteTeam("Germany");
 			modelIA = choosingTeams();
 			Pteams= new JComboBox<String>(modelP);
@@ -141,11 +141,12 @@ public class KickOffMenu extends JPanel {
 						filleS.setModel(modelSGermany);
 						paintPlayers();	
 					}
-					else if(Pteams.getSelectedItem().equals("Tunisie")) {
-						filleT.setModel(modelTTunisie);
-						filleS.setModel(modelSTunisie);
+					else if(Pteams.getSelectedItem().equals("Tunisia")) {
+						filleT.setModel(modelTTunisia);
+						filleS.setModel(modelSTunisia);
 						paintPlayers();	
 					}
+		
 					else {
 						final DefaultListModel<String> modelTitular = new DefaultListModel<String>();
 						final DefaultListModel<String> modelSubstitute = new DefaultListModel<String>();
@@ -443,7 +444,7 @@ public class KickOffMenu extends JPanel {
 		tactics352.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				tacticsLabelPanel.removeAll();
-				tacticsPlayersLabel = new JLabel("Select 4 defenders, 4 midfielders and 2 fowards");
+				tacticsPlayersLabel = new JLabel("Select 3 defenders, 5 midfielders and 2 fowards");
 				tacticsLabelPanel.add(tacticsPlayersLabel);
 				tacticsLabelPanel.revalidate();
 			}
