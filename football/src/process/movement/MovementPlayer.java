@@ -35,42 +35,42 @@ public class MovementPlayer{
 
 	public void moveToCoord(DataPlayer player, int x, int y, Boolean itsBotRound) {
 		if(player.getPlayerType().getStamina() != 0) {
-		// X AXIS
-		if(x < player.getPositionX()) {
-			if(player.getPositionX() - x == 1) {
-				player.setPositionX(player.getPositionX() - 1);
+			// X AXIS
+			if(x < player.getPositionX()) {
+				if(player.getPositionX() - x == 1) {
+					player.setPositionX(player.getPositionX() - 1);
+				}
+				else {
+					player.setPositionX(player.getPositionX() - 1);
+				}
 			}
-			else {
-				player.setPositionX(player.getPositionX() - 1);
+			else if(x > player.getPositionX()) {
+				if(player.getPositionX() - x == 1) {
+					player.setPositionX(player.getPositionX() + 1);
+				}
+				else {
+					player.setPositionX(player.getPositionX() + 1);
+				}
 			}
-		}
-		else if(x > player.getPositionX()) {
-			if(player.getPositionX() - x == 1) {
-				player.setPositionX(player.getPositionX() + 1);
+	
+			// Y AXIS
+			if(y < player.getPositionY()) {
+				if(player.getPositionY() - y == 1) {
+					player.setPositionY(player.getPositionY() - 1);
+				}
+				else {
+					player.setPositionY(player.getPositionY() - 1);
+				}
 			}
-			else {
-				player.setPositionX(player.getPositionX() + 1);
+			else if(y > player.getPositionY()) {
+				if(player.getPositionY() - y == 1) {
+					player.setPositionY(player.getPositionY() + 1);
+				}
+				else {
+					player.setPositionY(player.getPositionY() + 1);
+				}
 			}
-		}
-
-		// Y AXIS
-		if(y < player.getPositionY()) {
-			if(player.getPositionY() - y == 1) {
-				player.setPositionY(player.getPositionY() - 1);
-			}
-			else {
-				player.setPositionY(player.getPositionY() - 1);
-			}
-		}
-		else if(y > player.getPositionY()) {
-			if(player.getPositionY() - y == 1) {
-				player.setPositionY(player.getPositionY() + 1);
-			}
-			else {
-				player.setPositionY(player.getPositionY() + 1);
-			}
-		}
-		checkPosition(player, itsBotRound);
+			checkPosition(player, itsBotRound);
 		}
 		else {
 			player.setPlayerStamina(player.getPlayerType().getStamina() + 1);
@@ -97,11 +97,11 @@ public class MovementPlayer{
 			if (itsBotRound) 
 			{
 				goalx = ConstantPosition.GOAL1X;
-				d = -3;
+				d = -2;
 			} 
 			else {
 				goalx = ConstantPosition.GOAL2X;
-				d = 3;
+				d = 2;
 			}
 			
 			if(goalx < player.getPositionX()) {
