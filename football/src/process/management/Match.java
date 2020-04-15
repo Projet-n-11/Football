@@ -130,19 +130,19 @@ public class Match {	// if singleton : re-chech every variables
 												mp.passBalltoPal(currentPlayer, thirdPlayer, ball);
 												System.out.println("pass from " + currentPlayer.getPlayerName() + " to " + thirdPlayer.getPlayerName());
 												receivedPass = true;
+												i=objectsSeen.size();
 											}
 										}
 										
 									}
 								}
 								else{
+									System.out.println("and shoot");
 									mp.shoot(currentPlayer, ball, itsUserRound);
+									i=objectsSeen.size();
 								}
 							}
 						}
-
-						System.out.println("and shoot");
-						mp.shoot(currentPlayer, ball, itsUserRound);
 					}
 					else // player does not see cages :
 					{
@@ -162,16 +162,16 @@ public class Match {	// if singleton : re-chech every variables
 												mp.passBalltoPal(currentPlayer, thirdPlayer, ball);
 												System.out.println("pass from " + currentPlayer.getPlayerName() + " to " + thirdPlayer.getPlayerName());
 												receivedPass = true;
+												i=objectsSeen.size();
 											}
 										}
 									}
-
-
 								}
 								else
 								{
 									System.out.println(currentPlayer.getPlayerName() + " runs to cages");
 									mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
+									i=objectsSeen.size();
 								}
 							}
 						}
@@ -197,8 +197,9 @@ public class Match {	// if singleton : re-chech every variables
 										}
 										else
 										{
-											System.out.println("INTERCEPTION FAILED by " + currentPlayer.getPlayerName());	
+											System.out.println("INTERCEPTION FAILED by " + currentPlayer.getPlayerName());
 										}
+										i=objectsSeen.size();
 									}
 								}
 								else // ball is owned by ally : cover ally
@@ -206,8 +207,10 @@ public class Match {	// if singleton : re-chech every variables
 									if (currentPlayer.getPositionX()-ball.getSpeedX()>15)
 									{
 										mp.move(currentPlayer, ball, itsUserRound);
+										i=objectsSeen.size();
 									}
 								}
+								
 							}
 							else // case of free ball:
 							{
@@ -217,6 +220,7 @@ public class Match {	// if singleton : re-chech every variables
 								{
 									currentPlayer.setHaveBall(true);
 									ball.setOwnedBy(currentPlayer);
+									i=objectsSeen.size();
 								}
 							}
 						}
@@ -232,7 +236,7 @@ public class Match {	// if singleton : re-chech every variables
 				}
 				
 				if (thirdPlayer!=null) {
-										thirdPlayer.getPlayerType().setCanHePass(currentPlayer.getPlayerType().getCanHePass()+1);
+					thirdPlayer.getPlayerType().setCanHePass(currentPlayer.getPlayerType().getCanHePass()+1);
 					if (receivedPass==true) 
 					{
 						currentPlayer.getPlayerType().setCanHePass(0);

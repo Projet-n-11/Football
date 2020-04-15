@@ -46,7 +46,6 @@ public class MovementBall {
 		if (ball.getSpeedX()!=0 || ball.getSpeedY()!=0)
 		{
 			table.removeElement(ball.getPositionX(), ball.getPositionY());
-			table.setElement(ball);
 			//we decelerate slowly
 			int deceleration = 0;
 			if(deceleration == 2) {
@@ -68,7 +67,8 @@ public class MovementBall {
 					ball.setSpeedY(ball.getSpeedY()+1);
 				}
 				deceleration++;
-			}	
+			}
+			table.setElement(ball);
 		}
 
 		try {
