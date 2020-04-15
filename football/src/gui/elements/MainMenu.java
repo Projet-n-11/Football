@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +30,7 @@ public class MainMenu extends JPanel {
 	private JButton kickOff;
 	private JButton options;
 	private JButton credits;
-	
+	private GridBagConstraints c;
 	private JButton leave;
 	
 	public MainMenu(){
@@ -47,7 +49,8 @@ public class MainMenu extends JPanel {
 		optionsPanel = new JPanel();
 		creditsPanel = new JPanel();
 		leavePanel = new JPanel();
-	
+		c = new GridBagConstraints();
+		
 		simulatorPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		kickOffPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		optionsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -59,42 +62,53 @@ public class MainMenu extends JPanel {
 		simulator.setFont(new Font("Arial", Font.PLAIN, 40));
 		simulator.setForeground(Color.GREEN);
 		simulatorPanel.add(simulator);
-		simulatorPanel.setBackground(new Color(80, 206, 89));
+		simulatorPanel.setBackground(new Color(245, 235, 200));
 
 		kickOff=new JButton("Kick-off");
-		kickOff.setSize(new Dimension(300, 100));
+		kickOff.setPreferredSize(new Dimension(200, 50));
 		kickOff.setMinimumSize(getSize());
 		kickOff.addActionListener(new ActionKickOff());
 		kickOffPanel.add(kickOff);
-		kickOffPanel.setBackground(new Color(80, 206, 89));
+		kickOffPanel.setBackground(new Color(245, 235, 200));
 		
 		options =new JButton("Options");
-		options.setSize(300,400);
+		options.setPreferredSize(new Dimension(200, 50));
 		options.addActionListener(new ActionOptions());
 		optionsPanel.add(options);
-		optionsPanel.setBackground(new Color(80, 206, 89));
+		optionsPanel.setBackground(new Color(245, 235, 200));
 		
 		credits=new JButton("Credits");
-		credits.setSize(300,400);
+		credits.setPreferredSize(new Dimension(200, 50));
 		credits.addActionListener(new ActionCredits());
 		creditsPanel.add(credits);
-		creditsPanel.setBackground(new Color(80, 206, 89));
+		creditsPanel.setBackground(new Color(245, 235, 200));
 		
 		leave=new JButton("Quit the game");
 		leave.addActionListener(new ActionLeave());
-		leave.setSize(200,400);
+		leave.setPreferredSize(new Dimension(200, 50));
 		leavePanel.add(leave);
-		leavePanel.setBackground(new Color(80, 206, 89));
+		leavePanel.setBackground(new Color(245, 235, 200));
 		
-		panelButtons.setLayout(new GridLayout(6,1));
-		panelButtons.add(simulatorPanel);
-		panelButtons.add(kickOffPanel);
-		panelButtons.add(optionsPanel);
-		panelButtons.add(creditsPanel);
-		panelButtons.add(leavePanel);
+		panelButtons.setLayout(new GridBagLayout());
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 0;
+		panelButtons.add(simulatorPanel, c);
+		c.gridx = 0;
+		c.gridy = 2;
+		panelButtons.add(kickOffPanel, c);
+		c.gridx = 0;
+		c.gridy = 3;
+		panelButtons.add(optionsPanel, c);
+		c.gridx = 0;
+		c.gridy = 4;
+		panelButtons.add(creditsPanel, c);
+		c.gridx = 0;
+		c.gridy = 5;
+		panelButtons.add(leavePanel, c);
 		
 		mainFrame.getContentPane().setLayout(new BorderLayout());
-		panelButtons.setBackground(new Color(80, 206, 89));
+		panelButtons.setBackground(new Color(245, 235, 200));
 		mainFrame.getContentPane().add(panelButtons);
         mainFrame.setSize(ConstantValues.SCREEN_WIDTH,ConstantValues.SCREEN_HEIGHT);
 		mainFrame.setLocation(200,130);

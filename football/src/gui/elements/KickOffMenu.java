@@ -65,7 +65,7 @@ public class KickOffMenu extends JPanel {
 
 	public KickOffMenu(String title) {
 		panel= new JPanel();
-		panel.setBackground(new Color(80, 206, 89));
+		panel.setBackground(new Color(245, 235, 200));
 	}
 
 	public JPanel createKickOff() {
@@ -103,11 +103,12 @@ public class KickOffMenu extends JPanel {
 			tactics352 = new JRadioButton ("3-5-2");
 			tactics433 = new JRadioButton ("4-3-3");
 			tactics = new JPanel();
+			tactics.setBackground(new Color(245, 235, 200));
 			
 			tacticsLabelPanel = new JPanel();
-			tacticsLabelPanel.setBackground(new Color(80, 206, 89));
+			tacticsLabelPanel.setBackground(new Color(245, 235, 200));
 			players = new JPanel();
-			players.setBackground(new Color(80, 206, 89));
+			players.setBackground(new Color(245, 235, 200));
 
 			gc = new GridBagConstraints();
 
@@ -175,7 +176,10 @@ public class KickOffMenu extends JPanel {
 					DataTeam teamPlayer = null;
 					DataTeam teamIA = null;
 					if(modelP.getSelectedItem().toString() != "Select your team..." && modelIA.getSelectedItem().toString() != "Select your team..." 
-							&& group.getSelection() != null && filleT.getModel().getSize() == 11 && filleS.getModel().getSize() == 12) {
+							&& group.getSelection() != null && filleT.getModel().getSize() == 11 && filleS.getModel().getSize() == 12 
+							&& !modelP.getSelectedItem().toString().contains(modelIA.getSelectedItem().toString())) {
+						System.out.println(modelP.getSelectedItem().toString());
+						System.out.println(modelIA.getSelectedItem().toString());
 						boolean everythingFine = false;
 						teamPlayer = CreaTeam.creaTeam(modelP.getSelectedItem().toString());
 						teamIA = CreaTeam.creaTeam(modelIA.getSelectedItem().toString());
@@ -274,46 +278,49 @@ public class KickOffMenu extends JPanel {
 						JLabel labERROR = new JLabel("");
 						if(modelP.getSelectedItem().toString() == "Select your team..." && modelIA.getSelectedItem().toString() == "Select your team..." 
 								&& group.getSelection() == null && filleT.getModel().getSize() != 11 && filleS.getModel().getSize() != 12) {
-							labERROR = new JLabel("Select your team, IA's team, your tactics and adjust your players to have 11 Titular players!");
+							labERROR = new JLabel("Select your team, IA's team, your tactics and adjust your players to have 11 Titular players!", JLabel.CENTER);
 						}
 						else if(modelP.getSelectedItem().toString() == "Select your team..." && group.getSelection() == null
 								&& filleT.getModel().getSize() != 11 && filleS.getModel().getSize() != 12) {
-							labERROR = new JLabel("Select your team, your tactics and adjust your players to have 11 Titular players!");
+							labERROR = new JLabel("Select your team, your tactics and adjust your players to have 11 Titular players!", JLabel.CENTER);
 						}
 						else if(modelIA.getSelectedItem().toString() == "Select your team..." 
 								&& group.getSelection() == null && filleT.getModel().getSize() != 11 && filleS.getModel().getSize() != 12) {
-							labERROR = new JLabel("Select IA's team, your tactics and adjust your players to have 11 Titular players!");
+							labERROR = new JLabel("Select IA's team, your tactics and adjust your players to have 11 Titular players!", JLabel.CENTER);
 						}
 						else if(group.getSelection() == null && filleT.getModel().getSize() != 11 && filleS.getModel().getSize() != 12) {
-							labERROR = new JLabel("Select your tactics and adjust your players to have 11 Titular players!");
+							labERROR = new JLabel("Select your tactics and adjust your players to have 11 Titular players!", JLabel.CENTER);
 						}
 						else if(modelP.getSelectedItem().toString() == "Select your team..." && modelIA.getSelectedItem().toString() == "Select your team...") {
-							labERROR = new JLabel("Select your team and the IA's one!");
+							labERROR = new JLabel("Select your team and the IA's one!", JLabel.CENTER);
 						}
 						else if(group.getSelection() == null && modelIA.getSelectedItem().toString() == "Select your team...") {
-							labERROR = new JLabel("Select your tactics and select the IA's team !");
+							labERROR = new JLabel("Select your tactics and select the IA's team !", JLabel.CENTER);
 						}
 						else if(modelP.getSelectedItem().toString() == "Select your team..." && filleT.getModel().getSize() != 11 && filleS.getModel().getSize() != 12) {
-							labERROR = new JLabel("Select your team and adjust your players to have 11 Titular players!");
+							labERROR = new JLabel("Select your team and adjust your players to have 11 Titular players!", JLabel.CENTER);
 						}
 						else if(filleT.getModel().getSize() != 11 && filleS.getModel().getSize() != 12) {
-							labERROR = new JLabel("Adjust your players to have 11 Titular players!");
+							labERROR = new JLabel("Adjust your players to have 11 Titular players!", JLabel.CENTER);
 						}
 						else if(group.getSelection() == null) {
-							labERROR = new JLabel("Please select your tactics !");
+							labERROR = new JLabel("Please select your tactics !", JLabel.CENTER);
 						}
 						else if(modelP.getSelectedItem().toString() == "Select your team...") {
-							labERROR = new JLabel("Select your team !");
+							labERROR = new JLabel("Select your team !", JLabel.CENTER);
 						}
 						else if(modelIA.getSelectedItem().toString() == "Select your team...") {
-							labERROR = new JLabel("Select the IA's team !");
+							labERROR = new JLabel("Select the IA's team !", JLabel.CENTER);
+						}
+						else if(modelIA.getSelectedItem().toString().contains(modelP.getSelectedItem().toString())) {
+							labERROR = new JLabel("You cannot choose the same team as the IA's one !", JLabel.CENTER);
 						}
 						else {
 							errorPanel.removeAll();
 							errorPanel.repaint();
 						}
 						errorPanel.add(labERROR);
-						errorPanel.setBackground(new Color(80, 206, 89));
+						errorPanel.setBackground(new Color(245, 235, 200));
 						errorPanel.repaint();
 						gc.gridx = 0;
 						gc.gridy = 5;

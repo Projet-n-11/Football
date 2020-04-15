@@ -203,11 +203,11 @@ public class ConstantTactics {
 			public static final int R_CENTERHALFBACKX_433 = WIDTH - 35;
 			public static final int R_CENTERHALFBACKY_433 = HEIGHT/2;
 			public static final int R_RIGHTFORWARDX_433 = WIDTH/2 + 7;
-			public static final int R_RIGHTFORWARDY_433 = HEIGHT - HEIGHT/8;
+			public static final int R_RIGHTFORWARDY_433 = HEIGHT/2 - 8;
 			public static final int R_LEFTFORWARDX_433 = WIDTH/2 + 7;
-			public static final int R_LEFTFORWARDY_433 = HEIGHT/2 + HEIGHT/14;
+			public static final int R_LEFTFORWARDY_433 = HEIGHT/2 + 8;
 			public static final int R_CENTERFORWARDX_433 = WIDTH/2 + 10;
-			public static final int R_CENTERFORWARDY_433 = HEIGHT/2 + WIDTH/14;
+			public static final int R_CENTERFORWARDY_433 = HEIGHT/2;
 
 			
 	/*
