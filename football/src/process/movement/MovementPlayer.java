@@ -80,62 +80,69 @@ public class MovementPlayer{
 	 * @param ball
 	 */
 	public void runtoCages(DataPlayer player, DataBall ball, Boolean itsBotRound, MovementBall moveball) {
-		Random r = new Random();
-		int goalx;
-		int GOALY1 = ConstantPosition.GOALY1;
-		int GOALY2 = ConstantPosition.GOALY2;
-		int cages = r.nextInt(GOALY2 - GOALY1) + GOALY1;
-		int d;
-		int oldPlayerPosX = player.getPositionX();
-		int oldPlayerPosY = player.getPositionY();
-		
-		if (itsBotRound) 
-		{
-			goalx = ConstantPosition.GOAL1X;
-			d = -3;
-		} else
-		{
-			goalx = ConstantPosition.GOAL2X;
-			d = 3;
-		}
-		
-		if(goalx < player.getPositionX()) {
-			if(player.getPositionX() - goalx == 1) {
-				player.setPositionX(player.getPositionX() - 1);
-			}
+		if(player.getPlayerType().getStamina() != 0) {
+			Random r = new Random();
+			int goalx;
+			int GOALY1 = ConstantPosition.GOALY1;
+			int GOALY2 = ConstantPosition.GOALY2;
+			int cages = r.nextInt(GOALY2 - GOALY1) + GOALY1;
+			int d;
+			int oldPlayerPosX = player.getPositionX();
+			int oldPlayerPosY = player.getPositionY();
+			
+			if (itsBotRound) 
+			{
+				goalx = ConstantPosition.GOAL1X;
+				d = -3;
+			} 
 			else {
-				player.setPositionX(player.getPositionX() - 1);
+				goalx = ConstantPosition.GOAL2X;
+				d = 3;
 			}
-		}
-		else if(goalx > player.getPositionX()) {
-			if(player.getPositionX() - goalx == 1) {
-				player.setPositionX(player.getPositionX() + 1);
+			
+			if(goalx < player.getPositionX()) {
+				if(player.getPositionX() - goalx == 1) {
+					player.setPositionX(player.getPositionX() - 1);
+				}
+				else {
+					player.setPositionX(player.getPositionX() - 1);
+				}
 			}
-			else {
-				player.setPositionX(player.getPositionX() + 1);
+			else if(goalx > player.getPositionX()) {
+				if(player.getPositionX() - goalx == 1) {
+					player.setPositionX(player.getPositionX() + 1);
+				}
+				else {
+					player.setPositionX(player.getPositionX() + 1);
+				}
 			}
-		}
 
-		if(cages < player.getPositionY()) {
-			if(player.getPositionY() - cages == 1) {
-				player.setPositionY(player.getPositionY() - 1);
+			if(cages < player.getPositionY()) {
+				if(player.getPositionY() - cages == 1) {
+					player.setPositionY(player.getPositionY() - 1);
+				}
+				else {
+					player.setPositionY(player.getPositionY() - 1);
+				}
 			}
-			else {
-				player.setPositionY(player.getPositionY() - 1);
+			else if(cages > player.getPositionY()) {
+				if(player.getPositionY() - cages == 1) {
+					player.setPositionY(player.getPositionY() + 1);
+				}
+				else {
+					player.setPositionY(player.getPositionY() + 1);
+				}
 			}
+			player.setPlayerStamina(player.getPlayerType().getStamina() - 1);
+			player.setPlayerStress(player.getPlayerType().getStress() +1);
+			map.removeElement(oldPlayerPosX, oldPlayerPosY);
+			checkPosition(player, itsBotRound);
+			map.setElement(player);
+			moveball.setPositionBall(player.getPositionX()+d, player.getPositionY());
 		}
-		else if(cages > player.getPositionY()) {
-			if(player.getPositionY() - cages == 1) {
-				player.setPositionY(player.getPositionY() + 1);
-			}
-			else {
-				player.setPositionY(player.getPositionY() + 1);
-			}
+		else {
+			player.setPlayerStamina(player.getPlayerType().getStamina() + 1);
 		}
-		map.removeElement(oldPlayerPosX, oldPlayerPosY);
-		checkPosition(player, itsBotRound);
-		map.setElement(player);
-		moveball.setPositionBall(player.getPositionX()+d, player.getPositionY());
 	}
 	
 	public void passBalltoPal(DataPlayer player, DataPlayer player2, DataBall ball) {

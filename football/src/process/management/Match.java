@@ -7,7 +7,6 @@ import datafield.Position;
 import dataplayer.DataPlayer;
 import datateam.DataTeam;
 import process.movement.Vision;
-import process.scores.Score;
 import process.movement.MovementBall;
 import process.movement.MovementPlayer;
 
@@ -49,6 +48,7 @@ public class Match {	// if singleton : re-chech every variables
 		ArrayList<Position> visionForPass = null;
 		int i, j;
 
+		
 		//each round we initialize the list (iterator) of players to check
 		itUser = userTeam.getPlayers().values().iterator();
 		itBot = botTeam.getPlayers().values().iterator();
@@ -127,7 +127,9 @@ public class Match {	// if singleton : re-chech every variables
 										
 									}
 								}
-								else mp.shoot(currentPlayer, ball, itsUserRound);
+								else{
+									mp.shoot(currentPlayer, ball, itsUserRound);
+								}
 							}
 						}
 
@@ -212,10 +214,7 @@ public class Match {	// if singleton : re-chech every variables
 				}
 				objectsSeen.removeAll(objectsSeen);
 					
-					
-					
-					
-					
+				
 				currentPlayer.getPlayerType().setCanHe(0); // CHANGER DE PLACE: on set à 0 seulement si le joueur a agi
 				}
 				else if (currentPlayer.getPlayerType().getCanHe()+currentPlayer.getPlayerType().getSpeed().getSpeedX()<5){		

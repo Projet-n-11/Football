@@ -39,12 +39,6 @@ public class MovementBall {
 		this.IATeam = IATeam;
 		PositionBall pb;
 		pb = new PositionBall(ball, table);
-		try {
-			move(pb, table, pt, pt2, PTeam, IATeam);
-		} catch (InterruptedException e) {
-			System.err.println("Movement problem, reinstall the game!");
-		}
-
 	}
 	
 	public void roll() {
@@ -54,21 +48,24 @@ public class MovementBall {
 			ball.setPositionX(ball.getPositionX()+ball.getSpeedX());
 			ball.setPositionY(ball.getPositionY()+ball.getSpeedY());
 			table.setElement(ball);
-			
-			if (ball.getSpeedX()>0) {
-				ball.setSpeedX(ball.getSpeedX()-1);
-			}
-			else if (ball.getSpeedX()<0){
-				ball.setSpeedX(ball.getSpeedX()+1);
-			}
-			
-			if (ball.getSpeedY()>0) {
-				ball.setSpeedY(ball.getSpeedY()-1);
-			}
-			else if (ball.getSpeedY()<0){
-				ball.setSpeedY(ball.getSpeedY()+1);
-			}
-			
+			//we decelerate slowly
+			int deceleration = 0;
+			if(deceleration == 2) {
+				if (ball.getSpeedX()>0) {
+					ball.setSpeedX(ball.getSpeedX()-1);
+				}
+				else if (ball.getSpeedX()<0){
+					ball.setSpeedX(ball.getSpeedX()+1);
+				}
+				
+				if (ball.getSpeedY()>0) {
+					ball.setSpeedY(ball.getSpeedY()-1);
+				}
+				else if (ball.getSpeedY()<0){
+					ball.setSpeedY(ball.getSpeedY()+1);
+				}
+				deceleration++;
+			}	
 		}
 		
 		PositionBall pb = new PositionBall(ball, table);
@@ -91,7 +88,6 @@ public class MovementBall {
 			PositionTactics pt, PositionTactics pt2, DataTeam PTeam, DataTeam IATeam) throws InterruptedException {
 		
 		boolean alreadyPlacedLeft = false;
-		
 		if(limitsGoalLeft()) {
 			System.out.println("GOAL !!! Congratulations team2");
 			Thread.sleep(500);
