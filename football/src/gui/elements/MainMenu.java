@@ -20,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import process.management.ConstantValues;
+
 
 public class MainMenu extends JPanel {
 	
@@ -98,8 +100,8 @@ public class MainMenu extends JPanel {
 		mainFrame.getContentPane().setLayout(new BorderLayout());
 		panelButtons.setBackground(new Color(80, 206, 89));
 		mainFrame.getContentPane().add(panelButtons);
-        mainFrame.setSize(1300,800);
-		mainFrame.setLocation(350,150);
+        mainFrame.setSize(ConstantValues.SCREEN_WIDTH,ConstantValues.SCREEN_HEIGHT);
+		mainFrame.setLocation(200,130);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setPreferredSize(null);
 		mainFrame.setVisible(true);

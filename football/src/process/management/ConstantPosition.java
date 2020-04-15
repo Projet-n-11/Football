@@ -5,7 +5,6 @@ public class ConstantPosition {
 	public static final int INITIAL_POINT = 6;
 	public static final int HEIGHT = 102;
 	public static final int WIDTH = 132;
-	public static final int RADIUSVISION = 15;
 	
 	public static final int CORNER1X=INITIAL_POINT;
 	public static final int CORNER1Y=INITIAL_POINT;

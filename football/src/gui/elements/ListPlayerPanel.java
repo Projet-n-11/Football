@@ -19,6 +19,7 @@ public class ListPlayerPanel extends JPanel implements Runnable {
 	private JPanel playersteam1panel = new JPanel();
 	private JScrollPane jsteam1 = new JScrollPane();
 	private DataTeam team;
+	
 	private ListPlayerPanel instance = this;
 	
 	public ListPlayerPanel(DataTeam team) {

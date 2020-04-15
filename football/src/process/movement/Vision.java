@@ -3,9 +3,8 @@ package process.movement;
 import java.util.ArrayList;
 
 import datafield.Position;
-import dataplayer.DataPlayer;
 import datafield.Grass;
-import process.management.ConstantPosition;
+import process.management.ConstantValues;
 import process.management.Map;
 
 public class Vision {
@@ -20,7 +19,7 @@ public class Vision {
 	 */
 	public ArrayList<Position> see(int x, int y, Map position) {
 		ArrayList<Position> objects = new ArrayList<Position>();
-		int radiusVision = ConstantPosition.RADIUSVISION;
+		int radiusVision = ConstantValues.RADIUSVISION;
 		int i=0, j=0; 
 
 		for (i=-radiusVision; i<=radiusVision; i++) {
@@ -37,7 +36,7 @@ public class Vision {
 	
 	public ArrayList<Position> Goalsee(int x, int y, Map position) {
 		ArrayList<Position> objects = new ArrayList<Position>();
-		int radiusVision = ConstantPosition.RADIUSVISION+5;
+		int radiusVision = ConstantValues.RADIUSVISION+5;
 		int i=0, j=0; 
 
 		for (i=-radiusVision; i<=radiusVision; i++) {

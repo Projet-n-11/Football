@@ -81,7 +81,6 @@ public class GraphicalField extends JPanel implements Runnable{
 		
 		Match m = new Match(team, team2, field, ball, score, pt, pt2);
 		MovementBall mb = new MovementBall(ball, field, score, pt, pt2, team, team2);
-		
 		while(paused == false){
 			try {
 				mb.move(pb, field, pt, pt2, team, team2);

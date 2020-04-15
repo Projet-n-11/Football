@@ -44,8 +44,8 @@ public class ScoresGUI extends JPanel implements Runnable{
 	}
 
 	private void updateValues() {
-		PTeamLabel.setText(PTeam.getTeamName() + " : " + score.getScoreTeam1());
-		IATeamLabel.setText(" -  " + IATeam.getTeamName() + " : " + score.getScoreTeam2());
+		PTeamLabel.setText(PTeam.getTeamName() + " : " + score.getScoreTeam2());
+		IATeamLabel.setText(" -  " + IATeam.getTeamName() + " : " + score.getScoreTeam1());
 	}
 	
 	@Override
