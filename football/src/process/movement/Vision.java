@@ -34,6 +34,23 @@ public class Vision {
 		}
 		return objects;
 	}
+	
+	public ArrayList<Position> Goalsee(int x, int y, Map position) {
+		ArrayList<Position> objects = new ArrayList<Position>();
+		int radiusVision = ConstantPosition.RADIUSVISION+5;
+		int i=0, j=0; 
+
+		for (i=-radiusVision; i<=radiusVision; i++) {
+			for (j=-radiusVision; j<=radiusVision; j++) {
+                if (!(i+x<0 || i+x>120 || j+y<0 || j+y>90)) {
+                	if(!(position.getElement(i+x, j+y) instanceof Grass)) { 
+                		objects.add(position.getElement(i+x, j+y));
+                	}
+                }
+			}
+		}
+		return objects;
+	}
 	/**
 	 * this position
 	 * @param player

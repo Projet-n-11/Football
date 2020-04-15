@@ -22,6 +22,10 @@ public class MovementBall {
 	private static DataBall ball;
 	private static Map table;
 	private Score score;
+	private PositionTactics pt;
+	private PositionTactics pt2;
+	private DataTeam PTeam;
+	private DataTeam IATeam;
 
 	public MovementBall(DataBall ball, Map table, Score score,
 			PositionTactics pt, PositionTactics pt2, DataTeam PTeam, DataTeam IATeam){
@@ -29,6 +33,10 @@ public class MovementBall {
 		MovementBall.ball = ball;
 		MovementBall.table = table;
 		this.score = score;
+		this.pt = pt;
+		this.pt2 = pt2;
+		this.PTeam = PTeam;
+		this.IATeam = IATeam;
 		PositionBall pb;
 		pb = new PositionBall(ball, table);
 		try {
@@ -43,12 +51,18 @@ public class MovementBall {
 		if (ball.getSpeedX()!=0 || ball.getSpeedY()!=0)
 		{
 			System.out.println("roll !");
-			Grass grass = new Grass(ball.getPositionX(), ball.getPositionY());
-			table.setElement(grass);
+			table.removeElement(ball.getPositionX(), ball.getPositionY());
 			ball.setPositionX(ball.getPositionX()+ball.getSpeedX());
 			ball.setPositionY(ball.getPositionY()+ball.getSpeedY());
 			table.setElement(ball);
 		}
+		PositionBall pb = new PositionBall(ball, table);
+		try {
+			move(pb, table, pt, pt2, PTeam, IATeam);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		// checker limites sorties ballon
 	}
 	
 	public static void setPositionBall(int x, int y) {

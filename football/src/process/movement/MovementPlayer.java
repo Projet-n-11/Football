@@ -29,66 +29,62 @@ public class MovementPlayer{
 		this.map = map;
 	}
 
-	public void move(DataPlayer dp, DataBall db, Boolean itsBotRound) {
-		/*
-		 * Player's conditions so he'll run to the ball's position
-		 * to get it. Only for the x axis. 
-		 */
-		Boolean positionOnX = false;
-		Boolean positionOnY = false;
-
-		if(db.getPositionX() < dp.getPositionX()) {
-			if(dp.getPositionX() - db.getPositionX() == 1) {
-				dp.setPositionX(dp.getPositionX() - 1);
-			}
-			else if(dp.getPositionX() - db.getPositionX() <= dp.getPlayerType().getSpeed().getSpeedX() ) {
-				dp.setPositionX(db.getPositionX());
-			}
-			else {
-				dp.setPositionX(dp.getPositionX() - dp.getPlayerType().getSpeed().getSpeedX());
-			}
-		}
-		else if(db.getPositionX() > dp.getPositionX()) {
-			if(dp.getPositionX() - db.getPositionX() == 1) {
-				dp.setPositionX(dp.getPositionX() + 1);
-			}
-			else if(db.getPositionX() - dp.getPositionX() <= dp.getPlayerType().getSpeed().getSpeedX()) {
-				dp.setPositionX(db.getPositionX());
-			}
-			else {
-				dp.setPositionX(dp.getPositionX() + dp.getPlayerType().getSpeed().getSpeedX());
-			}
-		}
-
-		/*
-		 * Player's conditions so he'll run to the ball's position
-		 * to get it. Only for the y axis.
-		 */
-		if(db.getPositionY() < dp.getPositionY()) {
-			if(dp.getPositionY() - db.getPositionY() == 1) {
-				dp.setPositionY(dp.getPositionY() - 1);
-			}
-			else if(dp.getPositionY() - db.getPositionY() <= dp.getPlayerType().getSpeed().getSpeedY()){
-				dp.setPositionY(db.getPositionY());
-			}
-			else {
-				dp.setPositionY(dp.getPositionY() - dp.getPlayerType().getSpeed().getSpeedY());
-			}
-		}
-		else if(db.getPositionY() > dp.getPositionY()) {
-			if(dp.getPositionY() - db.getPositionY() == 1) {
-				dp.setPositionY(dp.getPositionY() + 1);
-			}
-			else if(db.getPositionY() - dp.getPositionY() <= dp.getPlayerType().getSpeed().getSpeedY()){
-				dp.setPositionY(db.getPositionY());
-			}
-			else {
-				dp.setPositionY(dp.getPositionY() + dp.getPlayerType().getSpeed().getSpeedY());
-			}
-		}
-		checkPosition(dp, itsBotRound);
+	public void move(DataPlayer player, DataBall ball, Boolean itsBotRound) {
+		moveToCoord(player, ball.getPositionX(), ball.getPositionY(), itsBotRound);
 	}
 
+	public void moveToCoord(DataPlayer player, int x, int y, Boolean itsBotRound) {
+
+		// X AXIS
+		if(x < player.getPositionX()) {
+			if(player.getPositionX() - x == 1) {
+				player.setPositionX(player.getPositionX() - 1);
+			}
+			else if(player.getPositionX() - x <= player.getPlayerType().getSpeed().getSpeedX() ) {
+				player.setPositionX(x);
+			}
+			else {
+				player.setPositionX(player.getPositionX() - player.getPlayerType().getSpeed().getSpeedX());
+			}
+		}
+		else if(x > player.getPositionX()) {
+			if(player.getPositionX() - x == 1) {
+				player.setPositionX(player.getPositionX() + 1);
+			}
+			else if(x - player.getPositionX() <= player.getPlayerType().getSpeed().getSpeedX()) {
+				player.setPositionX(x);
+			}
+			else {
+				player.setPositionX(player.getPositionX() + player.getPlayerType().getSpeed().getSpeedX());
+			}
+		}
+
+		// Y AXIS
+		if(y < player.getPositionY()) {
+			if(player.getPositionY() - y == 1) {
+				player.setPositionY(player.getPositionY() - 1);
+			}
+			else if(player.getPositionY() - y <= player.getPlayerType().getSpeed().getSpeedY()){
+				player.setPositionY(y);
+			}
+			else {
+				player.setPositionY(player.getPositionY() - player.getPlayerType().getSpeed().getSpeedY());
+			}
+		}
+		else if(y > player.getPositionY()) {
+			if(player.getPositionY() - y == 1) {
+				player.setPositionY(player.getPositionY() + 1);
+			}
+			else if(y - player.getPositionY() <= player.getPlayerType().getSpeed().getSpeedY()){
+				player.setPositionY(y);
+			}
+			else {
+				player.setPositionY(player.getPositionY() + player.getPlayerType().getSpeed().getSpeedY());
+			}
+		}
+		checkPosition(player, itsBotRound);
+	}
+	
 	/**
 	 * runtoCages is called when player own the ball and is distant from cages.
 	 * @param player
@@ -208,7 +204,17 @@ public class MovementPlayer{
 		ball.setOwnedBy(null);
 	}
 
-	public Boolean tryInterception(DataPlayer player, DataBall ball) {
+	public Boolean tryInterception(DataPlayer player, DataBall ball, Boolean itsBotRound) {
+		if (ball.getOwnedBy().getPlayerType().getPlayerTypeName().compareTo("Goalie")==0)
+		{
+			int dx=0, dy=0;
+			if (itsBotRound) dx = 5;
+			else dx = -5;
+			if (player.getPositionY()<ball.getOwnedBy().getPositionY()) dy = -1;
+			else dy = +1;
+			moveToCoord(player, player.getPositionX()+dx, player.getPositionY()+dy, itsBotRound);
+			return false;
+		}
 		Random r = new Random();
 		int speedx = player.getPlayerType().getSpeed().getSpeedX();
 		int speedy = player.getPlayerType().getSpeed().getSpeedY();
@@ -258,9 +264,10 @@ public class MovementPlayer{
 		looser.getPlayerType().setStress(winner.getPlayerType().getStress()+5);
 		winner.setHaveBall(true);
 		looser.setHaveBall(false);
-		
+			
 		return player.getHaveBall();
 	}
+	
 	
 	public Boolean isCloseToBall(DataPlayer player, DataBall ball) {
 		if (Math.abs(player.getPositionX()-ball.getPositionX())==1 || player.getPositionX()-ball.getPositionX()==0)
@@ -311,11 +318,12 @@ public class MovementPlayer{
 		}
 	}
 	
+	
 	public void checkPosition(DataPlayer player, Boolean itsBotRound) {
 		int middleX = (ConstantPosition.WIDTH/2);
 		int limitOneThird1 = (ConstantPosition.WIDTH/3);
 		int limitOneThird2 = ConstantPosition.WIDTH-(ConstantPosition.WIDTH/3);
-		int GoalLimitX, GoalLimitY1 = ConstantPosition.HEIGHT/2-40/2, GoalLimitY2 = GoalLimitY1 = ConstantPosition.HEIGHT/2+40/2;;
+		int GoalLimitX, GoalLimitY1 = ConstantPosition.HEIGHT/2-40/2, GoalLimitY2 = ConstantPosition.HEIGHT/2+40/2;
 		if (itsBotRound)
 		{
 			GoalLimitX = ConstantPosition.INITIAL_POINT+15;

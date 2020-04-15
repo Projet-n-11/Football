@@ -72,6 +72,7 @@ public class Match {	// if singleton : re-chech every variables
 					if (ball.getSpeedY()>0)	ball.setSpeedY(ball.getSpeedY()-1);
 					else 					ball.setSpeedY(ball.getSpeedY()+1);
 				}
+			// THEN IF "THE BALL SEES NO ONE AROUND" SELECT SOME PLAYERS TO SEE IT... NAH ?
 		}
 		else System.out.print(ball.getOwnedBy().getPlayerName() + " owns the ball; ");
 		
@@ -91,8 +92,8 @@ public class Match {	// if singleton : re-chech every variables
 					itsUserRound = true;
 				}
 
-				
-				objectsSeen = v.see(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
+				if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Goalie")==0) objectsSeen = v.Goalsee(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
+				else objectsSeen = v.see(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
 				
 				if (currentPlayer.getHaveBall())
 				{
@@ -115,7 +116,7 @@ public class Match {	// if singleton : re-chech every variables
 				{
 					for (i=0; i<objectsSeen.size() ; i++) {
 	
-						if (objectsSeen.get(i) instanceof DataBall ) {
+						if (objectsSeen.get(i) instanceof DataBall ) { // player see ball
 	
 							posBall = objectsSeen.get(i);
 	
@@ -126,7 +127,7 @@ public class Match {	// if singleton : re-chech every variables
 									mp.move(currentPlayer, ball, itsUserRound);
 									if (mp.isCloseToBall(currentPlayer, ball));
 									{
-										if (mp.tryInterception(currentPlayer, ball)) 
+										if (mp.tryInterception(currentPlayer, ball, itsUserRound)) 
 										{
 										mp.runtoCages(currentPlayer, ball, itsUserRound);
 										System.out.println("INTERCEPTION !");
@@ -147,6 +148,7 @@ public class Match {	// if singleton : re-chech every variables
 							}
 							else // case of free ball:
 							{
+								// ************************************************* if you're a goalie you DIVE !
 								mp.move(currentPlayer, ball, itsUserRound);
 								if (mp.isCloseToBall(currentPlayer, ball)) // if free ball is reached : get ball.
 								{
