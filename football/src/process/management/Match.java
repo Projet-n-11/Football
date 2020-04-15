@@ -38,11 +38,13 @@ public class Match {	// if singleton : re-chech every variables
 
 		Iterator<DataPlayer> itUser;
 		Iterator<DataPlayer> itBot;
-		DataPlayer currentPlayer;
-		DataPlayer secondPlayer;
-		DataPlayer thirdPlayer;
+		DataPlayer currentPlayer = null;
+		DataPlayer secondPlayer = null;
+		DataPlayer thirdPlayer = null;
 		Boolean itsUserRound = true;
 		Boolean bothHavePlayed;
+		Boolean receivedPass;
+		Boolean didNothing;
 		Vision v = new Vision();
 		ArrayList<Position> objectsSeen = null;
 		ArrayList<Position> visionForPass = null;
@@ -57,7 +59,7 @@ public class Match {	// if singleton : re-chech every variables
 		bothHavePlayed = false;
 
 		/**
-		 * first we move the ball considering its own speed (if it was shoot)
+		 * first we move the ball considering its own speed (if it is free)
 		 * and slow it down
 		 */
 
@@ -94,7 +96,10 @@ public class Match {	// if singleton : re-chech every variables
 					itsUserRound = true;
 				}
 				
-				if (currentPlayer.getPlayerType().getCanHe()+currentPlayer.getPlayerType().getSpeed().getSpeedX()==5)
+				receivedPass = false;
+				didNothing = true;
+				
+				if (currentPlayer.getPlayerType().getCanHeAct() + currentPlayer.getPlayerType().getSpeed().getSpeedX()==5)
 				{	
 								
 					if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Goalie")==0) {
@@ -112,7 +117,8 @@ public class Match {	// if singleton : re-chech every variables
 						for (i=0; i<objectsSeen.size() ; i++) {
 							if (objectsSeen.get(i) instanceof DataPlayer) {
 								secondPlayer = (DataPlayer)objectsSeen.get(i);
-								if (secondPlayer.getTeam().compareTo(currentPlayer.getTeam())!=0) // if blocked : can he pass ?
+								if (secondPlayer.getPlayerType().getPlayerTypeName().compareTo("Goalie")!=0 && 
+										secondPlayer.getTeam().compareTo(currentPlayer.getTeam())!=0) // if blocked (goalie does not count) : can he pass ?
 								{
 									visionForPass = v.largeSee(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
 									j=0;
@@ -120,8 +126,10 @@ public class Match {	// if singleton : re-chech every variables
 									{
 										if(visionForPass.get(j) instanceof DataPlayer) {
 											thirdPlayer = (DataPlayer)visionForPass.get(j);
-											if (thirdPlayer.getTeam().compareTo(currentPlayer.getTeam())==0) {
+											if (thirdPlayer.getTeam().compareTo(currentPlayer.getTeam())==0 && currentPlayer.getPlayerType().getCanHePass()>=4) {
 												mp.passBalltoPal(currentPlayer, thirdPlayer, ball);
+												System.out.println("pass from " + currentPlayer.getPlayerName() + " to " + thirdPlayer.getPlayerName());
+												receivedPass = true;
 											}
 										}
 										
@@ -150,8 +158,10 @@ public class Match {	// if singleton : re-chech every variables
 									{
 										if(visionForPass.get(j) instanceof DataPlayer) {
 											thirdPlayer = (DataPlayer)visionForPass.get(j);
-											if (thirdPlayer.getTeam().compareTo(currentPlayer.getTeam())==0) {
+											if (thirdPlayer.getTeam().compareTo(currentPlayer.getTeam())==0 && currentPlayer.getPlayerType().getCanHePass()>=4) {
 												mp.passBalltoPal(currentPlayer, thirdPlayer, ball);
+												System.out.println("pass from " + currentPlayer.getPlayerName() + " to " + thirdPlayer.getPlayerName());
+												receivedPass = true;
 											}
 										}
 									}
@@ -160,7 +170,7 @@ public class Match {	// if singleton : re-chech every variables
 								}
 								else
 								{
-									System.out.println("and runs to cages");
+									System.out.println(currentPlayer.getPlayerName() + " runs to cages");
 									mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
 								}
 							}
@@ -183,11 +193,11 @@ public class Match {	// if singleton : re-chech every variables
 										if (mp.tryInterception(currentPlayer, ball, itsUserRound)) 
 										{
 											mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
-											System.out.println("INTERCEPTION !");
+											System.out.println("INTERCEPTION by " + currentPlayer.getPlayerName());
 										}
 										else
 										{
-											System.out.println("INTERCEPTION FAILED");	
+											System.out.println("INTERCEPTION FAILED by " + currentPlayer.getPlayerName());	
 										}
 									}
 								}
@@ -215,16 +225,26 @@ public class Match {	// if singleton : re-chech every variables
 				objectsSeen.removeAll(objectsSeen);
 					
 				
-				currentPlayer.getPlayerType().setCanHe(0); // CHANGER DE PLACE: on set à 0 seulement si le joueur a agi
+				currentPlayer.getPlayerType().setCanHeAct(0); // CHANGER DE PLACE: on set à 0 seulement si le joueur a agi
 				}
-				else if (currentPlayer.getPlayerType().getCanHe()+currentPlayer.getPlayerType().getSpeed().getSpeedX()<5){		
-					currentPlayer.getPlayerType().setCanHe(currentPlayer.getPlayerType().getCanHe()+1);
+				else if (currentPlayer.getPlayerType().getCanHeAct()+currentPlayer.getPlayerType().getSpeed().getSpeedX()<5){		
+					currentPlayer.getPlayerType().setCanHeAct(currentPlayer.getPlayerType().getCanHeAct()+1);
 				}
 				
-				
-
-				
-			}
+				if (thirdPlayer!=null) {
+										thirdPlayer.getPlayerType().setCanHePass(currentPlayer.getPlayerType().getCanHePass()+1);
+					if (receivedPass==true) 
+					{
+						currentPlayer.getPlayerType().setCanHePass(0);
+						thirdPlayer.getPlayerType().setCanHePass(0);
+					}
+				}
+				if (didNothing)
+				{
+					currentPlayer.setPlayerStamina(currentPlayer.getPlayerType().getStamina() + 1);
+					currentPlayer.setPlayerStress(currentPlayer.getPlayerType().getStress()-1);
+				}
+			}		
 		}
 	}
 }

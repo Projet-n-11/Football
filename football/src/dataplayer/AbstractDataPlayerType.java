@@ -6,7 +6,8 @@ public abstract class AbstractDataPlayerType{
 	private PlayerStamina stamina;
 	private PlayerStress stress;
 	private PlayerSpeed speed;
-	private int canHe;
+	private int canHeAct;
+	private int canHePass;
 	private String playerTypeName;
 	private int titularPlayer;
 	
@@ -14,23 +15,39 @@ public abstract class AbstractDataPlayerType{
 		stamina = new PlayerStamina(100);
 		stress = new PlayerStress(0);
 		speed = new PlayerSpeed(1);
-		canHe = 0;
+		canHeAct = 0;
+		setCanHePass(0);
 	}
 	
 	public int getStamina() {
 		return stamina.getStamina();
 	}
 	public void setStamina(int stamina) {
-		if (stamina>=0 && stamina<=100)
-		this.stamina.setStamina(stamina);
+		if (stamina<0)
+		{
+			this.stamina.setStamina(0);
+		}
+		else if (stamina>=100)
+		{
+			this.stamina.setStamina(100);
+		}
+		else this.stamina.setStamina(stamina);
 	}
 	public int getStress() {
 		return stress.getStress();
 	}
 	public void setStress(int stress) {
-		if (stress>=0 && stress<=100)
-		this.stress.setStress(stress);
+		if (stress<0)
+		{
+			this.stress.setStress(0);
+		}
+		else if (stress>=100)
+		{
+			this.stress.setStress(100);
+		}
+		else this.stress.setStress(stress);
 	}
+	
 	public PlayerSpeed getSpeed() {
 		return speed;
 	}
@@ -56,11 +73,19 @@ public abstract class AbstractDataPlayerType{
 		return "stamina =" + stamina + ", stress=" + stress + ", speed=" + speed;
 	}
 
-	public int getCanHe() {
-		return canHe;
+	public int getCanHeAct() {
+		return canHeAct;
 	}
 
-	public void setCanHe(int canHe) {
-		this.canHe = canHe;
+	public void setCanHeAct(int canHe) {
+		this.canHeAct = canHe;
+	}
+
+	public int getCanHePass() {
+		return canHePass;
+	}
+
+	public void setCanHePass(int canHePass) {
+		this.canHePass = canHePass;
 	}
 }

@@ -34,7 +34,7 @@ public class MovementPlayer{
 	}
 
 	public void moveToCoord(DataPlayer player, int x, int y, Boolean itsBotRound) {
-
+		if(player.getPlayerType().getStamina() != 0) {
 		// X AXIS
 		if(x < player.getPositionX()) {
 			if(player.getPositionX() - x == 1) {
@@ -71,6 +71,10 @@ public class MovementPlayer{
 			}
 		}
 		checkPosition(player, itsBotRound);
+		}
+		else {
+			player.setPlayerStamina(player.getPlayerType().getStamina() + 1);
+		}
 	}
 	
 	/**
@@ -101,37 +105,17 @@ public class MovementPlayer{
 			}
 			
 			if(goalx < player.getPositionX()) {
-				if(player.getPositionX() - goalx == 1) {
-					player.setPositionX(player.getPositionX() - 1);
-				}
-				else {
-					player.setPositionX(player.getPositionX() - 1);
-				}
+				player.setPositionX(player.getPositionX() - 1);
 			}
 			else if(goalx > player.getPositionX()) {
-				if(player.getPositionX() - goalx == 1) {
-					player.setPositionX(player.getPositionX() + 1);
-				}
-				else {
-					player.setPositionX(player.getPositionX() + 1);
-				}
+				player.setPositionX(player.getPositionX() + 1);
 			}
 
 			if(cages < player.getPositionY()) {
-				if(player.getPositionY() - cages == 1) {
-					player.setPositionY(player.getPositionY() - 1);
-				}
-				else {
-					player.setPositionY(player.getPositionY() - 1);
-				}
+				player.setPositionY(player.getPositionY() - 1);
 			}
 			else if(cages > player.getPositionY()) {
-				if(player.getPositionY() - cages == 1) {
-					player.setPositionY(player.getPositionY() + 1);
-				}
-				else {
-					player.setPositionY(player.getPositionY() + 1);
-				}
+				player.setPositionY(player.getPositionY() + 1);
 			}
 			player.setPlayerStamina(player.getPlayerType().getStamina() - 1);
 			player.setPlayerStress(player.getPlayerType().getStress() +1);
@@ -167,6 +151,7 @@ public class MovementPlayer{
 		int speed_towards_palX = deltaX/4;
 		int speed_towards_palY = deltaY/4;
 		
+		player.setHaveBall(false);
 		ball.setSpeedX(speed_towards_palX);
 		ball.setSpeedY(speed_towards_palY);
 	}
@@ -198,6 +183,8 @@ public class MovementPlayer{
 			moveToCoord(player, player.getPositionX()+dx, player.getPositionY()+dy, itsBotRound);
 			return false;
 		}
+		else 
+		{
 		Random r = new Random();
 		int speedx = player.getPlayerType().getSpeed().getSpeedX();
 		int speedy = player.getPlayerType().getSpeed().getSpeedY();
@@ -209,45 +196,33 @@ public class MovementPlayer{
 		
 		DataPlayer winner, looser;
 		
-		if (interceptorGrade>ballPlayerGrade)
+		if (interceptorGrade+r.nextInt(4)>ballPlayerGrade+r.nextInt(4))
 		{
 			winner = player;
 			looser = ball.getOwnedBy();
 		}
-		else if (ballPlayerGrade<interceptorGrade)
+		else if (ballPlayerGrade+r.nextInt(4)<interceptorGrade+r.nextInt(4))
 		{
 			winner = ball.getOwnedBy();
 			looser = player;
 		}
-		else 
+		else if (r.nextInt(2)==0)
 		{
-			if (player.getPlayerType().getStamina()<ball.getOwnedBy().getPlayerType().getStamina())
-			{
-				winner = ball.getOwnedBy();
-				looser = player;
-			}
-			else if (player.getPlayerType().getStamina()<ball.getOwnedBy().getPlayerType().getStamina()) 
-			{
-				winner = player;
-				looser = ball.getOwnedBy();
-			}
-			else if (r.nextInt(2)==0)
-			{
-				winner = player;
-				looser = ball.getOwnedBy();
-			}
-			else
-			{
-				winner = ball.getOwnedBy();
-				looser = player;
-			}
+			winner = player;
+			looser = ball.getOwnedBy();
+		}
+		else
+		{
+			winner = ball.getOwnedBy();
+			looser = player;
 		}
 		
 		winner.getPlayerType().setStress(winner.getPlayerType().getStress()-5);
 		looser.getPlayerType().setStress(winner.getPlayerType().getStress()+5);
 		winner.setHaveBall(true);
 		looser.setHaveBall(false);
-			
+		}
+				
 		return player.getHaveBall();
 	}
 	
