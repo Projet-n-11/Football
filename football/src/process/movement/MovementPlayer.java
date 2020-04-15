@@ -17,11 +17,11 @@ import process.management.Map;
  * @author Aladdine Ben Romdhane
  */
 public class MovementPlayer{
-
+	
 	private final int BORDERTOP = 0;
-	private final int BORDERBOTTOM = 48;
+	private final int BORDERBOTTOM = ConstantPosition.HEIGHT;
 	private final int BORDERLEFT = 0;
-	private final int BORDERRIGHT = 84;
+	private final int BORDERRIGHT = ConstantPosition.WIDTH;
 	private Map map;
 
 

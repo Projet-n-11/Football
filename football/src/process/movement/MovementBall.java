@@ -12,6 +12,7 @@ import process.management.PositionBall;
 import process.management.PositionTactics;
 import process.scores.Score;
 import process.management.ConstantPosition;
+import process.management.ConstantValues;
 import process.management.Map;
 /**
  * @author quitt
@@ -26,9 +27,10 @@ public class MovementBall {
 	private PositionTactics pt2;
 	private DataTeam PTeam;
 	private DataTeam IATeam;
-
+	private PositionBall pb;
+	
 	public MovementBall(DataBall ball, Map table, Score score,
-			PositionTactics pt, PositionTactics pt2, DataTeam PTeam, DataTeam IATeam){
+			PositionTactics pt, PositionTactics pt2, DataTeam PTeam, DataTeam IATeam, PositionBall pb){
 		
 		this.ball = ball;
 		this.table = table;
@@ -37,8 +39,7 @@ public class MovementBall {
 		this.pt2 = pt2;
 		this.PTeam = PTeam;
 		this.IATeam = IATeam;
-		PositionBall pb;
-		pb = new PositionBall(ball, table);
+		this.pb = pb;
 	}
 	
 	public void roll() {
@@ -69,8 +70,7 @@ public class MovementBall {
 				deceleration++;
 			}	
 		}
-		
-		PositionBall pb = new PositionBall(ball, table);
+
 		try {
 			move(pb, table, pt, pt2, PTeam, IATeam);
 		} catch (InterruptedException e) {
@@ -92,45 +92,43 @@ public class MovementBall {
 		boolean alreadyPlacedLeft = false;
 		if(limitsGoalLeft()) {
 			System.out.println("GOAL !!! Congratulations team2");
-			Thread.sleep(500);
+			Thread.sleep(ConstantValues.GAME_SPEED);
 			score.setScoreTeam1(score.getScoreTeam2()+1);
 			pt.placePlayers(PTeam, table, alreadyPlacedLeft);
 			alreadyPlacedLeft = true;
 			pt2.placePlayers(IATeam, table, alreadyPlacedLeft);
 			alreadyPlacedLeft = false;
-			Thread.sleep(200);
 			pb.placeBallEngagement(ball, table);
 		}
 
 		else if(limitsGoalRight()) {
 			System.out.println("GOAL !!! Congratulations team1");
-			Thread.sleep(500);
+			Thread.sleep(ConstantValues.GAME_SPEED);
 			score.setScoreTeam2(score.getScoreTeam2()+1);
 			pt.placePlayers(PTeam, table, alreadyPlacedLeft);
 			alreadyPlacedLeft = true;
 			pt2.placePlayers(IATeam, table, alreadyPlacedLeft);
 			alreadyPlacedLeft = false;
-			Thread.sleep(200);
 			pb.placeBallEngagement(ball, table);
 		}
 		else if (limitsSideLineTop()) {
 			System.out.println("THROW (top)!!!");
-			Thread.sleep(200);
+			Thread.sleep(ConstantValues.GAME_SPEED);
 			pb.setPositionBall(ball.getPositionX(), ConstantPosition.INITIAL_POINT, ball, table);
 		}
 		else if (limitsSideLineBottom()) {
 			System.out.println("THROW (bottom)!!!");
-			Thread.sleep(200);
+			Thread.sleep(ConstantValues.GAME_SPEED);
 			pb.setPositionBall(ball.getPositionX(), ConstantPosition.HEIGHT, ball, table);
 		}
 		else if(limitsCornersLeft()) {
 			System.out.println("Corner Left");
-			Thread.sleep(200);
+			Thread.sleep(ConstantValues.GAME_SPEED);
 			pb.setPositionBall(ConstantPosition.SIXYARD1X, ConstantPosition.SIXYARD1Y, ball, table);
 		}
 		else if(limitsCornersRight()) {
 			System.out.println("Corner Right");
-			Thread.sleep(200);
+			Thread.sleep(ConstantValues.GAME_SPEED);
 			pb.setPositionBall(ConstantPosition.SIXYARD2X, ConstantPosition.SIXYARD2Y, ball, table);
 		}
 	}
