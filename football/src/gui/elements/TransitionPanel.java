@@ -35,6 +35,7 @@ import javax.swing.TransferHandler;
 
 import dataplayer.DataPlayer;
 import datateam.DataTeam;
+import process.management.CreaTeam;
 
 public class TransitionPanel extends JPanel{
 
@@ -125,23 +126,26 @@ public class TransitionPanel extends JPanel{
 					if(filleT.getModel().getSize() == 11 && filleS.getModel().getSize() == 12) {
 						boolean everythingFine = false;
 						
+						DataTeam teamPlayer = playerTeam;
+						
 						if(tactics343.isSelected()) {
-							playerTeam.setDefaultStrategy(new int[] {3,4,3});
+							teamPlayer.setDefaultStrategy(new int[] {3,4,3});
 						}
 						else if(tactics424.isSelected()) {
-							playerTeam.setDefaultStrategy(new int[] {4,2,4});
+							teamPlayer.setDefaultStrategy(new int[] {4,2,4});
 						}
 						else if(tactics235.isSelected()) {
-							playerTeam.setDefaultStrategy(new int[] {2,3,5});
+							teamPlayer.setDefaultStrategy(new int[] {2,3,5});
 						}
 						else if(tactics352.isSelected()) {
-							playerTeam.setDefaultStrategy(new int[] {3,5,2});
+							teamPlayer.setDefaultStrategy(new int[] {3,5,2});
 						}
 						else if(tactics433.isSelected()) {
-							playerTeam.setDefaultStrategy(new int[] {4,3,3});
+							teamPlayer.setDefaultStrategy(new int[] {4,3,3});
 						}
 						
-						Collection<DataPlayer> playersList = playerTeam.getPlayers().values();
+						Collection<DataPlayer> playersList = teamPlayer.getPlayers().values();
+						
 						for(DataPlayer players: playersList) {
 							for(int nb_elts=0; nb_elts < filleT.getModel().getSize(); nb_elts++) {
 								if(filleT.getModel().getElementAt(nb_elts).contains(players.getPlayerName())) {
@@ -177,28 +181,29 @@ public class TransitionPanel extends JPanel{
 						}
 
 						if(goalie == 1 && defenders == 4 && midfielders == 3 && forward == 3 
-								&& playerTeam.getDefaultStrategy(0) == 4 && playerTeam.getDefaultStrategy(1) == 3 && playerTeam.getDefaultStrategy(2) == 3) {
+								&& teamPlayer.getDefaultStrategy(0) == 4 && teamPlayer.getDefaultStrategy(1) == 3 && teamPlayer.getDefaultStrategy(2) == 3) {
 							everythingFine = true;
 						}
 						else if(goalie == 1 && defenders == 3 && midfielders == 5 && forward == 2  
-								&& playerTeam.getDefaultStrategy(0) == 3 && playerTeam.getDefaultStrategy(1) == 5 && playerTeam.getDefaultStrategy(2) == 2) {
+								&& teamPlayer.getDefaultStrategy(0) == 3 && teamPlayer.getDefaultStrategy(1) == 5 && teamPlayer.getDefaultStrategy(2) == 2) {
 							everythingFine = true;
 						}
 						else if(goalie == 1 && defenders == 2 && midfielders == 3 && forward == 5  
-								&& playerTeam.getDefaultStrategy(0) == 2 && playerTeam.getDefaultStrategy(1) == 3 && playerTeam.getDefaultStrategy(2) == 5) {
+								&& teamPlayer.getDefaultStrategy(0) == 2 && teamPlayer.getDefaultStrategy(1) == 3 && teamPlayer.getDefaultStrategy(2) == 5) {
 							everythingFine = true;
 						}
 						else if(goalie == 1 && defenders == 4 && midfielders == 2 && forward == 4  
-								&& playerTeam.getDefaultStrategy(0) == 4 && playerTeam.getDefaultStrategy(1) == 2 && playerTeam.getDefaultStrategy(2) == 4) {
+								&& teamPlayer.getDefaultStrategy(0) == 4 && teamPlayer.getDefaultStrategy(1) == 2 && teamPlayer.getDefaultStrategy(2) == 4) {
 							everythingFine = true;
 						}
 						else if(goalie == 1 && defenders == 3 && midfielders == 4 && forward == 3  
-								&& playerTeam.getDefaultStrategy(0) == 3 && playerTeam.getDefaultStrategy(1) == 4 && playerTeam.getDefaultStrategy(2) == 3) {
+								&& teamPlayer.getDefaultStrategy(0) == 3 && teamPlayer.getDefaultStrategy(1) == 4 && teamPlayer.getDefaultStrategy(2) == 3) {
 							everythingFine = true;
 						}
 
 						if(everythingFine == true) {
 							setResumedTrue();
+							playerTeam = teamPlayer;
 						}
 					}
 					else {

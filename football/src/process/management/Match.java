@@ -25,14 +25,16 @@ public class Match {
 	private MovementBall mb;
 	private MovementPlayer mp;
 	private Vision v;
+	private ArrayList<DataPlayer> allPlayers;
 
-	public Match(DataTeam userTeam, DataTeam botTeam, Map positions, DataBall ball, MovementBall mb) {
+	public Match(DataTeam userTeam, DataTeam botTeam, Map positions, DataBall ball, MovementBall mb, ArrayList<DataPlayer> allPlayers) {
 		this.userTeam = userTeam;
 		this.botTeam = botTeam;
 		this.positions = positions;
 		this.ball = ball;
 		this.mp = new MovementPlayer(positions, ball);
 		this.mb = mb;
+		this.allPlayers = allPlayers;
 		v = new Vision();
 	}
 
@@ -360,6 +362,10 @@ public class Match {
 						}
 					}
 				}
+				else {
+					mp.goBackToInitialPosition(currentPlayer, getInitialPositionPlayer(currentPlayer), itsUserRound);
+					System.out.println(currentPlayer.getPlayerType().getSpeed());
+				}
 			}
 		}
 		return act;
@@ -383,6 +389,16 @@ public class Match {
 			currentPlayer.getPlayerType().setCanHeAct(currentPlayer.getPlayerType().getCanHeAct()+1);
 		}
 		
+	}
+	
+	public Position getInitialPositionPlayer(DataPlayer player) {
+		for(DataPlayer players: allPlayers) {
+			if(players.getPlayerName().contains(player.getPlayerName())) {
+				Position initial_pos_player = new Position(players.getPositionX(), players.getPositionY());
+				return initial_pos_player;
+			}
+		}
+		return new Position(0,0);
 	}
 
 }

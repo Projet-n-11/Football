@@ -57,6 +57,14 @@ public abstract class AbstractDataPlayerType{
 		this.speed.setSpeedY(speed);
 	}
 	
+	public void setSpeedX(int speed) {
+		this.speed.setSpeedX(speed);
+	}
+	
+	public void setSpeedY(int speed) {
+		this.speed.setSpeedY(speed);
+	}
+	
 	public int getTitularPlayer() {
 		return titularPlayer;
 	}

@@ -340,6 +340,10 @@ public class MovementPlayer{
 		}
 	}
 	
+	public void goBackToInitialPosition(DataPlayer player, Position initialPos, boolean itsUserRound) {
+		player.setHaveBall(false);
+		moveToCoord(player, initialPos.getPositionX(), initialPos.getPositionY(), itsUserRound);
+	}
 	
 	public void checkPosition(DataPlayer player, Boolean itsUserRound) {
 		int middleX = (ConstantPosition.WIDTH/2);

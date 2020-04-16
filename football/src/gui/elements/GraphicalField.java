@@ -91,33 +91,35 @@ public class GraphicalField extends JPanel implements Runnable{
 		PositionTactics pt2 = new PositionTactics(team2, field, true);
 		pt2.placePlayers(team2, field, true);
 
-		/*ArrayList<DataPlayer> allPlayersFromTeam1 = new ArrayList<DataPlayer>(team.getPlayers().values());
+		ArrayList<DataPlayer> allPlayersFromTeam1 = new ArrayList<DataPlayer>(team.getPlayers().values());
 		ArrayList<DataPlayer> allPlayersFromTeam2 = new ArrayList<DataPlayer>(team2.getPlayers().values());
-		ArrayList<DataPlayer> allPlayers = new ArrayList<DataPlayer>();*/
+		ArrayList<DataPlayer> allPlayers = new ArrayList<DataPlayer>();
+		allPlayers.addAll(allPlayersFromTeam1);
+		allPlayers.addAll(allPlayersFromTeam2);
 		MovementBall mb = new MovementBall(ball, field, score, pt, pt2, team, team2, pb);
-		Match m = new Match(team, team2, field, ball, mb);
+		Match m = new Match(team, team2, field, ball, mb, allPlayers);
 		TransitionPanel tp = new TransitionPanel("Transition Panel", frame, team);	
 		transitionPanel = tp.createTransitionPanel();
 
 		while(started == true) {
 			if(chrono.getMinute() != 90){
-				/*if(paused == false) {
-					while(game_duration < ConstantValues.TRANSITION_TIME) {*/
+				if(paused == false) {
+					while(game_duration < ConstantValues.TRANSITION_TIME) {
 						try{
 							Thread.sleep(GAME_SPEED);
 							this.repaint();
 							m.matchOneRound();
-							//pb.setPositionBall(ball.getPositionX(), ball.getPositionY(), ball, field);
+							pb.setPositionBall(ball.getPositionX(), ball.getPositionY(), ball, field);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						/*game_duration++;
+						game_duration++;
 					}
 					chrono.pause();
 					transition = true;
 					paused = true;
-				//}
-				//else {
+				}
+				else {
 					if(transition == true) {
 						remove(df);
 						initTransitionLayout(transitionPanel);
@@ -139,6 +141,7 @@ public class GraphicalField extends JPanel implements Runnable{
 						
 						team = tp.actualizedTeam();
 						
+						pt = new PositionTactics(team, field, false);
 						pt.placePlayers(team, field, false);
 						pt2.placePlayers(team2, field , true);
 						PositionBall.getInstance().placeBallEngagement(ball, field);
@@ -148,7 +151,7 @@ public class GraphicalField extends JPanel implements Runnable{
 						game_duration = 0;
 						tp.setResumedFalse();
 					}
-				}*/
+				}
 			}
 			else {
 				removeAll();

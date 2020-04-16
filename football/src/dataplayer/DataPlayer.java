@@ -115,6 +115,14 @@ public class DataPlayer extends Position{
 		this.playerType.setSpeed(speed);
 	}
 	
+	public void setSpeedX(int speed) {
+		this.playerType.setSpeedX(speed);
+	}
+	
+	public void setSpeedY(int speed) {
+		this.playerType.setSpeedY(speed);
+	}
+	
 	public void setPlayerStress(int stress) {
 		this.playerType.setStress(stress);
 	}

@@ -113,7 +113,14 @@ public class PlayerPanel extends JPanel{
 		c.gridy = 1;
 		barsPanel.add(stressPanel, c);	
 
-		if(player.getPlayerType().getSpeed().getSpeedX() == 1) {
+		if(player.getPlayerType().getSpeed().getSpeedX() == 0) {
+			for(int i=0; i<=4; i++) {
+				c.gridx = i;
+				c.gridy = 0;
+				speedPanel.add(new JLabel(emptyStar, JLabel.CENTER), c);
+			}
+		}
+		else if(player.getPlayerType().getSpeed().getSpeedX() == 1) {
 			c.gridx = 0;
 			c.gridy = 0;
 			speedPanel.add(new JLabel(fullStar, JLabel.CENTER), c);
