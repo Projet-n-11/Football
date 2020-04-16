@@ -115,6 +115,7 @@ public class GraphicalField extends JPanel implements Runnable{
 					}
 					game_duration++;
 				}
+				chrono.pause();
 				transition = true;
 				paused = true;
 			}
@@ -123,17 +124,9 @@ public class GraphicalField extends JPanel implements Runnable{
 					remove(df);
 					initTransitionLayout(transitionPanel);
 					transition = false;
-				} else {
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 				}
 				
 				if(tp.isResumed() == true){
-					remove(transitionPanel);
 					add(df);
 					setBackground(new Color(0, 128, 0));
 					chrono.resume();

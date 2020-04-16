@@ -93,7 +93,6 @@ public class MovementBall {
 		boolean alreadyPlacedLeft = false;
 		if(limitsGoalLeft()) {
 			System.out.println("GOAL !!! Congratulations team2");
-			Thread.sleep(ConstantValues.GAME_SPEED);
 			score.setScoreTeam1(score.getScoreTeam2()+1);
 			pt.placePlayers(PTeam, table, alreadyPlacedLeft);
 			alreadyPlacedLeft = true;
@@ -104,7 +103,6 @@ public class MovementBall {
 
 		else if(limitsGoalRight()) {
 			System.out.println("GOAL !!! Congratulations team1");
-			Thread.sleep(ConstantValues.GAME_SPEED);
 			score.setScoreTeam2(score.getScoreTeam2()+1);
 			pt.placePlayers(PTeam, table, alreadyPlacedLeft);
 			alreadyPlacedLeft = true;
@@ -114,22 +112,18 @@ public class MovementBall {
 		}
 		else if (limitsSideLineTop()) {
 			System.out.println("THROW (top)!!!");
-			Thread.sleep(ConstantValues.GAME_SPEED);
 			pb.setPositionBall(ball.getPositionX(), ConstantPosition.INITIAL_POINT, ball, table);
 		}
 		else if (limitsSideLineBottom()) {
 			System.out.println("THROW (bottom)!!!");
-			Thread.sleep(ConstantValues.GAME_SPEED);
 			pb.setPositionBall(ball.getPositionX(), ConstantPosition.HEIGHT, ball, table);
 		}
 		else if(limitsCornersLeft()) {
 			System.out.println("Corner Left");
-			Thread.sleep(ConstantValues.GAME_SPEED);
 			pb.setPositionBall(ConstantPosition.SIXYARD1X, ConstantPosition.SIXYARD1Y, ball, table);
 		}
 		else if(limitsCornersRight()) {
 			System.out.println("Corner Right");
-			Thread.sleep(ConstantValues.GAME_SPEED);
 			pb.setPositionBall(ConstantPosition.SIXYARD2X, ConstantPosition.SIXYARD2Y, ball, table);
 		}
 	}
