@@ -119,9 +119,6 @@ public class Match {
 			}
 
 		}
-		else {
-			System.out.print(ball.getOwnedBy().getPlayerName() + " owns the ball; ");
-		}
 
 	}
 

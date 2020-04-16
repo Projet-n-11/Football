@@ -58,7 +58,7 @@ public class MovementBall {
 				{
 					ball.setPositionX(ball.getPositionX()+1);
 				}
-				else if (ball.getSpeedX()<1){
+				else if (ball.getSpeedX()<-1){
 					ball.setPositionX(ball.getPositionX()-1);
 					ball.setSpeedX(ball.getSpeedX()+1);
 				}
@@ -74,7 +74,7 @@ public class MovementBall {
 				else if (ball.getSpeedY()==1) {
 					ball.setPositionY(ball.getPositionY()+1);
 				}
-				else if (ball.getSpeedY()<1){
+				else if (ball.getSpeedY()<-1){
 					ball.setPositionY(ball.getPositionY()-1);
 					ball.setSpeedY(ball.getSpeedY()+1);
 				}
@@ -117,6 +117,8 @@ public class MovementBall {
 			pt2.placePlayers(IATeam, table, alreadyPlacedLeft);
 			alreadyPlacedLeft = false;
 			pb.placeBallEngagement(ball, table);
+			ball.setSpeedX(0);
+			ball.setSpeedY(0);
 		}
 
 		else if(limitsGoalRight()) {
@@ -149,12 +151,12 @@ public class MovementBall {
 	public boolean limitsGoalLeft () {
 
 		if(ball.getPositionX()<ConstantPosition.GOAL1X) {
-			if(ball.getPositionY()>ConstantPosition.GOALY1 && ball.getPositionY()<ConstantPosition.GOALY2) {
+			//if(ball.getPositionY()>ConstantPosition.GOALY1 && ball.getPositionY()<ConstantPosition.GOALY2) {
 				return true;
-			}
+			/*}
 			else {
 				return false;
-			}
+			}*/
 		}
 		else {
 			return false;
@@ -164,12 +166,12 @@ public class MovementBall {
 
 	public boolean limitsGoalRight() {
 		if(ball.getPositionX()>ConstantPosition.GOAL2X) {
-			if(ball.getPositionY()>ConstantPosition.GOALY1 && ball.getPositionY()<ConstantPosition.GOALY2) {
+			//if(ball.getPositionY()>ConstantPosition.GOALY1 && ball.getPositionY()<ConstantPosition.GOALY2) {
 				return true;
-			}
+			/*}
 			else {
 				return false;
-			}
+			}*/
 		}
 		else {
 			return false;

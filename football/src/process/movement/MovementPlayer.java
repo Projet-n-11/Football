@@ -35,6 +35,17 @@ public class MovementPlayer{
 			player.setHaveBall(true);
 			ball.setOwnedBy(player);
 		}
+		else 
+		{
+			int ballGrade = Math.abs(ball.getSpeedX()*ball.getSpeedY())+50;
+			int playerGrade = Math.abs(player.getPlayerType().getSpeed().getSpeedX()*player.getPlayerType().getSpeed().getSpeedY())
+					-player.getPlayerType().getStress()+player.getPlayerType().getStamina();
+			if (playerGrade>=ballGrade)
+			{
+				player.setHaveBall(true);
+				ball.setOwnedBy(player);
+			}
+		}
 		
 	}
 	
@@ -132,6 +143,8 @@ public class MovementPlayer{
 			checkPosition(player, itsUserRound);
 			map.setElement(player);
 			moveball.setPositionBall(player.getPositionX()+d, player.getPositionY());
+			System.out.println(player.getPlayerName() + 
+					" runs to cages");
 		}
 		else {
 			player.setPlayerStamina(player.getPlayerType().getStamina() + 1);
@@ -167,17 +180,19 @@ public class MovementPlayer{
 	
 	public void shoot(DataPlayer player, DataBall ball, Boolean itsUserRound) {
 		int direction;
-		if (!itsUserRound)
+		if (itsUserRound)
 		{
 			direction = -1;
 		} else
 		{
 			direction = 1;
-		}
+		}		
+		System.out.println("SHOOT by " + player.getPlayerName());
 		player.setPositionX(player.getPositionX()-direction); // player steps back
 		ball.setSpeedX( (int) ( direction*5));
 		player.setHaveBall(false);
 		ball.setOwnedBy(null);
+
 	}
 
 	public void tryInterception(DataPlayer player, DataBall ball, Boolean itsUserRound, MovementBall mb) {
@@ -235,18 +250,17 @@ public class MovementPlayer{
 				
 		if(player.getHaveBall())
 		{
-			System.out.println("INTERCEPTION BY " + player.getPlayerName() + " TO " + ball.getOwnedBy().getPlayerName());
+			System.out.println("INTERCEPTION BY " + player.getPlayerName());
 			runtoCages(player, ball, itsUserRound, mb);
 		}
 	}
 
 	public void cover(DataPlayer player, DataPlayer ballPlayer, Boolean itsUserRound) {
-		// player doit couvrir ballPlayer: pour ça, il doit se tenir à une certaine distance
 		int dx = 10, dy = 15;
 		
 		if (player.getPlayerType().getPlayerTypeName()=="Forward" && !itsUserRound || itsUserRound && player.getPlayerType().getPlayerTypeName()=="defender")
 		{
-			if (Math.abs(player.getPositionY()-ballPlayer.getPositionY())<dy) 
+			if (Math.abs(player.getPositionY()-ballPlayer.getPositionY())<dy) // if too close to pal to cover :
 			{
 				if (player.getPositionY()<ballPlayer.getPositionY() ) 
 				{
@@ -255,6 +269,10 @@ public class MovementPlayer{
 				{
 					moveToCoord(player, player.getPositionX()-dx, player.getPositionY()+dy, itsUserRound);
 				}
+			}
+			else
+			{
+				moveToCoord(player, ballPlayer.getPositionX(), ballPlayer.getPositionY(), itsUserRound);
 			}
 			
 		}
@@ -391,7 +409,7 @@ public class MovementPlayer{
 		}
 		else 																			// forward
 		{
-			if (!itsUserRound)
+			if (itsUserRound)
 			{
 				if (player.getPositionX()>limitOneThird2)
 				{
