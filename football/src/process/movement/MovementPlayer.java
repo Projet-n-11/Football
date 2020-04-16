@@ -190,9 +190,9 @@ public class MovementPlayer{
 		int speedy = player.getPlayerType().getSpeed().getSpeedY();
 		int interceptorGrade = Math.abs(speedx*speedy)-player.getPlayerType().getStress();
 		
-		speedx = ball.getOwnedBy().getPlayerType().getSpeed().getSpeedX();
-		speedy = ball.getOwnedBy().getPlayerType().getSpeed().getSpeedY();
-		int ballPlayerGrade = Math.abs(speedx*speedy)-ball.getOwnedBy().getPlayerType().getStress();
+		int speedx2 = ball.getOwnedBy().getPlayerType().getSpeed().getSpeedX();
+		int speedy2 = ball.getOwnedBy().getPlayerType().getSpeed().getSpeedY();
+		int ballPlayerGrade = Math.abs(speedx2*speedy2)-ball.getOwnedBy().getPlayerType().getStress();
 		
 		DataPlayer winner, looser;
 		
@@ -218,9 +218,12 @@ public class MovementPlayer{
 		}
 		
 		winner.getPlayerType().setStress(winner.getPlayerType().getStress()-5);
-		looser.getPlayerType().setStress(winner.getPlayerType().getStress()+5);
+		looser.getPlayerType().setStress(winner.getPlayerType().getStress()+10);
 		winner.setHaveBall(true);
 		looser.setHaveBall(false);
+		ball.setOwnedBy(winner);
+		winner.getPlayerType().setCanHeAct(5-winner.getPlayerType().getSpeed().getSpeedX());
+		looser.getPlayerType().setCanHeAct(-2);
 		}
 				
 		return player.getHaveBall();

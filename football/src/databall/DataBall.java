@@ -16,10 +16,12 @@ public class DataBall extends Position{
 		this.speedX = 0;
 		this.speedY = 0;
 		setCanIt(0);
+		ownedBy = null;
 	}
 	
 	public DataBall(int positionx, int positiony) {
 		super(positionx, positiony);
+		ownedBy = null;
 	}
 	
 	public int getBallsize() {

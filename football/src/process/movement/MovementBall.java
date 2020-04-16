@@ -45,6 +45,7 @@ public class MovementBall {
 	public void roll() {
 		if (ball.getSpeedX()!=0 || ball.getSpeedY()!=0)
 		{
+			ball.setCanIt(0);
 			table.removeElement(ball.getPositionX(), ball.getPositionY());
 			//we decelerate slowly
 			int deceleration = 0;
