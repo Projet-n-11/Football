@@ -238,7 +238,6 @@ public class Match {	// if singleton : re-chech every variables
 					}
 					objectsSeen.removeAll(objectsSeen);
 						
-					
 					currentPlayer.getPlayerType().setCanHeAct(0); // CHANGER DE PLACE: on set à 0 seulement si le joueur a agi
 				} // end of case of player which can act
 				

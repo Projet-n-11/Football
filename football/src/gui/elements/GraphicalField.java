@@ -45,6 +45,7 @@ public class GraphicalField extends JPanel implements Runnable{
 	private Score score;
 	private ChronometerGUI chrono;
 	private JFrame frame;
+	private JPanel transitionPanel;
 	
 	private static final int GAME_SPEED = ConstantValues.GAME_SPEED;
 
@@ -99,7 +100,7 @@ public class GraphicalField extends JPanel implements Runnable{
 		MovementBall mb = new MovementBall(ball, field, score, pt, pt2, team, team2, pb);
 		Match m = new Match(team, team2, field, ball, mb);
 		TransitionPanel tp = new TransitionPanel("Transition Panel", frame, team);	
-		JPanel panel = tp.createTransitionPanel();
+	    transitionPanel = tp.createTransitionPanel();
 		
 		while(started == true) {
 			if(paused == false) {
@@ -119,7 +120,8 @@ public class GraphicalField extends JPanel implements Runnable{
 			}
 			else {
 				if(transition == true) {
-					initTransitionLayout(panel);
+					remove(df);
+					initTransitionLayout(transitionPanel);
 					transition = false;
 				} else {
 					try {
@@ -131,7 +133,7 @@ public class GraphicalField extends JPanel implements Runnable{
 				}
 				
 				if(tp.isResumed() == true){
-					remove(panel);
+					remove(transitionPanel);
 					add(df);
 					setBackground(new Color(0, 128, 0));
 					chrono.resume();
@@ -139,8 +141,6 @@ public class GraphicalField extends JPanel implements Runnable{
 					game_duration = 0;
 					tp.setResumedFalse();
 				}
-				
-				
 			}
 		}
 	}
