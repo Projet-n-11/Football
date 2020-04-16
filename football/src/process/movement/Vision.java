@@ -27,7 +27,7 @@ public class Vision {
 	            for (j=-radiusVision; j<=radiusVision; j++) {
 	                if (!(i+x<ConstantPosition.INITIAL_POINT || i+x>ConstantPosition.WIDTH 
 	                		|| j+y<ConstantPosition.INITIAL_POINT || j+y>ConstantPosition.HEIGHT)) {
-	                    if((position.getElement(i+x, j+y)!=null)) {  
+	                    if((i!=0 && j!=0 && position.getElement(i+x, j+y)!=null)) {  
 	                        objects.add(position.getElement(i+x, j+y));
 	                    }
 	                }
@@ -38,14 +38,14 @@ public class Vision {
 	    
 	    public ArrayList<Position> largeSee(int x, int y, Map position) {
 	        ArrayList<Position> objects = new ArrayList<Position>();
-	        int radiusVision = ConstantValues.RADIUSVISION+35;
+	        int radiusVision = ConstantValues.RADIUSVISION+15;
 	        int i=0, j=0; 
 
 	        for (i=-radiusVision; i<=radiusVision; i++) {
 	            for (j=-radiusVision; j<=radiusVision; j++) {
 	                if (!(i+x<ConstantPosition.INITIAL_POINT || i+x>ConstantPosition.WIDTH 
 	                		|| j+y<ConstantPosition.INITIAL_POINT || j+y>ConstantPosition.HEIGHT)) {
-	                    if((position.getElement(i+x, j+y)!=null)) { 
+	                    if((i!=0 && j!=0 && position.getElement(i+x, j+y)!=null)) { 
 	                        objects.add(position.getElement(i+x, j+y));
 	                    }
 	                }
@@ -62,7 +62,7 @@ public class Vision {
 		for (i=-radiusVision; i<=radiusVision; i++) {
 			for (j=-radiusVision; j<=radiusVision; j++) {
                 if (!(i+x<0 || i+x>120 || j+y<0 || j+y>90)) {
-                	if(!(position.getElement(i+x, j+y) instanceof Grass)) { 
+                	if(i!=0 && j!=0 && position.getElement(i+x, j+y) != null) { 
                 		objects.add(position.getElement(i+x, j+y));
                 	}
                 }

@@ -167,7 +167,7 @@ public class MovementPlayer{
 			direction = 1;
 			player.setPositionX(player.getPositionX()-1); // player steps back
 		}
-		ball.setSpeedX( (int) ( direction*5)); // ball's speed is 1.2 times of the player's speed
+		ball.setSpeedX( (int) ( direction*5));
 		player.setHaveBall(false);
 		ball.setOwnedBy(null);
 	}
@@ -201,7 +201,7 @@ public class MovementPlayer{
 			winner = player;
 			looser = ball.getOwnedBy();
 		}
-		else if (ballPlayerGrade+r.nextInt(4)<interceptorGrade+r.nextInt(4))
+		else if (ballPlayerGrade+r.nextInt(4)>interceptorGrade+r.nextInt(4))
 		{
 			winner = ball.getOwnedBy();
 			looser = player;
@@ -218,7 +218,7 @@ public class MovementPlayer{
 		}
 		
 		winner.getPlayerType().setStress(winner.getPlayerType().getStress()-5);
-		looser.getPlayerType().setStress(winner.getPlayerType().getStress()+10);
+		looser.getPlayerType().setStress(winner.getPlayerType().getStress()+5);
 		winner.setHaveBall(true);
 		looser.setHaveBall(false);
 		ball.setOwnedBy(winner);
@@ -228,12 +228,45 @@ public class MovementPlayer{
 				
 		return player.getHaveBall();
 	}
-	
+
+	public void cover(DataPlayer player, DataPlayer ballPlayer, Boolean itsBotRound) {
+		// player doit couvrir ballPlayer: pour ça, il doit se tenir à une certaine distance
+		int dx = 10, dy = 15;
+		
+		if (player.getPlayerType().getPlayerTypeName()=="Forward" && itsBotRound || !itsBotRound && player.getPlayerType().getPlayerTypeName()=="defender")
+		{
+			if (Math.abs(player.getPositionY()-ballPlayer.getPositionY())<dy) 
+			{
+				if (player.getPositionY()<ballPlayer.getPositionY() ) 
+				{
+					moveToCoord(player, player.getPositionX()-dx, player.getPositionY()-dy, itsBotRound);
+				} else
+				{
+					moveToCoord(player, player.getPositionX()-dx, player.getPositionY()+dy, itsBotRound);
+				}
+			}
+			
+		}
+		else if (player.getPlayerType().getPlayerTypeName()=="Forward" && !itsBotRound || itsBotRound && player.getPlayerType().getPlayerTypeName()=="defender")
+		{
+			if (Math.abs(player.getPositionY()-ballPlayer.getPositionY())<dy) 
+			{
+				if (player.getPositionY()<ballPlayer.getPositionY()) 
+				{
+					moveToCoord(player, player.getPositionX()+dx, player.getPositionY()-dy, itsBotRound);
+				} else
+				{
+					moveToCoord(player, player.getPositionX()+dx, player.getPositionY()+dy, itsBotRound);
+				}
+			}
+
+		}
+	}
 	
 	public Boolean isCloseToBall(DataPlayer player, DataBall ball) {
-		if (Math.abs(player.getPositionX()-ball.getPositionX())==1 || player.getPositionX()-ball.getPositionX()==0)
+		if (Math.abs(player.getPositionX()-ball.getPositionX())==1 || Math.abs(player.getPositionX()-ball.getPositionX())==0)
 		{
-			if (Math.abs(player.getPositionY()-ball.getPositionY())==1 || player.getPositionY()-ball.getPositionY()==0)
+			if (Math.abs(player.getPositionY()-ball.getPositionY())==1 || Math.abs(player.getPositionY()-ball.getPositionY())==0)
 			{
 				return true;
 			}
