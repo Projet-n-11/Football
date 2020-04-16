@@ -305,10 +305,9 @@ public class Match {
 		Boolean act=false;
 		ArrayList<Position> objectsSeen = v.see(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
 		
-		if (currentPlayer.getHaveBall()) {
+		if (currentPlayer.getHaveBall()){
 			if (Math.abs(currentPlayer.getPositionX()-middle)<10) // if get close to their field-limits :
-			{
-												// consider to pass :	
+			{	// consider to pass :	
 				DataPlayer otherPlayer;
 				Boolean didPass=false;
 				for (i=0; i<objectsSeen.size() ; i++) {
@@ -336,13 +335,13 @@ public class Match {
 				mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
 				return true;
 			}
-		}		
+		}
 		else if (ball.getOwnedBy()!=null && ball.getOwnedBy().getTeam().compareTo(currentPlayer.getTeam())==0)						
 		{
 			mp.cover(currentPlayer, ball.getOwnedBy(), itsUserRound);
 			return true;
 		}
-		else {																		 // if does not have ball
+		else if(ball.getOwnedBy()!=null && ball.getOwnedBy().getTeam().compareTo(currentPlayer.getTeam())!=0) {
 			for (i=0; i<objectsSeen.size() ; i++) {
 				if (objectsSeen.get(i) instanceof DataBall)				
 				{
