@@ -127,7 +127,6 @@ public class Match {
 			if (v.seeCages(currentPlayer.getPositionX(), currentPlayer.getPositionY(), itsUserRound)) // and see cages
 			{
 				mp.shoot(currentPlayer, ball, itsUserRound);
-				currentPlayer.getPlayerType().setCanHeAct(-1);
 				return true;
 			}
 			else

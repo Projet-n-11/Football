@@ -143,8 +143,7 @@ public class MovementPlayer{
 			checkPosition(player, itsUserRound);
 			map.setElement(player);
 			moveball.setPositionBall(player.getPositionX()+d, player.getPositionY());
-			System.out.println(player.getPlayerName() + 
-					" runs to cages");
+			System.out.println(player.getPlayerName() + " runs to cages");
 		}
 		else {
 			player.setPlayerStamina(player.getPlayerType().getStamina() + 1);
@@ -362,6 +361,7 @@ public class MovementPlayer{
 				if (player.getPositionX()<GoalLimitX)
 				{
 					player.setPositionX(GoalLimitX);
+					System.out.println(player.getPlayerName());
 				}
 			}
 			else
