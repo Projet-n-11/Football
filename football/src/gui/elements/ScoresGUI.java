@@ -1,5 +1,6 @@
 package gui.elements;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
@@ -39,7 +40,7 @@ public class ScoresGUI extends JPanel implements Runnable{
 		IATeamLabel = new JLabel("");
 		IATeamLabel.setFont(font);
 		this.add(IATeamLabel);
-		
+		this.setBackground(new Color(245, 235, 200));
 		this.setVisible(true);
 	}
 

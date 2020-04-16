@@ -2,7 +2,6 @@ package gui.elements;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -20,21 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
-import javax.swing.DropMode;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.TransferHandler;
 import javax.swing.*;
 
 import databall.DataBall;
@@ -56,7 +40,7 @@ public class KickOffMenu extends JPanel {
 	private JList<String> filleT, filleS;
 	private JScrollPane jsfilleT, jsfilleS;
 	private ComboBoxModel<String> modelP, modelIA;
-	private ListModel<String> modelTFrance, modelTBrazil, modelSFrance, modelSBrazil, modelTGermany, modelSGermany, modelTTunisia, modelSTunisia, modelTEngland, modelSEngland;
+	private DefaultListModel<String> modelTFrance, modelTBrazil, modelSFrance, modelSBrazil, modelTGermany, modelSGermany, modelTTunisia, modelSTunisia, modelTEngland, modelSEngland;
 	private JComboBox<String> Pteams, IAteams;
 	private ButtonGroup group;
 	private JRadioButton tactics343, tactics424, tactics235, tactics352, tactics433;
@@ -190,8 +174,6 @@ public class KickOffMenu extends JPanel {
 					if(modelP.getSelectedItem().toString() != "Select your team..." && modelIA.getSelectedItem().toString() != "Select your team..." 
 							&& group.getSelection() != null && filleT.getModel().getSize() == 11 && filleS.getModel().getSize() == 12 
 							&& !modelP.getSelectedItem().toString().contains(modelIA.getSelectedItem().toString())) {
-						System.out.println(modelP.getSelectedItem().toString());
-						System.out.println(modelIA.getSelectedItem().toString());
 						boolean everythingFine = false;
 						teamPlayer = CreaTeam.creaTeam(modelP.getSelectedItem().toString());
 						teamIA = CreaTeam.creaTeam(modelIA.getSelectedItem().toString());
@@ -272,7 +254,7 @@ public class KickOffMenu extends JPanel {
 							panel.setBorder(BorderFactory.createTitledBorder(""));
 							DataBall ball = new DataBall(ConstantPosition.ENGAGEMENTX, ConstantPosition.ENGAGEMENTY);
 							Score score = new Score(teamPlayer, teamIA);
-							MatchScreen match = new MatchScreen(teamPlayer, teamIA, ball, score);
+							MatchScreen match = new MatchScreen(teamPlayer, teamIA, ball, score, frame);
 							panel.setLayout(new BorderLayout());
 							panel.setSize(1300,800);
 							panel.setLocation(350,150);

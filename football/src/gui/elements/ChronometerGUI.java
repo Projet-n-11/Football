@@ -1,5 +1,6 @@
 package gui.elements;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.JLabel;
@@ -19,14 +20,14 @@ public class ChronometerGUI extends JPanel implements Runnable {
 	//private static final Dimension IDEAL_MAIN_DIMENSION = new Dimension(800, 400);
 
 	private static Font font = new Font(Font.SANS_SERIF, Font.BOLD, 20);
-	
-	 //The normal speed is 1000, e.q. one refresh per second (1000 milliseconds).
-	 
+
+	//The normal speed is 1000, e.q. one refresh per second (1000 milliseconds).
+
 	private static final int CHRONO_SPEED = ConstantValues.GAME_SPEED;
 
 	private static final long serialVersionUID = 1L;
 
-	
+
 	//The core functional part : the chronometer.
 	private Chronometer chronometer = new Chronometer();
 
@@ -37,10 +38,11 @@ public class ChronometerGUI extends JPanel implements Runnable {
 	private JLabel minuteValue = new JLabel("");
 	private JLabel secondValue = new JLabel("");
 
-	 //This instance is used in the inner classes for different action listeners.
-	
+	//This instance is used in the inner classes for different action listeners.
+
 	private ChronometerGUI instance = this;
 
+	private boolean paused = false;
 	private boolean stop = false;
 
 	public ChronometerGUI() {
@@ -54,26 +56,26 @@ public class ChronometerGUI extends JPanel implements Runnable {
 		updateValues();
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
-		
+
 		minuteValue.setFont(font);
 		this.add(minuteValue);
 		minuteLabel.setFont(font);
 		this.add(minuteLabel);
-		
+
 		beetweenLabel.setFont(font);
 		this.add(beetweenLabel);
-		
+
 		secondValue.setFont(font);
 		this.add(secondValue);
 		secondLabel.setFont(font);
 		this.add(secondLabel);
-
+		this.setBackground(new Color(245, 235, 200));
 		setVisible(true);
-		
+
 	}
 
 	private void updateValues() {
-		
+
 		CyclicCounter minute = chronometer.getMinute();
 		minuteValue.setText(minute.toString() + " ");
 
@@ -84,19 +86,31 @@ public class ChronometerGUI extends JPanel implements Runnable {
 	/**
 	 * Defines what to do for each time unit (by default 1 second) : it increments the chronometer
 	 */
-	
+	public void pause() {
+		paused = true;
+	}
+
+	public void resume() {
+		paused = false;
+	}
+
 	public void run() {
 		while (!stop) {
-			if(chronometer.getMinute().getValue() == 90) {
-				stop = true;
+			if(paused == false){
+				if(chronometer.getMinute().getValue() == 90) {
+					stop = true;
+				}
+				try {
+					Thread.sleep(CHRONO_SPEED);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+				chronometer.increment();
+				updateValues();
 			}
-			try {
-				Thread.sleep(CHRONO_SPEED);
-			} catch (InterruptedException e) {
-				System.out.println(e.getMessage());
+			else {
+				updateValues();
 			}
-			chronometer.increment();
-			updateValues();
 		}
 	}
 }

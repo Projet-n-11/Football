@@ -1,6 +1,7 @@
 package gui.elements;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -38,6 +39,7 @@ public class ListPlayerPanel extends JPanel implements Runnable {
 		jsteam1.setPreferredSize(new Dimension(340, 300));
 		jsteam1.setViewportView(playersteam1panel);
 		this.setLayout(new BorderLayout());
+		this.setBackground(new Color(245, 235, 200));
 		this.add(jsteam1);
 		Thread actualizeList = new Thread(instance);
 		actualizeList.start();
@@ -56,6 +58,7 @@ public class ListPlayerPanel extends JPanel implements Runnable {
 			playersteam1panel.add(new JSeparator(SwingConstants.HORIZONTAL), c);
 			i++;
 		}
+		playersteam1panel.setBackground(new Color(245, 235, 200));
 	}
 	
 	@Override

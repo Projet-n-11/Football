@@ -1,5 +1,6 @@
 package gui.elements;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -27,6 +28,7 @@ public class PlayerPanel extends JPanel{
 		this.player = player;
 		this.teamname = teamname;
 		initLayout();
+		this.setBackground(new Color(245, 235, 200));
 	}
 
 	public void initLayout() {
@@ -62,12 +64,16 @@ public class PlayerPanel extends JPanel{
 		else {
 			teamFaceLabel = new JLabel("Image not found", JLabel.CENTER);
 		}
-
 		playerImagePanel = new JPanel();
+		playerImagePanel.setBackground(new Color(245, 235, 200));
 		staminaPanel = new JPanel();
+		staminaPanel.setBackground(new Color(245, 235, 200));
 		stressPanel = new JPanel();
+		stressPanel.setBackground(new Color(245, 235, 200));
 		barsPanel = new JPanel();
+		barsPanel.setBackground(new Color(245, 235, 200));
 		speedPanel = new JPanel();
+		speedPanel.setBackground(new Color(245, 235, 200));
 
 
 

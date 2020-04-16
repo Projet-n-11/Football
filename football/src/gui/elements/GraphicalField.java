@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagLayout;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -42,16 +43,21 @@ public class GraphicalField extends JPanel implements Runnable{
 	private DataBall ball;
 	private DrawField df;
 	private Score score;
-	private static final int GAME_SPEED = ConstantValues.GAME_SPEED;
+	private ChronometerGUI chrono;
+	private JFrame frame;
 	
-	public GraphicalField(DataTeam team, DataTeam team2, DataBall ball, Score score){
+	private static final int GAME_SPEED = ConstantValues.GAME_SPEED;
+
+	public GraphicalField(DataTeam team, DataTeam team2, DataBall ball, Score score, JFrame frame, ChronometerGUI chrono){
 		this.team = team;
 		this.team2 = team2;
 		this.ball = ball;
 		this.score = score;
-		initLayout(this.team, this.team2, ball);
+		this.frame = frame;
+		this.chrono = chrono;
+		initLayout(this.team, this.team2, this.ball);
 	}
-	
+
 	private void initLayout(DataTeam team, DataTeam team2, DataBall ball) {
 		df = new DrawField(team, team2, ball);
 		df.setPreferredSize(new Dimension(900, 700));
@@ -59,12 +65,24 @@ public class GraphicalField extends JPanel implements Runnable{
 		setBackground(new Color(0, 128, 0));
 		setSize(widthx, widthy);
 		setVisible(true);
+		this.repaint();
 	}
 
+	private void initTransitionLayout(JPanel panel) {
+		this.remove(df);
+		this.setBackground(new Color(245, 235, 200));
+		this.add(panel);
+		this.repaint();
+	}
+	
 	@Override
 	public void run() {
+		boolean started = true;
 		boolean paused = false;
 		boolean alreadyPlacedLeft = false;
+		boolean transition = false;
+		int game_duration = 0; // This will represent the actual time which will help to know when to put the TransitionPanel
+		
 		//Initializing each elements from the game (map, placing the ball, placing each players following their tactics)
 		Map field = Map.getInstance();
 		PositionBall pb = new PositionBall(ball, field);
@@ -74,20 +92,55 @@ public class GraphicalField extends JPanel implements Runnable{
 		PositionTactics pt2 = new PositionTactics(team2, field, alreadyPlacedLeft);
 		pt2.placePlayers(team2, field, alreadyPlacedLeft);
 		alreadyPlacedLeft = false;
-		
+
 		ArrayList<DataPlayer> allPlayersFromTeam1 = new ArrayList<DataPlayer>(team.getPlayers().values());
 		ArrayList<DataPlayer> allPlayersFromTeam2 = new ArrayList<DataPlayer>(team2.getPlayers().values());
 		ArrayList<DataPlayer> allPlayers = new ArrayList<DataPlayer>();
 		MovementBall mb = new MovementBall(ball, field, score, pt, pt2, team, team2, pb);
 		Match m = new Match(team, team2, field, ball, mb);
-		while(paused == false){
-			try {
-				m.matchOneRound();
-				pb.setPositionBall(ball.getPositionX(), ball.getPositionY(), ball, field);
-				this.repaint();
-				Thread.sleep(GAME_SPEED);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		TransitionPanel tp = new TransitionPanel("Transition Panel", frame, team);	
+		JPanel panel = tp.createTransitionPanel();
+		
+		while(started == true) {
+			if(paused == false) {
+				while(game_duration < ConstantValues.TRANSITION_TIME) {
+					try{
+						Thread.sleep(GAME_SPEED);
+						this.repaint();
+						m.matchOneRound();
+						pb.setPositionBall(ball.getPositionX(), ball.getPositionY(), ball, field);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					game_duration++;
+				}
+				transition = true;
+				paused = true;
+			}
+			else {
+				if(transition == true) {
+					initTransitionLayout(panel);
+					transition = false;
+				} else {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				if(tp.isResumed() == true){
+					remove(panel);
+					add(df);
+					setBackground(new Color(0, 128, 0));
+					chrono.resume();
+					paused = false;
+					game_duration = 0;
+					tp.setResumedFalse();
+				}
+				
+				
 			}
 		}
 	}
