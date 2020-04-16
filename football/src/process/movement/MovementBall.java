@@ -45,31 +45,49 @@ public class MovementBall {
 	public void roll() {
 		if (ball.getSpeedX()!=0 || ball.getSpeedY()!=0)
 		{
-			ball.setCanIt(0);
+			//ball.setCanIt(0);
 			table.removeElement(ball.getPositionX(), ball.getPositionY());
 			//we decelerate slowly
 			int deceleration = 0;
-			if(deceleration == 2) {
+			//if(deceleration == 2) {
 				if (ball.getSpeedX()>1) {
-					ball.setPositionX(ball.getPositionX()-1);
+					ball.setPositionX(ball.getPositionX()+1);
 					ball.setSpeedX(ball.getSpeedX()-1);
+				}
+				else if (ball.getSpeedX()==1)
+				{
+					ball.setPositionX(ball.getPositionX()+1);
 				}
 				else if (ball.getSpeedX()<1){
 					ball.setPositionX(ball.getPositionX()-1);
 					ball.setSpeedX(ball.getSpeedX()+1);
 				}
+				else if (ball.getSpeedX()==-1) {
+					ball.setPositionX(ball.getPositionX()-1);
+				}
+				
 				
 				if (ball.getSpeedY()>1) {
-					ball.setPositionY(ball.getPositionY()-1);
+					ball.setPositionY(ball.getPositionY()+1);
 					ball.setSpeedY(ball.getSpeedY()-1);
 				}
-				else if (ball.getSpeedY()<1){
+				else if (ball.getSpeedY()==1) {
 					ball.setPositionY(ball.getPositionY()+1);
+				}
+				else if (ball.getSpeedY()<1){
+					ball.setPositionY(ball.getPositionY()-1);
 					ball.setSpeedY(ball.getSpeedY()+1);
 				}
+				else if (ball.getSpeedY()==-1) {
+					ball.setPositionY(ball.getPositionY()-1);
+				}
 				deceleration++;
-			}
+			//}
 			table.setElement(ball);
+		}
+		else 
+		{
+			ball.setCanIt(ball.getCanIt()+1);
 		}
 
 		try {

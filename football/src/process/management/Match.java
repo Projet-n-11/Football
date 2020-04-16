@@ -10,7 +10,7 @@ import process.movement.Vision;
 import process.movement.MovementBall;
 import process.movement.MovementPlayer;
 
-public class Match {	// if singleton : re-chech every variables 
+public class Match {
 	/**
 	 * Used in playerBehavior();
 	 * allow one action for each soccer-player
@@ -18,12 +18,13 @@ public class Match {	// if singleton : re-chech every variables
 	 * @param botTeam
 	 */
 
-	private Boolean goal, outOfField, falt;
+	private Boolean itsUserRound, pickUserTeamPlayer;
 	private DataTeam userTeam, botTeam;
 	private Map positions;
 	private DataBall ball;
 	private MovementBall mb;
 	private MovementPlayer mp;
+	private Vision v;
 
 	public Match(DataTeam userTeam, DataTeam botTeam, Map positions, DataBall ball, MovementBall mb) {
 		this.userTeam = userTeam;
@@ -32,6 +33,7 @@ public class Match {	// if singleton : re-chech every variables
 		this.ball = ball;
 		this.mp = new MovementPlayer(positions, ball);
 		this.mb = mb;
+		v = new Vision();
 	}
 
 	public void matchOneRound() { 		
@@ -39,30 +41,71 @@ public class Match {	// if singleton : re-chech every variables
 		Iterator<DataPlayer> itUser;
 		Iterator<DataPlayer> itBot;
 		DataPlayer currentPlayer = null;
-		DataPlayer secondPlayer = null;
-		DataPlayer thirdPlayer = null;
-		Boolean itsUserRound = true;
-		Boolean bothHavePlayed;
-		Boolean receivedPass;
-		Boolean didNothing;
-		Vision v = new Vision();
-		ArrayList<Position> objectsSeen = null;
-		ArrayList<Position> visionForPass = null;
-		int i, j, interceptions = 0;
+		Boolean bothHavePlayed;	
 
 		
 		//each round we initialize the list (iterator) of players to check
 		itUser = userTeam.getPlayers().values().iterator();
 		itBot = botTeam.getPlayers().values().iterator();
 
-		itsUserRound = true;
+		itsUserRound = false;
+		pickUserTeamPlayer = true;
 		bothHavePlayed = false;
 
 		/**
 		 * first we move the ball considering its own speed (if it is free)
 		 * and slow it down
 		 */
-
+		letTheBallMove();
+		if (ball.getOwnedBy()!=null) {
+			System.out.println("ball owned by " + ball.getOwnedBy().getPlayerName());
+		}
+		
+		// While there is nothing to interrupt the match, players are playing
+		// And while both teams have players to deal with:
+		while ((itUser.hasNext() || itBot.hasNext())){
+			bothHavePlayed = false;
+			while (!bothHavePlayed) {
+				if(pickUserTeamPlayer && itUser.hasNext()) {
+					currentPlayer = itUser.next();
+					pickUserTeamPlayer = false;
+					itsUserRound = true;
+					bothHavePlayed = false;
+				}
+				else {
+					currentPlayer = itBot.next();
+					bothHavePlayed = true;
+					pickUserTeamPlayer = true;
+					itsUserRound = true;
+				}
+				
+				if (currentPlayer.getPlayerType().getCanHeAct() + currentPlayer.getPlayerType().getSpeed().getSpeedX()==5)
+				{
+					if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Forward")==0)
+					{
+						didActionHappenned(currentPlayer,forward(currentPlayer));
+					}
+					else if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Midfielder")==0)
+					{
+						didActionHappenned(currentPlayer,midfielder(currentPlayer));
+					}
+					else if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Defender")==0)
+					{
+						didActionHappenned(currentPlayer,defender(currentPlayer));
+					}
+					else
+					{
+						didActionHappenned(currentPlayer,goalie(currentPlayer));
+					}
+					/*************************************************************************************/
+				}					
+			}
+		}		
+		
+		System.out.println("1 round done\n");
+	}
+	
+	public void letTheBallMove() {
 		if (ball.getOwnedBy()==null)
 		{
 			System.out.println("they see me rollin'...");
@@ -79,187 +122,271 @@ public class Match {	// if singleton : re-chech every variables
 		else {
 			System.out.print(ball.getOwnedBy().getPlayerName() + " owns the ball; ");
 		}
-		
-		// While there is nothing to interrupt the match, players are playing
-		// And while both teams have players to deal with:
-		while ((itUser.hasNext() || itBot.hasNext())){
-			bothHavePlayed = false;
-			while (!bothHavePlayed) {
-				if(itsUserRound && itUser.hasNext()) {
-					currentPlayer = itUser.next();
-					itsUserRound = false;
-					bothHavePlayed = false;
-				}
-				else {
-					currentPlayer = itBot.next();
-					bothHavePlayed = true;
-					itsUserRound = true;
-				}
-				
-				receivedPass = false;
-				didNothing = true;
-				
-				if (currentPlayer.getPlayerType().getCanHeAct() + currentPlayer.getPlayerType().getSpeed().getSpeedX()==5)
-				{				
-					if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Goalie")==0) {
-					objectsSeen = v.Goalsee(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
-					}
-					else {
-					objectsSeen = v.see(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
-					}
 
-					if (currentPlayer.getHaveBall()) // player have ball
-					{
-						if (v.seeCages(currentPlayer.getPositionX(), currentPlayer.getPositionY(), itsUserRound))
-						{
-							// CONSIDER IF HE IS BLOCKED BY A DEFENDER
-							for (i=0; i<objectsSeen.size() ; i++) {
-								if (objectsSeen.get(i) instanceof DataPlayer) {
-									
-									secondPlayer = (DataPlayer)objectsSeen.get(i);
-									
-									if (secondPlayer.getPlayerType().getPlayerTypeName().compareTo("Goalie")!=0 && 
-											secondPlayer.getTeam().compareTo(currentPlayer.getTeam())!=0) // if blocked (goalie does not count) : can he pass ?
-									{
-										visionForPass = v.largeSee(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
-										j=0;
-										
-										for (j=0; j<visionForPass.size(); j++) 
-										{
-											if(visionForPass.get(j) instanceof DataPlayer) {
-												thirdPlayer = (DataPlayer)visionForPass.get(j);
-												if (thirdPlayer.getTeam().compareTo(currentPlayer.getTeam())==0 && currentPlayer.getPlayerType().getCanHePass()>=4) {
-													mp.passBalltoPal(currentPlayer, thirdPlayer, ball);
-													System.out.println("pass from " + currentPlayer.getPlayerName() + " to " + thirdPlayer.getPlayerName());
-													receivedPass = true;
-													j=objectsSeen.size();
-													i=objectsSeen.size()+2;
-												}
-											}
-										}
-									}
-								}
-							}
-							if (i<objectsSeen.size()+2)
-							{
-								System.out.println("and shoot");
-								mp.shoot(currentPlayer, ball, itsUserRound);
-							}
-						}
-						else // player has ball & does not see cages :
-						{
-							//if () "la passe est possible"
-							// CONSIDER IF HE IS BLOCKED BY A DEFENDER
-							for (i=0; i<objectsSeen.size() ; i++) {
-								if (objectsSeen.get(i) instanceof DataPlayer) {
-									secondPlayer = (DataPlayer)objectsSeen.get(i);
-									if (secondPlayer.getTeam().compareTo(currentPlayer.getTeam())!=0) // if blocked : can he pass ?
-									{
-										visionForPass = v.largeSee(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
-										j=0;
-										for (j=0; j<visionForPass.size(); j++) 
-										{
-											if(visionForPass.get(j) instanceof DataPlayer) {
-												thirdPlayer = (DataPlayer)visionForPass.get(j);
-												if (thirdPlayer.getTeam().compareTo(currentPlayer.getTeam())==0 && currentPlayer.getPlayerType().getCanHePass()>=4) {
-													mp.passBalltoPal(currentPlayer, thirdPlayer, ball);
-													System.out.println("pass from " + currentPlayer.getPlayerName() + " to " + thirdPlayer.getPlayerName());
-													System.out.println("Ball : Speed x = " + ball.getSpeedX() + " ; Speed Y = " + ball.getSpeedY());
-													receivedPass = true;
-													i=objectsSeen.size()+2;
-												}
-											}
-										}
-									}
-								}
-							}
-							if (i<objectsSeen.size()+2)
-							{
-								System.out.println(currentPlayer.getPlayerName() + " runs to cages");
-								mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
-							}
-						}
-					}
-					else // player does not have ball
-					{
-						for (i=0; i<objectsSeen.size() ; i++) {
-	
-							if (objectsSeen.get(i) instanceof DataBall ) { // player see ball
-	
-								if (ball.getOwnedBy()!=null) // ball is not free:
-								{
-									if (ball.getOwnedBy().getTeam().compareTo(currentPlayer.getTeam())!=0) // if ball is owned by ennemy
-									{
-										mp.move(currentPlayer, ball, itsUserRound);
-										if (mp.isCloseToBall(currentPlayer, ball));
-										{
-											if (mp.tryInterception(currentPlayer, ball, itsUserRound)) 
-											{
-												mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
-												interceptions++;
-												System.out.println("INTERCEPTION by " + currentPlayer.getPlayerName() + " (check :) " + ball.getOwnedBy().getPlayerName());
-											}
-											else
-											{
-												System.out.println("INTERCEPTION FAILED by " + currentPlayer.getPlayerName() + " from " + ball.getOwnedBy().getPlayerName());
-											}
-											i=objectsSeen.size()+2;
-											didNothing=false;
-										}
-									}
-									else // ball is owned by ally : cover ally if your not goalie
-									{
-										if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Goalie")!=0)
-										{
-											System.out.println(currentPlayer.getPlayerName() + " cover " + ball.getOwnedBy().getPlayerName());
-											mp.cover(currentPlayer, ball.getOwnedBy(), itsUserRound);
-											didNothing = false;
-										}
-										else
-										{
-											// you are a Goalie so you protect the goal
-										}
-									}
-								}
-								else // case of free ball:
-								{
-									// ************************************************* if you're a goalie you DIVE !
-									mp.move(currentPlayer, ball, itsUserRound);
-									if (mp.isCloseToBall(currentPlayer, ball)) // if free ball is reached : get ball.
-									{
-										System.out.println(currentPlayer.getPlayerName() + " reached the ball");
-										currentPlayer.setHaveBall(true);
-										ball.setOwnedBy(currentPlayer);
-										i=objectsSeen.size();
-									}
-								}
-							}
-						}
-					}
-					objectsSeen.removeAll(objectsSeen);
-						
-					currentPlayer.getPlayerType().setCanHeAct(0); // CHANGER DE PLACE: on set à 0 seulement si le joueur a agi
-				} // end of case of player which can act
-				
-				else if (currentPlayer.getPlayerType().getCanHeAct()+currentPlayer.getPlayerType().getSpeed().getSpeedX()<5){		
-					currentPlayer.getPlayerType().setCanHeAct(currentPlayer.getPlayerType().getCanHeAct()+1);
-				}
-				
-				if (thirdPlayer!=null) {
-					currentPlayer.getPlayerType().setCanHePass(currentPlayer.getPlayerType().getCanHePass()+1);
-					if (receivedPass==true) 
-					{
-						currentPlayer.getPlayerType().setCanHePass(0);
-						thirdPlayer.getPlayerType().setCanHePass(0);
-					}
-				}
-				if (didNothing)
-				{
-					currentPlayer.setPlayerStamina(currentPlayer.getPlayerType().getStamina() + 1);
-					currentPlayer.setPlayerStress(currentPlayer.getPlayerType().getStress()-1);
-				}
-			}		
-		}
-		System.out.println("1 round done			AND " + interceptions + "INTERCEPTIONS\n\n");
 	}
+
+	public Boolean forward(DataPlayer currentPlayer) {
+		if (currentPlayer.getHaveBall()) {										// if forward player has ball
+			if (v.seeCages(currentPlayer.getPositionX(), currentPlayer.getPositionY(), itsUserRound)) // and see cages
+			{
+				mp.shoot(currentPlayer, ball, itsUserRound);
+				currentPlayer.getPlayerType().setCanHeAct(-1);
+				return true;
+			}
+			else
+			{
+				mp.runtoCages(currentPlayer, ball, itsUserRound, mb);				// if does not see cages -> go to cages
+				return true;
+			}
+		}
+		else if (ball.getOwnedBy()!=null && ball.getOwnedBy().getTeam().compareTo(currentPlayer.getTeam())==0) // if ball owned by their own team
+		{
+			mp.cover(currentPlayer, ball.getOwnedBy(), itsUserRound);
+			return true;
+		}
+		else											// if forward player does not have ball
+		{
+			if (mp.isCloseToBall(currentPlayer, ball)) {
+				if (ball.getOwnedBy()==null) {									// if free ball -> reach ball
+					mp.reachBall(currentPlayer, ball);
+				}
+				else								// if ball owned by ennemy						
+				{
+					mp.tryInterception(currentPlayer, ball, itsUserRound, mb);
+					return true;
+				}
+			}
+			else
+			{
+				mp.move(currentPlayer, ball, itsUserRound);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Boolean goalie(DataPlayer currentPlayer) {
+		ArrayList<Position> objectsSeen = v.Goalsee(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
+		int i;
+		int GoalLimitX;
+		if (itsUserRound)
+		{
+			GoalLimitX = ConstantPosition.INITIAL_POINT+15;
+		}
+		else
+		{
+			GoalLimitX = ConstantPosition.WIDTH-15;
+		}
+		
+		if (currentPlayer.getHaveBall()) {												// if Goalie has ball ;
+			if (currentPlayer.getPositionX()==GoalLimitX) {								// if is ready to pass :
+				DataPlayer otherPlayer;
+				for (i=0; i<objectsSeen.size() ; i++) {
+					if (objectsSeen.get(i) instanceof DataPlayer)				
+					{
+						otherPlayer = (DataPlayer)objectsSeen.get(i);
+						if (otherPlayer.getTeam().compareTo(currentPlayer.getTeam())==0) // if see pal :
+						{
+							mp.passBalltoPal(currentPlayer, otherPlayer, ball);
+							currentPlayer.getPlayerType().setCanHePass(-1);
+							otherPlayer.getPlayerType().setCanHePass(0);
+							return true;
+						}
+					}
+				}
+				
+			}
+			else {
+				mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
+				return true;
+			}
+		}
+		else																		// if Goalie does not have ball :
+		{
+			for (i=0; i<objectsSeen.size() ; i++) {
+				if (objectsSeen.get(i) instanceof DataBall)				// if see ball :
+				{
+					if (!mp.isCloseToBall(currentPlayer, ball))			// if is close to ball :
+					{
+						mp.move(currentPlayer, ball, itsUserRound);
+					}
+					if (mp.isCloseToBall(currentPlayer, ball)) {
+						if (ball.getOwnedBy()==null) {					// if it is free :
+							mp.reachBall(currentPlayer, ball);
+							return true;
+						}
+						else if (ball.getOwnedBy().getTeam().compareTo(currentPlayer.getTeam())!=0) // if ennemy has this ball:
+						{
+							mp.tryInterception(currentPlayer, ball, itsUserRound, mb);
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	public Boolean midfielder(DataPlayer currentPlayer) {
+		int i=0;
+		Boolean limit, act=false;
+		ArrayList<Position> objectsSeen = v.see(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
+		
+		if (itsUserRound) {
+			limit = Math.abs(currentPlayer.getPositionX()-ConstantPosition.WIDTH/3)<10;
+		}
+		else {
+			limit = Math.abs(currentPlayer.getPositionX()-ConstantPosition.WIDTH-(ConstantPosition.WIDTH/3))<10;
+		}
+		
+		if (currentPlayer.getHaveBall()) {
+			if (limit) // if get close to their field-limits :
+			{
+											// consider to pass :	
+				DataPlayer otherPlayer;
+				Boolean didPass=false;
+				for (i=0; i<objectsSeen.size() ; i++) {
+					if (objectsSeen.get(i) instanceof DataPlayer)				
+					{
+						otherPlayer = (DataPlayer)objectsSeen.get(i);
+						if (otherPlayer.getTeam().compareTo(currentPlayer.getTeam())==0) // if see pal :
+						{
+							mp.passBalltoPal(currentPlayer, otherPlayer, ball);
+							currentPlayer.getPlayerType().setCanHePass(-1);
+							otherPlayer.getPlayerType().setCanHePass(0);
+							didPass=true;
+							act=true;
+						}
+					}
+				}
+				if (!didPass)
+				{
+					mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
+					act=true;
+				}
+				
+			}
+			else
+			{
+				mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
+				act=true;
+			}
+		}		
+		else if (ball.getOwnedBy()!=null && ball.getOwnedBy().getTeam().compareTo(currentPlayer.getTeam())==0)						
+		{
+			mp.cover(currentPlayer, ball.getOwnedBy(), itsUserRound);
+			act=true;
+		}
+		else {																		 // if does not have ball
+			for (i=0; i<objectsSeen.size() ; i++) {
+				if (objectsSeen.get(i) instanceof DataBall)				
+				{
+					if (!mp.isCloseToBall(currentPlayer, ball))
+					{
+						mp.move(currentPlayer, ball, itsUserRound);
+					}
+					if (mp.isCloseToBall(currentPlayer, ball)) {
+						if (ball.getOwnedBy()==null)
+						{
+							mp.reachBall(currentPlayer, ball);
+							return true;
+						}
+						else {
+							mp.tryInterception(currentPlayer, ball, itsUserRound, mb);
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return act;
+	}
+	
+	public Boolean defender(DataPlayer currentPlayer) {
+		int i=0, middle = ConstantPosition.WIDTH/2;
+		Boolean act=false;
+		ArrayList<Position> objectsSeen = v.see(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
+		
+		if (currentPlayer.getHaveBall()) {
+			if (Math.abs(currentPlayer.getPositionX()-middle)<10) // if get close to their field-limits :
+			{
+												// consider to pass :	
+				DataPlayer otherPlayer;
+				Boolean didPass=false;
+				for (i=0; i<objectsSeen.size() ; i++) {
+					if (objectsSeen.get(i) instanceof DataPlayer)				
+					{
+						otherPlayer = (DataPlayer)objectsSeen.get(i);
+						if (otherPlayer.getTeam().compareTo(currentPlayer.getTeam())==0) // if see pal :
+						{
+							mp.passBalltoPal(currentPlayer, otherPlayer, ball);
+							currentPlayer.getPlayerType().setCanHePass(-1);
+							otherPlayer.getPlayerType().setCanHePass(0);
+							didPass=true;
+							act=true;
+						}
+					}
+				}
+				if (!didPass)
+				{
+					mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
+					act=true;
+				}
+			}
+			else
+			{
+				mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
+				return true;
+			}
+		}		
+		else if (ball.getOwnedBy()!=null && ball.getOwnedBy().getTeam().compareTo(currentPlayer.getTeam())==0)						
+		{
+			mp.cover(currentPlayer, ball.getOwnedBy(), itsUserRound);
+			return true;
+		}
+		else {																		 // if does not have ball
+			for (i=0; i<objectsSeen.size() ; i++) {
+				if (objectsSeen.get(i) instanceof DataBall)				
+				{
+					if (!mp.isCloseToBall(currentPlayer, ball))
+					{
+						mp.move(currentPlayer, ball, itsUserRound);
+					}
+					if (mp.isCloseToBall(currentPlayer, ball)) {
+						if (ball.getOwnedBy()==null)
+						{
+							mp.reachBall(currentPlayer, ball);
+							return true;
+						}
+						else {
+							mp.tryInterception(currentPlayer, ball, itsUserRound, mb);
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return act;
+	}
+
+	public void didActionHappenned(DataPlayer currentPlayer, Boolean didSomething) {
+		
+		if (didSomething)
+		{
+			currentPlayer.getPlayerType().setCanHeAct(-1);
+			currentPlayer.setPlayerStamina(currentPlayer.getPlayerType().getStamina() - 1);
+		}
+		else {
+			currentPlayer.setPlayerStamina(currentPlayer.getPlayerType().getStamina() + 1);
+			currentPlayer.setPlayerStress(currentPlayer.getPlayerType().getStress()-1);
+		}
+		
+		currentPlayer.getPlayerType().setCanHePass(currentPlayer.getPlayerType().getCanHePass()+1);
+		
+		if (currentPlayer.getPlayerType().getCanHeAct()+currentPlayer.getPlayerType().getSpeed().getSpeedX()<5){		
+			currentPlayer.getPlayerType().setCanHeAct(currentPlayer.getPlayerType().getCanHeAct()+1);
+		}
+		
+	}
+
 }

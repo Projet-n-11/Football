@@ -20,10 +20,6 @@ public class Map {
 	
 	public static Map carte = new Map();
 	
-	//The following constructor will initialize each box from the "position" array by inserting grass
-	public Map(){
-	}
-	
 	//This hook method will set an element into the array
 	public void setElement(Position element) {
 		this.map[element.getPositionX()][element.getPositionY()] = element;

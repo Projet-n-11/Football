@@ -47,6 +47,7 @@ public class ListPlayerPanel extends JPanel implements Runnable {
 
 	public void updateValuesList() {
 		int i = 0;
+		playersteam1panel.removeAll();
 		for(DataPlayer dp: team.getPlayers().values()) {
 			c.gridx = 0;
 			c.gridy = i;

@@ -94,6 +94,10 @@ public class ChronometerGUI extends JPanel implements Runnable {
 		paused = false;
 	}
 
+	public int getMinute() {
+		return chronometer.getMinute().getValue();
+	}
+	
 	public void run() {
 		while (!stop) {
 			if(paused == false){

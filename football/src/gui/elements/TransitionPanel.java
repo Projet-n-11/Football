@@ -16,6 +16,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
@@ -50,11 +51,8 @@ public class TransitionPanel extends JPanel{
 	private JRadioButton tactics343, tactics424, tactics235, tactics352, tactics433;
 	private GridBagConstraints gc;
 	private DataTeam playerTeam;
-	private boolean resumed;
 	
-	public TransitionPanel() {
-		this("Configuration", null, null);
-	}
+	private boolean resumed;
 
 	public TransitionPanel(String title, JFrame frame, DataTeam playerTeam) {
 		panel = new JPanel();
@@ -124,27 +122,27 @@ public class TransitionPanel extends JPanel{
 			resumeButton.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e) {
-					DataTeam teamPlayer = playerTeam;
 					if(filleT.getModel().getSize() == 11 && filleS.getModel().getSize() == 12) {
 						boolean everythingFine = false;
 						
 						if(tactics343.isSelected()) {
-							teamPlayer.setDefaultStrategy(new int[] {3,4,3});
+							playerTeam.setDefaultStrategy(new int[] {3,4,3});
 						}
 						else if(tactics424.isSelected()) {
-							teamPlayer.setDefaultStrategy(new int[] {4,2,4});
+							playerTeam.setDefaultStrategy(new int[] {4,2,4});
 						}
 						else if(tactics235.isSelected()) {
-							teamPlayer.setDefaultStrategy(new int[] {2,3,5});
+							playerTeam.setDefaultStrategy(new int[] {2,3,5});
 						}
 						else if(tactics352.isSelected()) {
-							teamPlayer.setDefaultStrategy(new int[] {3,5,2});
+							playerTeam.setDefaultStrategy(new int[] {3,5,2});
 						}
 						else if(tactics433.isSelected()) {
-							teamPlayer.setDefaultStrategy(new int[] {4,3,3});
+							playerTeam.setDefaultStrategy(new int[] {4,3,3});
 						}
-
-						for(DataPlayer players: teamPlayer.getPlayers().values()) {
+						
+						Collection<DataPlayer> playersList = playerTeam.getPlayers().values();
+						for(DataPlayer players: playersList) {
 							for(int nb_elts=0; nb_elts < filleT.getModel().getSize(); nb_elts++) {
 								if(filleT.getModel().getElementAt(nb_elts).contains(players.getPlayerName())) {
 									players.setPlayerTitular(1);
@@ -163,7 +161,7 @@ public class TransitionPanel extends JPanel{
 						int forward = 0;
 						int goalie = 0;
 
-						for(DataPlayer players: teamPlayer.getPlayers().values()) {
+						for(DataPlayer players: playersList) {
 							if(players.getPlayerType().getTitularPlayer() == 1 && players.getPlayerType().getPlayerTypeName() == "Defender") {
 								defenders++;
 							}
@@ -179,23 +177,23 @@ public class TransitionPanel extends JPanel{
 						}
 
 						if(goalie == 1 && defenders == 4 && midfielders == 3 && forward == 3 
-								&& teamPlayer.getDefaultStrategy(0) == 4 && teamPlayer.getDefaultStrategy(1) == 3 && teamPlayer.getDefaultStrategy(2) == 3) {
+								&& playerTeam.getDefaultStrategy(0) == 4 && playerTeam.getDefaultStrategy(1) == 3 && playerTeam.getDefaultStrategy(2) == 3) {
 							everythingFine = true;
 						}
 						else if(goalie == 1 && defenders == 3 && midfielders == 5 && forward == 2  
-								&& teamPlayer.getDefaultStrategy(0) == 3 && teamPlayer.getDefaultStrategy(1) == 5 && teamPlayer.getDefaultStrategy(2) == 2) {
+								&& playerTeam.getDefaultStrategy(0) == 3 && playerTeam.getDefaultStrategy(1) == 5 && playerTeam.getDefaultStrategy(2) == 2) {
 							everythingFine = true;
 						}
 						else if(goalie == 1 && defenders == 2 && midfielders == 3 && forward == 5  
-								&& teamPlayer.getDefaultStrategy(0) == 2 && teamPlayer.getDefaultStrategy(1) == 3 && teamPlayer.getDefaultStrategy(2) == 5) {
+								&& playerTeam.getDefaultStrategy(0) == 2 && playerTeam.getDefaultStrategy(1) == 3 && playerTeam.getDefaultStrategy(2) == 5) {
 							everythingFine = true;
 						}
 						else if(goalie == 1 && defenders == 4 && midfielders == 2 && forward == 4  
-								&& teamPlayer.getDefaultStrategy(0) == 4 && teamPlayer.getDefaultStrategy(1) == 2 && teamPlayer.getDefaultStrategy(2) == 4) {
+								&& playerTeam.getDefaultStrategy(0) == 4 && playerTeam.getDefaultStrategy(1) == 2 && playerTeam.getDefaultStrategy(2) == 4) {
 							everythingFine = true;
 						}
 						else if(goalie == 1 && defenders == 3 && midfielders == 4 && forward == 3  
-								&& teamPlayer.getDefaultStrategy(0) == 3 && teamPlayer.getDefaultStrategy(1) == 4 && teamPlayer.getDefaultStrategy(2) == 3) {
+								&& playerTeam.getDefaultStrategy(0) == 3 && playerTeam.getDefaultStrategy(1) == 4 && playerTeam.getDefaultStrategy(2) == 3) {
 							everythingFine = true;
 						}
 
@@ -214,6 +212,7 @@ public class TransitionPanel extends JPanel{
 							errorPanel.removeAll();
 							errorPanel.repaint();
 						}
+						
 						labERROR.setFont(new Font("", Font.BOLD, 15));
 						labERROR.setForeground(Color.RED);
 						errorPanel.add(labERROR);
@@ -244,7 +243,6 @@ public class TransitionPanel extends JPanel{
 				}
 			});
 			addObjectstoPanel();
-			panel.setBorder(BorderFactory.createTitledBorder("Select a new tactics and different players or not !"));
 		}
 		catch (IOException e1){
 			e1.printStackTrace();
@@ -254,6 +252,10 @@ public class TransitionPanel extends JPanel{
 
 	}
 
+	public DataTeam actualizedTeam() {
+		return playerTeam;
+	}
+	
 	public DefaultListModel<String> playersSubstituteTeam(DataTeam playerTeam) throws IOException {
 		DefaultListModel<String> substitute;
 		String [] tabPlayer = new String[12];

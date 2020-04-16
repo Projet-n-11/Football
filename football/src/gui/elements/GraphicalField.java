@@ -46,7 +46,7 @@ public class GraphicalField extends JPanel implements Runnable{
 	private ChronometerGUI chrono;
 	private JFrame frame;
 	private JPanel transitionPanel;
-	
+
 	private static final int GAME_SPEED = ConstantValues.GAME_SPEED;
 
 	public GraphicalField(DataTeam team, DataTeam team2, DataBall ball, Score score, JFrame frame, ChronometerGUI chrono){
@@ -75,65 +75,84 @@ public class GraphicalField extends JPanel implements Runnable{
 		this.add(panel);
 		this.repaint();
 	}
-	
+
 	@Override
 	public void run() {
 		boolean started = true;
 		boolean paused = false;
-		boolean alreadyPlacedLeft = false;
 		boolean transition = false;
 		int game_duration = 0; // This will represent the actual time which will help to know when to put the TransitionPanel
-		
+
 		//Initializing each elements from the game (map, placing the ball, placing each players following their tactics)
 		Map field = Map.getInstance();
-		PositionBall pb = new PositionBall(ball, field);
-		PositionTactics pt = new PositionTactics(team, field, alreadyPlacedLeft);
-		pt.placePlayers(team, field, alreadyPlacedLeft);
-		alreadyPlacedLeft = true;
-		PositionTactics pt2 = new PositionTactics(team2, field, alreadyPlacedLeft);
-		pt2.placePlayers(team2, field, alreadyPlacedLeft);
-		alreadyPlacedLeft = false;
+		PositionBall pb = PositionBall.getInstance();
+		PositionTactics pt = new PositionTactics(team, field, false);
+		pt.placePlayers(team, field, false);
+		PositionTactics pt2 = new PositionTactics(team2, field, true);
+		pt2.placePlayers(team2, field, true);
 
-		ArrayList<DataPlayer> allPlayersFromTeam1 = new ArrayList<DataPlayer>(team.getPlayers().values());
+		/*ArrayList<DataPlayer> allPlayersFromTeam1 = new ArrayList<DataPlayer>(team.getPlayers().values());
 		ArrayList<DataPlayer> allPlayersFromTeam2 = new ArrayList<DataPlayer>(team2.getPlayers().values());
-		ArrayList<DataPlayer> allPlayers = new ArrayList<DataPlayer>();
+		ArrayList<DataPlayer> allPlayers = new ArrayList<DataPlayer>();*/
 		MovementBall mb = new MovementBall(ball, field, score, pt, pt2, team, team2, pb);
 		Match m = new Match(team, team2, field, ball, mb);
 		TransitionPanel tp = new TransitionPanel("Transition Panel", frame, team);	
-	    transitionPanel = tp.createTransitionPanel();
-		
+		transitionPanel = tp.createTransitionPanel();
+
 		while(started == true) {
-			if(paused == false) {
-				while(game_duration < ConstantValues.TRANSITION_TIME) {
-					try{
-						Thread.sleep(GAME_SPEED);
-						this.repaint();
-						m.matchOneRound();
-						pb.setPositionBall(ball.getPositionX(), ball.getPositionY(), ball, field);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+			if(chrono.getMinute() != 90){
+				/*if(paused == false) {
+					while(game_duration < ConstantValues.TRANSITION_TIME) {*/
+						try{
+							Thread.sleep(GAME_SPEED);
+							this.repaint();
+							m.matchOneRound();
+							//pb.setPositionBall(ball.getPositionX(), ball.getPositionY(), ball, field);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						/*game_duration++;
 					}
-					game_duration++;
-				}
-				chrono.pause();
-				transition = true;
-				paused = true;
+					chrono.pause();
+					transition = true;
+					paused = true;
+				//}
+				//else {
+					if(transition == true) {
+						remove(df);
+						initTransitionLayout(transitionPanel);
+						transition = false;
+					}
+					else {
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+
+					if(tp.isResumed() == true){
+						
+						remove(transitionPanel);
+						add(df);
+						setBackground(new Color(0, 128, 0));
+						
+						team = tp.actualizedTeam();
+						
+						pt.placePlayers(team, field, false);
+						pt2.placePlayers(team2, field , true);
+						PositionBall.getInstance().placeBallEngagement(ball, field);
+						
+						chrono.resume();
+						paused = false;
+						game_duration = 0;
+						tp.setResumedFalse();
+					}
+				}*/
 			}
 			else {
-				if(transition == true) {
-					remove(df);
-					initTransitionLayout(transitionPanel);
-					transition = false;
-				}
-				
-				if(tp.isResumed() == true){
-					add(df);
-					setBackground(new Color(0, 128, 0));
-					chrono.resume();
-					paused = false;
-					game_duration = 0;
-					tp.setResumedFalse();
-				}
+				removeAll();
+				System.out.println("END");
 			}
 		}
 	}

@@ -13,10 +13,13 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import databall.DataBall;
@@ -244,7 +247,7 @@ public class DrawField extends JPanel {
 		}
 	}
 	
-	public void drawBall(Graphics2D gball, double fieldLength, double doubleWidth) {
+	public void drawBall(Graphics2D gball, double fieldLength, double doubleWidth) {        
 		gball.draw(new Ellipse2D.Double(ball.getPositionX(), ball.getPositionY(), 0.4, 0.4));
 	}
 }

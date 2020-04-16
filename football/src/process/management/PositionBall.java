@@ -5,10 +5,11 @@ import dataplayer.DataPlayer;
 
 public class PositionBall {
 
-	public PositionBall(DataBall db, Map table) {
-		
-	}
+	private DataBall db;
+	private Map table;
 	
+	public static PositionBall pb = new PositionBall();
+
 	public void setPositionBall(int positionX, int positionY, DataBall db, Map table) {
 		db.setPositionX(positionX);
 		db.setPositionY(positionY);
@@ -19,6 +20,8 @@ public class PositionBall {
 		setPositionBall(ConstantPosition.ENGAGEMENTX, ConstantPosition.ENGAGEMENTY, db, table);
 	}
 	
-	
+	public static PositionBall getInstance() {
+		return pb;
+	}
 	
 }
