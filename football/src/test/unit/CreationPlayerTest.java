@@ -89,8 +89,8 @@ public class CreationPlayerTest {
 		int titular=type.getTitularPlayer();
 		assertEquals(1,titular);
 		
-		assertEquals(3,((PlayerGoalie)type).getDive().getValueDive());
-		assertEquals(4,((PlayerGoalie)type).getReflex().getValueReflex());
+		assertEquals(4,((PlayerGoalie)type).getDive().getValueDive());
+		assertEquals(3,((PlayerGoalie)type).getReflex().getValueReflex());
 		
 	}
 	

@@ -41,17 +41,17 @@ public class SpecialPosTest {
 		Corner corner2=spePos.getCorner2();
 		assertNotNull(corner2);
 		assertEquals(6,corner2.getPositionX());
-		assertEquals(96,corner2.getPositionY());
+		assertEquals(102,corner2.getPositionY());
 		
 		Corner corner3=spePos.getCorner3();
 		assertNotNull(corner3);
-		assertEquals(126,corner3.getPositionX());
+		assertEquals(132,corner3.getPositionX());
 		assertEquals(6,corner3.getPositionY());
 		
 		Corner corner4=spePos.getCorner4();
 		assertNotNull(corner4);
-		assertEquals(126,corner4.getPositionX());
-		assertEquals(96,corner4.getPositionY());
+		assertEquals(132,corner4.getPositionX());
+		assertEquals(102,corner4.getPositionY());
 	}
 	
 	/**
@@ -63,13 +63,13 @@ public class SpecialPosTest {
 		Penalty penalty1=spePos.getPenalty1();
 		assertNotNull(penalty1);
 		assertEquals(18,penalty1.getPositionX());
-		assertEquals(48,penalty1.getPositionY());
+		assertEquals(51,penalty1.getPositionY());
 		
 		
 		Penalty penalty2=spePos.getPenalty2();
 		assertNotNull(penalty2);
-		assertEquals(114,penalty2.getPositionX());
-		assertEquals(48,penalty2.getPositionY());
+		assertEquals(120,penalty2.getPositionX());
+		assertEquals(51,penalty2.getPositionY());
 	}
 	
 	/**
@@ -79,8 +79,8 @@ public class SpecialPosTest {
 	public void testEngagement() {
 		Engagement engagement=spePos.getEngagement();
 		assertNotNull(engagement);
-		assertEquals(63,engagement.getPositionX());
-		assertEquals(48,engagement.getPositionY());
+		assertEquals(66,engagement.getPositionX());
+		assertEquals(51,engagement.getPositionY());
 	}
 	
 	/**
@@ -90,13 +90,13 @@ public class SpecialPosTest {
 	public void testSixYard() {
 		SixYard sixYard1=spePos.getSixYard1();
 		assertNotNull(sixYard1);
-		assertEquals(6,sixYard1.getPositionX());
-		assertEquals(48,sixYard1.getPositionY());
+		assertEquals(9,sixYard1.getPositionX());
+		assertEquals(51,sixYard1.getPositionY());
 		
 		SixYard sixYard2=spePos.getSixYard2();
 		assertNotNull(sixYard2);
-		assertEquals(120,sixYard2.getPositionX());
-		assertEquals(48,sixYard2.getPositionY());
+		assertEquals(129,sixYard2.getPositionX());
+		assertEquals(51,sixYard2.getPositionY());
 	}
 	
 	/**
@@ -107,14 +107,14 @@ public class SpecialPosTest {
 		Goal goal1=spePos.getGoal1();
 		assertNotNull(goal1);
 		assertEquals(6,goal1.getPositionX());
-		assertEquals(44,goal1.getPositionY());
-		assertEquals(52,goal1.getPosition2Y());
+		assertEquals(47,goal1.getPositionY());
+		assertEquals(55,goal1.getPosition2Y());
 		
 		Goal goal2=spePos.getGoal2();
 		assertNotNull(goal2);
-		assertEquals(126,goal2.getPositionX());
-		assertEquals(44,goal2.getPositionY());
-		assertEquals(52,goal2.getPosition2Y());
+		assertEquals(132,goal2.getPositionX());
+		assertEquals(47,goal2.getPositionY());
+		assertEquals(55,goal2.getPosition2Y());
 		
 		
 		

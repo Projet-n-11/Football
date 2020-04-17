@@ -6,4 +6,5 @@ import org.junit.runner.RunWith;
 @Suite.SuiteClasses({CreationPlayerTest.class,SpecialPosTest.class})
 public class FootballTestSuite {
 
+	
 }
