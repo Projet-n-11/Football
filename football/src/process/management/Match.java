@@ -85,19 +85,19 @@ public class Match {
 				{
 					if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Forward")==0)
 					{
-						didActionHappenned(currentPlayer,forward(currentPlayer));
+						didActionHappenned(currentPlayer,Forward(currentPlayer));
 					}
 					else if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Midfielder")==0)
 					{
-						didActionHappenned(currentPlayer,midfielder(currentPlayer));
+						didActionHappenned(currentPlayer,Midfielder(currentPlayer));
 					}
 					else if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Defender")==0)
 					{
-						didActionHappenned(currentPlayer,defender(currentPlayer));
+						didActionHappenned(currentPlayer,Defender(currentPlayer));
 					}
 					else
 					{
-						didActionHappenned(currentPlayer,goalie(currentPlayer));
+						didActionHappenned(currentPlayer,Goalie(currentPlayer));
 					}
 					/*************************************************************************************/
 				}					
@@ -125,8 +125,8 @@ public class Match {
 	}
 
 	
-	public Boolean forward(DataPlayer currentPlayer) {
-		if (currentPlayer.getHaveBall()) {										// if forward player has ball
+	public Boolean Forward(DataPlayer currentPlayer) {
+		if (currentPlayer.getHaveBall()) {										// if Forward player has ball
 			if (v.seeCages(currentPlayer.getPositionX(), currentPlayer.getPositionY(), itsUserRound)) // and see cages
 			{
 				mp.shoot(currentPlayer, ball, itsUserRound);
@@ -143,7 +143,7 @@ public class Match {
 			mp.cover(currentPlayer, ball.getOwnedBy(), itsUserRound);
 			return false;
 		}
-		else											// if forward player does not have ball
+		else											// if Forward player does not have ball
 		{
 			if (ball.getOwnedBy()!=null && ball.getOwnedBy().getPlayerType().getPlayerTypeName().compareTo("Goalie")==0) {
 						mp.moveToCoord(currentPlayer, ConstantPosition.ENGAGEMENTX, ConstantPosition.INITIAL_POINT, itsUserRound);
@@ -167,7 +167,7 @@ public class Match {
 		return false;
 	}
 	
-	public Boolean goalie(DataPlayer currentPlayer) {
+	public Boolean Goalie(DataPlayer currentPlayer) {
 		ArrayList<Position> objectsSeen = v.Goalsee(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
 		int i;
 		int GoalLimitX;
@@ -229,16 +229,16 @@ public class Match {
 		return false;
 	}
 	
-	public Boolean midfielder(DataPlayer currentPlayer) {
+	public Boolean Midfielder(DataPlayer currentPlayer) {
 		int i=0;
 		Boolean limit, act=false;
 		ArrayList<Position> objectsSeen = v.see(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
 		
 		if (itsUserRound) {
-			limit = Math.abs(currentPlayer.getPositionX()-ConstantPosition.WIDTH/3)<10;
+			limit = Math.abs(currentPlayer.getPositionX()-ConstantPosition.WIDTH-(ConstantPosition.WIDTH/3))<10;
 		}
 		else {
-			limit = Math.abs(currentPlayer.getPositionX()-ConstantPosition.WIDTH-(ConstantPosition.WIDTH/3))<10;
+			limit = Math.abs(currentPlayer.getPositionX()-ConstantPosition.WIDTH/3)<10;
 		}
 		
 		if (currentPlayer.getHaveBall()) {
@@ -308,7 +308,7 @@ public class Match {
 		return act;
 	}
 	
-	public Boolean defender(DataPlayer currentPlayer) {
+	public Boolean Defender(DataPlayer currentPlayer) {
 		int i=0, middle = ConstantPosition.WIDTH/2;
 		Boolean act=false;
 		ArrayList<Position> objectsSeen = v.see(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
