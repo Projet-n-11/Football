@@ -4,67 +4,29 @@ import java.io.IOException;
 
 import java.util.Iterator;
 
+import javax.swing.JFrame;
+
 import databall.DataBall;
 import dataplayer.DataPlayer;
 import datateam.DataTeam;
 import gui.elements.DrawField;
+import gui.elements.EndscreenPanel;
 import process.management.CreaTeam;
 import process.management.Map;
 import process.management.Match;
+import process.scores.Score;
 
 public class TestMatch {
 
 	public static void main(String[] args) throws IOException {
 		
+		JFrame frame = new JFrame();
+		Score score = new Score(1, 0);
+		EndscreenPanel ep = new EndscreenPanel(score);
 		
-		DataTeam teamA = CreaTeam.creaTeam("France");
-		DataTeam teamB = CreaTeam.creaTeam("Brazil");
-		
-		//DrawField df = new DrawField(teamA, teamB, );
-		//df.run();
-		/*
-		DataPlayer tmp;
-		
-		Map map = new Map();
-		Iterator<DataPlayer> iteratorUser = teamA.getPlayers().values().iterator();
-		Iterator<DataPlayer> iteratorBot = teamB.getPlayers().values().iterator();
-		
-		while (iteratorUser.hasNext()) {
-			tmp = iteratorUser.next();
-			map.setElement(tmp);
-		}
-		
-		while (iteratorBot.hasNext()) {
-			map.setElement(iteratorBot.next());
-		}
-		
-		// POSITIONS PAR DEFAUTS :	(0,0) => il n'y aura qu'un joueur sur le terrain
-		
-		
-		
-		
-		Match m = new Match();
-		DataBall ball = new DataBall(5,5);
-		map.setElement(ball);
-		
-		map.printAllElementsFromTable();
-
-		m.matchOneRound(teamA, teamB, map, ball);
-		m.matchOneRound(teamA, teamB, map, ball);
-		m.matchOneRound(teamA, teamB, map, ball);
-		m.matchOneRound(teamA, teamB, map, ball);
-		m.matchOneRound(teamA, teamB, map, ball);
-		m.matchOneRound(teamA, teamB, map, ball);
-		m.matchOneRound(teamA, teamB, map, ball);
-		m.matchOneRound(teamA, teamB, map, ball);
-		m.matchOneRound(teamA, teamB, map, ball);
-		m.matchOneRound(teamA, teamB, map, ball);
-		m.matchOneRound(teamA, teamB, map, ball);
-		m.matchOneRound(teamA, teamB, map, ball);
-		// stratégies : 424 et 343
-		
-		map.printAllElementsFromTable();
-		*/
+		frame.add(ep.initLayout());
+		frame.setVisible(true);
+		frame.setSize(500, 500);
 	}
 
 }

@@ -7,6 +7,11 @@ public class Score {
 	private int scoreTeam1;
 	private int scoreTeam2;
 	
+	public Score(int score1, int score2) {
+		scoreTeam1=score1;
+		scoreTeam2=score2;
+	}
+	
 	public Score(DataTeam team1, DataTeam team2) {
 		scoreTeam1=0;
 		scoreTeam2=0;

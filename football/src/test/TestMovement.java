@@ -26,7 +26,7 @@ public class TestMovement {
 			System.out.println("―――――――――――――――");
 			System.out.println("Player's position :");
 			while(!paused) {
-				//MovementPlayer mp = new MovementPlayer(null, db);
+				MovementPlayer mp = new MovementPlayer(null, db);
 				paused = true;
 			}
 			db.setPositionX(r.nextInt(highx-low));

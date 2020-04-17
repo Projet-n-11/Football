@@ -30,8 +30,8 @@ import process.scores.Score;
 public class GraphicalField extends JPanel implements Runnable{
 
 	/*
-	 *  GraphicalField is the frame that will generate the Soccer field, it will
-	 *  show the field with different draw forms to make the field's shape.
+	 *  GraphicalField is the panel which will call the Soccer field,
+	 *  the transition panel (changes) and the end panel (results).
 	 *  
 	 *  @author Aladdine Ben Romdhane
 	 * 
@@ -79,9 +79,9 @@ public class GraphicalField extends JPanel implements Runnable{
 
 	@Override
 	public void run() {
-		boolean started = true;
+		boolean started = true, end  = true;
 		boolean paused = false;
-		boolean transition = false;
+		boolean transition= false;
 		int game_duration = 0; // This will represent the actual time which will help to know when to put the TransitionPanel
 
 		//Initializing each elements from the game (map, placing the ball, placing each players following their tactics)
@@ -153,12 +153,24 @@ public class GraphicalField extends JPanel implements Runnable{
 						tp.setResumedFalse();
 					}
 				}
+				
 			}
 			else {
-				removeAll();
-				add(new JLabel("Match DONE !", JLabel.CENTER));
-				System.out.println("END");
+				remove(df);
+				EndscreenPanel ep = new EndscreenPanel(score);
+				initTransitionLayout(ep.initLayout());
+				frame.setSize(ConstantValues.SCREEN_WIDTH, ConstantValues.SCREEN_HEIGHT+1); // to debug frame
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				frame.revalidate();
+				frame.repaint();
+				started = false;
 			}
 		}
+		System.out.println("done");
 	}
 }

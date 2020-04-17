@@ -29,6 +29,13 @@ import process.management.CreaTeam;
 import process.management.RecupTeam;
 import process.scores.Score;
 
+/*
+ * Here the user can select his team, his tactics, players of his team
+ * and the team he's going to play against before starting the match.
+ * 
+ * @author Aladdine Ben Romdhane, Quitterie Pilon, Laura Fustinoni
+ */
+
 public class KickOffMenu extends JPanel {
 
 	private static final long serialVersionUID = 1L;

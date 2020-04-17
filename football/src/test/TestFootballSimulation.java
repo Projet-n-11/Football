@@ -10,7 +10,5 @@ public class TestFootballSimulation {
 	
 	public static void main(String[] args){
 		MainFrame mainframe = new MainFrame();
-		/*Thread guiThread = new Thread(mainframe);
-		guiThread.start();*/
 	}
 }

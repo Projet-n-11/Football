@@ -9,6 +9,13 @@ import databall.DataBall;
 import datateam.DataTeam;
 import process.scores.Score;
 
+	/*
+	 * This panel is gonna regroup each panels for our match Layout,
+	 * it will show us both list of players (with their stats), the
+	 * field, the chronometer, and the score.
+	 * 
+	 * @author Aladdine Ben Romdhane, Quitterie Pilon, Laura Fustinoni
+	 */
 public class MatchScreen extends JPanel{
 
 	private static final long serialVersionUID = 2301016752658769684L;
@@ -19,7 +26,6 @@ public class MatchScreen extends JPanel{
 	
 	public void initLayout(DataTeam team, DataTeam team2, DataBall ball, Score score, JFrame frame) {
 		ChronometerGUI chrono = new ChronometerGUI();
-
 		ScoresGUI scores = new ScoresGUI(score, team, team2);
 		GraphicalField field = new GraphicalField(team, team2, ball, score, frame, chrono);
 		Thread matchgui = new Thread(field);

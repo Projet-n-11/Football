@@ -36,6 +36,14 @@ import process.movement.MovementBall;
 import process.movement.MovementPlayer;
 import process.movement.Vision;
 
+/*
+ *	This is the main panel of the game, here we draw the field, the players,
+ *	the ball, the grid (representing each points where an element from the map
+ *	can be put), and the special positions.
+ * 
+ * @author Aladdine Ben Romdhane, Quitterie Pilon, Laura Fustinoni
+ */
+
 public class DrawField extends JPanel {
 
 	private static final long serialVersionUID = 8187623550893249601L;
@@ -185,7 +193,6 @@ public class DrawField extends JPanel {
 	public void drawPenaltyArches(Graphics2D g2, double fieldLength,
 			double fieldWidth) {
 		double extent = 2*Math.toDegrees(Math.acos(6d/10d));
-		//double extent = 106.26020470831196d;
 		g2.draw(new Arc2D.Double(fieldLength-12-10, (fieldWidth/2)-10, 20, 20, 180-(extent/2), extent, Arc2D.OPEN));
 		g2.draw(new Arc2D.Double(12-4, (fieldWidth/2)-10, 20, 20, -extent/2, extent, Arc2D.OPEN));
 	}
@@ -258,6 +265,12 @@ public class DrawField extends JPanel {
 		}
 	}
 	
+	/*
+	 * drawSpecialPositions can be useful to see where are positionned the special positions into the field, it draws the points following
+	 * the coordinates inside the ConstantPosition class.
+	 * 
+	 */
+	
 	public void drawSpecialPositions(Graphics2D g4, double fieldLength, double doubleWidth) {
 		g4.draw(new Line2D.Double(ConstantPosition.CORNER1X, ConstantPosition.CORNER1Y, ConstantPosition.CORNER1X ,ConstantPosition.CORNER1Y));
 		g4.draw(new Line2D.Double(ConstantPosition.CORNER2X, ConstantPosition.CORNER2Y, ConstantPosition.CORNER2X ,ConstantPosition.CORNER2Y));
@@ -271,6 +284,10 @@ public class DrawField extends JPanel {
 		g4.draw(new Line2D.Double(ConstantPosition.GOAL1X, ConstantPosition.GOALY1, ConstantPosition.GOAL1X ,ConstantPosition.GOALY2));
 		g4.draw(new Line2D.Double(ConstantPosition.GOAL2X, ConstantPosition.GOALY1, ConstantPosition.GOAL2X ,ConstantPosition.GOALY2));
 	}
+	
+	/*
+	 * drawPlayers is one of the main method which will draw each players from both user and IA team, following if the player is titular or not.
+	 */
 	
 	public void drawPlayers(Graphics2D gplayersteam, Graphics2D gplayersteam2, double fieldLength, double doubleWidth){
 		Font font = new Font("SANS_SERIF", Font.BOLD, 2);
@@ -290,6 +307,10 @@ public class DrawField extends JPanel {
 			}
 		}
 	}
+	
+	/*
+	 * drawBall is one of the main method of DrawField which will draw the ball.
+	 */
 	
 	public void drawBall(Graphics2D gball, double fieldLength, double doubleWidth) {        
 		gball.draw(new Ellipse2D.Double(ball.getPositionX(), ball.getPositionY(), 0.4, 0.4));
