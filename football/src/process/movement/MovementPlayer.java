@@ -9,7 +9,6 @@ import dataplayer.DataPlayer;
 import process.management.ConstantPosition;
 import process.management.Map;
 
-
 /*
  * Class which will do the player's movement based on the ball's position.
  * Player will always try to move next to the ball
@@ -173,7 +172,14 @@ public class MovementPlayer{
 		int speed_towards_palX = deltaX/4;
 		int speed_towards_palY = deltaY/4;
 		
+		if (player.getPlayerType().getPlayerTypeName().compareTo("Goalie")==0)
+		{
+			speed_towards_palX *= 5;
+			speed_towards_palY *= 5;
+		}
+		
 		player.setHaveBall(false);
+		ball.setOwnedBy(null);
 		ball.setSpeedX(speed_towards_palX);
 		ball.setSpeedY(speed_towards_palY);
 	}
@@ -190,8 +196,9 @@ public class MovementPlayer{
 		System.out.println("SHOOT by " + player.getPlayerName());
 		player.setPositionX(player.getPositionX()-2*direction); // player steps back
 		player.getPlayerType().setCanHeAct(-player.getPlayerType().getSpeed().getSpeedX());
+		player.getPlayerType().setStamina(player.getPlayerType().getStamina()-10);
 		player.setHaveBall(false);
-		ball.setSpeedX( (int) ( direction*5));
+		ball.setSpeedX( (int) ( direction*10));
 		ball.setOwnedBy(null);
 
 	}
@@ -247,6 +254,7 @@ public class MovementPlayer{
 	}
 
 	public void cover(DataPlayer player, DataPlayer ballPlayer, Boolean itsUserRound) {
+
 		int dx = 10, dy = 15;
 		System.out.println(player.getPlayerName() + " covers " + ballPlayer.getPlayerName());
 		if (player.getPlayerType().getPlayerTypeName()=="Forward" && !itsUserRound || itsUserRound && player.getPlayerType().getPlayerTypeName()=="Defender")
@@ -279,14 +287,17 @@ public class MovementPlayer{
 					moveToCoord(player, player.getPositionX()+dx, player.getPositionY()+dy, itsUserRound);
 				}
 			}
-
+			else
+			{
+				moveToCoord(player, ballPlayer.getPositionX(), ballPlayer.getPositionY(), itsUserRound);
+			}
 		}
 	}
 	
 	public Boolean isCloseToBall(DataPlayer player, DataBall ball) {
-		if (Math.abs(player.getPositionX()-ball.getPositionX())==1 || Math.abs(player.getPositionX()-ball.getPositionX())==0)
+		if (Math.abs(player.getPositionX()-ball.getPositionX())<=2 && Math.abs(player.getPositionX()-ball.getPositionX())>=0)
 		{
-			if (Math.abs(player.getPositionY()-ball.getPositionY())==1 || Math.abs(player.getPositionY()-ball.getPositionY())==0)
+			if (Math.abs(player.getPositionY()-ball.getPositionY())<=2 && Math.abs(player.getPositionY()-ball.getPositionY())>=0)
 			{
 				return true;
 			}
@@ -342,7 +353,7 @@ public class MovementPlayer{
 		int limitOneThird1 = (ConstantPosition.WIDTH/3);
 		int limitOneThird2 = ConstantPosition.WIDTH-(ConstantPosition.WIDTH/3);
 		int GoalLimitX, GoalLimitY1 = ConstantPosition.HEIGHT/2-40/2, GoalLimitY2 = ConstantPosition.HEIGHT/2+40/2;
-		if (!itsUserRound)
+		if (itsUserRound)
 		{
 			GoalLimitX = ConstantPosition.INITIAL_POINT+15;
 		}

@@ -26,6 +26,7 @@ public class Match {
 	private MovementPlayer mp;
 	private Vision v;
 	private ArrayList<DataPlayer> allPlayers;
+	private int GoalLimitX;
 
 	public Match(DataTeam userTeam, DataTeam botTeam, Map positions, DataBall ball, MovementBall mb, ArrayList<DataPlayer> allPlayers) {
 		this.userTeam = userTeam;
@@ -43,16 +44,13 @@ public class Match {
 		Iterator<DataPlayer> itUser;
 		Iterator<DataPlayer> itBot;
 		DataPlayer currentPlayer = null;
-		Boolean bothHavePlayed;	
-
+		Boolean bothHavePlayed = false;
+		itsUserRound = false;
+		pickUserTeamPlayer = true;
 		
 		//each round we initialize the list (iterator) of players to check
 		itUser = userTeam.getPlayers().values().iterator();
 		itBot = botTeam.getPlayers().values().iterator();
-
-		itsUserRound = false;
-		pickUserTeamPlayer = true;
-		bothHavePlayed = false;
 
 		/**
 		 * first we move the ball considering its own speed (if it is free)
@@ -76,6 +74,8 @@ public class Match {
 		// And while both teams have players to deal with:
 		while ((itUser.hasNext() || itBot.hasNext())){
 			bothHavePlayed = false;
+			pickUserTeamPlayer = true;
+			itsUserRound = true;
 			while (!bothHavePlayed) {
 				if(pickUserTeamPlayer && itUser.hasNext()) {
 					currentPlayer = itUser.next();
@@ -85,9 +85,9 @@ public class Match {
 				}
 				else {
 					currentPlayer = itBot.next();
-					bothHavePlayed = true;
 					pickUserTeamPlayer = true;
 					itsUserRound = false;
+					bothHavePlayed = true;
 				}
 				
 				if (currentPlayer.getPlayerType().getTitularPlayer()==1 && currentPlayer.getPlayerType().getCanHeAct() + currentPlayer.getPlayerType().getSpeed().getSpeedX()>=5)
@@ -109,10 +109,21 @@ public class Match {
 						didActionHappenned(currentPlayer,Goalie(currentPlayer));
 					}
 					/*************************************************************************************/
-				}					
+				}
+				else
+				{
+					currentPlayer.setPlayerStamina(currentPlayer.getPlayerType().getStamina() + 1);
+				}
+				
+				currentPlayer.getPlayerType().setCanHePass(currentPlayer.getPlayerType().getCanHePass()+1);
+				
+				if (currentPlayer.getPlayerType().getCanHeAct()+currentPlayer.getPlayerType().getSpeed().getSpeedX()<5)
+				{		
+				currentPlayer.getPlayerType().setCanHeAct(currentPlayer.getPlayerType().getCanHeAct()+1);					
+				}
 			}
 		}		
-		
+
 		System.out.println("1 round done\n");
 	}
 	
@@ -138,7 +149,7 @@ public class Match {
 		if (currentPlayer.getHaveBall()) {										// if Forward player has ball
 			if (v.seeCages(currentPlayer.getPositionX(), currentPlayer.getPositionY(), itsUserRound)) // and see cages
 			{
-				System.out.println("I swear " + currentPlayer.getPlayerName() + "");
+				System.out.println(currentPlayer.getPlayerName() + " sees cages");
 				mp.shoot(currentPlayer, ball, itsUserRound);
 				return true;
 			}
@@ -180,7 +191,7 @@ public class Match {
 	public Boolean Goalie(DataPlayer currentPlayer) {
 		ArrayList<Position> objectsSeen = v.Goalsee(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
 		int i;
-		int GoalLimitX;
+		
 		if (itsUserRound)
 		{
 			GoalLimitX = ConstantPosition.INITIAL_POINT+15;
@@ -191,7 +202,8 @@ public class Match {
 		}
 		
 		if (currentPlayer.getHaveBall()) {												// if Goalie has ball ;
-			if (currentPlayer.getPositionX()==GoalLimitX) {								// if is ready to pass :
+			if (Math.abs(currentPlayer.getPositionX()-GoalLimitX)<=5) {								// if is ready to pass :
+				System.out.println("Goalie " + currentPlayer.getPlayerName() + " ready to pass !");
 				DataPlayer otherPlayer;
 				for (i=0; i<objectsSeen.size() ; i++) {
 					if (objectsSeen.get(i) instanceof DataPlayer)				
@@ -200,21 +212,37 @@ public class Match {
 						if (otherPlayer.getTeam().compareTo(currentPlayer.getTeam())==0) // if see pal :
 						{
 							mp.passBalltoPal(currentPlayer, otherPlayer, ball);
+							System.out.println("Goalie " + currentPlayer.getPlayerName() + " passed to " + otherPlayer.getPlayerName());
 							currentPlayer.getPlayerType().setCanHePass(-1);
 							otherPlayer.getPlayerType().setCanHePass(0);
 							return true;
 						}
 					}
 				}
-				
-			}
-			else {
 				mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
 				return true;
 			}
+			else if (itsUserRound) {
+				if (currentPlayer.getPositionX()<GoalLimitX){
+				mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
+				return true;
+				}
+			}
+			else {
+				if (currentPlayer.getPositionX()>GoalLimitX) {
+				mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
+				}
+			}
 		}
-		else																		// if Goalie does not have ball :
-		{
+		else if (ball.getOwnedBy()!=null && ball.getOwnedBy().getTeam().compareTo(currentPlayer.getTeam())==0) {
+			if (Math.abs(currentPlayer.getPositionX()-getInitialPositionPlayer(currentPlayer).getPositionX())>0) {
+				if (Math.abs(currentPlayer.getPositionX()-getInitialPositionPlayer(currentPlayer).getPositionX())>0) {
+					mp.moveToCoord(currentPlayer, getInitialPositionPlayer(currentPlayer).getPositionX(), getInitialPositionPlayer(currentPlayer).getPositionX(), itsUserRound);
+				}
+			}
+		}
+		else
+		{							// if Goalie does not have ball :
 			for (i=0; i<objectsSeen.size() ; i++) {
 				if (objectsSeen.get(i) instanceof DataBall)				// if see ball :
 				{
@@ -236,6 +264,7 @@ public class Match {
 				}
 			}
 		}
+		objectsSeen = null;
 		return false;
 	}
 	
@@ -315,6 +344,7 @@ public class Match {
 				}
 			}
 		}
+		objectsSeen = null;
 		return act;
 	}
 	
@@ -386,6 +416,7 @@ public class Match {
 				}
 			}
 		}
+		objectsSeen = null;
 		return act;
 	}
 
@@ -403,11 +434,7 @@ public class Match {
 			currentPlayer.setPlayerStress(currentPlayer.getPlayerType().getStress()-1);
 		}
 		
-		currentPlayer.getPlayerType().setCanHePass(currentPlayer.getPlayerType().getCanHePass()+1);
-		
-		if (currentPlayer.getPlayerType().getCanHeAct()+currentPlayer.getPlayerType().getSpeed().getSpeedX()<5){		
-			currentPlayer.getPlayerType().setCanHeAct(currentPlayer.getPlayerType().getCanHeAct()+1);
-		}
+
 		
 	}
 	

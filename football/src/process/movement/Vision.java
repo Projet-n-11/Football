@@ -70,36 +70,20 @@ public class Vision {
 		}
 		return objects;
 	}
-	/**
-	 * this position
-	 * @param player
-	 * @param ball
-	 * @return true/false
-	 */
-	public Boolean areClose(Position a, Position b) {
-		int dx = a.getPositionX()-b.getPositionX();
-		int dy = a.getPositionY()-b.getPositionY();
-		if (dx<=1 && dx>=-1) 
-		{
-			if (dy<=1 && dy>=-1) 
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+
+
 	
 	public Boolean seeCages(int playerPosX, int playerPosY, Boolean itsUserRound) {
 		if (!itsUserRound)
 		{
-			if (playerPosX<=ConstantPosition.GOAL1X+10)
+			if (playerPosX<=ConstantPosition.GOAL1X+13)
 			{
 				return true;
 			}
 		}
 		else
 		{
-			if (playerPosX>=ConstantPosition.GOAL2X-10)
+			if (playerPosX>=ConstantPosition.GOAL2X-13)
 			{
 				return true;
 			}
