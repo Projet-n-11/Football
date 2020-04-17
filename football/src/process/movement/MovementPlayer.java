@@ -30,6 +30,7 @@ public class MovementPlayer{
 	}
 
 	public void reachBall(DataPlayer player, DataBall ball) {
+		System.out.println(player.getPlayerName() + " reached ball");
 		if (ball.getSpeedX()==0 && ball.getSpeedY()==0)
 		{
 			player.setHaveBall(true);
@@ -46,7 +47,6 @@ public class MovementPlayer{
 				ball.setOwnedBy(player);
 			}
 		}
-		
 	}
 	
 	public void move(DataPlayer player, DataBall ball, Boolean itsUserRound) {
@@ -55,6 +55,7 @@ public class MovementPlayer{
 
 	public void moveToCoord(DataPlayer player, int x, int y, Boolean itsUserRound) {
 		if(player.getPlayerType().getStamina() != 0) {
+			map.removeElement(player.getPositionX(), player.getPositionX());
 			// X AXIS
 			if(x < player.getPositionX()) {
 				if(player.getPositionX() - x == 1) {
@@ -91,10 +92,12 @@ public class MovementPlayer{
 				}
 			}
 			checkPosition(player, itsUserRound);
+			map.setElement(player);
 		}
 		else {
 			player.setPlayerStamina(player.getPlayerType().getStamina() + 1);
 		}
+		
 	}
 	
 	/**
@@ -111,10 +114,8 @@ public class MovementPlayer{
 			int GOALY2 = ConstantPosition.GOALY2;
 			int cages = r.nextInt(GOALY2 - GOALY1) + GOALY1;
 			int d;
-			int oldPlayerPosX = player.getPositionX();
-			int oldPlayerPosY = player.getPositionY();
 			
-			if (itsUserRound) 
+			if (!itsUserRound) 
 			{
 				goalx = ConstantPosition.GOAL1X;
 				d = -2;
@@ -124,7 +125,9 @@ public class MovementPlayer{
 				d = 2;
 			}
 			
-			if(goalx < player.getPositionX()) {
+			moveToCoord(player, goalx, cages, itsUserRound);
+			
+			/*if(goalx < player.getPositionX()) {
 				player.setPositionX(player.getPositionX() - 1);
 			}
 			else if(goalx > player.getPositionX()) {
@@ -136,12 +139,10 @@ public class MovementPlayer{
 			}
 			else if(cages > player.getPositionY()) {
 				player.setPositionY(player.getPositionY() + 1);
-			}
+			}*/
 			player.setPlayerStamina(player.getPlayerType().getStamina() - 1);
 			player.setPlayerStress(player.getPlayerType().getStress() +1);
-			map.removeElement(oldPlayerPosX, oldPlayerPosY);
 			checkPosition(player, itsUserRound);
-			map.setElement(player);
 			moveball.setPositionBall(player.getPositionX()+d, player.getPositionY());
 			System.out.println(player.getPlayerName() + " runs to cages");
 		}
@@ -195,17 +196,7 @@ public class MovementPlayer{
 	}
 
 	public void tryInterception(DataPlayer player, DataBall ball, Boolean itsUserRound, MovementBall mb) {
-		if (ball.getOwnedBy().getPlayerType().getPlayerTypeName().compareTo("Goalie")==0)
-		{
-			int dx=0, dy=0;
-			if (!itsUserRound) dx = 5;
-			else dx = -5;
-			if (player.getPositionY()<ball.getOwnedBy().getPositionY()) dy = -1;
-			else dy = +1;
-			moveToCoord(player, player.getPositionX()+dx, player.getPositionY()+dy, itsUserRound);		
-		}
-		else 
-		{
+		
 		Random r = new Random();
 		int speedx = player.getPlayerType().getSpeed().getSpeedX();
 		int speedy = player.getPlayerType().getSpeed().getSpeedY();
@@ -244,8 +235,8 @@ public class MovementPlayer{
 		looser.setHaveBall(false);
 		ball.setOwnedBy(winner);
 		winner.getPlayerType().setCanHeAct(5-winner.getPlayerType().getSpeed().getSpeedX());
-		looser.getPlayerType().setCanHeAct(-2);
-		}
+		looser.getPlayerType().setCanHeAct(-1);
+		
 				
 		if(player.getHaveBall())
 		{
@@ -256,7 +247,7 @@ public class MovementPlayer{
 
 	public void cover(DataPlayer player, DataPlayer ballPlayer, Boolean itsUserRound) {
 		int dx = 10, dy = 15;
-		
+		System.out.println(player.getPlayerName() + " covers " + ballPlayer.getPlayerName());
 		if (player.getPlayerType().getPlayerTypeName()=="Forward" && !itsUserRound || itsUserRound && player.getPlayerType().getPlayerTypeName()=="defender")
 		{
 			if (Math.abs(player.getPositionY()-ballPlayer.getPositionY())<dy) // if too close to pal to cover :

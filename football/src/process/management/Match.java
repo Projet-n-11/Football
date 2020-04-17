@@ -38,7 +38,7 @@ public class Match {
 		v = new Vision();
 	}
 
-	public void matchOneRound() { 		
+	public void matchOneRound() {
 
 		Iterator<DataPlayer> itUser;
 		Iterator<DataPlayer> itBot;
@@ -81,7 +81,7 @@ public class Match {
 					itsUserRound = false;
 				}
 				
-				if (currentPlayer.getPlayerType().getCanHeAct() + currentPlayer.getPlayerType().getSpeed().getSpeedX()==5)
+				if (currentPlayer.getPlayerType().getCanHeAct() + currentPlayer.getPlayerType().getSpeed().getSpeedX()>=5)
 				{
 					if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Forward")==0)
 					{
@@ -124,6 +124,7 @@ public class Match {
 
 	}
 
+	
 	public Boolean forward(DataPlayer currentPlayer) {
 		if (currentPlayer.getHaveBall()) {										// if forward player has ball
 			if (v.seeCages(currentPlayer.getPositionX(), currentPlayer.getPositionY(), itsUserRound)) // and see cages
@@ -144,20 +145,23 @@ public class Match {
 		}
 		else											// if forward player does not have ball
 		{
+			if (ball.getOwnedBy()!=null && ball.getOwnedBy().getPlayerType().getPlayerTypeName().compareTo("Goalie")==0) {
+						mp.moveToCoord(currentPlayer, ConstantPosition.ENGAGEMENTX, ConstantPosition.INITIAL_POINT, itsUserRound);
+						return true;
+					}
+			if (!mp.isCloseToBall(currentPlayer, ball)) {
+				mp.move(currentPlayer, ball, itsUserRound);
+			}
 			if (mp.isCloseToBall(currentPlayer, ball)) {
 				if (ball.getOwnedBy()==null) {									// if free ball -> reach ball
 					mp.reachBall(currentPlayer, ball);
+					return true;
 				}
 				else								// if ball owned by ennemy						
 				{
 					mp.tryInterception(currentPlayer, ball, itsUserRound, mb);
 					return true;
 				}
-			}
-			else
-			{
-				mp.move(currentPlayer, ball, itsUserRound);
-				return true;
 			}
 		}
 		return false;
@@ -276,6 +280,10 @@ public class Match {
 			act=true;
 		}
 		else {																		 // if does not have ball
+			if (ball.getOwnedBy()!=null && ball.getOwnedBy().getPlayerType().getPlayerTypeName().compareTo("Goalie")==0) {
+				mp.moveToCoord(currentPlayer, ConstantPosition.ENGAGEMENTX, ConstantPosition.INITIAL_POINT, itsUserRound);
+				return true;
+			}
 			for (i=0; i<objectsSeen.size() ; i++) {
 				if (objectsSeen.get(i) instanceof DataBall)				
 				{
@@ -364,7 +372,7 @@ public class Match {
 				}
 				else {
 					mp.goBackToInitialPosition(currentPlayer, getInitialPositionPlayer(currentPlayer), itsUserRound);
-					System.out.println(currentPlayer.getPlayerType().getSpeed());
+					//System.out.println(currentPlayer.getPlayerType().getSpeed());
 				}
 			}
 		}
