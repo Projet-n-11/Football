@@ -45,10 +45,10 @@ public class MovementBall {
 	public void roll() {
 		if (ball.getSpeedX()!=0 || ball.getSpeedY()!=0)
 		{
-			//ball.setCanIt(0);
+			ball.setCanIt(0);
 			table.removeElement(ball.getPositionX(), ball.getPositionY());
 			//we decelerate slowly
-			int deceleration = 0;
+			//int deceleration = 0;
 			//if(deceleration == 2) {
 				if (ball.getSpeedX()>1) {
 					ball.setPositionX(ball.getPositionX()+1);
@@ -81,7 +81,7 @@ public class MovementBall {
 				else if (ball.getSpeedY()==-1) {
 					ball.setPositionY(ball.getPositionY()-1);
 				}
-				deceleration++;
+				//deceleration++;
 			//}
 			table.setElement(ball);
 		}
