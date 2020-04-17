@@ -141,12 +141,12 @@ public class MainMenu extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			String message= "After launching the kickoff menu, you have to choose a team from the list of the 5 proposed teams.\n" 
 					+"You must then choose a tactic. Depending on the tactic you have chosen, you must change the titular and substitute players,\n"
-					+ "by dragging them from one square to another so that the number of each type of player (goalkeeper, defenders, midfielders and forwards) matches the tactic you have chosen. \n" 
+					+"by dragging them from one square to another so that the number of each type of player (goalkeeper, defenders, midfielders and forwards) matches the tactic you have chosen. \n" 
 					+"For example, if you choose the 3-4-3 tactic, you will need 1 goalkeeper, 3 defenders, 4 midfielders and 3 forwards in the starting players.\n"
-					+"In case the players do not match the chosen tactic, an error message will appear asking you to rectify. \n" 
+					+"In case the players do not match the chosen tactic, an error message will appear asking you to rectify.\n" 
 					+"You must then choose the team you want to play against. All you have to do is start the game by pressing the start button. \n"  
 					+"You will then be able to adapt your tactics and change the starting players every 10 minutes (match time, not real time) according to the game progress.\n"
-					+ " For example, adopt a more defensive tactic in case you are ahead of the game. \n" 
+					+"For example, adopt a more defensive tactic in case you are ahead of the game.\n" 
 					+"Now it's your turn to play ";
 					
 

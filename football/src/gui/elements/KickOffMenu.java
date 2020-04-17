@@ -171,6 +171,9 @@ public class KickOffMenu extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					DataTeam teamPlayer = null;
 					DataTeam teamIA = null;
+					JLabel labERROR = new JLabel("");
+					JLabel labERRORsec = new JLabel("");
+					JPanel errorPanel = new JPanel();
 					if(modelP.getSelectedItem().toString() != "Select your team..." && modelIA.getSelectedItem().toString() != "Select your team..." 
 							&& group.getSelection() != null && filleT.getModel().getSize() == 11 && filleS.getModel().getSize() == 12 
 							&& !modelP.getSelectedItem().toString().contains(modelIA.getSelectedItem().toString())) {
@@ -248,6 +251,28 @@ public class KickOffMenu extends JPanel {
 								&& teamPlayer.getDefaultStrategy(0) == 3 && teamPlayer.getDefaultStrategy(1) == 4 && teamPlayer.getDefaultStrategy(2) == 3) {
 							everythingFine = true;
 						}
+						else {
+							labERROR = new JLabel("You cannot launch if you have " + goalie + " goalie, " + defenders + " defenders, " + midfielders 
+									+ " midfielders, " + forward + " forward!\n", JLabel.CENTER);
+							labERRORsec	= new JLabel(" You need to must match the number of players from the tactic you chosen : ", JLabel.CENTER);
+							labERROR.setFont(new Font("", Font.BOLD, 15));
+							labERRORsec.setFont(new Font("", Font.BOLD, 15));
+							labERROR.setForeground(Color.RED);
+							labERRORsec.setForeground(Color.RED);
+							errorPanel.setLayout(new GridBagLayout());
+							gc.gridx = 0;
+							gc.gridy = 0;
+							errorPanel.add(labERROR, gc);
+							gc.gridx = 0;
+							gc.gridy = 1;
+							errorPanel.add(labERRORsec, gc);
+							errorPanel.setBackground(new Color(245, 235, 200));
+							errorPanel.repaint();
+							gc.gridx = 0;
+							gc.gridy = 5;
+							panel.add(errorPanel, gc);
+							panel.revalidate();
+						}
 
 						if(everythingFine == true) {
 							panel.removeAll();
@@ -268,8 +293,6 @@ public class KickOffMenu extends JPanel {
 						}
 					}
 					else {
-						JPanel errorPanel = new JPanel();
-						JLabel labERROR = new JLabel("");
 						if(modelP.getSelectedItem().toString() == "Select your team..." && modelIA.getSelectedItem().toString() == "Select your team..." 
 								&& group.getSelection() == null && filleT.getModel().getSize() != 11 && filleS.getModel().getSize() != 12) {
 							labERROR = new JLabel("Select your team, IA's team, your tactics and adjust your players to have 11 Titular players!", JLabel.CENTER);
@@ -319,7 +342,7 @@ public class KickOffMenu extends JPanel {
 						errorPanel.setBackground(new Color(245, 235, 200));
 						errorPanel.repaint();
 						gc.gridx = 0;
-						gc.gridy = 5;
+						gc.gridy = 4;
 						panel.add(errorPanel, gc);
 						panel.revalidate();
 					}
