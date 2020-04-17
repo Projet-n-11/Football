@@ -15,6 +15,7 @@ import process.management.ConstantPosition;
 import process.management.ConstantValues;
 import process.management.Map;
 /**
+ * this class manage changing position, speed and movements of the ball.
  * @author quitt
  *
  */
@@ -29,6 +30,17 @@ public class MovementBall {
 	private DataTeam IATeam;
 	private PositionBall pb;
 	
+	/**
+	 * 
+	 * @param ball
+	 * @param table
+	 * @param score
+	 * @param position tactics of team 1
+	 * @param position tactics of team 2
+	 * @param user Team
+	 * @param Bot Team
+	 * @param position ball
+	 */
 	public MovementBall(DataBall ball, Map table, Score score,
 			PositionTactics pt, PositionTactics pt2, DataTeam PTeam, DataTeam IATeam, PositionBall pb){
 		
@@ -42,6 +54,12 @@ public class MovementBall {
 		this.pb = pb;
 	}
 	
+	/**
+	 * This function is called when ball is free; it checks if ball has
+	 * any speed and move it depending on it. It also decrease speed to
+	 * simulate a slow-down. It also calls {@link #move(PositionBall, Map, PositionTactics, PositionTactics, DataTeam, DataTeam)}
+	 * to check if ball quits field or reaches one of the cages.
+	 */
 	public void roll() {
 		if (ball.getSpeedX()!=0 || ball.getSpeedY()!=0)
 		{
@@ -98,6 +116,12 @@ public class MovementBall {
 		// checker ball's exit limits
 	}
 	
+	/**
+	 * This function set the position of the ball based on the coordinates
+	 * provided.
+	 * @param x coordinates
+	 * @param y coordinates
+	 */
 	public void setPositionBall(int x, int y) {
 		table.removeElement(ball.getPositionX(), ball.getPositionY());
 		ball.setPositionX(x);
@@ -105,6 +129,19 @@ public class MovementBall {
 		table.setElement(ball);		
 	}
 
+	/**
+	 * This function is not moving ball but checking position of ball to announce
+	 * a goal, or a ball out of the field, by calling {@link #limitsCornersLeft()},
+	 * {@link #limitsCornersRight()}, {@link #limitsGoalLeft()}, {@link #limitsGoalRight()},
+	 * {@link #limitsSideLineBottom()} and {@link #limitsSideLineTop()}.
+	 * @param pb
+	 * @param table
+	 * @param pt
+	 * @param pt2
+	 * @param PTeam
+	 * @param IATeam
+	 * @throws InterruptedException
+	 */
 	public void move(PositionBall pb, Map table,
 			PositionTactics pt, PositionTactics pt2, DataTeam PTeam, DataTeam IATeam) throws InterruptedException {
 		

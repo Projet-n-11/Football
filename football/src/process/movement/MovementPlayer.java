@@ -28,6 +28,13 @@ public class MovementPlayer{
 		this.map = map;
 	}
 
+	/**
+	 * This function needs to be called when the player is close to the ball.
+	 * Then, it determines if the player is able to catch the ball, based on ball
+	 * and player speed, and player stress and stamina.
+	 * @param player
+	 * @param ball
+	 */
 	public void reachBall(DataPlayer player, DataBall ball) {
 		System.out.println(player.getPlayerName() + " reached ball");
 		if (ball.getSpeedX()==0 && ball.getSpeedY()==0)
@@ -48,10 +55,29 @@ public class MovementPlayer{
 		}
 	}
 	
+	/**
+	 * This function calls the function {@link #moveToCoord(DataPlayer, int, int, Boolean)}
+	 * in order to move the player closer to the ball : it collects the coordinates of ball
+	 * to use the classical movement function.
+	 * @param player
+	 * @param ball
+	 * @param itsUserRound
+	 */
 	public void move(DataPlayer player, DataBall ball, Boolean itsUserRound) {
 		moveToCoord(player, ball.getPositionX(), ball.getPositionY(), itsUserRound);
 	}
 
+	/**
+	 * this function tests if the player is able to move, by checking its stamina,
+	 * then it moves the player closer to its objective (one square on x, one
+	 * square on y), and finally, it calls {@link #checkPosition(DataPlayer, Boolean)}
+	 * to correct the position of the player if it is out of its bound, according
+	 * to its role (defender, goalie...)
+	 * @param player
+	 * @param coordinates on x-axis of objective
+	 * @param coordinates on y-axis of objective
+	 * @param itsUserRound
+	 */
 	public void moveToCoord(DataPlayer player, int x, int y, Boolean itsUserRound) {
 		if(player.getPlayerType().getStamina() != 0) {
 			map.removeElement(player.getPositionX(), player.getPositionY());
@@ -100,9 +126,11 @@ public class MovementPlayer{
 	}
 	
 	/**
-	 * runtoCages is called when player own the ball and is distant from cages.
+	 * runtoCages is called when player owns the ball and is distant from cages; it calls
+	 * the function {@link #moveToCoord(DataPlayer, int, int, Boolean)} and for the coordinates
+	 * of the y-axis ; provide a random coordinate corresponding to cages.
 	 * @param player
-	 * @param itsBotRound
+	 * @param itsUserRound
 	 * @param ball
 	 */
 	public void runtoCages(DataPlayer player, DataBall ball, Boolean itsUserRound, MovementBall moveball) {
@@ -125,13 +153,6 @@ public class MovementPlayer{
 			}
 			
 			moveToCoord(player, goalx, cages, itsUserRound);
-			
-			if(goalx < player.getPositionX()) {
-				player.setPositionX(player.getPositionX() - 1);
-			}
-			else if(goalx > player.getPositionX()) {
-				player.setPositionX(player.getPositionX() + 1);
-			}
 
 			if(cages < player.getPositionY()) {
 				player.setPositionY(player.getPositionY() - 1);
@@ -150,6 +171,13 @@ public class MovementPlayer{
 		}
 	}
 	
+	/**
+	 * This function takes the ball from player, set the ball free and gives it a speed corresponding
+	 * to the direction of the player 2.
+	 * @param player
+	 * @param player2
+	 * @param ball
+	 */
 	public void passBalltoPal(DataPlayer player, DataPlayer player2, DataBall ball) {
 		Position posPlayer = new Position(player.getPositionX(), player.getPositionY());
 		Position posPlayer2 = new Position(player2.getPositionX(), player2.getPositionY());
@@ -184,6 +212,13 @@ public class MovementPlayer{
 		ball.setSpeedY(speed_towards_palY);
 	}
 	
+	/**
+	 * This function takes the ball from player, set it free, and gives it a speed of 10 in the x-axis,
+	 * in the direction of cages.
+	 * @param player
+	 * @param ball
+	 * @param itsUserRound
+	 */
 	public void shoot(DataPlayer player, DataBall ball, Boolean itsUserRound) {
 		int direction;
 		if (!itsUserRound)
@@ -203,6 +238,14 @@ public class MovementPlayer{
 
 	}
 
+	/**
+	 * This function checks if player is able to take ball from player2, based on their speed and stress.
+	 * If their are equal; winner is choosen randomly.
+	 * @param player
+	 * @param ball
+	 * @param itsUserRound
+	 * @param mb
+	 */
 	public void tryInterception(DataPlayer player, DataBall ball, Boolean itsUserRound, MovementBall mb) {
 		
 		Random r = new Random();
@@ -253,6 +296,13 @@ public class MovementPlayer{
 		}
 	}
 
+	/**
+	 * This function allows the player to cover the owner of ball (ballPlayer) by remaining on a distance of
+	 * 10 for x-axis and 15 for y axis, in order to have interesting passes and follow the direction of ball.
+	 * @param player
+	 * @param ballPlayer
+	 * @param itsUserRound
+	 */
 	public void cover(DataPlayer player, DataPlayer ballPlayer, Boolean itsUserRound) {
 
 		int dx = 10, dy = 15;
@@ -294,6 +344,14 @@ public class MovementPlayer{
 		}
 	}
 	
+	/**
+	 * This method checks if player is close enough to ball to reach it; then, {@link #reachBall(DataPlayer, DataBall)}
+	 * of {@link #tryInterception(DataPlayer, DataBall, Boolean, MovementBall)} will be called. The wider distance
+	 * acceped on x and y axis is 2.
+	 * @param player
+	 * @param ball
+	 * @return
+	 */
 	public Boolean isCloseToBall(DataPlayer player, DataBall ball) {
 		if (Math.abs(player.getPositionX()-ball.getPositionX())<=2 && Math.abs(player.getPositionX()-ball.getPositionX())>=0)
 		{
@@ -304,12 +362,12 @@ public class MovementPlayer{
 		}
 		return false;
 	}
-	/*
+	
+	/** 
 	 * Method limits will be delimiting the players limitations on the playfield
-	 * so the player can get out of the field
+	 * so the player can not get out of the field
 	 * @param DataBall db, DataPlayer dp
 	 */
-
 	public Boolean limits(DataPlayer dp) {
 
 		if(dp.getPositionX() == BORDERLEFT || dp.getPositionX() < BORDERLEFT) {
@@ -343,11 +401,25 @@ public class MovementPlayer{
 		}
 	}
 	
+	/**
+	 * This function uses initialPos as initial position of the player (based on its strategy), 
+	 * and then uses {@link #moveToCoord(DataPlayer, int, int, Boolean)}
+	 * to send player to its initial position.
+	 * @param player
+	 * @param initial Position of player
+	 * @param itsUserRound
+	 */
 	public void goBackToInitialPosition(DataPlayer player, Position initialPos, boolean itsUserRound) {
 		player.setHaveBall(false);
 		moveToCoord(player, initialPos.getPositionX(), initialPos.getPositionY(), itsUserRound);
 	}
 	
+	/**
+	 * This function correct position of the player if it is out of its bounds, based on its role on the
+	 * playfield (Goalie must not go too far away from goal for example)
+	 * @param player
+	 * @param itsUserRound
+	 */
 	public void checkPosition(DataPlayer player, Boolean itsUserRound) {
 		int middleX = (ConstantPosition.WIDTH/2);
 		int limitOneThird1 = (ConstantPosition.WIDTH/3);

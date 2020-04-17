@@ -9,15 +9,13 @@ import datateam.DataTeam;
 import process.movement.Vision;
 import process.movement.MovementBall;
 import process.movement.MovementPlayer;
-
+/**
+ * this class manage movement of all player during the match, by using its main method :
+ * {@link #matchOneRound()}.
+ * @author laura
+ *
+ */
 public class Match {
-	/**
-	 * Used in playerBehavior();
-	 * allow one action for each soccer-player
-	 * @param userTeam
-	 * @param botTeam
-	 */
-
 	private Boolean itsUserRound, pickUserTeamPlayer;
 	private DataTeam userTeam, botTeam;
 	private Map positions;
@@ -27,6 +25,7 @@ public class Match {
 	private Vision v;
 	private ArrayList<DataPlayer> allPlayers;
 	private int GoalLimitX;
+
 
 	public Match(DataTeam userTeam, DataTeam botTeam, Map positions, DataBall ball, MovementBall mb, ArrayList<DataPlayer> allPlayers) {
 		this.userTeam = userTeam;
@@ -39,6 +38,15 @@ public class Match {
 		v = new Vision();
 	}
 
+	/**
+	 * this function manage to move all player for "one round" (like for one step) according to roles and situation.
+	 * @param userTeam
+	 * @param botTeam
+	 * @param positions
+	 * @param ball
+	 * @param mb
+	 * @param allPlayers
+	 */
 	public void matchOneRound() {
 
 		Iterator<DataPlayer> itUser;
@@ -127,6 +135,9 @@ public class Match {
 		System.out.println("1 round done\n");
 	}
 	
+	/**
+	 * this function checks if the ball is free	and then manage its movements.
+	 */
 	public void letTheBallMove() {
 		if (ball.getOwnedBy()==null)
 		{
@@ -144,7 +155,11 @@ public class Match {
 
 	}
 
-	
+	/**
+	 * This function manage behaviour of any Forward player and return true if it did something during its round.
+	 * @param currentPlayer
+	 * @return true/false
+	 */
 	public Boolean Forward(DataPlayer currentPlayer) {
 		if (currentPlayer.getHaveBall()) {										// if Forward player has ball
 			if (v.seeCages(currentPlayer.getPositionX(), currentPlayer.getPositionY(), itsUserRound)) // and see cages
@@ -188,6 +203,11 @@ public class Match {
 		return false;
 	}
 	
+	/**
+	 * This function manage behaviour of any Goalie and return true if it did something during its round.
+	 * @param currentPlayer
+	 * @return true/false
+	 */
 	public Boolean Goalie(DataPlayer currentPlayer) {
 		ArrayList<Position> objectsSeen = v.Goalsee(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
 		int i;
@@ -268,6 +288,11 @@ public class Match {
 		return false;
 	}
 	
+	/**
+	 * This function manage behaviour of any Midfielder and return true if it did something during its round.
+	 * @param currentPlayer
+	 * @return true/false
+	 */
 	public Boolean Midfielder(DataPlayer currentPlayer) {
 		int i=0;
 		Boolean limit, act=false;
@@ -347,7 +372,12 @@ public class Match {
 		objectsSeen = null;
 		return act;
 	}
-	
+
+	/**
+	 * This function manage behaviour of any Defender and return true if it did something during its round.
+	 * @param currentPlayer
+	 * @return true/false
+	 */
 	public Boolean Defender(DataPlayer currentPlayer) {
 		int i=0, middle = ConstantPosition.WIDTH/2;
 		Boolean act=false;
@@ -420,6 +450,11 @@ public class Match {
 		return act;
 	}
 
+	/**
+	 * This function manage stamina or stress according to player acting or not.
+	 * @param currentPlayer
+	 * @param didSomething
+	 */
 	public void didActionHappenned(DataPlayer currentPlayer, Boolean didSomething) {
 		
 		if (didSomething)
@@ -438,6 +473,11 @@ public class Match {
 		
 	}
 	
+	/**
+	 * This function return initial position of a player, based on the tactic choosen.
+	 * @param player
+	 * @return
+	 */
 	public Position getInitialPositionPlayer(DataPlayer player) {
 		for(DataPlayer players: allPlayers) {
 			if(players.getPlayerName().contains(player.getPlayerName())) {
