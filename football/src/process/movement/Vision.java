@@ -90,16 +90,16 @@ public class Vision {
 	}
 	
 	public Boolean seeCages(int playerPosX, int playerPosY, Boolean itsUserRound) {
-		if (itsUserRound)
+		if (!itsUserRound)
 		{
-			if (playerPosX<=15 && playerPosY>30 && playerPosY<60)
+			if (playerPosX<=ConstantPosition.GOAL1X+10)
 			{
 				return true;
 			}
 		}
 		else
 		{
-			if (playerPosX>=120-15 && playerPosY>30 && playerPosY<60)
+			if (playerPosX>=ConstantPosition.GOAL2X-10)
 			{
 				return true;
 			}

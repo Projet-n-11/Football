@@ -118,16 +118,16 @@ public class MovementPlayer{
 			if (!itsUserRound) 
 			{
 				goalx = ConstantPosition.GOAL1X;
-				d = -2;
+				d = -3;
 			} 
 			else {
 				goalx = ConstantPosition.GOAL2X;
-				d = 2;
+				d = 3;
 			}
 			
 			moveToCoord(player, goalx, cages, itsUserRound);
 			
-			/*if(goalx < player.getPositionX()) {
+			if(goalx < player.getPositionX()) {
 				player.setPositionX(player.getPositionX() - 1);
 			}
 			else if(goalx > player.getPositionX()) {
@@ -139,7 +139,7 @@ public class MovementPlayer{
 			}
 			else if(cages > player.getPositionY()) {
 				player.setPositionY(player.getPositionY() + 1);
-			}*/
+			}
 			player.setPlayerStamina(player.getPlayerType().getStamina() - 1);
 			player.setPlayerStress(player.getPlayerType().getStress() +1);
 			checkPosition(player, itsUserRound);
@@ -180,7 +180,7 @@ public class MovementPlayer{
 	
 	public void shoot(DataPlayer player, DataBall ball, Boolean itsUserRound) {
 		int direction;
-		if (itsUserRound)
+		if (!itsUserRound)
 		{
 			direction = -1;
 		} else
@@ -188,9 +188,10 @@ public class MovementPlayer{
 			direction = 1;
 		}		
 		System.out.println("SHOOT by " + player.getPlayerName());
-		player.setPositionX(player.getPositionX()-direction); // player steps back
-		ball.setSpeedX( (int) ( direction*5));
+		player.setPositionX(player.getPositionX()-2*direction); // player steps back
+		player.getPlayerType().setCanHeAct(-player.getPlayerType().getSpeed().getSpeedX());
 		player.setHaveBall(false);
+		ball.setSpeedX( (int) ( direction*5));
 		ball.setOwnedBy(null);
 
 	}

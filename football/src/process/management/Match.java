@@ -61,7 +61,16 @@ public class Match {
 		letTheBallMove();
 		if (ball.getOwnedBy()!=null) {
 			System.out.println("ball owned by " + ball.getOwnedBy().getPlayerName());
+			if (ball.getOwnedBy().getHaveBall())
+			{
+				System.out.println("    (confirm)");
+			}
+			else
+			{
+				System.out.println(" BUT HE DOES NOT KNOW");
+			}
 		}
+		
 		
 		// While there is nothing to interrupt the match, players are playing
 		// And while both teams have players to deal with:
@@ -81,7 +90,7 @@ public class Match {
 					itsUserRound = false;
 				}
 				
-				if (currentPlayer.getPlayerType().getTitularPlayer()==1 )//&& currentPlayer.getPlayerType().getCanHeAct() + currentPlayer.getPlayerType().getSpeed().getSpeedX()>=5)
+				if (currentPlayer.getPlayerType().getTitularPlayer()==1 && currentPlayer.getPlayerType().getCanHeAct() + currentPlayer.getPlayerType().getSpeed().getSpeedX()>=5)
 				{
 					if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Forward")==0)
 					{
@@ -129,6 +138,7 @@ public class Match {
 		if (currentPlayer.getHaveBall()) {										// if Forward player has ball
 			if (v.seeCages(currentPlayer.getPositionX(), currentPlayer.getPositionY(), itsUserRound)) // and see cages
 			{
+				System.out.println("I swear " + currentPlayer.getPlayerName() + "");
 				mp.shoot(currentPlayer, ball, itsUserRound);
 				return true;
 			}
@@ -382,8 +392,10 @@ public class Match {
 	public void didActionHappenned(DataPlayer currentPlayer, Boolean didSomething) {
 		
 		if (didSomething)
-		{
-			currentPlayer.getPlayerType().setCanHeAct(-1);
+		{	
+			if (currentPlayer.getPlayerType().getCanHeAct()>=0) {
+				currentPlayer.getPlayerType().setCanHeAct(-1);
+			}
 			currentPlayer.setPlayerStamina(currentPlayer.getPlayerType().getStamina() - 1);
 		}
 		else {
