@@ -81,7 +81,7 @@ public class Match {
 					itsUserRound = false;
 				}
 				
-				if (currentPlayer.getPlayerType().getCanHeAct() + currentPlayer.getPlayerType().getSpeed().getSpeedX()>=5)
+				if (currentPlayer.getPlayerType().getTitularPlayer()==1 )//&& currentPlayer.getPlayerType().getCanHeAct() + currentPlayer.getPlayerType().getSpeed().getSpeedX()>=5)
 				{
 					if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Forward")==0)
 					{
@@ -141,13 +141,13 @@ public class Match {
 		else if (ball.getOwnedBy()!=null && ball.getOwnedBy().getTeam().compareTo(currentPlayer.getTeam())==0) // if ball owned by their own team
 		{
 			mp.cover(currentPlayer, ball.getOwnedBy(), itsUserRound);
-			return true;
+			return false;
 		}
 		else											// if forward player does not have ball
 		{
 			if (ball.getOwnedBy()!=null && ball.getOwnedBy().getPlayerType().getPlayerTypeName().compareTo("Goalie")==0) {
 						mp.moveToCoord(currentPlayer, ConstantPosition.ENGAGEMENTX, ConstantPosition.INITIAL_POINT, itsUserRound);
-						return true;
+						return false;
 					}
 			if (!mp.isCloseToBall(currentPlayer, ball)) {
 				mp.move(currentPlayer, ball, itsUserRound);
@@ -155,7 +155,7 @@ public class Match {
 			if (mp.isCloseToBall(currentPlayer, ball)) {
 				if (ball.getOwnedBy()==null) {									// if free ball -> reach ball
 					mp.reachBall(currentPlayer, ball);
-					return true;
+					return false;
 				}
 				else								// if ball owned by ennemy						
 				{
@@ -282,7 +282,7 @@ public class Match {
 		else {																		 // if does not have ball
 			if (ball.getOwnedBy()!=null && ball.getOwnedBy().getPlayerType().getPlayerTypeName().compareTo("Goalie")==0) {
 				mp.moveToCoord(currentPlayer, ConstantPosition.ENGAGEMENTX, ConstantPosition.INITIAL_POINT, itsUserRound);
-				return true;
+				return false;
 			}
 			for (i=0; i<objectsSeen.size() ; i++) {
 				if (objectsSeen.get(i) instanceof DataBall)				
@@ -348,7 +348,7 @@ public class Match {
 		else if (ball.getOwnedBy()!=null && ball.getOwnedBy().getTeam().compareTo(currentPlayer.getTeam())==0)						
 		{
 			mp.cover(currentPlayer, ball.getOwnedBy(), itsUserRound);
-			return true;
+			return false;
 		}
 		else {																		 // if does not have ball
 			for (i=0; i<objectsSeen.size() ; i++) {
