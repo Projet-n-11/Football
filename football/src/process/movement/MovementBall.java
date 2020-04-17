@@ -111,7 +111,7 @@ public class MovementBall {
 		boolean alreadyPlacedLeft = false;
 		if(limitsGoalLeft()) {
 			System.out.println("GOAL !!! Congratulations team2");
-			score.setScoreTeam1(score.getScoreTeam2()+1);
+			score.setScoreTeam1(score.getScoreTeam1()+1);
 			pt.placePlayers(PTeam, table, alreadyPlacedLeft);
 			alreadyPlacedLeft = true;
 			pt2.placePlayers(IATeam, table, alreadyPlacedLeft);

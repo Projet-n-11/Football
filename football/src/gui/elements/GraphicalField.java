@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import databall.DataBall;
@@ -100,7 +101,7 @@ public class GraphicalField extends JPanel implements Runnable{
 		Match m = new Match(team, team2, field, ball, mb, allPlayers);
 		TransitionPanel tp = new TransitionPanel("Transition Panel", frame, team);	
 		transitionPanel = tp.createTransitionPanel();
-
+		System.out.println(team.getColor());
 		while(started == true) {
 			if(chrono.getMinute() != 90){
 				if(paused == false) {
@@ -155,6 +156,7 @@ public class GraphicalField extends JPanel implements Runnable{
 			}
 			else {
 				removeAll();
+				add(new JLabel("Match DONE !", JLabel.CENTER));
 				System.out.println("END");
 			}
 		}

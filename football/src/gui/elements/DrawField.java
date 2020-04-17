@@ -113,13 +113,57 @@ public class DrawField extends JPanel {
 		//g6
 		g6.scale(scale, scale);
 		g6.translate(1,1);
-		g6.setColor(Color.BLUE);
 		g6.setStroke(stroke3);
 		//g7
 		g7.scale(scale, scale);
 		g7.translate(1,1);
 		g7.setColor(Color.BLACK);
 		g7.setStroke(stroke2);
+		
+		
+		if(team.getColor().contains("green")) {
+			g6.setColor(Color.GREEN);
+		}
+		else if(team.getColor().contains("blue")) {
+			g6.setColor(Color.BLUE);
+		}
+		else if(team.getColor().contains("red")) {
+			g6.setColor(Color.RED);
+		}
+		else if(team.getColor().contains("black")) {
+			g6.setColor(Color.BLACK);
+		}
+		else if(team.getColor().contains("beige")) {
+			g6.setColor(new Color(245, 245, 220));
+		}
+		else if(team.getColor().contains("yellow")) {
+			g6.setColor(Color.YELLOW);
+		}
+		else {
+			g6.setColor(Color.WHITE);
+		}
+
+		if(team2.getColor().contains("green")) {
+			g5.setColor(Color.GREEN);
+		}
+		else if(team2.getColor().contains("blue")) {
+			g5.setColor(Color.BLUE);
+		}
+		else if(team2.getColor().contains("red")) {
+			g5.setColor(Color.RED);
+		}
+		else if(team2.getColor().contains("black")) {
+			g5.setColor(Color.BLACK);
+		}
+		else if(team2.getColor().contains("beige")) {
+			g5.setColor(new Color(245, 245, 220));
+		}
+		else if(team2.getColor().contains("yellow")) {
+			g5.setColor(Color.YELLOW);
+		}
+		else {
+			g5.setColor(Color.WHITE);
+		}
 		
 		//drawGrid(g3, fieldLength, fieldWidth);
 		drawTouchLines(g2, fieldLength, fieldWidth);
