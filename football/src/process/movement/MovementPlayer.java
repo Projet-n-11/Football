@@ -504,7 +504,7 @@ public class MovementPlayer{
 				}
 			}
 		}
-	
+	limits(player);
 	}
 
 

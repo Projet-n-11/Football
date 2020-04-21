@@ -21,12 +21,11 @@ public class TestMatch {
 	public static void main(String[] args) throws IOException {
 		
 		JFrame frame = new JFrame();
-		Score score = new Score(1, 0);
+		Score score = new Score(0, 0);
 		EndscreenPanel ep = new EndscreenPanel(score);
 		
 		frame.add(ep.initLayout());
 		frame.setVisible(true);
 		frame.setSize(500, 500);
 	}
-
 }

@@ -38,17 +38,17 @@ public class EndscreenPanel extends JPanel{
 		endPanel = new JPanel();
 		if(score.getScoreTeam1() == score.getScoreTeam2()) {
 			endTextLabel = new JLabel("DRAW ! " + score.getScoreTeam1() + " : " + score.getScoreTeam2());
-			ImageIcon drawIMG = new ImageIcon("C:\\Users\\aladd\\Desktop\\handshake.jpg");
+			ImageIcon drawIMG = new ImageIcon(".\\src\\ressources\\handshake.jpg");
 			imageEndLabel = new JLabel(drawIMG, JLabel.CENTER);
 		}
 		else if(score.getScoreTeam1() < score.getScoreTeam2()){
 			endTextLabel = new JLabel("YOU LOSE ! " + score.getScoreTeam1() + " : " + score.getScoreTeam2());
-			ImageIcon drawIMG = new ImageIcon("C:\\Users\\aladd\\Desktop\\thumbsdown.png");
+			ImageIcon drawIMG = new ImageIcon(".\\src\\ressources\\thumbsdown.png");
 			imageEndLabel = new JLabel(drawIMG, JLabel.CENTER);
 		}
 		else if(score.getScoreTeam1() > score.getScoreTeam2()){
 			endTextLabel = new JLabel("YOU WIN ! " + score.getScoreTeam1() + " : " + score.getScoreTeam2());
-			ImageIcon drawIMG = new ImageIcon("C:\\Users\\aladd\\Desktop\\cupwin.jpg");
+			ImageIcon drawIMG = new ImageIcon(".\\src\\ressources\\cupwin.jpg");
 			imageEndLabel = new JLabel(drawIMG, JLabel.CENTER);
 		}
 		endPanel.setLayout(new GridBagLayout());
