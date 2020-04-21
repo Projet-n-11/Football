@@ -158,7 +158,7 @@ public class MainMenu extends JPanel {
 	public class ActionCredits implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			
-			String message="Produced by : \n ALADDINE BEN ROMDHANE \n LAURA FUSTINONI \n QUITTERIE PILON";
+			String message="Produced by :\nALADDINE BEN ROMDHANE\nLAURA FUSTINONI\nQUITTERIE PILON" + "\n Thanks to : TIANXIAO LIU";
 			JOptionPane.showMessageDialog(null, message, "Credits Menu", JOptionPane.INFORMATION_MESSAGE);
 			
 		}
