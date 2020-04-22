@@ -70,7 +70,7 @@ public class MovementBall {
 			//if(deceleration == 2) {
 				if (ball.getSpeedX()>1) {
 					ball.setPositionX(ball.getPositionX()+1);
-					ball.setSpeedX(ball.getSpeedX()-1);
+					//ball.setSpeedX(ball.getSpeedX()-1);
 				}
 				else if (ball.getSpeedX()==1)
 				{
@@ -78,7 +78,7 @@ public class MovementBall {
 				}
 				else if (ball.getSpeedX()<-1){
 					ball.setPositionX(ball.getPositionX()-1);
-					ball.setSpeedX(ball.getSpeedX()+1);
+					//ball.setSpeedX(ball.getSpeedX()+1);
 				}
 				else if (ball.getSpeedX()==-1) {
 					ball.setPositionX(ball.getPositionX()-1);
@@ -87,19 +87,19 @@ public class MovementBall {
 				
 				if (ball.getSpeedY()>1) {
 					ball.setPositionY(ball.getPositionY()+1);
-					ball.setSpeedY(ball.getSpeedY()-1);
+					//ball.setSpeedY(ball.getSpeedY()-1);
 				}
 				else if (ball.getSpeedY()==1) {
 					ball.setPositionY(ball.getPositionY()+1);
 				}
 				else if (ball.getSpeedY()<-1){
 					ball.setPositionY(ball.getPositionY()-1);
-					ball.setSpeedY(ball.getSpeedY()+1);
+					//ball.setSpeedY(ball.getSpeedY()+1);
 				}
 				else if (ball.getSpeedY()==-1) {
 					ball.setPositionY(ball.getPositionY()-1);
 				}
-				//deceleration++;
+				decelerate(ball);
 			//}
 			table.setElement(ball);
 		}
@@ -114,6 +114,39 @@ public class MovementBall {
 			e.printStackTrace();
 		}
 		// checker ball's exit limits
+	}
+	
+	public void decelerate(DataBall ball) {
+		if (ball.getSpeedX()>1)
+		{
+			if (ball.getSpeedX()<=5)
+			{
+				ball.setSpeedX(ball.getSpeedX()-1);
+			}
+			else if (ball.getSpeedX()<=10)
+			{
+				ball.setSpeedX(ball.getSpeedX()-2);
+			}
+			else
+			{
+				ball.setSpeedX(10);
+			}
+		}
+		if (ball.getSpeedY()>1)
+		{
+			if (ball.getSpeedY()<=5)
+			{
+				ball.setSpeedY(ball.getSpeedY()-1);
+			}
+			else if (ball.getSpeedY()<=10)
+			{
+				ball.setSpeedY(ball.getSpeedY()-2);
+			}
+			else
+			{
+				ball.setSpeedY(10);
+			}
+		}
 	}
 	
 	/**

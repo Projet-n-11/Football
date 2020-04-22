@@ -183,22 +183,12 @@ public class MovementPlayer{
 		Position posPlayer2 = new Position(player2.getPositionX(), player2.getPositionY());
 		int deltaX = 0;
 		int deltaY = 0;
-		if(posPlayer.getPositionX() > posPlayer2.getPositionX()) {
-			deltaX = posPlayer.getPositionX() - posPlayer2.getPositionX();
-		}
-		else if (posPlayer.getPositionX() < posPlayer2.getPositionX()){
-			deltaX = posPlayer2.getPositionX() - posPlayer.getPositionX();
-		}
+
+		deltaX = posPlayer2.getPositionX() - posPlayer.getPositionX();	
+		deltaY = posPlayer2.getPositionY() - posPlayer.getPositionY();
 		
-		if(posPlayer.getPositionY() > posPlayer2.getPositionY()) {
-			deltaY = posPlayer.getPositionY() - posPlayer2.getPositionY();
-		}
-		else if (posPlayer.getPositionX() < posPlayer2.getPositionX()){
-			deltaY = posPlayer2.getPositionY() - posPlayer.getPositionY();
-		}
-		
-		int speed_towards_palX = deltaX/4;
-		int speed_towards_palY = deltaY/4;
+		int speed_towards_palX = deltaX;
+		int speed_towards_palY = deltaY;
 		
 		if (player.getPlayerType().getPlayerTypeName().compareTo("Goalie")==0)
 		{
@@ -233,8 +223,10 @@ public class MovementPlayer{
 		player.getPlayerType().setCanHeAct(-player.getPlayerType().getSpeed().getSpeedX());
 		player.getPlayerType().setStamina(player.getPlayerType().getStamina()-10);
 		player.setHaveBall(false);
-		ball.setSpeedX( (int) ( direction*10));
 		ball.setOwnedBy(null);
+		ball.setSpeedX( (int) ( direction*10));
+		ball.setSpeedY(0);
+		
 
 	}
 
@@ -311,6 +303,9 @@ public class MovementPlayer{
 		{
 			if (Math.abs(player.getPositionY()-ballPlayer.getPositionY())<dy) // if too close to pal to cover :
 			{
+				if (ballPlayer.getPlayerType().getPlayerTypeName().compareTo("Goalie")==0) {
+					dx=-dx;
+				}
 				if (player.getPositionY()<ballPlayer.getPositionY() ) 
 				{
 					moveToCoord(player, player.getPositionX()-dx, player.getPositionY()-dy, itsUserRound);
@@ -329,6 +324,9 @@ public class MovementPlayer{
 		{
 			if (Math.abs(player.getPositionY()-ballPlayer.getPositionY())<dy) 
 			{
+				if (ballPlayer.getPlayerType().getPlayerTypeName().compareTo("Goalie")==0) {
+					dx=-dx;
+				}
 				if (player.getPositionY()<ballPlayer.getPositionY()) 
 				{
 					moveToCoord(player, player.getPositionX()+dx, player.getPositionY()-dy, itsUserRound);
@@ -342,6 +340,7 @@ public class MovementPlayer{
 				moveToCoord(player, ballPlayer.getPositionX(), ballPlayer.getPositionY(), itsUserRound);
 			}
 		}
+		checkPosition(player, itsUserRound);
 	}
 	
 	/**
@@ -504,7 +503,7 @@ public class MovementPlayer{
 				}
 			}
 		}
-	limits(player);
+		limits(player);
 	}
 
 

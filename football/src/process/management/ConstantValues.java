@@ -7,7 +7,6 @@ package process.management;
  */
 
 public class ConstantValues {
-
 	public static final int SCREEN_WIDTH = 1600; // SCREEN WIDTH
 	public static final int SCREEN_HEIGHT = 800; // SCREEN HEIGHT
 	public static final int GAME_SPEED = 55; // GAME SPEED

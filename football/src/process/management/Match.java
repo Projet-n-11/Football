@@ -66,7 +66,6 @@ public class Match {
 		 */
 		letTheBallMove();
 		if (ball.getOwnedBy()!=null) {
-			System.out.println("ball owned by " + ball.getOwnedBy().getPlayerName());
 			if (ball.getOwnedBy().getHaveBall())
 			{
 				System.out.println("    (confirm)");
@@ -98,7 +97,7 @@ public class Match {
 					bothHavePlayed = true;
 				}
 				
-				if (currentPlayer.getPlayerType().getTitularPlayer()==1 && currentPlayer.getPlayerType().getCanHeAct() + currentPlayer.getPlayerType().getSpeed().getSpeedX()>=5)
+				if (currentPlayer.getPlayerType().getTitularPlayer()==1 && (currentPlayer.getPlayerType().getCanHeAct() + currentPlayer.getPlayerType().getSpeed().getSpeedX())>=5)
 				{
 					if (currentPlayer.getPlayerType().getPlayerTypeName().compareTo("Forward")==0)
 					{
@@ -125,7 +124,7 @@ public class Match {
 				
 				currentPlayer.getPlayerType().setCanHePass(currentPlayer.getPlayerType().getCanHePass()+1);
 				
-				if (currentPlayer.getPlayerType().getCanHeAct()+currentPlayer.getPlayerType().getSpeed().getSpeedX()<5)
+				if (currentPlayer.getPlayerType().getCanHeAct()+currentPlayer.getPlayerType().getSpeed().getSpeedX()<=5)
 				{		
 				currentPlayer.getPlayerType().setCanHeAct(currentPlayer.getPlayerType().getCanHeAct()+1);					
 				}
@@ -162,7 +161,32 @@ public class Match {
 	 */
 	public Boolean Forward(DataPlayer currentPlayer) {
 		if (currentPlayer.getHaveBall()) {										// if Forward player has ball
-			if (v.seeCages(currentPlayer.getPositionX(), currentPlayer.getPositionY(), itsUserRound)) // and see cages
+			if (currentPlayer.getPlayerType().getStamina()<15) {
+				DataPlayer otherPlayer;
+				Boolean didPass=false;
+				int i;
+				ArrayList<Position> objectsSeen = v.see(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
+				for (i=0; i<objectsSeen.size() ; i++) {
+					if (objectsSeen.get(i) instanceof DataPlayer)				
+					{
+						otherPlayer = (DataPlayer)objectsSeen.get(i);
+						if (otherPlayer.getTeam().compareTo(currentPlayer.getTeam())==0) // if see pal :
+						{
+							mp.passBalltoPal(currentPlayer, otherPlayer, ball);
+							currentPlayer.getPlayerType().setCanHePass(-1);
+							otherPlayer.getPlayerType().setCanHePass(0);
+							currentPlayer.getPlayerType().setCanHeAct(-3);
+							return true;
+						}
+					}
+				}
+				if (!didPass)
+				{
+					mp.runtoCages(currentPlayer, ball, itsUserRound, mb);
+					return true;
+				}
+			}
+			else if (v.seeCages(currentPlayer.getPositionX(), currentPlayer.getPositionY(), itsUserRound)) // and see cages
 			{
 				System.out.println(currentPlayer.getPlayerName() + " sees cages");
 				mp.shoot(currentPlayer, ball, itsUserRound);
@@ -229,7 +253,7 @@ public class Match {
 					if (objectsSeen.get(i) instanceof DataPlayer)				
 					{
 						otherPlayer = (DataPlayer)objectsSeen.get(i);
-						if (otherPlayer.getTeam().compareTo(currentPlayer.getTeam())==0) // if see pal :
+						if (otherPlayer.getTeam().compareTo(currentPlayer.getTeam())==0 && otherPlayer.getPlayerName().compareTo(currentPlayer.getPlayerName())!=0) // if see pal :
 						{
 							mp.passBalltoPal(currentPlayer, otherPlayer, ball);
 							System.out.println("Goalie " + currentPlayer.getPlayerName() + " passed to " + otherPlayer.getPlayerName());
@@ -382,7 +406,6 @@ public class Match {
 		int i=0, middle = ConstantPosition.WIDTH/2;
 		Boolean act=false;
 		ArrayList<Position> objectsSeen = v.see(currentPlayer.getPositionX(), currentPlayer.getPositionY(), positions);
-		
 		if (currentPlayer.getHaveBall()) {
 			if (Math.abs(currentPlayer.getPositionX()-middle)<10) // if get close to their field-limits :
 			{
