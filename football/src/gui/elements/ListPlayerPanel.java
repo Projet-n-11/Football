@@ -65,9 +65,9 @@ public class ListPlayerPanel extends JPanel implements Runnable {
 	@Override
 	public void run() {
 		while(true) {
-			updateValuesList();
 			try {
-				Thread.sleep(ConstantValues.GAME_SPEED+40);
+				updateValuesList();
+				Thread.sleep(ConstantValues.GAME_SPEED+30);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
