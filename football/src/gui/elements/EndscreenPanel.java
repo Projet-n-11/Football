@@ -61,7 +61,6 @@ public class EndscreenPanel extends JPanel{
 		gc.gridy = 1;
 		endPanel.add(endTextLabel,gc);
 		this.add(endPanel);
-		
 		return this;
 	}
 }
